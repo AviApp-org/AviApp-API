@@ -1,13 +1,16 @@
 package br.com.aviapp.api.domain.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import br.com.aviapp.api.domain.dto.ClienteDTO;
 import br.com.aviapp.api.domain.entities.ClienteBO;
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 
+@ActiveProfiles("test")
 public class ClienteMapperTest {
 
   @Test
@@ -34,5 +37,14 @@ public class ClienteMapperTest {
     assertEquals(bo.getCnpj(), dto.getCnpj());
     assertEquals(bo.getTelefone(), dto.getTelefone());
     assertEquals(bo.getStatus(), dto.getStatus());
+  }
+
+  @Test
+  void shouldThrowIfAParamIsNull() {
+    ClienteBO bo = new ClienteBO(1l, "Test", null, null, "000000000", EnumStatusCliente.ATIVO);
+
+    assertThrows(RuntimeException.class, () -> {
+      bo.validate();
+    });
   }
 }

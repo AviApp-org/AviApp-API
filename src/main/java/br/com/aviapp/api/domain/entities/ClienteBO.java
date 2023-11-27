@@ -27,6 +27,25 @@ public class ClienteBO {
     this.cnpj = cnpj;
     this.telefone = telefone;
     this.status = EnumStatusCliente.ATIVO;
+    validate();
+  }
+
+  public void validate() {
+    if (this.nome == null) {
+      throw new RuntimeException("Nome não pode estar nulo");
+    }
+
+    if (this.email == null) {
+      throw new RuntimeException("Email não pode estar nulo");
+    }
+
+    if (this.cnpj == null) {
+      throw new RuntimeException("Cnpj não pode estar nulo");
+    }
+
+    if (this.telefone == null) {
+      throw new RuntimeException("Telefone não pode estar nulo");
+    }
   }
   
 }
