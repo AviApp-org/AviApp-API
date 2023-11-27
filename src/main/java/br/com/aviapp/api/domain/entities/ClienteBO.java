@@ -27,7 +27,7 @@ public class ClienteBO {
     this.cnpj = cnpj;
     this.telefone = telefone;
     this.status = EnumStatusCliente.ATIVO;
-    validate();
+    this.validate();
   }
 
   public void validate() {
@@ -48,4 +48,11 @@ public class ClienteBO {
     }
   }
   
+  public void desativar() {
+    this.status = EnumStatusCliente.INATIVO;
+  }
+
+  public void ativar() {
+    this.status = EnumStatusCliente.ATIVO;
+  }
 }
