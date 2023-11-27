@@ -23,4 +23,17 @@ public class ClienteMapperTest {
     assertEquals(dto.getTelefone(), bo.getTelefone());
     assertEquals(dto.getStatus(), bo.getStatus());
   }
+
+  @Test
+  void shouldParseBoToDtoCorrectly() {
+    ClienteBO bo = new ClienteBO(1l, "Test", "test@email.com", "00000000000", "000000000", EnumStatusCliente.ATIVO);
+    ClienteDTO dto = ClienteMapper.toDTO(bo);
+
+    assertEquals(bo.getId(), dto.getId());
+    assertEquals(bo.getNome(), dto.getNome());
+    assertEquals(bo.getEmail(), dto.getEmail());
+    assertEquals(bo.getCnpj(), dto.getCnpj());
+    assertEquals(bo.getTelefone(), dto.getTelefone());
+    assertEquals(bo.getStatus(), dto.getStatus());
+  }
 }

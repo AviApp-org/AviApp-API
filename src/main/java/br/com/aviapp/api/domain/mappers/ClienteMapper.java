@@ -16,4 +16,17 @@ public class ClienteMapper {
     
     return bo;
   }
+
+  public static ClienteDTO toDTO(ClienteBO bo) {
+    ClienteDTO dto = new ClienteDTO();
+
+    dto.setId(bo.getId());
+    dto.setEmail(bo.getEmail());
+    dto.setCnpj(bo.getCnpj());
+    dto.setNome(bo.getNome());
+    dto.setStatus(bo.getStatus());
+    dto.setTelefone(bo.getTelefone());
+    
+    return dto;
+  }
 }
