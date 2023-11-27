@@ -19,4 +19,13 @@ public class ClienteDTO {
   private String cnpj;
   private String telefone;
   private EnumStatusCliente status;
+
+  public ClienteDTO(Long id, String nome, String email, String cnpj, String telefone) {
+    this.id = id;
+    this.nome = nome;
+    this.email = email;
+    this.cnpj = cnpj;
+    this.telefone = telefone;
+    this.status = EnumStatusCliente.ATIVO;
+  }
 }
