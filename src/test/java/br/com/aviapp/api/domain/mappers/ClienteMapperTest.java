@@ -1,4 +1,4 @@
-package br.com.aviapp.api.domain.entities.mappers;
+package br.com.aviapp.api.domain.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import br.com.aviapp.api.domain.dto.ClienteDTO;
 import br.com.aviapp.api.domain.entities.ClienteBO;
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
-import br.com.aviapp.api.domain.mappers.ClienteMapper;
 
 public class ClienteMapperTest {
 
