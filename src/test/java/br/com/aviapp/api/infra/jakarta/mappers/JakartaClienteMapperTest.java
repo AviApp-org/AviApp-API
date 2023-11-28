@@ -19,4 +19,22 @@ public class JakartaClienteMapperTest {
     assertEquals(bo.getTelefone(), entity.getTelefone());
     assertEquals(bo.getNome(), entity.getNome());
   }
+
+  @Test
+  void shouldMapToDomain() {
+    JakartaCliente entity = new JakartaCliente();
+
+    entity.setId(1l);
+    entity.setNome("Test");
+    entity.setEmail("test@test.com");
+    entity.setCnpj("00000000000");
+    entity.setTelefone("000000000");
+
+    ClienteBO bo = JakartaClienteMapper.toDomain(entity);
+
+    assertEquals(entity.getCnpj(), bo.getCnpj());
+    assertEquals(entity.getEmail(), bo.getEmail());
+    assertEquals(entity.getTelefone(), bo.getTelefone());
+    assertEquals(entity.getNome(), bo.getNome());
+  }
 }

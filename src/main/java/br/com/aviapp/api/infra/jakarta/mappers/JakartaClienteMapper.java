@@ -15,4 +15,17 @@ public class JakartaClienteMapper {
 
     return entity;
   }
+
+  public static ClienteBO toDomain(JakartaCliente entity) {
+    ClienteBO bo = new ClienteBO();
+
+    bo.setId(entity.getId());
+    bo.setCnpj(entity.getCnpj());
+    bo.setEmail(entity.getEmail());
+    bo.setNome(entity.getNome());
+    bo.setStatus(entity.getStatus());
+    bo.setTelefone(entity.getTelefone());
+
+    return bo;
+  }
 }
