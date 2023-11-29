@@ -13,7 +13,8 @@ public class CadastrarCliente {
 
   public ClienteDTO execute(ClienteDTO dto) {
     ClienteBO bo = ClienteMapper.toBO(dto);
-    ClienteDTO response = repository.save(bo);
+    ClienteBO repositoryResponse = repository.save(bo);
+    ClienteDTO response = ClienteMapper.toDTO(repositoryResponse);
     return response;
   }
   
