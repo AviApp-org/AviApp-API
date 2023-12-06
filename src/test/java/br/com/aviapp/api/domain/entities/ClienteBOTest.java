@@ -27,7 +27,7 @@ public class ClienteBOTest {
   }
 
   @Test
-  void shouldThrowIfAnInvalidEmailIsGiven() {
+  void shouldThrowIfEmailIsNull() {
     assertThrows(InvalidParamError.class, () -> {
       ClienteBO bo = new ClienteBO(1l, "Test", null, "00000000000", "000000000");
       bo.validate();
@@ -35,9 +35,23 @@ public class ClienteBOTest {
   }
 
   @Test
-  void shouldThrowIfAnInvalidCnpjIsGiven() {
+  void shouldThrowIfCnpjIsNull() {
     assertThrows(InvalidParamError.class, () -> {
       new ClienteBO(1l, "Test", "test@email.com", null, "000000000");
+    });
+  }
+
+  @Test
+  void shouldThrowIfNameIsNull() {
+    assertThrows(InvalidParamError.class, () -> {
+      new ClienteBO(1l, null, "test@email.com", "00000000000", "000000000");
+    });
+  }
+
+  @Test
+  void shouldThrowIfTelefoneIsNull() {
+    assertThrows(InvalidParamError.class, () -> {
+      new ClienteBO(1l, null, "test@email.com", "00000000000", "000000000");
     });
   }
 }
