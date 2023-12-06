@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
+import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 public class ClienteBOTest {
 
@@ -27,7 +28,7 @@ public class ClienteBOTest {
 
   @Test
   void shouldThrowIfAnInvalidEmailIsGiven() {
-    assertThrows(RuntimeException.class, () -> {
+    assertThrows(InvalidParamError.class, () -> {
       ClienteBO bo = new ClienteBO(1l, "Test", null, "00000000000", "000000000");
       bo.validate();
     });
@@ -35,7 +36,7 @@ public class ClienteBOTest {
 
   @Test
   void shouldThrowIfAnInvalidCnpjIsGiven() {
-    assertThrows(IllegalArgumentException.class, () -> {
+    assertThrows(InvalidParamError.class, () -> {
       new ClienteBO(1l, "Test", "test@email.com", null, "000000000");
     });
   }
