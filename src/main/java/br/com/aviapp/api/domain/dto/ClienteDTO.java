@@ -21,7 +21,7 @@ public class ClienteDTO {
   private EnumStatusCliente status;
 
   public ClienteDTO(Long id, String nome, String email, String cnpj, String telefone) {
-    this.id = id;
+    this.id = id != null ? id : null;
     this.nome = nome;
     this.email = email;
     this.cnpj = cnpj;

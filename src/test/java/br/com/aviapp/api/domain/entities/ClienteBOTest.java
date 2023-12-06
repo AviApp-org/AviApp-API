@@ -1,6 +1,7 @@
 package br.com.aviapp.api.domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,21 @@ public class ClienteBOTest {
     bo.ativar();
 
     assertEquals(EnumStatusCliente.ATIVO, bo.getStatus());
+  }
+
+  @Test
+  void shouldThrowIfAnInvalidEmailIsGiven() {
+    assertThrows(RuntimeException.class, () -> {
+      ClienteBO bo = new ClienteBO(1l, "Test", null, "00000000000", "000000000", EnumStatusCliente.INATIVO);
+      bo.validate();
+    });
+  }
+
+  @Test
+  void shouldThrowIfAnInvalidCnpjIsGiven() {
+    assertThrows(RuntimeException.class, () -> {
+      ClienteBO bo = new ClienteBO(1l, "Test", "test@email.com", null, "000000000", EnumStatusCliente.INATIVO);
+      bo.validate();
+    });
   }
 }
