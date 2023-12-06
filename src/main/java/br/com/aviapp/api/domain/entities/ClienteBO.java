@@ -28,7 +28,7 @@ public class ClienteBO {
     this.validate();
   }
 
-  public void validate() throws InvalidParamError {
+  public void validate() {
     if (this.nome == null) {
       throw new InvalidParamError("nome");
     }
