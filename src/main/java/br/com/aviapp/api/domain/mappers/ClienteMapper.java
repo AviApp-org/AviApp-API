@@ -5,8 +5,8 @@ import br.com.aviapp.api.domain.entities.ClienteBO;
 
 public class ClienteMapper {
   public static ClienteBO toBO(ClienteDTO dto) {
-    ClienteBO bo = new ClienteBO(dto.getId(), dto.getNome(), dto.getEmail(), dto.getCnpj(), dto.getTelefone(), dto.getStatus());
-        
+    ClienteBO bo = new ClienteBO(dto.getId(), dto.getNome(), dto.getEmail(), dto.getCnpj(), dto.getTelefone());
+    bo.setStatus(dto.getStatus());
     return bo;
   }
 

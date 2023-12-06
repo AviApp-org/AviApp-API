@@ -1,7 +1,6 @@
 package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 public class ClienteBO {
   private Long id;
@@ -26,25 +24,24 @@ public class ClienteBO {
     this.email = email;
     this.cnpj = cnpj;
     this.telefone = telefone;
-    this.status = EnumStatusCliente.ATIVO;
     this.validate();
   }
 
-  public void validate() {
+  public void validate() throws IllegalArgumentException {
     if (this.nome == null) {
-      throw new RuntimeException("Nome não pode estar nulo");
+      throw new IllegalArgumentException("Nome não pode estar nulo");
     }
 
     if (this.email == null) {
-      throw new RuntimeException("Email não pode estar nulo");
+      throw new IllegalArgumentException("Email não pode estar nulo");
     }
 
     if (this.cnpj == null) {
-      throw new RuntimeException("Cnpj não pode estar nulo");
+      throw new IllegalArgumentException("Cnpj não pode estar nulo");
     }
 
     if (this.telefone == null) {
-      throw new RuntimeException("Telefone não pode estar nulo");
+      throw new IllegalArgumentException("Telefone não pode estar nulo");
     }
   }
   

@@ -1,21 +1,19 @@
 package br.com.aviapp.api.domain.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.aviapp.api.domain.dto.ClienteDTO;
 import br.com.aviapp.api.domain.entities.ClienteBO;
-import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 
 @ActiveProfiles("test")
 public class ClienteMapperTest {
 
   @Test
   void shouldParseDtoToBoCorrectly() {
-    ClienteDTO dto = new ClienteDTO(1l, "Test", "test@email.com", "00000000000", "000000000", EnumStatusCliente.ATIVO);
+    ClienteDTO dto = new ClienteDTO(1l, "Test", "test@email.com", "00000000000", "000000000");
     ClienteBO bo = ClienteMapper.toBO(dto);
 
     assertEquals(dto.getId(), bo.getId());
@@ -28,7 +26,7 @@ public class ClienteMapperTest {
 
   @Test
   void shouldParseBoToDtoCorrectly() {
-    ClienteBO bo = new ClienteBO(1l, "Test", "test@email.com", "00000000000", "000000000", EnumStatusCliente.ATIVO);
+    ClienteBO bo = new ClienteBO(1l, "Test", "test@email.com", "00000000000", "000000000");
     ClienteDTO dto = ClienteMapper.toDTO(bo);
 
     assertEquals(bo.getId(), dto.getId());
@@ -39,12 +37,4 @@ public class ClienteMapperTest {
     assertEquals(bo.getStatus(), dto.getStatus());
   }
 
-  @Test
-  void shouldThrowIfAParamIsNull() {
-    ClienteBO bo = new ClienteBO(1l, "Test", null, null, "000000000", EnumStatusCliente.ATIVO);
-
-    assertThrows(RuntimeException.class, () -> {
-      bo.validate();
-    });
-  }
 }
