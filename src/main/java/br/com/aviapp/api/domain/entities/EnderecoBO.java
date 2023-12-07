@@ -29,23 +29,23 @@ public class EnderecoBO {
   }
 
   private void validate() {
-    if (this.cep.isBlank()) {
+    if (this.cep == null || this.cep.isBlank()) {
       throw new InvalidParamError("cep");
     }
 
-    if (this.cep.isBlank()) {
+    if (this.logradouro == null || this.logradouro.isBlank()) {
       throw new InvalidParamError("logradouro");
     }
 
-    if (this.cep.isBlank()) {
+    if (this.bairro == null || this.bairro.isBlank()) {
       throw new InvalidParamError("bairro");
     }
 
-    if (this.cep.isBlank()) {
+    if (this.cidade == null || this.cidade.isBlank()) {
       throw new InvalidParamError("cidade");
     }
 
-    if (this.cep.isBlank()) {
+    if (this.estado == null || this.estado.isBlank()) {
       throw new InvalidParamError("estado");
     }
   }
