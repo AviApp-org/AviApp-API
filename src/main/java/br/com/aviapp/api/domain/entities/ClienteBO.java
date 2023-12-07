@@ -29,19 +29,19 @@ public class ClienteBO {
   }
 
   public void validate() {
-    if (this.nome == null) {
+    if (this.nome == null || this.nome.isBlank()) {
       throw new InvalidParamError("nome");
     }
 
-    if (this.email == null) {
+    if (this.email == null || this.email.isBlank()) {
       throw new InvalidParamError("email");
     }
 
-    if (this.cnpj == null) {
+    if (this.cnpj == null || this.cnpj.isBlank()) {
       throw new InvalidParamError("cnpj");
     }
 
-    if (this.telefone == null) {
+    if (this.telefone == null || this.telefone.isBlank()) {
       throw new InvalidParamError("telefone");
     }
   }

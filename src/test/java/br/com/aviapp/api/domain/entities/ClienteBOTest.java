@@ -54,4 +54,11 @@ public class ClienteBOTest {
       new ClienteBO(1l, "Test", "test@email.com", "00000000000", null);
     });
   }
+
+  @Test
+  void shouldThrowIfParamIsBlank() {
+    assertThrows(InvalidParamError.class, () -> {
+      new ClienteBO(1l, "", "test@email.com", "00000000000", "000000000");
+    });
+  }
 }
