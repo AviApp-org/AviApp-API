@@ -17,4 +17,16 @@ public class EnderecoBOTest {
         () -> assertEquals("Cascavel", sut.getCidade()),
         () -> assertEquals("Paraná", sut.getEstado()));
   }
+
+  @Test
+  void shouldRemoveBlankSpaces() {
+    EnderecoBO sut = new EnderecoBO(null, "Rua Xavantes      ", "     85806020", "Santa Cruz", "Cascavel", "Paraná");
+
+    assertAll("Match values",
+        () -> assertEquals("Rua Xavantes", sut.getLogradouro()),
+        () -> assertEquals("85806020", sut.getCep()),
+        () -> assertEquals("Santa Cruz", sut.getBairro()),
+        () -> assertEquals("Cascavel", sut.getCidade()),
+        () -> assertEquals("Paraná", sut.getEstado()));
+  }
 }

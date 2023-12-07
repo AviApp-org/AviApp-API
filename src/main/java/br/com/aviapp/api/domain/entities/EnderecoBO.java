@@ -1,6 +1,5 @@
 package br.com.aviapp.api.domain.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class EnderecoBO {
   private Long id;
   private String logradouro;
@@ -18,4 +16,13 @@ public class EnderecoBO {
   private String bairro;
   private String cidade;
   private String estado;
+
+  public EnderecoBO(Long id, String logradouro, String cep, String bairro, String cidade, String estado) {
+    this.id = id;
+    this.logradouro = logradouro.trim();
+    this.cep = cep.trim();
+    this.bairro = bairro.trim();
+    this.cidade = cidade.trim();
+    this.estado = estado.trim();
+  }
 }
