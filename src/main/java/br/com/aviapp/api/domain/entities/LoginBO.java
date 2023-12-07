@@ -14,12 +14,12 @@ public class LoginBO {
     this.password = password;
   }
 
-  private void validate(Object ...params) {
+  private void validate(Object... params) {
     for (Object object : params) {
-    if (object == null || object.toString().isBlank()) {
-      String field = object != null ? object.getClass().getName() : "field";
-      throw new InvalidParamError(field);
-    } 
+      if (object == null || object.toString().isBlank()) {
+        String field = object != null ? object.getClass().getName() : "field";
+        throw new InvalidParamError(field);
+      }
     }
   }
 }
