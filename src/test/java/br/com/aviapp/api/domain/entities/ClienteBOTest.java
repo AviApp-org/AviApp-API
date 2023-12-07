@@ -51,7 +51,7 @@ public class ClienteBOTest {
   @Test
   void shouldThrowIfTelefoneIsNull() {
     assertThrows(InvalidParamError.class, () -> {
-      new ClienteBO(1l, null, "test@email.com", "00000000000", "000000000");
+      new ClienteBO(1l, "Test", "test@email.com", "00000000000", null);
     });
   }
 }
