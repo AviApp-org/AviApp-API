@@ -15,4 +15,14 @@ public class ParamValidatorTest {
       ParamValidator.validate(test);
     });
   }
+
+  @Test
+  void shouldThrowIfMoreParamsIsNull() {
+    String name = null;
+    String address = "Test";
+
+    assertThrows(InvalidParamError.class, () -> {
+      ParamValidator.validate(name, address);
+    });
+  }
 }
