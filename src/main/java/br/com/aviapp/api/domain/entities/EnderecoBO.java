@@ -1,6 +1,7 @@
 package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.errors.InvalidParamError;
+import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,34 +20,12 @@ public class EnderecoBO {
   private String estado;
 
   public EnderecoBO(Long id, String logradouro, String cep, String bairro, String cidade, String estado) throws InvalidParamError {
+    ParamValidator.validate(cep, logradouro, bairro, cidade, estado);
     this.id = id;
     this.logradouro = logradouro.trim();
     this.cep = cep.trim();
     this.bairro = bairro.trim();
     this.cidade = cidade.trim();
     this.estado = estado.trim();
-    this.validate();
-  }
-
-  private void validate() {
-    if (this.cep == null || this.cep.isBlank()) {
-      throw new InvalidParamError("cep");
-    }
-
-    if (this.logradouro == null || this.logradouro.isBlank()) {
-      throw new InvalidParamError("logradouro");
-    }
-
-    if (this.bairro == null || this.bairro.isBlank()) {
-      throw new InvalidParamError("bairro");
-    }
-
-    if (this.cidade == null || this.cidade.isBlank()) {
-      throw new InvalidParamError("cidade");
-    }
-
-    if (this.estado == null || this.estado.isBlank()) {
-      throw new InvalidParamError("estado");
-    }
   }
 }

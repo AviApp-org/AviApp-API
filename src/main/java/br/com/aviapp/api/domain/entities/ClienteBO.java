@@ -2,6 +2,7 @@ package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
+import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,32 +21,14 @@ public class ClienteBO {
   private EnumStatusCliente status;
 
   public ClienteBO(Long id, String nome, String email, String cnpj, String telefone) throws InvalidParamError {
+    ParamValidator.validate(nome, email, cnpj, telefone);
     this.id = id;
     this.nome = nome;
     this.email = email;
     this.cnpj = cnpj;
     this.telefone = telefone;
-    this.validate();
   }
 
-  public void validate() {
-    if (this.nome == null || this.nome.isBlank()) {
-      throw new InvalidParamError("nome");
-    }
-
-    if (this.email == null || this.email.isBlank()) {
-      throw new InvalidParamError("email");
-    }
-
-    if (this.cnpj == null || this.cnpj.isBlank()) {
-      throw new InvalidParamError("cnpj");
-    }
-
-    if (this.telefone == null || this.telefone.isBlank()) {
-      throw new InvalidParamError("telefone");
-    }
-  }
-  
   public void desativar() {
     this.status = EnumStatusCliente.INATIVO;
   }
