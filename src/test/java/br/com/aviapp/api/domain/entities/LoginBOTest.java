@@ -1,8 +1,11 @@
 package br.com.aviapp.api.domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 public class LoginBOTest {
   
@@ -15,5 +18,15 @@ public class LoginBOTest {
 
     assertEquals(password, sut.getPassword());
     assertEquals(userName, sut.getUserName());
+  }
+
+  @Test
+  void shouldThrowIfAParamIsBlank() {
+    assertThrows(InvalidParamError.class, () -> {
+      String userName = null;
+      String password = "world";
+
+      new LoginBO(userName, password);
+    });
   }
 }
