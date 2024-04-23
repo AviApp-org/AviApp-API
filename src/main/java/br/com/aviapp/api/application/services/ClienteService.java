@@ -1,4 +1,4 @@
-package br.com.aviapp.api.services;
+package br.com.aviapp.api.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
