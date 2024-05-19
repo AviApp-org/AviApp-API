@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -17,7 +19,9 @@ public class MySqlCollectEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long aviaryId;
+  @ManyToOne
+  @JoinColumn(name = "aviary_id")
+  private MySqlAviaryEntity aviaryId;
 
   private LocalDateTime timestamp;
 

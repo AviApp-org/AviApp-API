@@ -10,9 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Table(name = "egg")
-@Entity
 @Data
+@Entity
+@Table(name = "egg")
 public class MySqlEggEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

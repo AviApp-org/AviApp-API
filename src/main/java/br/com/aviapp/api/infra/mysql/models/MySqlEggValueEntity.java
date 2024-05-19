@@ -22,7 +22,7 @@ public class MySqlEggValueEntity {
 
   @ManyToOne
   @JoinColumn(name = "egg_id")
-  private Integer eggId;
+  private MySqlEggEntity eggId;
 
   private LocalDateTime timestamp;
 

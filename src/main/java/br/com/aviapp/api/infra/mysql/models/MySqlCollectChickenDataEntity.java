@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table
+@Table(name = "collect_chicken_data")
 public class MySqlCollectChickenDataEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +25,19 @@ public class MySqlCollectChickenDataEntity {
 
   @ManyToOne
   @JoinColumn(name = "collect_id")
-  private Long collectId;
+  private MySqlCollectEntity collect;
 
-  @Enumerated(EnumType.STRING)
+  @Enumerated(EnumType.ORDINAL)
   private ChickenGender gender;
 
   private Integer quantity;
 
   @Column(name = "death_cause")
-  @Enumerated(EnumType.STRING)
+  @Enumerated(EnumType.ORDINAL)
   private ChickenDeathCause deathCause;
 
-  @Enumerated(EnumType.STRING)
+  @Column(name = "status")
+  @Enumerated(EnumType.ORDINAL)
   private ChickenStatus status;
 
   private String observation;

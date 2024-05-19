@@ -19,11 +19,11 @@ public class MySqlCollectEggDataEntity {
 
   @ManyToOne
   @JoinColumn(name = "collect_id")
-  private Long collectId;
+  private MySqlCollectEntity collect;
 
   @ManyToOne
   @JoinColumn(name = "egg_id")
-  private Integer eggId;
+  private MySqlEggEntity eggId;
 
   private Integer quantity;
 }
