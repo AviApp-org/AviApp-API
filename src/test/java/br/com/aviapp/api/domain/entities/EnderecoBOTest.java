@@ -11,7 +11,7 @@ import br.com.aviapp.api.domain.errors.InvalidParamError;
 public class EnderecoBOTest {
   @Test
   void shouldInstanciateWithCorrectValues() {
-    EnderecoBO sut = new EnderecoBO(null, "Rua Xavantes", "85806020", "Santa Cruz", "Cascavel", "Paraná");
+    AddressBO sut = new AddressBO(null, "Rua Xavantes", "85806020", "Santa Cruz", "Cascavel", "Paraná");
 
     assertAll("Match values",
         () -> assertEquals("Rua Xavantes", sut.getLogradouro()),
@@ -23,7 +23,7 @@ public class EnderecoBOTest {
 
   @Test
   void shouldRemoveBlankSpaces() {
-    EnderecoBO sut = new EnderecoBO(null, "Rua Xavantes      ", "     85806020", "Santa Cruz", "Cascavel", "Paraná");
+    AddressBO sut = new AddressBO(null, "Rua Xavantes      ", "     85806020", "Santa Cruz", "Cascavel", "Paraná");
 
     assertAll("Match values",
         () -> assertEquals("Rua Xavantes", sut.getLogradouro()),
@@ -36,7 +36,7 @@ public class EnderecoBOTest {
   @Test
   void shouldThrowIfAParamIsNull() {
     assertThrows(InvalidParamError.class, () -> {
-      new EnderecoBO(null, "Rua Xavantes", "", "Santa Cruz", "Cascavel", "Paraná");
+      new AddressBO(null, "Rua Xavantes", "", "Santa Cruz", "Cascavel", "Paraná");
     });
   }
 }

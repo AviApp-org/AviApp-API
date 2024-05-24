@@ -14,6 +14,6 @@ import lombok.ToString;
 public class GranjaBO {
   private Long id;
   private ClienteBO cliente;
-  private EnderecoBO endereco;
+  private AddressBO endereco;
   private LoteBO[] lote;
 }

@@ -27,17 +27,17 @@ public class MySqlCollectChickenDataEntity {
   @JoinColumn(name = "collect_id")
   private MySqlCollectEntity collect;
 
-  @Enumerated(EnumType.ORDINAL)
+  @Enumerated(EnumType.STRING)
   private ChickenGender gender;
 
   private Integer quantity;
 
   @Column(name = "death_cause")
-  @Enumerated(EnumType.ORDINAL)
+  @Enumerated(EnumType.STRING)
   private ChickenDeathCause deathCause;
 
   @Column(name = "status")
-  @Enumerated(EnumType.ORDINAL)
+  @Enumerated(EnumType.STRING)
   private ChickenStatus status;
 
   private String observation;
