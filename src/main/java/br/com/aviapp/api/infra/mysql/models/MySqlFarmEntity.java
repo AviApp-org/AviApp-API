@@ -1,5 +1,7 @@
 package br.com.aviapp.api.infra.mysql.models;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,5 +32,5 @@ public class MySqlFarmEntity {
 
   @OneToMany
   @JoinColumn(name = "employee_id")
-  private MySqlEmployeeEntity employeeId;
+  private List<MySqlEmployeeEntity> employeeId;
 }
