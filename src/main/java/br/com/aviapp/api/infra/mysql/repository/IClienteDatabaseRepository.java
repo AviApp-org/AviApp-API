@@ -1,4 +1,4 @@
-package br.com.aviapp.api.domain.repository;
+package br.com.aviapp.api.infra.mysql.repository;
 
 import br.com.aviapp.api.domain.entities.ClienteBO;
 

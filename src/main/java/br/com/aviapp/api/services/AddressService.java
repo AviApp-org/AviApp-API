@@ -1,4 +1,4 @@
-package br.com.aviapp.api.domain.services;
+package br.com.aviapp.api.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.aviapp.api.domain.dto.AddressDTO;
-import br.com.aviapp.api.domain.repository.AddressRepository;
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
+import br.com.aviapp.api.infra.mysql.repository.AddressRepository;
 
 @Service
 public class AddressService {

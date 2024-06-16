@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 
 import br.com.aviapp.api.domain.dto.ClienteDTO;
-import br.com.aviapp.api.domain.repository.IClienteDatabaseRepository;
+import br.com.aviapp.api.infra.mysql.repository.IClienteDatabaseRepository;
 
 public class CadastrarClienteTest {
 
@@ -33,7 +33,7 @@ public class CadastrarClienteTest {
   void config() {
     Mockito.clearAllCaches();
   }
-  
+
   @Disabled
   void shouldAddClienteToDatabase() {
     ClienteDTO dto = new ClienteDTO(null, "Test", "teste@teste.com", "00000000000", "000000000");
