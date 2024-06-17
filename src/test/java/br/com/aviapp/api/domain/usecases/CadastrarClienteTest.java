@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 
-import br.com.aviapp.api.domain.dto.ClienteDTO;
+import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.infra.mysql.repository.IClienteDatabaseRepository;
 
 public class CadastrarClienteTest {
@@ -36,9 +36,9 @@ public class CadastrarClienteTest {
 
   @Disabled
   void shouldAddClienteToDatabase() {
-    ClienteDTO dto = new ClienteDTO(null, "Test", "teste@teste.com", "00000000000", "000000000");
-    when(sut.execute(any(ClienteDTO.class))).thenReturn(dto);
-    ClienteDTO response = sut.execute(dto);
+    ClientDTO dto = new ClientDTO(null, "Test", "teste@teste.com", "00000000000", "000000000");
+    when(sut.execute(any(ClientDTO.class))).thenReturn(dto);
+    ClientDTO response = sut.execute(dto);
 
     assertNotNull(response.getId());
   }

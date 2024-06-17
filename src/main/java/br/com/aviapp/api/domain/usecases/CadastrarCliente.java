@@ -1,6 +1,6 @@
 package br.com.aviapp.api.domain.usecases;
 
-import br.com.aviapp.api.domain.dto.ClienteDTO;
+import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.domain.entities.ClienteBO;
 import br.com.aviapp.api.domain.mappers.ClienteMapper;
 import br.com.aviapp.api.infra.mysql.repository.IClienteDatabaseRepository;
@@ -11,10 +11,10 @@ public class CadastrarCliente {
 
   private IClienteDatabaseRepository repository;
 
-  public ClienteDTO execute(ClienteDTO dto) {
+  public ClientDTO execute(ClientDTO dto) {
     ClienteBO bo = ClienteMapper.toBO(dto);
     ClienteBO repositoryResponse = repository.save(bo);
-    ClienteDTO response = ClienteMapper.toDTO(repositoryResponse);
+    ClientDTO response = ClienteMapper.toDTO(repositoryResponse);
     return response;
   }
 

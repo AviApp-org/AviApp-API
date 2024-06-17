@@ -1,8 +1,8 @@
 package br.com.aviapp.api.domain.entities;
 
-import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
+import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,26 +14,26 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ClienteBO {
   private Long id;
-  private String nome;
+  private String name;
   private String email;
-  private String cnpj;
+  private String cpf;
   private String telefone;
-  private EnumStatusCliente status;
+  private ClientStatusType status;
 
-  public ClienteBO(Long id, String nome, String email, String cnpj, String telefone) throws InvalidParamError {
-    ParamValidator.validate(nome, email, cnpj, telefone);
+  public ClienteBO(Long id, String name, String email, String cpf, String telefone) throws InvalidParamError {
+    ParamValidator.validate(name, email, cpf, telefone);
     this.id = id;
-    this.nome = nome;
+    this.name = name;
     this.email = email;
-    this.cnpj = cnpj;
+    this.cpf = cpf;
     this.telefone = telefone;
   }
 
   public void desativar() {
-    this.status = EnumStatusCliente.INATIVO;
+    this.status = ClientStatusType.INACTIVE;
   }
 
   public void ativar() {
-    this.status = EnumStatusCliente.ATIVO;
+    this.status = ClientStatusType.ACTIVE;
   }
 }

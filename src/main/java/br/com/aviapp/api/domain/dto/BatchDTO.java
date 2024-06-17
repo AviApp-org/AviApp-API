@@ -11,5 +11,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class BatchDTO {
     
+    private Long id;
     private FarmDTO farmId;
 }

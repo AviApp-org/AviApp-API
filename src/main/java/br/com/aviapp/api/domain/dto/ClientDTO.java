@@ -1,6 +1,6 @@
 package br.com.aviapp.api.domain.dto;
 
-import br.com.aviapp.api.domain.enums.EnumStatusCliente;
+import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,20 +12,20 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteDTO {
+public class ClientDTO {
   private Long id;
-  private String nome;
+  private String name;
   private String email;
-  private String cnpj;
+  private String cpf;
   private String telefone;
-  private EnumStatusCliente status;
+  private ClientStatusType status;
 
-  public ClienteDTO(Long id, String nome, String email, String cnpj, String telefone) {
+  public ClientDTO(Long id, String name, String email, String cpf, String telefone) {
     this.id = id != null ? id : null;
-    this.nome = nome;
+    this.name = name;
     this.email = email;
-    this.cnpj = cnpj;
+    this.cpf = cpf;
     this.telefone = telefone;
-    this.status = EnumStatusCliente.ATIVO;
+    this.status = ClientStatusType.ACTIVE;
   }
 }

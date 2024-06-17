@@ -12,7 +12,7 @@ import lombok.ToString;
 
 public class UserCredentialsDTO {
     
-    private ClienteDTO clientId;
+    private ClientDTO clientId;
     private String username;
     private String password;
 }
