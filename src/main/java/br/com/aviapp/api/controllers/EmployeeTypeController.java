@@ -22,9 +22,9 @@ import br.com.aviapp.api.services.EmployeeTypeService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/clients")
+@RequestMapping("/api/employee/type")
 public class EmployeeTypeController {
-    
+
     @Autowired
     private EmployeeTypeService employeeTypeService;
 
