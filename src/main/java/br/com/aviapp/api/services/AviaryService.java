@@ -36,25 +36,25 @@ public class AviaryService {
     }
 
     public Long save(AviaryDTO aviaryDTO) {
-        
+
         MySqlBatchEntity batchDTO = batchService.findBatchOrThrow(aviaryDTO.getBatchId());
-        
+
         var entity = new MySqlAviaryEntity(
             null,
             aviaryDTO.getName(),
             batchDTO
         );
-        
+
         var savedAviary = aviaryRepository.save(entity);
         return savedAviary.getId();
     }
 
-    public AviaryDTO toAviaryDTO(MySqlAviaryEntity mySqlAviaryEntity) {
-        AviaryDTO AviaryDTO = new AviaryDTO();
-        AviaryDTO.setName(mySqlAviaryEntity.getName());
-        AviaryDTO.setBatchId(batchService.toBatchDTO(mySqlAviaryEntity.getBatchId()));
+    public AviaryDTO toAviaryDTO(MySqlAviaryEntity entity) {
+        AviaryDTO dto = new AviaryDTO();
+        dto.setName(entity.getName());
+        dto.setBatchId(entity.getBatchId().getId());
         // Mapear outros campos, se necessário
-        return AviaryDTO;
+        return dto;
     }
 
     public void deleteAviary(Long id) {
@@ -85,7 +85,7 @@ public class AviaryService {
 
             existingAviary.setName(aviaryDTO.getName());
             existingAviary.setBatchId(batchService.findBatchOrThrow(aviaryDTO.getBatchId()));
-            
+
 
             MySqlAviaryEntity updatedAviary = aviaryRepository.save(existingAviary);
 
