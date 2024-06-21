@@ -37,28 +37,28 @@ public class BatchService {
         }
     }
 
-    /* 
+    /*
     public Long save(BatchDTO batchDTO) {
          MySqlBatchEntity batchDTO = batchService.findBatchOrThrow(BatchDTO.getBatchId());
- 
+
          var entity = new MySqlBatchEntity(
                  null,
                  BatchDTO.getName(),
                  batchDTO);
- 
+
          var savedBatch = batchRepository.save(entity);
          return savedBatch.getId();
      }
- 
+
      public void deleteBatch(Long id) {
          var batchExiste = batchRepository.existsById(id);
- 
+
          if (batchExiste) {
              batchRepository.deleteById(id);
          }
      }
-    */ 
-    
+    */
+
 
     public List<BatchDTO> listBatches() {
         List<MySqlBatchEntity> aviaries = batchRepository.findAll();
@@ -92,7 +92,13 @@ public class BatchService {
     public MySqlBatchEntity findBatchOrThrow(BatchDTO batchDTO) {
 
         return batchRepository.findById(batchDTO.getId())
-                .orElseThrow(() -> new RuntimeException("errorMessage "));
+                .orElseThrow(() -> new RuntimeException("Lote não encontrado com o ID: " + batchDTO.getId()));
+    }
+
+    public MySqlBatchEntity findBatchOrThrow(Long batchId) {
+
+        return batchRepository.findById(batchId)
+                .orElseThrow(() -> new RuntimeException("Lote não encontrado com o ID: " + batchId));
     }
 
     public MySqlBatchEntity toEntity(BatchDTO batchDTO) {

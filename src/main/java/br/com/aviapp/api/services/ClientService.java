@@ -31,18 +31,22 @@ public class ClientService {
         }
     }
 
-    public Long save(ClientDTO clientDTO) {
+    public MySqlClientEntity save(ClientDTO clientDTO) {
 
-        var entity = new MySqlClientEntity(
+        MySqlClientEntity entity = new MySqlClientEntity(
                 null,
                 clientDTO.getName(),
-                clientDTO.getEmail(),
                 clientDTO.getCpf(),
+                clientDTO.getEmail(),
                 clientDTO.getTelefone(),
                 clientDTO.getStatus());
 
-        var savedClient = clientRepository.save(entity);
-        return savedClient.getId();
+        if (entity.getCpf().isBlank()) {
+            throw new RuntimeException("Campo obrigatório faltando: cpf");
+        }
+
+        MySqlClientEntity savedClient = clientRepository.save(entity);
+        return savedClient;
     }
 
     public ClientDTO toClientDTO(MySqlClientEntity mySqlClientEntity) {
