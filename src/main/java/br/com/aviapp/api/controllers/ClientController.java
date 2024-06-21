@@ -47,10 +47,10 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> createClient(@RequestBody ClientDTO clientDTO) {
-        Long createdClientId = clientService.save(clientDTO);
-        URI location = URI.create("/api/clients/" + createdClientId);
-        return ResponseEntity.created(location).build();
+    public ResponseEntity<MySqlClientEntity> createClient(@RequestBody ClientDTO clientDTO) {
+        MySqlClientEntity created = clientService.save(clientDTO);
+        URI location = URI.create("/api/clients/" + created.getId());
+        return ResponseEntity.ok(created);
     }
 
     @PutMapping("/{id}")
