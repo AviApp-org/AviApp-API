@@ -10,7 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AviaryDTO {
-    
     private String name;
-    private BatchDTO batchId;
+    private Long batchId;
 }
