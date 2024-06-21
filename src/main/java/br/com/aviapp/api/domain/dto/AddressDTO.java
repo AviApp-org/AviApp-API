@@ -10,12 +10,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressDTO {
-
     private String street;
     private String number;
     private String cep;
     private String neighborhood;
     private String city;
     private String state;
-
 }

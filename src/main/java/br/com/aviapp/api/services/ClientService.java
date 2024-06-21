@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
+import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepository;
 
@@ -33,6 +34,22 @@ public class ClientService {
 
     public MySqlClientEntity save(ClientDTO clientDTO) {
 
+        if (clientDTO.getName().isBlank()) {
+            throw new RuntimeException("Campo obrigatório vazio: nome");
+        }
+
+        if (clientDTO.getCpf().isBlank()) {
+            throw new RuntimeException("Campo obrigatório vazio: cpf");
+        }
+
+        if (clientDTO.getEmail().isBlank()) {
+            throw new RuntimeException("Campo obrigatório vazio: email");
+        }
+
+        if (clientDTO.getStatus().toString().isBlank()) {
+            clientDTO.setStatus(ClientStatusType.ACTIVE);
+        }
+
         MySqlClientEntity entity = new MySqlClientEntity(
                 null,
                 clientDTO.getName(),
@@ -40,10 +57,6 @@ public class ClientService {
                 clientDTO.getEmail(),
                 clientDTO.getTelefone(),
                 clientDTO.getStatus());
-
-        if (entity.getCpf().isBlank()) {
-            throw new RuntimeException("Campo obrigatório faltando: cpf");
-        }
 
         MySqlClientEntity savedClient = clientRepository.save(entity);
         return savedClient;
