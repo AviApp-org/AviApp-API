@@ -18,8 +18,8 @@ public class ClienteMapper {
     dto.setCpf(bo.getCpf());
     dto.setName(bo.getName());
     dto.setStatus(bo.getStatus());
-    dto.setTelefone(bo.getTelefone());
-    
+    dto.setTelefone(bo.getPhone());
+
     return dto;
   }
 }

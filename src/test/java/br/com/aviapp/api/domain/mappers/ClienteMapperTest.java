@@ -20,7 +20,7 @@ public class ClienteMapperTest {
     assertEquals(dto.getName(), bo.getName());
     assertEquals(dto.getEmail(), bo.getEmail());
     assertEquals(dto.getCpf(), bo.getCpf());
-    assertEquals(dto.getTelefone(), bo.getTelefone());
+    assertEquals(dto.getPhone(), bo.getPhone());
     assertEquals(dto.getStatus(), bo.getStatus());
   }
 
@@ -33,7 +33,7 @@ public class ClienteMapperTest {
     assertEquals(bo.getName(), dto.getName());
     assertEquals(bo.getEmail(), dto.getEmail());
     assertEquals(bo.getCpf(), dto.getCpf());
-    assertEquals(bo.getTelefone(), dto.getTelefone());
+    assertEquals(bo.getPhone(), dto.getPhone());
     assertEquals(bo.getStatus(), dto.getStatus());
   }
 

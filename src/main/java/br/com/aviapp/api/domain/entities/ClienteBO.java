@@ -17,16 +17,16 @@ public class ClienteBO {
   private String name;
   private String email;
   private String cpf;
-  private String telefone;
+  private String phone;
   private ClientStatusType status;
 
-  public ClienteBO(Long id, String name, String email, String cpf, String telefone) throws InvalidParamError {
-    ParamValidator.validate(name, email, cpf, telefone);
+  public ClienteBO(Long id, String name, String email, String cpf, String phone) throws InvalidParamError {
+    ParamValidator.validate(name, email, cpf, phone);
     this.id = id;
     this.name = name;
     this.email = email;
     this.cpf = cpf;
-    this.telefone = telefone;
+    this.phone = phone;
   }
 
   public void desativar() {
