@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.aviapp.api.domain.enums.EnumStatusCliente;
+import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 public class ClienteBOTest {
@@ -13,17 +13,17 @@ public class ClienteBOTest {
   @Test
   void shouldInactivateAClient() {
     ClienteBO bo = new ClienteBO(1l, "Test", "teste@teste.com", "00000000000", "000000000");
-    bo.desativar();
+    bo.deactivate();
 
-    assertEquals(EnumStatusCliente.INATIVO, bo.getStatus());
+    assertEquals(ClientStatusEnum.INACTIVE, bo.getStatus());
   }
 
   @Test
   void shouldActivateAClient() {
     ClienteBO bo = new ClienteBO(1l, "Test", "teste@teste.com", "00000000000", "000000000");
-    bo.ativar();
+    bo.activate();
 
-    assertEquals(EnumStatusCliente.ATIVO, bo.getStatus());
+    assertEquals(ClientStatusEnum.ACTIVE, bo.getStatus());
   }
 
   @Test

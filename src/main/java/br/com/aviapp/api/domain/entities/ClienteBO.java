@@ -1,8 +1,8 @@
 package br.com.aviapp.api.domain.entities;
 
+import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
-import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class ClienteBO {
   private String email;
   private String cpf;
   private String phone;
-  private ClientStatusType status;
+  private ClientStatusEnum status;
 
   public ClienteBO(Long id, String name, String email, String cpf, String phone) throws InvalidParamError {
     ParamValidator.validate(name, email, cpf, phone);
@@ -27,13 +27,14 @@ public class ClienteBO {
     this.email = email;
     this.cpf = cpf;
     this.phone = phone;
+    this.status = ClientStatusEnum.ACTIVE;
   }
 
-  public void desativar() {
-    this.status = ClientStatusType.INACTIVE;
+  public void deactivate() {
+    this.status = ClientStatusEnum.INACTIVE;
   }
 
-  public void ativar() {
-    this.status = ClientStatusType.ACTIVE;
+  public void activate() {
+    this.status = ClientStatusEnum.ACTIVE;
   }
 }
