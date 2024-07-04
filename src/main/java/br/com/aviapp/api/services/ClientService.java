@@ -2,12 +2,12 @@ package br.com.aviapp.api.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
+import br.com.aviapp.api.domain.mappers.ClienteMapper;
 import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepository;
@@ -18,8 +18,9 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public List<MySqlClientEntity> findAll() {
-        return clientRepository.findAll();
+    public List<ClientDTO> findAll() {
+        List<MySqlClientEntity> entities = clientRepository.findAll();
+        return entities.stream().map(e -> ClienteMapper.toDTO(e)).toList();
     }
 
     public ClientDTO findById(Long id) {
@@ -62,31 +63,12 @@ public class ClientService {
         return savedClient;
     }
 
-    public ClientDTO toClientDTO(MySqlClientEntity mySqlClientEntity) {
-        ClientDTO clientDTO = new ClientDTO();
-        clientDTO.setId(mySqlClientEntity.getId());
-        clientDTO.setName(mySqlClientEntity.getName());
-        clientDTO.setEmail(mySqlClientEntity.getEmail());
-        clientDTO.setCpf(mySqlClientEntity.getCpf());
-        clientDTO.setTelefone(mySqlClientEntity.getTelefone());
-        clientDTO.setStatus(mySqlClientEntity.getStatus());
-        // Mapear outros campos, se necessário
-        return clientDTO;
-    }
-
     public void deleteClient(Long id) {
         var clientExiste = clientRepository.existsById(id);
 
         if (clientExiste) {
             clientRepository.deleteById(id);
         }
-    }
-
-    public List<ClientDTO> listClients() {
-        List<MySqlClientEntity> clients = clientRepository.findAll();
-        return clients.stream()
-                .map(this::toClientDTO)
-                .collect(Collectors.toList());
     }
 
     public Optional<MySqlClientEntity> getClientById(Long id) {
