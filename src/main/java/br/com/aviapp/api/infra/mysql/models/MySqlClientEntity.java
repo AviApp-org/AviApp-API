@@ -1,6 +1,6 @@
 package br.com.aviapp.api.infra.mysql.models;
 
-import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
+import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,9 +33,9 @@ public class MySqlClientEntity {
   private String email;
 
   @Column(nullable = false)
-  private String telefone;
+  private String phone;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  private ClientStatusType status;
+  private ClientStatusEnum status;
 }

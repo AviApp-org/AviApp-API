@@ -2,6 +2,7 @@ package br.com.aviapp.api.domain.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class ClientDTO {
   @CPF
   private String cpf;
   private String phone;
-  private ClientStatusType status = ClientStatusType.ACTIVE;
+  private ClientStatusEnum status = ClientStatusEnum.ACTIVE;
 
   public ClientDTO(Long id, String name, String email, String cpf, String phone) {
     this.id = id != null ? id : null;
