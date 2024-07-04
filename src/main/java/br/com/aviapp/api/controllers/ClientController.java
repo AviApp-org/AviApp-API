@@ -28,6 +28,7 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    // TODO: Implement pagination
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getAllClients() {
         List<ClientDTO> clients = clientService.listClients();
