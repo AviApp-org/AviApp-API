@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ClienteBO {
+public class ClientBO {
   private Long id;
   private String name;
   private String email;
@@ -20,7 +20,7 @@ public class ClienteBO {
   private String phone;
   private ClientStatusEnum status;
 
-  public ClienteBO(Long id, String name, String email, String cpf, String phone) throws InvalidParamError {
+  public ClientBO(Long id, String name, String email, String cpf, String phone) throws InvalidParamError {
     ParamValidator.validate(name, email, cpf, phone);
     this.id = id;
     this.name = name;

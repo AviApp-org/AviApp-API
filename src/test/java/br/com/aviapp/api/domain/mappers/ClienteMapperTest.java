@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
-import br.com.aviapp.api.domain.entities.ClienteBO;
+import br.com.aviapp.api.domain.entities.ClientBO;
 
 @ActiveProfiles("test")
 public class ClienteMapperTest {
@@ -14,7 +14,7 @@ public class ClienteMapperTest {
   @Test
   void shouldParseDtoToBoCorrectly() {
     ClientDTO dto = new ClientDTO(1l, "Test", "test@email.com", "00000000000", "000000000");
-    ClienteBO bo = ClienteMapper.toBO(dto);
+    ClientBO bo = ClienteMapper.toBO(dto);
 
     assertEquals(dto.getId(), bo.getId());
     assertEquals(dto.getName(), bo.getName());
@@ -26,7 +26,7 @@ public class ClienteMapperTest {
 
   @Test
   void shouldParseBoToDtoCorrectly() {
-    ClienteBO bo = new ClienteBO(1l, "Test", "test@email.com", "00000000000", "000000000");
+    ClientBO bo = new ClientBO(1l, "Test", "test@email.com", "00000000000", "000000000");
     ClientDTO dto = ClienteMapper.toDTO(bo);
 
     assertEquals(bo.getId(), dto.getId());

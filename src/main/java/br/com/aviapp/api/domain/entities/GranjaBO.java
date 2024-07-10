@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class GranjaBO {
   private Long id;
-  private ClienteBO cliente;
+  private ClientBO cliente;
   private AddressBO endereco;
   private LoteBO[] lote;
 }

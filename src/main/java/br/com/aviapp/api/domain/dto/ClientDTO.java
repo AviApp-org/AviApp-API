@@ -1,9 +1,10 @@
 package br.com.aviapp.api.domain.dto;
 
+import java.time.LocalDate;
+
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
-import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,11 @@ public class ClientDTO {
 
   @CPF
   private String cpf;
+
   private String phone;
+
+  private LocalDate birthDate;
+
   private ClientStatusEnum status = ClientStatusEnum.ACTIVE;
 
   public ClientDTO(Long id, String name, String email, String cpf, String phone) {
@@ -34,6 +39,6 @@ public class ClientDTO {
     this.email = email;
     this.cpf = cpf;
     this.phone = phone;
-    this.status = ClientStatusType.ACTIVE;
+    this.status = ClientStatusEnum.ACTIVE;
   }
 }

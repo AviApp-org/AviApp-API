@@ -1,17 +1,17 @@
 package br.com.aviapp.api.domain.mappers;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
-import br.com.aviapp.api.domain.entities.ClienteBO;
+import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 
 public class ClienteMapper {
-  public static ClienteBO toBO(ClientDTO dto) {
-    ClienteBO bo = new ClienteBO(dto.getId(), dto.getName(), dto.getEmail(), dto.getCpf(), dto.getPhone());
+  public static ClientBO toBO(ClientDTO dto) {
+    ClientBO bo = new ClientBO(dto.getId(), dto.getName(), dto.getEmail(), dto.getCpf(), dto.getPhone());
     bo.setStatus(dto.getStatus());
     return bo;
   }
 
-  public static ClientDTO toDTO(ClienteBO bo) {
+  public static ClientDTO toDTO(ClientBO bo) {
     ClientDTO dto = new ClientDTO();
 
     dto.setId(bo.getId());
