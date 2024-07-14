@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
-import br.com.aviapp.api.domain.mappers.ClienteMapper;
-import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
+import br.com.aviapp.api.domain.entities.ClientBO;
+import br.com.aviapp.api.domain.mappers.ClientMapper;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepository;
+import br.com.aviapp.api.presentation.dto.request.client.CreateClientRequestDTO;
+import br.com.aviapp.api.presentation.dto.response.client.CreateClientResponseDTO;
 
 @Service
 public class ClientService {
@@ -33,33 +35,17 @@ public class ClientService {
         }
     }
 
-    public MySqlClientEntity save(ClientDTO clientDTO) {
+    public MySqlClientEntity save(CreateClientRequestDTO dto) {
+        ClientBO bo = ClientMapper.toBO(dto);
 
-        if (clientDTO.getName().isBlank()) {
-            throw new RuntimeException("Campo obrigatório vazio: nome");
-        }
+        bo.isCpfValid();
+        bo.isBirthDateValid();
 
-        if (clientDTO.getCpf().isBlank()) {
-            throw new RuntimeException("Campo obrigatório vazio: cpf");
-        }
-
-        if (clientDTO.getEmail().isBlank()) {
-            throw new RuntimeException("Campo obrigatório vazio: email");
-        }
-
-        if (clientDTO.getStatus().toString().isBlank()) {
-            clientDTO.setStatus(ClientStatusType.ACTIVE);
-        }
-
-        MySqlClientEntity entity = new MySqlClientEntity(
-                null,
-                clientDTO.getName(),
-                clientDTO.getCpf(),
-                clientDTO.getEmail(),
-                clientDTO.getTelefone(),
-                clientDTO.getStatus());
-
+        MySqlClientEntity entity = ClientMapper.toEntity(bo);
         MySqlClientEntity savedClient = clientRepository.save(entity);
+
+        CreateClientResponseDTO response = ClientMapper.toDTO(entity);
+
         return savedClient;
     }
 
