@@ -40,4 +40,12 @@ public class ClientBO {
   public void activate() {
     this.status = ClientStatusEnum.ACTIVE;
   }
+
+  public boolean isCpfValid() {
+    return true;
+  }
+
+  public boolean isBirthDateValid() {
+    return true;
+  }
 }

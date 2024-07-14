@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 
-public class ClienteBOTest {
+public class ClientBOTest {
 
   private ClientBO makeClientBO() {
     ClientBO bo = new ClientBO(1L, "Test", "teste@teste.com", "00000000000", "000000000", LocalDate.now());
