@@ -1,4 +1,4 @@
-package br.com.aviapp.api.controllers;
+package br.com.aviapp.api.presentation.controllers;
 
 import java.net.URI;
 import java.util.List;

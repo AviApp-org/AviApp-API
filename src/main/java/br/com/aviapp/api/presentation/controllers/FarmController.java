@@ -1,10 +1,12 @@
-package br.com.aviapp.api.controllers;
+package br.com.aviapp.api.presentation.controllers;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +14,6 @@ import br.com.aviapp.api.domain.dto.FarmDTO;
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController

@@ -1,4 +1,4 @@
-package br.com.aviapp.api.controllers;
+package br.com.aviapp.api.presentation.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -24,7 +24,7 @@ import br.com.aviapp.api.services.AviaryService;
 @CrossOrigin("*")
 @RequestMapping("/api/aviaries")
 public class AviaryController {
-   
+
     @Autowired
     private AviaryService aviaryService;
 
