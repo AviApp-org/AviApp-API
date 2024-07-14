@@ -68,4 +68,11 @@ public class ClienteBOTest {
       new ClientBO(1l, "", "test@email.com", "00000000000", "000000000", LocalDate.now());
     });
   }
+
+  @Test
+  void shouldInitializeClientAsActive() {
+    ClientBO bo = this.makeClientBO();
+
+    assertEquals(ClientStatusEnum.ACTIVE, bo.getStatus());
+  }
 }
