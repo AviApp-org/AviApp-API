@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
+import br.com.aviapp.api.presentation.dto.request.client.CreateClientRequestDTO;
+import br.com.aviapp.api.presentation.dto.response.client.CreateClientResponseDTO;
 import br.com.aviapp.api.services.ClientService;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/api/clients")
+@RequestMapping("/api/v1/clients")
 public class ClientController {
 
     @Autowired
@@ -48,8 +48,8 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<MySqlClientEntity> createClient(@RequestBody ClientDTO clientDTO) {
-        MySqlClientEntity created = clientService.save(clientDTO);
+    public ResponseEntity<CreateClientResponseDTO> createClient(@RequestBody CreateClientRequestDTO clientDTO) {
+        CreateClientResponseDTO created = clientService.save(clientDTO);
         URI location = URI.create("/api/clients/" + created.getId());
         return ResponseEntity.ok(created);
     }
