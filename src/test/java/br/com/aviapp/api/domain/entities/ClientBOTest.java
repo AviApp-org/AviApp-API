@@ -1,11 +1,13 @@
 package br.com.aviapp.api.domain.entities;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Description;
 
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
@@ -74,5 +76,22 @@ public class ClientBOTest {
     ClientBO bo = this.makeClientBO();
 
     assertEquals(ClientStatusEnum.ACTIVE, bo.getStatus());
+  }
+
+  @Test
+  @Description("Should not throw if client is older than 18")
+  void shouldNotThrowIfClientIsOlderThan18() {
+    ClientBO bo = this.makeClientBO();
+    bo.setBirthDate(LocalDate.now().minusYears(20));
+
+    assertDoesNotThrow(() -> bo.isBirthDateValid());
+  }
+
+  @Test
+  @Description("Should throw if client is not older than 18")
+  void shouldThrowIfClientIsNotOlderThan18() {
+    ClientBO bo = this.makeClientBO();
+
+    assertThrows(RuntimeException.class, () -> bo.isBirthDateValid());
   }
 }

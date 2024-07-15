@@ -46,6 +46,16 @@ public class ClientBO {
   }
 
   public boolean isBirthDateValid() {
+    boolean isFutureDate = this.birthDate.isAfter(LocalDate.now());
+    boolean isAdult = this.birthDate.isBefore(LocalDate.now().minusYears(18));
+    if (isFutureDate) {
+      throw new RuntimeException("Data de nascimento não pode ser futura");
+    }
+
+    if (!isAdult) {
+      throw new RuntimeException("Cliente não pode ser menor de 18 anos");
+    }
+
     return true;
   }
 }
