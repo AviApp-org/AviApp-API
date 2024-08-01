@@ -1,8 +1,13 @@
 package br.com.aviapp.api.infra.postgresql.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
@@ -21,6 +26,11 @@ public class PgSqlClientRepositoryTest {
   @Autowired
   private PgSqlClientRepository sut;
 
+  @BeforeEach
+  void init() {
+    sut.deleteAll();
+  }
+
   @Test
   void shouldPersistClientOnDatabase() {
     PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
@@ -29,5 +39,20 @@ public class PgSqlClientRepositoryTest {
 
     assertNotNull(persisted.getId());
     assertEquals(entity, persisted);
+  }
+
+  @Test
+  void shouldFindAllClients() {
+    PgSqlClientEntity entity1 = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity2 = new PgSqlClientEntity(null, "Bradley Cooper", "98765432109", "bradley@cooper.com", "(926) 321-6543", ClientStatusEnum.ACTIVE);
+
+    sut.saveAll(List.of(entity1, entity2));
+
+    List<PgSqlClientEntity> allClients = sut.findAll();
+
+    assertEquals(2, allClients.size());
+    assertTrue(allClients.contains(entity1));
+    assertTrue(allClients.contains(entity2));
+    assertNotEquals(entity1, entity2);
   }
 }
