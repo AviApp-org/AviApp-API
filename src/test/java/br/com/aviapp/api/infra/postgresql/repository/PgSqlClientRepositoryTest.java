@@ -67,4 +67,18 @@ public class PgSqlClientRepositoryTest {
     assertEquals(persisted, foundClient);
     assertNotNull(foundClient);
   }
+
+  @Test
+  void shouldFindClientByCpf() {
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+
+    PgSqlClientEntity persisted = sut.save(entity);
+
+    PgSqlClientEntity foundClient = sut.findByCpf("12345678901");
+
+    assertEquals(persisted, foundClient);
+    assertNotNull(foundClient);
+  }
+
+
 }
