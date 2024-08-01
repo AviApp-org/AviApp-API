@@ -2,19 +2,22 @@ package br.com.aviapp.api.domain.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.domain.entities.ClientBO;
+import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 
 @ActiveProfiles("test")
-public class ClienteMapperTest {
+public class ClientMapperTest {
 
   @Test
   void shouldParseDtoToBoCorrectly() {
-    ClientDTO dto = new ClientDTO(1l, "Test", "test@email.com", "00000000000", "000000000");
-    ClientBO bo = ClienteMapper.toBO(dto);
+    ClientDTO dto = new ClientDTO(1l, "Test", "test@email.com", "00000000000", "000000000", LocalDate.now().minusYears(20), ClientStatusEnum.ACTIVE);
+    ClientBO bo = ClientMapper.toBO(dto);
 
     assertEquals(dto.getId(), bo.getId());
     assertEquals(dto.getName(), bo.getName());
@@ -26,8 +29,8 @@ public class ClienteMapperTest {
 
   @Test
   void shouldParseBoToDtoCorrectly() {
-    ClientBO bo = new ClientBO(1l, "Test", "test@email.com", "00000000000", "000000000");
-    ClientDTO dto = ClienteMapper.toDTO(bo);
+    ClientBO bo = new ClientBO(1l, "Test", "test@email.com", "00000000000", "000000000", LocalDate.now().minusYears(20));
+    ClientDTO dto = ClientMapper.toDTO(bo);
 
     assertEquals(bo.getId(), dto.getId());
     assertEquals(bo.getName(), dto.getName());
