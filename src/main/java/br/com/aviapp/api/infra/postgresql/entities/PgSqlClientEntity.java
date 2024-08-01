@@ -1,5 +1,7 @@
 package br.com.aviapp.api.infra.postgresql.entities;
 
+import java.time.LocalDate;
+
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +38,8 @@ public class PgSqlClientEntity {
 
   @Column(nullable = false)
   private String phone;
+
+  private LocalDate birthDate;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)

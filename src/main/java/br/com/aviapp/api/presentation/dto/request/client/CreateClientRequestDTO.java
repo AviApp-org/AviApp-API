@@ -35,12 +35,13 @@ public class CreateClientRequestDTO {
 
   private ClientStatusEnum status = ClientStatusEnum.ACTIVE;
 
-  public CreateClientRequestDTO(Long id, String name, String email, String cpf, String phone) {
+  public CreateClientRequestDTO(Long id, String name, String email, String cpf, String phone, LocalDate birthDate) {
     this.id = id != null ? id : null;
     this.name = name;
     this.email = email;
     this.cpf = cpf;
     this.phone = phone;
+    this.birthDate = birthDate;
     this.status = ClientStatusEnum.ACTIVE;
   }
 }
