@@ -55,4 +55,16 @@ public class PgSqlClientRepositoryTest {
     assertTrue(allClients.contains(entity2));
     assertNotEquals(entity1, entity2);
   }
+
+  @Test
+  void shouldFindClientById() {
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+
+    PgSqlClientEntity persisted = sut.save(entity);
+
+    PgSqlClientEntity foundClient = sut.findById(persisted.getId()).orElse(null);
+
+    assertEquals(persisted, foundClient);
+    assertNotNull(foundClient);
+  }
 }
