@@ -3,6 +3,7 @@ package br.com.aviapp.api.infra.postgresql.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Description;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
@@ -80,5 +82,16 @@ public class PgSqlClientRepositoryTest {
     assertNotNull(foundClient);
   }
 
+  @Test
+  @Description("Should return null if no entity is found")
+  void shouldFindClientByCpf_2() {
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+
+    sut.save(entity);
+
+    PgSqlClientEntity foundClient = sut.findByCpf("000");
+
+    assertNull(foundClient);
+  }
 
 }
