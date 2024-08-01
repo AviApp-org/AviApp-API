@@ -3,7 +3,6 @@ package br.com.aviapp.api.domain.entities;
 import java.time.LocalDate;
 
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
-import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,6 @@ public class ClientBO {
   private ClientStatusEnum status;
 
   public ClientBO(Long id, String name, String email, String cpf, String phone, LocalDate birthDate) {
-    ParamValidator.validate(name, email, cpf, phone);
     this.id = id;
     this.name = name;
     this.email = email;
@@ -31,6 +29,8 @@ public class ClientBO {
     this.phone = phone;
     this.birthDate = birthDate;
     this.status = ClientStatusEnum.ACTIVE;
+
+    this.validate();
   }
 
   public void deactivate() {
@@ -57,5 +57,27 @@ public class ClientBO {
     }
 
     return true;
+  }
+
+  private void validate() {
+
+    if (this.getName().isEmpty()) {
+      throw new RuntimeException("Nome cannot be empty");
+    }
+
+    if (this.getEmail().isEmpty()) {
+      throw new RuntimeException("Email cannot be empty");
+    }
+
+    if (this.getCpf().isEmpty()) {
+      throw new RuntimeException("CPF cannot be empty");
+    }
+
+    if (this.getPhone().isEmpty()) {
+      throw new RuntimeException("Phone cannot be empty");
+    }
+
+    this.isCpfValid();
+    this.isBirthDateValid();
   }
 }
