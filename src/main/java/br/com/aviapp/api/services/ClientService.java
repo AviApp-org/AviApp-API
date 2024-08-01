@@ -10,23 +10,28 @@ import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.mappers.ClientMapper;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
-import br.com.aviapp.api.infra.mysql.repository.ClientRepository;
+import br.com.aviapp.api.infra.postgresql.entities.PgSqlClientEntity;
+import br.com.aviapp.api.infra.postgresql.repository.PgSqlClientRepository;
 import br.com.aviapp.api.presentation.dto.request.client.CreateClientRequestDTO;
-import br.com.aviapp.api.presentation.dto.response.client.CreateClientResponseDTO;
 
 @Service
 public class ClientService {
 
+    private PgSqlClientRepository repository;
+
     @Autowired
-    private ClientRepository clientRepository;
+    public ClientService(PgSqlClientRepository clientRepository) {
+        this.repository = clientRepository;
+    }
 
     public List<ClientDTO> findAll() {
-        List<MySqlClientEntity> entities = clientRepository.findAll();
-        return entities.stream().map(e -> ClienteMapper.toDTO(e)).toList();
+        List<PgSqlClientEntity> entities = repository.findAll();
+        // return entities.stream().map(e -> ClientMapper.toDTO(e)).toList();
+        return null;
     }
 
     public ClientDTO findById(Long id) {
-        Optional<MySqlClientEntity> clientEntityOptional = clientRepository.findById(id);
+        Optional<MySqlClientEntity> clientEntityOptional = repository.findById(id);
         if (clientEntityOptional.isPresent()) {
             MySqlClientEntity clientEntity = clientEntityOptional.get();
             return toClientDTO(clientEntity);
@@ -35,35 +40,32 @@ public class ClientService {
         }
     }
 
-    public MySqlClientEntity save(CreateClientRequestDTO dto) {
+    public ClientBO save(CreateClientRequestDTO dto) {
         ClientBO bo = ClientMapper.toBO(dto);
 
-        bo.isCpfValid();
-        bo.isBirthDateValid();
+        PgSqlClientEntity entity = ClientMapper.toPgSqlEntity(bo);
+        PgSqlClientEntity savedClient = repository.save(entity);
 
-        MySqlClientEntity entity = ClientMapper.toEntity(bo);
-        MySqlClientEntity savedClient = clientRepository.save(entity);
+        ClientBO response = ClientMapper.toBO(savedClient);
 
-        CreateClientResponseDTO response = ClientMapper.toDTO(entity);
-
-        return savedClient;
+        return response;
     }
 
     public void deleteClient(Long id) {
-        var clientExiste = clientRepository.existsById(id);
+        var clientExiste = repository.existsById(id);
 
         if (clientExiste) {
-            clientRepository.deleteById(id);
+            repository.deleteById(id);
         }
     }
 
     public Optional<MySqlClientEntity> getClientById(Long id) {
-        var client = clientRepository.findById(id);
+        var client = repository.findById(id);
         return client;
     }
 
     public ClientDTO updateClient(Long id, ClientDTO clientDTO) {
-        Optional<MySqlClientEntity> optionalClient = clientRepository.findById(id);
+        Optional<MySqlClientEntity> optionalClient = repository.findById(id);
 
         if (optionalClient.isPresent()) {
             MySqlClientEntity existingClient = optionalClient.get();
@@ -74,7 +76,7 @@ public class ClientService {
             existingClient.setTelefone(clientDTO.getTelefone());
             existingClient.setStatus(clientDTO.getStatus());
 
-            MySqlClientEntity updatedClient = clientRepository.save(existingClient);
+            MySqlClientEntity updatedClient = repository.save(existingClient);
 
             return toClientDTO(updatedClient);
         } else {
