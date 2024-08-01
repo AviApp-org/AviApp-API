@@ -1,5 +1,6 @@
 package br.com.aviapp.api.domain.mappers;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
@@ -10,13 +11,15 @@ import org.springframework.test.context.ActiveProfiles;
 import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
+import br.com.aviapp.api.presentation.dto.request.client.CreateClientRequestDTO;
 
 @ActiveProfiles("test")
 public class ClientMapperTest {
 
   @Test
   void shouldParseDtoToBoCorrectly() {
-    ClientDTO dto = new ClientDTO(1l, "Test", "test@email.com", "00000000000", "000000000", LocalDate.now().minusYears(20), ClientStatusEnum.ACTIVE);
+    ClientDTO dto = new ClientDTO(1l, "Test", "test@email.com", "00000000000", "000000000",
+        LocalDate.now().minusYears(20), ClientStatusEnum.ACTIVE);
     ClientBO bo = ClientMapper.toBO(dto);
 
     assertEquals(dto.getId(), bo.getId());
@@ -29,7 +32,8 @@ public class ClientMapperTest {
 
   @Test
   void shouldParseBoToDtoCorrectly() {
-    ClientBO bo = new ClientBO(1l, "Test", "test@email.com", "00000000000", "000000000", LocalDate.now().minusYears(20));
+    ClientBO bo = new ClientBO(1l, "Test", "test@email.com", "00000000000", "000000000",
+        LocalDate.now().minusYears(20));
     ClientDTO dto = ClientMapper.toDTO(bo);
 
     assertEquals(bo.getId(), dto.getId());
@@ -38,6 +42,22 @@ public class ClientMapperTest {
     assertEquals(bo.getCpf(), dto.getCpf());
     assertEquals(bo.getPhone(), dto.getPhone());
     assertEquals(bo.getStatus(), dto.getStatus());
+  }
+
+  @Test
+  void shouldMapCreateClientRequestDTOToClientBOCorrectly() {
+    CreateClientRequestDTO dto = new CreateClientRequestDTO(null, "Test", "test@email.com", "00000000000", "000000000",
+        LocalDate.now().minusYears(20), ClientStatusEnum.ACTIVE);
+    ClientBO bo = ClientMapper.toBO(dto);
+
+    assertAll(() -> {
+      assertEquals(dto.getId(), bo.getId());
+      assertEquals(dto.getName(), bo.getName());
+      assertEquals(dto.getEmail(), bo.getEmail());
+      assertEquals(dto.getCpf(), bo.getCpf());
+      assertEquals(dto.getPhone(), bo.getPhone());
+      assertEquals(dto.getStatus(), bo.getStatus());
+    });
   }
 
 }
