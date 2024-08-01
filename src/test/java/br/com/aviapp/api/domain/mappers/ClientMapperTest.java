@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import br.com.aviapp.api.domain.dto.ClientDTO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.enums.ClientStatusEnum;
+import br.com.aviapp.api.infra.postgresql.entities.PgSqlClientEntity;
 import br.com.aviapp.api.presentation.dto.request.client.CreateClientRequestDTO;
 
 @ActiveProfiles("test")
@@ -57,6 +58,23 @@ public class ClientMapperTest {
       assertEquals(dto.getCpf(), bo.getCpf());
       assertEquals(dto.getPhone(), bo.getPhone());
       assertEquals(dto.getStatus(), bo.getStatus());
+    });
+  }
+
+  @Test
+  void shouldMapFromPgSqlEntityToBO() {
+    PgSqlClientEntity entity = new PgSqlClientEntity(1L, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now().minusYears(20), ClientStatusEnum.ACTIVE);
+
+    ClientBO bo = ClientMapper.toBO(entity);
+
+    assertAll(() -> {
+      assertEquals(entity.getId(), bo.getId());
+      assertEquals(entity.getName(), bo.getName());
+      assertEquals(entity.getEmail(), bo.getEmail());
+      assertEquals(entity.getCpf(), bo.getCpf());
+      assertEquals(entity.getPhone(), bo.getPhone());
+      assertEquals(entity.getStatus(), bo.getStatus());
+      assertEquals(entity.getBirthDate(), bo.getBirthDate());
     });
   }
 
