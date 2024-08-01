@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ public class PgSqlClientRepositoryTest {
 
   @Test
   void shouldPersistClientOnDatabase() {
-    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now(), ClientStatusEnum.ACTIVE);
 
     PgSqlClientEntity persisted = sut.save(entity);
 
@@ -45,8 +46,8 @@ public class PgSqlClientRepositoryTest {
 
   @Test
   void shouldFindAllClients() {
-    PgSqlClientEntity entity1 = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
-    PgSqlClientEntity entity2 = new PgSqlClientEntity(null, "Bradley Cooper", "98765432109", "bradley@cooper.com", "(926) 321-6543", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity1 = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now(), ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity2 = new PgSqlClientEntity(null, "Bradley Cooper", "98765432109", "bradley@cooper.com", "(926) 321-6543", LocalDate.now(), ClientStatusEnum.ACTIVE);
 
     sut.saveAll(List.of(entity1, entity2));
 
@@ -60,7 +61,7 @@ public class PgSqlClientRepositoryTest {
 
   @Test
   void shouldFindClientById() {
-    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now(), ClientStatusEnum.ACTIVE);
 
     PgSqlClientEntity persisted = sut.save(entity);
 
@@ -72,7 +73,7 @@ public class PgSqlClientRepositoryTest {
 
   @Test
   void shouldFindClientByCpf() {
-    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now(), ClientStatusEnum.ACTIVE);
 
     PgSqlClientEntity persisted = sut.save(entity);
 
@@ -85,7 +86,7 @@ public class PgSqlClientRepositoryTest {
   @Test
   @Description("Should return null if no entity is found")
   void shouldFindClientByCpf_2() {
-    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", ClientStatusEnum.ACTIVE);
+    PgSqlClientEntity entity = new PgSqlClientEntity(null, "Seth Austin", "12345678901", "nuwha@duzgibe.es", "(926) 432-4013", LocalDate.now(), ClientStatusEnum.ACTIVE);
 
     sut.save(entity);
 
