@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.aviapp.api.domain.dto.AddressDTO;
+import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
-import br.com.aviapp.api.infra.mysql.repository.AddressRepository;
+import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 
 @Service
 public class AddressService {
 
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressRepositoryJPA addressRepository;
 
     public List<MySqlAddressEntity> findAll() {
         return addressRepository.findAll();

@@ -12,7 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 
-import br.com.aviapp.api.domain.dto.ClientDTO;
+import br.com.aviapp.api.application.dto.ClientDTO;
+import br.com.aviapp.api.application.usecases.CadastrarCliente;
 import br.com.aviapp.api.infra.mysql.repository.IClienteDatabaseRepository;
 
 public class CadastrarClienteTest {

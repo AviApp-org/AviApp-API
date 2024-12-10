@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.aviapp.api.domain.dto.ClientDTO;
+import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepository;

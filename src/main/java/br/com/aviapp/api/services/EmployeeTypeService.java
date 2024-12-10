@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.aviapp.api.domain.dto.EmployeeTypeDTO;
+import br.com.aviapp.api.application.dto.EmployeeTypeDTO;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeType;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeTypeRepository;
 

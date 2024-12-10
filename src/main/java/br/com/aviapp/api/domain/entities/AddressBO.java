@@ -14,16 +14,18 @@ import lombok.ToString;
 public class AddressBO {
   private Long id;
   private String street;
+  private String number;
   private String cep;
   private String neighborhood;
   private String city;
   private String state;
 
-  public AddressBO(Long id, String street, String cep, String neighborhood, String city, String state)
+  public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state)
       throws InvalidParamError {
-    ParamValidator.validate(cep, street, neighborhood, city, state);
+    ParamValidator.validate(cep, street, number, neighborhood, city, state);
     this.id = id;
     this.street = street.trim();
+    this.number = number.trim();
     this.cep = cep.trim();
     this.neighborhood = neighborhood.trim();
     this.city = city.trim();
