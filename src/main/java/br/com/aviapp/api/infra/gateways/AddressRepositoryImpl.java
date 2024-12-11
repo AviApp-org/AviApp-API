@@ -3,8 +3,6 @@ package br.com.aviapp.api.infra.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import br.com.aviapp.api.application.gateways.AddressRepository;
 import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.infra.mappers.AddressMapper;
@@ -13,27 +11,34 @@ import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 
 public class AddressRepositoryImpl implements AddressRepository{
 
-    @Autowired
-    AddressRepositoryJPA repository;
+    
+    private final AddressRepositoryJPA repository;
+    private final AddressMapper addressMapper;
 
+
+
+    public AddressRepositoryImpl(AddressRepositoryJPA repository, AddressMapper addressMapper) {
+        this.repository = repository;
+        this.addressMapper = addressMapper;
+    }
 
     @Override
     public AddressBO createAdrress(AddressBO address) {
-        MySqlAddressEntity entity = AddressMapper.toEntity(address);
+        MySqlAddressEntity entity = addressMapper.toEntity(address);
         repository.save(entity);
 
-        return AddressMapper.toBO(entity);
+        return addressMapper.toBO(entity);
     }
 
     @Override
     public List<AddressBO> listAllAdresses() {
-        return AddressMapper.toBOList(repository.findAll());
+        return addressMapper.toBOList(repository.findAll());
     }
 
     @Override
     public Optional<AddressBO> findAddress(Long addressID) {
 
-        return repository.findById(addressID).map(AddressMapper::toBO);
+        return repository.findById(addressID).map(addressMapper::toBO);
     }
 
     @Override
@@ -64,7 +69,7 @@ public class AddressRepositoryImpl implements AddressRepository{
         MySqlAddressEntity updatedEntity = repository.save(existingAddress);
 
         // Passo 4: Converter a entidade atualizada de volta para BO e retornar
-        return Optional.of(AddressMapper.toBO(updatedEntity));
+        return Optional.of(addressMapper.toBO(updatedEntity));
     }
 
 
