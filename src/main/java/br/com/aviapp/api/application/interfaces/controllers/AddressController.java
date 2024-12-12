@@ -2,11 +2,11 @@ package br.com.aviapp.api.application.interfaces.controllers;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.mappers.AddressMapper;
-import br.com.aviapp.api.application.usecases.Address.CreateAddress;
-import br.com.aviapp.api.application.usecases.Address.DeleteAddress;
-import br.com.aviapp.api.application.usecases.Address.FindAddressById;
-import br.com.aviapp.api.application.usecases.Address.FindAllAdresses;
-import br.com.aviapp.api.application.usecases.Address.UpdateAddress;
+import br.com.aviapp.api.application.usecases.address.CreateAddressUseCase;
+import br.com.aviapp.api.application.usecases.address.DeleteAddressUseCase;
+import br.com.aviapp.api.application.usecases.address.FindAddressByUseCase;
+import br.com.aviapp.api.application.usecases.address.ListAddressesUseCase;
+import br.com.aviapp.api.application.usecases.address.UpdateAddressUseCase;
 import br.com.aviapp.api.domain.entities.AddressBO;
 import jakarta.validation.Valid;
 
@@ -22,18 +22,18 @@ import java.util.Optional;
 @RequestMapping("/api/addresses")
 public class AddressController {
 
-    private final CreateAddress createAddress;
-    private final DeleteAddress deleteAddress;
-    private final FindAddressById findAddressById;
-    private final FindAllAdresses findAllAdresses;
-    private final UpdateAddress updateAddress;
+    private final CreateAddressUseCase createAddress;
+    private final DeleteAddressUseCase deleteAddress;
+    private final FindAddressByUseCase findAddressById;
+    private final ListAddressesUseCase findAllAdresses;
+    private final UpdateAddressUseCase updateAddress;
 
     public AddressController(
-        CreateAddress createAddress,
-        DeleteAddress deleteAddress,
-        FindAddressById findAddressById,
-        FindAllAdresses findAllAdresses,
-        UpdateAddress updateAddress
+        CreateAddressUseCase createAddress,
+        DeleteAddressUseCase deleteAddress,
+        FindAddressByUseCase findAddressById,
+        ListAddressesUseCase findAllAdresses,
+        UpdateAddressUseCase updateAddress
     ) {
         this.createAddress = createAddress;
         this.deleteAddress = deleteAddress;
@@ -44,13 +44,13 @@ public class AddressController {
 
     @GetMapping
     public ResponseEntity<List<AddressDTO>> getAllAddresses() {
-        List<AddressDTO> addresses = AddressMapper.toDTOList(findAllAdresses.listarEnderecos());
+        List<AddressDTO> addresses = AddressMapper.toDTOList(findAllAdresses.invoke());
         return ResponseEntity.ok(addresses);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AddressDTO> getAddressById(@PathVariable Long id) {
-        Optional<AddressBO> addressBO = findAddressById.procurarEnderecoPorID(id);
+        Optional<AddressBO> addressBO = findAddressById.invoke(id);
 
         return addressBO.map(AddressMapper::toDTO)
                         .map(ResponseEntity::ok)
@@ -59,7 +59,7 @@ public class AddressController {
 
     @PostMapping
     public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody AddressDTO addressDTO) {
-        AddressBO newAddress = createAddress.cadastrarAddressBO(AddressMapper.toBO(addressDTO));
+        AddressBO newAddress = createAddress.invoke(AddressMapper.toBO(addressDTO));
         AddressDTO responseDTO = AddressMapper.toDTO(newAddress);
 
         URI location = URI.create("/api/addresses/" + newAddress.getId());
@@ -68,7 +68,7 @@ public class AddressController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long id, @Valid @RequestBody AddressDTO addressDTO) {
-        Optional<AddressBO> updatedAddressBO = updateAddress.atualizarEndereco(id, AddressMapper.toBO(addressDTO));
+        Optional<AddressBO> updatedAddressBO = updateAddress.invoke(id, AddressMapper.toBO(addressDTO));
 
         return updatedAddressBO.map(AddressMapper::toDTO)
                                .map(ResponseEntity::ok)
@@ -77,7 +77,7 @@ public class AddressController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id) {
-        deleteAddress.deletarAddressBO(id);
+        deleteAddress.invoke(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,18 +1,18 @@
-package br.com.aviapp.api.application.usecases.Address;
+package br.com.aviapp.api.application.usecases.address;
 
 import java.util.Optional;
 
 import br.com.aviapp.api.application.gateways.AddressRepository;
 import br.com.aviapp.api.domain.entities.AddressBO;
 
-public class FindAddressById {
+public class FindAddressByUseCase {
     private final AddressRepository repository;
 
-    public FindAddressById(AddressRepository repository) {
+    public FindAddressByUseCase(AddressRepository repository) {
         this.repository = repository;
     }
 
-    public Optional<AddressBO> procurarEnderecoPorID(Long addressID) {
+    public Optional<AddressBO> invoke(Long addressID) {
         return repository.findAddress(addressID);
     }
 }
