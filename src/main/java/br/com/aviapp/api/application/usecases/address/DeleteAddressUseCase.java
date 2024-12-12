@@ -1,16 +1,16 @@
-package br.com.aviapp.api.application.usecases.Address;
+package br.com.aviapp.api.application.usecases.address;
 
 import br.com.aviapp.api.application.gateways.AddressRepository;
 
-public class DeleteAddress {
+public class DeleteAddressUseCase {
 
     private final AddressRepository repository;
 
-    public DeleteAddress(AddressRepository repository) {
+    public DeleteAddressUseCase(AddressRepository repository) {
         this.repository = repository;
     }
 
-    public void deletarAddressBO (Long addressID){
+    public void invoke (Long addressID){
         repository.deleteAddress(addressID);
     }
 }
