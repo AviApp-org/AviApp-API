@@ -3,75 +3,74 @@ package br.com.aviapp.api.infra.gateways;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
+import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.gateways.AddressRepository;
-import br.com.aviapp.api.domain.entities.AddressBO;
-import br.com.aviapp.api.infra.mappers.AddressMapper;
+import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 
-public class AddressRepositoryImpl implements AddressRepository{
+@Repository
+public class AddressRepositoryImpl implements AddressRepository {
 
-    
-    private final AddressRepositoryJPA repository;
-    private final AddressMapper addressMapper;
+    private final AddressRepositoryJPA repositoryJPA;
+    private final AddressMapperEntity mapperEntity;
 
-
-
-    public AddressRepositoryImpl(AddressRepositoryJPA repository, AddressMapper addressMapper) {
-        this.repository = repository;
-        this.addressMapper = addressMapper;
+    public AddressRepositoryImpl(AddressRepositoryJPA repositoryJPA, AddressMapperEntity mapperEntity) {
+        this.repositoryJPA = repositoryJPA;
+        this.mapperEntity = mapperEntity;
     }
 
     @Override
-    public AddressBO createAdrress(AddressBO address) {
-        MySqlAddressEntity entity = addressMapper.toEntity(address);
-        repository.save(entity);
-
-        return addressMapper.toBO(entity);
+    public AddressDTO createAddress(AddressDTO address) {
+        MySqlAddressEntity entity = mapperEntity.toEntity(address);
+        MySqlAddressEntity savedEntity = repositoryJPA.save(entity);
+        return mapperEntity.toDTO(savedEntity);
     }
 
     @Override
-    public List<AddressBO> listAllAdresses() {
-        return addressMapper.toBOList(repository.findAll());
+    public List<AddressDTO> listAllAddresses() {
+        return mapperEntity.toDTOList(repositoryJPA.findAll());
     }
 
     @Override
-    public Optional<AddressBO> findAddress(Long addressID) {
-
-        return repository.findById(addressID).map(addressMapper::toBO);
+    public Optional<AddressDTO> findAddress(Long addressID) {
+        return repositoryJPA.findById(addressID)
+                .map(mapperEntity::toDTO);
     }
 
     @Override
     public void deleteAddress(Long addressID) {
-        repository.deleteById(addressID);
+        repositoryJPA.deleteById(addressID);
     }
 
     @Override
-    public Optional<AddressBO> updateAddress(Long addressID, AddressBO updatedAddressBO) {
-        // Passo 1: Buscar a entidade existente no banco de dados
-        Optional<MySqlAddressEntity> existingAddressOpt = repository.findById(addressID);
+    public Optional<AddressDTO> updateAddress(Long addressID, AddressDTO updatedAddressDTO) {
+        return repositoryJPA.findById(addressID)
+                .map(existingAddress -> {
+                    if (updatedAddressDTO.street() != null) {
+                        existingAddress.setStreet(updatedAddressDTO.street());
+                    }
+                    if (updatedAddressDTO.number() != null) {
+                        existingAddress.setNumber(updatedAddressDTO.number());
+                    }
+                    if (updatedAddressDTO.cep() != null) {
+                        existingAddress.setCep(updatedAddressDTO.cep());
+                    }
+                    if (updatedAddressDTO.neighborhood() != null) {
+                        existingAddress.setNeighborhood(updatedAddressDTO.neighborhood());
+                    }
+                    if (updatedAddressDTO.city() != null) {
+                        existingAddress.setCity(updatedAddressDTO.city());
+                    }
+                    if (updatedAddressDTO.state() != null) {
+                        existingAddress.setState(updatedAddressDTO.state());
+                    }
 
-        if (existingAddressOpt.isEmpty()) {
-            return Optional.empty();  // Caso o endereço não seja encontrado, retorna Optional.empty()
-        }
-
-        // Passo 2: Se a entidade existir, atualizar os dados
-        MySqlAddressEntity existingAddress = existingAddressOpt.get();
-
-        existingAddress.setStreet(updatedAddressBO.getStreet());
-        existingAddress.setNumber(updatedAddressBO.getNumber());
-        existingAddress.setCep(updatedAddressBO.getCep());
-        existingAddress.setNeighborhood(updatedAddressBO.getNeighborhood());
-        existingAddress.setCity(updatedAddressBO.getCity());
-        existingAddress.setState(updatedAddressBO.getState());
-
-        // Passo 3: Salvar a entidade atualizada de volta no banco de dados
-        MySqlAddressEntity updatedEntity = repository.save(existingAddress);
-
-        // Passo 4: Converter a entidade atualizada de volta para BO e retornar
-        return Optional.of(addressMapper.toBO(updatedEntity));
+                    MySqlAddressEntity savedEntity = repositoryJPA.save(existingAddress);
+                    return mapperEntity.toDTO(savedEntity);
+                });
     }
 
-
-    
 }

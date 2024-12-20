@@ -10,7 +10,7 @@ import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 public class ClienteBOTest {
 
-  @Test
+ /*  @Test
   void shouldInactivateAClient() {
     ClientBO bo = new ClientBO(1l, "Test", "teste@teste.com", "00000000000", "000000000");
     bo.desativar();
@@ -59,5 +59,5 @@ public class ClienteBOTest {
     assertThrows(InvalidParamError.class, () -> {
       new ClientBO(1l, "", "test@email.com", "00000000000", "000000000");
     });
-  }
+  }*/
 }

@@ -3,18 +3,17 @@ package br.com.aviapp.api.application.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.aviapp.api.domain.entities.AddressBO;
+import br.com.aviapp.api.application.dto.AddressDTO;
 
 public interface AddressRepository {
-    
-    AddressBO createAdrress (AddressBO address);
 
-    List<AddressBO> listAllAdresses ();
+    AddressDTO createAddress(AddressDTO address);
 
-    Optional<AddressBO> findAddress (Long addressID);
+    List<AddressDTO> listAllAddresses();
 
-    void deleteAddress (Long addressID);
+    Optional<AddressDTO> findAddress(Long addressID);
 
-    Optional<AddressBO> updateAddress (Long addressID, AddressBO updatedAddressBO);
+    void deleteAddress(Long addressID);
 
+    Optional<AddressDTO> updateAddress(Long addressID, AddressDTO updatedAddress);
 }

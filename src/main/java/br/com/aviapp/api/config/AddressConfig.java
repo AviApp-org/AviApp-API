@@ -4,21 +4,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.mappers.AddressMapperBO;
 import br.com.aviapp.api.application.usecases.address.CreateAddressUseCase;
 import br.com.aviapp.api.application.usecases.address.DeleteAddressUseCase;
-import br.com.aviapp.api.application.usecases.address.FindAddressByUseCase;
+import br.com.aviapp.api.application.usecases.address.FindAddressByIdUseCase;
 import br.com.aviapp.api.application.usecases.address.ListAddressesUseCase;
 import br.com.aviapp.api.application.usecases.address.UpdateAddressUseCase;
-import br.com.aviapp.api.infra.gateways.AddressRepositoryImpl;
-import br.com.aviapp.api.infra.mappers.AddressMapper;
-import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
+import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 
 @Configuration
 public class AddressConfig {
 
     @Bean
-    CreateAddressUseCase createAddress(AddressRepository addressRepository) {
-        return new CreateAddressUseCase(addressRepository);
+    CreateAddressUseCase createAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
+        return new CreateAddressUseCase(addressRepository, mapperBO);
     }
 
     @Bean
@@ -27,8 +26,8 @@ public class AddressConfig {
     }
 
     @Bean
-    FindAddressByUseCase findAddress(AddressRepository addressRepository) {
-        return new FindAddressByUseCase(addressRepository);
+    FindAddressByIdUseCase findAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
+        return new FindAddressByIdUseCase(addressRepository, mapperBO);
     }
 
     @Bean
@@ -42,13 +41,12 @@ public class AddressConfig {
     }
 
     @Bean
-    AddressRepositoryImpl saveAddressJpa(AddressRepositoryJPA addressRepositoryJpa, AddressMapper addressMapper) {
-        return new AddressRepositoryImpl(addressRepositoryJpa, addressMapper);
-
+    AddressMapperEntity returnAddressEntityMapper() {
+        return new AddressMapperEntity();
     }
 
     @Bean
-    AddressMapper returnMapper() {
-        return new AddressMapper();
+    AddressMapperBO returnAddressMapperBO() {
+        return new AddressMapperBO();
     }
 }

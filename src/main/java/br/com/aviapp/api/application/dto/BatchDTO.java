@@ -1,16 +1,5 @@
 package br.com.aviapp.api.application.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+public record BatchDTO(Long id, Long farmId) {
 
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class BatchDTO {
-    
-    private Long id;
-    private Long farmId;
 }

@@ -2,8 +2,8 @@ package br.com.aviapp.api.application.usecases.address;
 
 import java.util.List;
 
+import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.gateways.AddressRepository;
-import br.com.aviapp.api.domain.entities.AddressBO;
 
 public class ListAddressesUseCase {
     private final AddressRepository repository;
@@ -12,8 +12,8 @@ public class ListAddressesUseCase {
         this.repository = repository;
     }
 
-    public List<AddressBO> invoke() {
-        return repository.listAllAdresses();
+    public List<AddressDTO> invoke() {
+        return repository.listAllAddresses();
     }
 
     
