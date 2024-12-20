@@ -26,14 +26,14 @@ public class MySqlClientEntity {
   @Column(nullable = false)
   private String name;
 
-  @Column(nullable = false, length = 11)
-  private String cpf;
+  @Column(nullable = false, length = 14)
+  private String cnpj;
 
   @Column(nullable = false)
   private String email;
 
   @Column(nullable = false)
-  private String telefone;
+  private String phone;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)

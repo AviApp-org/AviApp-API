@@ -4,14 +4,16 @@ import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import br.com.aviapp.api.infra.mysql.enums.EmployeeRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,9 +27,8 @@ public class MySqlEmployeeEntity {
 
   private String name;
 
-  @OneToOne
-  @JoinColumn(name = "employee_type_id")
-  private MySqlEmployeeType role;
+  @Enumerated(EnumType.STRING)
+  private EmployeeRole role;
 
   @CreatedDate
   @Column(name = "created_at", nullable = false, updatable = false)

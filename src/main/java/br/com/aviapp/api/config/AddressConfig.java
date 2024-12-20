@@ -4,33 +4,49 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.aviapp.api.application.gateways.AddressRepository;
-import br.com.aviapp.api.application.usecases.Address.CreateAddress;
-import br.com.aviapp.api.application.usecases.Address.FindAllAdresses;
-import br.com.aviapp.api.infra.gateways.AddressRepositoryImpl;
-import br.com.aviapp.api.infra.mappers.AddressMapper;
-import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
+import br.com.aviapp.api.application.mappers.AddressMapperBO;
+import br.com.aviapp.api.application.usecases.address.CreateAddressUseCase;
+import br.com.aviapp.api.application.usecases.address.DeleteAddressUseCase;
+import br.com.aviapp.api.application.usecases.address.FindAddressByIdUseCase;
+import br.com.aviapp.api.application.usecases.address.ListAddressesUseCase;
+import br.com.aviapp.api.application.usecases.address.UpdateAddressUseCase;
+import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 
 @Configuration
 public class AddressConfig {
 
     @Bean
-    CreateAddress createAddress(AddressRepository addressRepository) {
-        return new CreateAddress(addressRepository);
+    CreateAddressUseCase createAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
+        return new CreateAddressUseCase(addressRepository, mapperBO);
     }
 
     @Bean
-    FindAllAdresses findAllAdresses(AddressRepository addressRepository) {
-        return new FindAllAdresses(addressRepository);
+    DeleteAddressUseCase deleteAddress(AddressRepository addressRepository) {
+        return new DeleteAddressUseCase(addressRepository);
     }
 
     @Bean
-    AddressRepositoryImpl saveAddressJpa(AddressRepositoryJPA addressRepositoryJpa, AddressMapper addressMapper) {
-        return new AddressRepositoryImpl(addressRepositoryJpa, addressMapper);
-
+    FindAddressByIdUseCase findAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
+        return new FindAddressByIdUseCase(addressRepository, mapperBO);
     }
 
     @Bean
-    AddressMapper returnMapper() {
-        return new AddressMapper();
+    ListAddressesUseCase listAllAdresses(AddressRepository addressRepository) {
+        return new ListAddressesUseCase(addressRepository);
+    }
+
+    @Bean
+    UpdateAddressUseCase updateAddress(AddressRepository addressRepository) {
+        return new UpdateAddressUseCase(addressRepository);
+    }
+
+    @Bean
+    AddressMapperEntity returnAddressEntityMapper() {
+        return new AddressMapperEntity();
+    }
+
+    @Bean
+    AddressMapperBO returnAddressMapperBO() {
+        return new AddressMapperBO();
     }
 }

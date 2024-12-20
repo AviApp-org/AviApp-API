@@ -1,19 +1,9 @@
 package br.com.aviapp.api.application.dto;
 
+import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import br.com.aviapp.api.domain.enums.EnumEmployeeRole;
 
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class EmployeeDTO {
-    
-    private String name;
-    private Long roleId;
-    private Long farmId;
+public record EmployeeDTO(Long id, String name, EnumEmployeeRole role, Date createdAt, Long farmId) {
 
 }
