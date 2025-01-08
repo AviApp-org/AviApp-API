@@ -23,6 +23,8 @@ public class EmployeeMapperBO {
         return new EmployeeBO(
             dto.id(),
             dto.name(),
+            dto.cpf(),
+            dto.phone(),
             dto.role(),
             dto.createdAt(),
             new FarmBO(
@@ -39,6 +41,8 @@ public class EmployeeMapperBO {
         return new EmployeeDTO(
             bo.getId(),
             bo.getName(),
+            bo.getCpf(),
+            bo.getPhone(),
             bo.getRole(),
             bo.getCreatedAt(),
             bo.getFarm().getId()

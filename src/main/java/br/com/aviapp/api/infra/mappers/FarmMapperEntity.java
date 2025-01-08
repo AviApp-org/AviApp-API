@@ -51,5 +51,17 @@ public class FarmMapperEntity {
                 .collect(Collectors.toList())
         );
     }
+
+    public List<FarmDTO> toDTOList(List<MySqlFarmEntity> farms){
+        return farms.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<MySqlFarmEntity> toEntityList(List<FarmDTO> farms) {
+        return farms.stream()
+                .map(this::toEntity)
+                .collect(Collectors.toList());
+    }
 }
 

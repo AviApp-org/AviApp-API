@@ -27,6 +27,10 @@ public class MySqlEmployeeEntity {
 
   private String name;
 
+  private String cpf;
+
+  private String phone;
+
   @Enumerated(EnumType.STRING)
   private EmployeeRole role;
 

@@ -6,20 +6,21 @@ import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
+import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.usecases.farm.FindFarmByIdUseCase;
 import br.com.aviapp.api.domain.entities.BatchBO;
 
 public class BatchMapperBO {
     private final FarmMapperBO farmMapper;
-    private final FindFarmByIdUseCase farmId;
+    private final LookUpRepository lookUpRepository;
 
-    public BatchMapperBO(FarmMapperBO farmMapper, FindFarmByIdUseCase farmId) {
+    public BatchMapperBO(FarmMapperBO farmMapper, LookUpRepository lookUpRepository) {
         this.farmMapper = farmMapper;
-        this.farmId = farmId;
+        this.lookUpRepository = lookUpRepository;
     }
 
     public BatchBO toBO(BatchDTO dto) {
-        Optional<FarmDTO> farm = farmId.invoke(dto.farmId());
+        Optional<FarmDTO> farm = lookUpRepository.findFarmDTOById(dto.farmId());
         return new BatchBO(
             dto.id(),
             farmMapper.toBO(farm.get())

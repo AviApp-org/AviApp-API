@@ -22,6 +22,8 @@ public class EmployeeMapperEntity {
         return new EmployeeDTO(
                 entity.getId(),
                 entity.getName(),
+                entity.getCpf(),
+                entity.getPhone(),
                 EnumEmployeeRole.valueOf(entity.getRole().name()),
                 entity.getCreatedAt(),
                 entity.getFarmId().getId());

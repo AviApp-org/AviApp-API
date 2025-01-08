@@ -2,7 +2,9 @@ package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
+import lombok.Getter;
 
+@Getter
 public class LoginBO {
   private String userName;
   private String password;
@@ -13,11 +15,4 @@ public class LoginBO {
     this.password = password;
   }
 
-  public String getUserName() {
-    return userName;
-  }
-
-  public String getPassword() {
-    return password;
-  }
 }

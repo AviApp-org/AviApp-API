@@ -3,6 +3,9 @@ package br.com.aviapp.api.domain.entities;
 import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
+import lombok.Getter;
+
+@Getter
 
 public class ClientBO {
   private Long id;
@@ -46,31 +49,7 @@ public class ClientBO {
     this.phone = phone;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getCnpj() {
-    return cnpj;
-  }
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public EnumStatusCliente getStatus() {
-    return status;
-  }
-
-  @Override
+    @Override
   public String toString() {
     return "ClientBO [id=" + id + ", name=" + name + ", email=" + email + ", cnpj=" + cnpj + ", phone=" + phone
         + ", status=" + status + "]";

@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.gateways;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -20,9 +21,29 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    public List<EmployeeDTO> listAllEmployees() {
+        return employeeMapper.toDTOList(employeeRepositoryJPA.findAll());
+    }
+
+    @Override
     public Optional<EmployeeDTO> findEmployee(Long id) {
         return employeeRepositoryJPA.findById(id)
                 .map(employeeMapper::toDTO);
+    }
+
+    @Override
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+        return null;
+    }
+
+    @Override
+    public void deleteEmployee(Long employeeId) {
+
+    }
+
+    @Override
+    public Optional<EmployeeDTO> updateEmployee(Long employeeId, EmployeeDTO employeeDTO) {
+        return Optional.empty();
     }
 
 }

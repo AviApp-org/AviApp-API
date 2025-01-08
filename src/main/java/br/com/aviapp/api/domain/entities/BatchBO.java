@@ -1,5 +1,8 @@
 package br.com.aviapp.api.domain.entities;
 
+import lombok.Getter;
+
+@Getter
 public class BatchBO {
     
     private Long id;
@@ -13,12 +16,4 @@ public class BatchBO {
         this.farm = farm;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public FarmBO getFarm() {
-        return farm;
-    }
-    
 }

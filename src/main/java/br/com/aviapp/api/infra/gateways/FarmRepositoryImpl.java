@@ -32,8 +32,7 @@ public class FarmRepositoryImpl implements FarmRepository {
 
     @Override
     public List<FarmDTO> listAllFarms() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listAllFarms'");
+        return farmMapper.toDTOList(farmRepositoryJPA.findAll());
     }
 
     @Override
@@ -44,8 +43,7 @@ public class FarmRepositoryImpl implements FarmRepository {
 
     @Override
     public void deleteFarm(Long farmID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteFarm'");
+        farmRepositoryJPA.deleteById(farmID);
     }
 
     @Override

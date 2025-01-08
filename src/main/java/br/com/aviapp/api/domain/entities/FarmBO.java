@@ -4,7 +4,11 @@ import java.util.List;
 
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class FarmBO {
   private Long id;
   private String name;
@@ -23,33 +27,6 @@ public class FarmBO {
     this.employees = List.copyOf(employees);
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public ClientBO getClient() {
-    return client;
-  }
-
-  public AddressBO getAddress() {
-    return address;
-  }
-
-  public List<EmployeeBO> getEmployees() {
-    return employees;
-  }
-
-  public void setEmployees(List<EmployeeBO> employees) {
-    this.employees = employees;
-  }
 
   @Override
   public String toString() {

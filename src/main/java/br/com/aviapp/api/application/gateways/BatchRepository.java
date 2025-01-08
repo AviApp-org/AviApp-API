@@ -13,4 +13,6 @@ public interface BatchRepository {
     Optional<BatchDTO> findBatch(Long batchID);
 
     List<BatchDTO> findBatchesByFarmId(Long farmId);
+
+    Optional<BatchDTO> updateBatch(Long id, BatchDTO batchDTO);
 }
