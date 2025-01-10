@@ -16,11 +16,10 @@ public class CreateEmployeeUseCase {
     }
 
     public EmployeeDTO invoke(EmployeeDTO employeeDTO) {
+        // Validate and convert to business object
         EmployeeBO employeeBO = mapperBO.toBO(employeeDTO);
-
-        EmployeeDTO validatedEmployee = mapperBO.toDTO(employeeBO);
-
-        return repository.createEmployee(validatedEmployee);
-
+        // Convert back and create
+        return repository.createEmployee(mapperBO.toDTO(employeeBO));
     }
+    
 }

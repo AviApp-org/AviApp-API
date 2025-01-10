@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
-import br.com.aviapp.api.application.usecases.farm.FindFarmByIdUseCase;
 import br.com.aviapp.api.domain.entities.BatchBO;
 
 public class BatchMapperBO {

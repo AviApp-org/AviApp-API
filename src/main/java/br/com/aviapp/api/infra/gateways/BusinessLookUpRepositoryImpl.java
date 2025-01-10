@@ -62,8 +62,12 @@ public class BusinessLookUpRepositoryImpl implements LookUpRepository {
 
     @Override
     public Optional<FarmDTO> findFarmDTOById(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
         return farmRepository.findById(id)
                 .map(farmMapper::toDTO);
     }
+    
 
 }
