@@ -19,18 +19,19 @@ public class AviaryMapperEntity {
 
     public AviaryDTO toDTO(MySqlAviaryEntity entity) {
         return new AviaryDTO(
+            entity.getId(),
             entity.getName(),
             entity.getBatchId().getId()
         );
     }
 
     public MySqlAviaryEntity toEntity(AviaryDTO dto) {
-        MySqlBatchEntity batch = repository.findBatchById(dto.getBatchId())
+        MySqlBatchEntity batch = repository.findBatchById(dto.batchId())
                 .orElseThrow(() -> new EntityNotFoundException("Batch not found"));
 
         return new MySqlAviaryEntity(
-            null,
-            dto.getName(),
+            dto.id(),
+            dto.name(),
             batch
         );
     }

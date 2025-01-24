@@ -1,15 +1,7 @@
 package br.com.aviapp.api.application.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class AviaryDTO {
-    private String name;
-    private Long batchId;
+public record AviaryDTO(
+        Long id,
+        String name,
+        Long batchId) {
 }

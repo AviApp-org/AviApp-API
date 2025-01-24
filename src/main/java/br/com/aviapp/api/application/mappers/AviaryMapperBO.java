@@ -19,16 +19,17 @@ public class AviaryMapperBO {
     }
 
     public AviaryBO toBO(AviaryDTO dto) {
-        Optional<BatchDTO> batch = lookUpRepository.findBatchDTOById(dto.getBatchId());
+        Optional<BatchDTO> batch = lookUpRepository.findBatchDTOById(dto.batchId());
         return new AviaryBO(
-            null,
-            dto.getName(),
+            dto.id(),
+            dto.name(),
             batchMapper.toBO(batch.get())
         );
     }
 
     public AviaryDTO toDTO(AviaryBO bo) {
         return new AviaryDTO(
+            bo.getId(),
             bo.getName(),
             bo.getBatchId().getId()
         );

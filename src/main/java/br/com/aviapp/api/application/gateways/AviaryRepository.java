@@ -9,9 +9,9 @@ public interface AviaryRepository {
     
     AviaryDTO createAviary(AviaryDTO aviaryDTO);
 
-    List<AviaryDTO> listAllAviarys();
+    Optional<List<AviaryDTO>> listAllAviarysByBatchId(Long batchId);
 
-    Optional<AviaryDTO> findAviary(Long aviaryId);
+    Optional<AviaryDTO> findAviaryById(Long aviaryId);
 
     Optional<AviaryDTO> updateAviary(Long aviaryId, AviaryDTO aviaryDTO);
 
