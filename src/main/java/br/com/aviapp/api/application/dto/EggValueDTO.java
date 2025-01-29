@@ -1,18 +1,10 @@
 package br.com.aviapp.api.application.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import br.com.aviapp.api.domain.enums.EnumEggType;
 
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class EggValueDTO {
-    
-    private Long eggId;
-    private BigDecimal value;
+public record EggValueDTO(Long eggId, EnumEggType egg, LocalDateTime timeStamp, BigDecimal value) {
+
 }
