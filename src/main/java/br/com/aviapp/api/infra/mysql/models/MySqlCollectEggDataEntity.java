@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.mysql.models;
 
+import br.com.aviapp.api.infra.mysql.enums.EggType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +22,8 @@ public class MySqlCollectEggDataEntity {
   @JoinColumn(name = "collect_id")
   private MySqlCollectEntity collect;
 
-  @ManyToOne
-  @JoinColumn(name = "egg_id")
-  private MySqlEggEntity eggId;
+
+  private EggType egg;
 
   private Integer quantity;
 }

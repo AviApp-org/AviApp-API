@@ -22,6 +22,6 @@ public class UpdateBatchUseCase {
 
         BatchDTO validatedBatch = mapper.toDTO(batchBO);
 
-        return repository.updateBatch(batchId,batch);
+        return repository.updateBatch(batchId,validatedBatch);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.mysql.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.aviapp.api.infra.mysql.models.MySqlAnomalyEntity;

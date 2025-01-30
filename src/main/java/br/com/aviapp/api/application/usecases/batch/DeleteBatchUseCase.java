@@ -1,7 +1,6 @@
 package br.com.aviapp.api.application.usecases.batch;
 
 import br.com.aviapp.api.application.gateways.BatchRepository;
-import br.com.aviapp.api.application.mappers.BatchMapperBO;
 
 public class DeleteBatchUseCase {
 

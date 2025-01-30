@@ -32,16 +32,19 @@ public class EmployeeMapperEntity {
     public MySqlEmployeeEntity toEntity(EmployeeDTO dto) {
         MySqlFarmEntity farm = lookupRepository.findFarmById(dto.farmId())
                 .orElseThrow(() -> new EntityNotFoundException("Farm not found"));
-
+    
         MySqlEmployeeEntity employee = new MySqlEmployeeEntity();
         employee.setId(dto.id());
         employee.setName(dto.name());
-        EmployeeRole.valueOf(dto.role().name());
+        employee.setCpf(dto.cpf());
+        employee.setPhone(dto.phone());
+        employee.setRole(EmployeeRole.valueOf(dto.role().name()));
         employee.setCreatedAt(dto.createdAt());
         employee.setFarmId(farm);
-
+    
         return employee;
     }
+    
 
     public List<EmployeeDTO> toDTOList(List<MySqlEmployeeEntity> entities) {
         return entities.stream()

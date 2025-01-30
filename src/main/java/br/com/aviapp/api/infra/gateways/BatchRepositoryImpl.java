@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.gateways.BatchRepository;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
+import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import org.springframework.stereotype.Repository;
 
@@ -12,13 +13,16 @@ import java.util.Optional;
 
 @Repository
 public class BatchRepositoryImpl implements BatchRepository {
+
     private final BatchRepositoryJPA repositoryJPA;
-
     private final BatchMapperEntity mapperEntity;
+    private final EntityLookupRepositoryImpl entityLookupRepository;
 
-    public BatchRepositoryImpl(BatchRepositoryJPA repositoryJPA, BatchMapperEntity mapperEntity) {
+    public BatchRepositoryImpl(BatchRepositoryJPA repositoryJPA, BatchMapperEntity mapperEntity, EntityLookupRepositoryImpl entityLookupRepository) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
+
+        this.entityLookupRepository = entityLookupRepository;
     }
 
     @Override
@@ -36,12 +40,19 @@ public class BatchRepositoryImpl implements BatchRepository {
 
     @Override
     public Optional<BatchDTO> findBatch(Long batchID) {
-        return repositoryJPA.findById(batchID).map(mapperEntity ::toDTO);
+        return repositoryJPA.findById(batchID).map(mapperEntity::toDTO);
     }
 
     @Override
     public List<BatchDTO> findBatchesByFarmId(Long farmId) {
-        return List.of();
+        Optional<MySqlFarmEntity> farmEntity = entityLookupRepository.findFarmById(farmId);
+        if (farmEntity.isEmpty()) {
+            return List.of(); // Retorna lista vazia se a fazenda não existir
+        }
+        List<MySqlBatchEntity> entities = repositoryJPA.findByFarmId(farmEntity.get());
+        return entities.stream()
+                .map(mapperEntity::toDTO)
+                .toList();
     }
 
     @Override
