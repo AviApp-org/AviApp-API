@@ -15,7 +15,7 @@ public class CreateEggValueUseCase {
         this.mapper = mapper;
     }
 
-    public EggValueDTO invoke(EggValueDTO eggValueDTO){
+    public EggValueDTO invoke(EggValueDTO eggValueDTO) {
         EggValueBO eggValueBO = mapper.toBO(eggValueDTO);
         EggValueDTO validatedEggValue = mapper.toDTO(eggValueBO);
         return repository.createEggValue(validatedEggValue);
