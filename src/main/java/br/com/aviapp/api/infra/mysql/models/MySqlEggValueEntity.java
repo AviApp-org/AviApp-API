@@ -2,7 +2,6 @@ package br.com.aviapp.api.infra.mysql.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import br.com.aviapp.api.infra.mysql.enums.EggType;
 import jakarta.persistence.*;
