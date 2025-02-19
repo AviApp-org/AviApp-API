@@ -18,16 +18,5 @@ public interface FarmRepository {
 
     Optional<FarmDTO> updateFarm(Long farmID, FarmDTO farm);
 
-    void addBatchToFarm(Long farmId, Long batchId);
-
-    void removeBatchFromFarm(Long farmId, Long batchId);
-
-    void addEmployeeToFarm(Long farmId, Long employeeId);
-
-    void removeEmployeeFromFarm(Long farmId, Long employeeId);
-
-    List<FarmDTO> findFarmsByClientId(Long clientId);
-
-    void updateFarmAddress(Long farmId, AddressDTO address);
 
 }

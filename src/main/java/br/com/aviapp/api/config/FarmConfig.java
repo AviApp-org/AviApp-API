@@ -1,5 +1,7 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.usecases.farm.DeleteFarmByIdUseCase;
+import br.com.aviapp.api.application.usecases.farm.ListAllFarmsUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,5 +43,15 @@ public class FarmConfig {
     @Bean
     FindFarmByIdUseCase findFarmByIdUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
         return new FindFarmByIdUseCase(repository, mapperBO);
+    }
+
+    @Bean
+    ListAllFarmsUseCase listAllFarmsUseCase(FarmRepository repository, FarmMapperBO mapperBO){
+        return new ListAllFarmsUseCase(repository, mapperBO);
+    }
+
+    @Bean
+    DeleteFarmByIdUseCase deleteFarmByIdUseCase (FarmRepository repository) {
+        return new DeleteFarmByIdUseCase(repository);
     }
 }
