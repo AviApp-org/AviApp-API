@@ -3,7 +3,6 @@ package br.com.aviapp.api.application.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 
 public interface FarmRepository {

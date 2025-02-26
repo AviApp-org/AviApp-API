@@ -23,6 +23,9 @@ public class AviaryMapperBO {
         return new AviaryBO(
             dto.id(),
             dto.name(),
+            dto.intialTotalAmount(),
+            dto.initialAmountOfRoosters(),
+            dto.initialAmountOfChickens(),
             batchMapper.toBO(batch.get())
         );
     }
@@ -31,6 +34,9 @@ public class AviaryMapperBO {
         return new AviaryDTO(
             bo.getId(),
             bo.getName(),
+            bo.getIntialTotalAmount(),
+            bo.getInitialAmountOfRoosters(),
+            bo.getInitialAmountOfChickens(),
             bo.getBatchId().getId()
         );
     }

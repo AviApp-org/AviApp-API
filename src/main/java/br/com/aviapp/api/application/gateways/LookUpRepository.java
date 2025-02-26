@@ -3,6 +3,7 @@ package br.com.aviapp.api.application.gateways;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
+import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
@@ -18,4 +19,6 @@ public interface LookUpRepository {
     Optional<FarmDTO> findFarmDTOById(Long id);
 
     Optional<BatchDTO> findBatchDTOById(Long id);
+
+    Optional<AviaryDTO> findAviaryDTOById(Long id);
 }

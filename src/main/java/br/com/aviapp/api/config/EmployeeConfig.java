@@ -17,22 +17,24 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 public class EmployeeConfig {
 
     @Bean
-    CreateEmployeeUseCase createEmployeeUseCase (EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
-        return new CreateEmployeeUseCase( employeeRepository, employeeMapperBO);
+    CreateEmployeeUseCase createEmployeeUseCase(EmployeeRepository employeeRepository,
+            EmployeeMapperBO employeeMapperBO) {
+        return new CreateEmployeeUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    DeleteEmployeeUseCase deleteEmployeeUseCase (EmployeeRepository employeeRepository) {
+    DeleteEmployeeUseCase deleteEmployeeUseCase(EmployeeRepository employeeRepository) {
         return new DeleteEmployeeUseCase(employeeRepository);
     }
 
     @Bean
-    ListAllEmployeesUseCase listAllEmployeesUseCase (EmployeeRepository employeeRepository) {
-        return new ListAllEmployeesUseCase(employeeRepository);
+    ListAllEmployeesUseCase listAllEmployeesUseCase(EmployeeRepository employeeRepository,
+            EmployeeMapperBO employeeMapperBO) {
+        return new ListAllEmployeesUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    FindEmployeeByIdUseCase findEmployeeById( EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
+    FindEmployeeByIdUseCase findEmployeeById(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new FindEmployeeByIdUseCase(employeeRepository, employeeMapperBO);
     }
 

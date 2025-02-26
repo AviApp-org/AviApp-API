@@ -2,7 +2,6 @@ package br.com.aviapp.api.domain.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import br.com.aviapp.api.domain.enums.EnumEggType;
 import lombok.Getter;

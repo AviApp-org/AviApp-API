@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 import br.com.aviapp.api.application.gateways.FarmRepository;
 import br.com.aviapp.api.infra.mappers.FarmMapperEntity;

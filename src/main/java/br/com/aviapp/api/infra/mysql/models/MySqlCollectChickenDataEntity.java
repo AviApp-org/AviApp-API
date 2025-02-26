@@ -2,7 +2,6 @@ package br.com.aviapp.api.infra.mysql.models;
 
 import br.com.aviapp.api.infra.mysql.enums.ChickenDeathCause;
 import br.com.aviapp.api.infra.mysql.enums.ChickenGender;
-import br.com.aviapp.api.infra.mysql.enums.ChickenStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,9 +35,6 @@ public class MySqlCollectChickenDataEntity {
   @Enumerated(EnumType.STRING)
   private ChickenDeathCause deathCause;
 
-  @Column(name = "status")
-  @Enumerated(EnumType.STRING)
-  private ChickenStatus status;
 
   private String observation;
 

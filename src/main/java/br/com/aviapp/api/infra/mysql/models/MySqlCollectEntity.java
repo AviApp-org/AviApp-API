@@ -21,9 +21,12 @@ public class MySqlCollectEntity {
 
   @ManyToOne
   @JoinColumn(name = "aviary_id")
-  private MySqlAviaryEntity aviaryId;
+  private MySqlAviaryEntity aviary;
+
+  
+  @ManyToOne
+  @JoinColumn(name = "employee_id")
+  private MySqlEmployeeEntity employee;
 
   private LocalDateTime timestamp;
-
-  private Integer stage;
 }
