@@ -5,22 +5,27 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
+import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
+import br.com.aviapp.api.infra.mappers.AviaryMapperEntity;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
 import br.com.aviapp.api.infra.mappers.ClientMapperEntity;
 import br.com.aviapp.api.infra.mappers.EmployeeMapperEntity;
 import br.com.aviapp.api.infra.mappers.FarmMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
+import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Repository
 public class BusinessLookUpRepositoryImpl implements LookUpRepository {
 
@@ -34,22 +39,10 @@ public class BusinessLookUpRepositoryImpl implements LookUpRepository {
     private final FarmMapperEntity farmMapper;
     private final BatchMapperEntity batchMapper;
     private final BatchRepositoryJPA batchRepository;
+    private final  AviaryMapperEntity aviaryMapper;
+    private final AviaryRepositoryJPA aviaryRepository;
 
-    public BusinessLookUpRepositoryImpl(ClientRepositoryJPA clientRepository, AddressRepositoryJPA addressRepository,
-            EmployeeRepositoryJPA employeeRepository, FarmRepositoryJPA farmRepository, ClientMapperEntity clientMapper,
-            AddressMapperEntity addressMapper, EmployeeMapperEntity employeeMapper, FarmMapperEntity farmMapper,
-            BatchMapperEntity batchMapper, BatchRepositoryJPA batchRepository) {
-        this.clientRepository = clientRepository;
-        this.addressRepository = addressRepository;
-        this.employeeRepository = employeeRepository;
-        this.farmRepository = farmRepository;
-        this.clientMapper = clientMapper;
-        this.addressMapper = addressMapper;
-        this.employeeMapper = employeeMapper;
-        this.farmMapper = farmMapper;
-        this.batchMapper = batchMapper;
-        this.batchRepository = batchRepository;
-    }
+
 
     @Override
     public Optional<ClientDTO> findClientDTOById(Long id) {
@@ -79,6 +72,12 @@ public class BusinessLookUpRepositoryImpl implements LookUpRepository {
     public Optional<BatchDTO> findBatchDTOById(Long id) {
         return batchRepository.findById(id)
                 .map(batchMapper::toDTO);
+    }
+
+    @Override
+    public Optional<AviaryDTO> findAviaryDTOById(Long id) {
+        return aviaryRepository.findById(id)
+        .map(aviaryMapper::toDTO);
     }
 
 }

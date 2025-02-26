@@ -22,7 +22,6 @@ public class MySqlCollectEggDataEntity {
   @JoinColumn(name = "collect_id")
   private MySqlCollectEntity collect;
 
-
   private EggType egg;
 
   private Integer quantity;

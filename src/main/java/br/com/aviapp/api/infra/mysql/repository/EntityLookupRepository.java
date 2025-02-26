@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
+import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
@@ -21,4 +22,6 @@ public interface EntityLookupRepository {
     Optional<MySqlFarmEntity> findFarmById(Long id);
 
     Optional<MySqlBatchEntity> findBatchById(Long id);
+
+    Optional<MySqlAviaryEntity> findAviaryById(Long id);
 }

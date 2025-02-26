@@ -10,7 +10,7 @@ public class EggValueMapperBO {
 
     public EggValueBO toBO(EggValueDTO dto) {
         return new EggValueBO(
-                dto.eggId(),
+                dto.id(),
                 dto.egg(),
                 dto.timeStamp(),
                 dto.value());

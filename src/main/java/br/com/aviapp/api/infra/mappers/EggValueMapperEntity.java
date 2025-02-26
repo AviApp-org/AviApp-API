@@ -21,7 +21,7 @@ public class EggValueMapperEntity {
 
     public MySqlEggValueEntity toEntity(EggValueDTO dto) {
         MySqlEggValueEntity entity = new MySqlEggValueEntity();
-        entity.setId(dto.eggId());
+        entity.setId(dto.id());
         entity.setEgg(EggType.valueOf(dto.egg().name()));
         entity.setTimestamp(dto.timeStamp());
         entity.setValue(dto.value());
