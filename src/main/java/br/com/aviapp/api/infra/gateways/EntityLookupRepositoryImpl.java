@@ -7,12 +7,14 @@ import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
+import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
+import br.com.aviapp.api.infra.mysql.repository.CollectRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
@@ -27,7 +29,7 @@ public class EntityLookupRepositoryImpl implements EntityLookupRepository {
     private final FarmRepositoryJPA farmRepository;
     private final BatchRepositoryJPA batchRepository;
     private final AviaryRepositoryJPA aviaryRepository;
-
+    private final CollectRepositoryJPA collectRepository;
     // EntityLookupRepository implementation
     @Override
     public Optional<MySqlClientEntity> findClientById(Long id) {
@@ -57,6 +59,11 @@ public class EntityLookupRepositoryImpl implements EntityLookupRepository {
     @Override
     public Optional<MySqlAviaryEntity> findAviaryById(Long id) {
         return aviaryRepository.findById(id);
+    }
+
+    @Override
+    public Optional<MySqlCollectEntity> findCollectById(Long id) {
+       return collectRepository.findById(id);
     }
 
     // BusinessLookupService implementation

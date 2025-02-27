@@ -6,6 +6,7 @@ import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
+import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 
@@ -21,4 +22,6 @@ public interface LookUpRepository {
     Optional<BatchDTO> findBatchDTOById(Long id);
 
     Optional<AviaryDTO> findAviaryDTOById(Long id);
+
+    Optional<CollectDTO> findCollectById(Long id);
 }

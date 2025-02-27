@@ -18,9 +18,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Repository
 public class CollectRepositoryImpl implements CollectRepository{
+    
     private final CollectRepositoryJPA collectRepositoryJPA;
     private final CollectMapperEntity collectMapper;
     private final EntityLookupRepository entityLookupRepository;
+
     @Override
     public CollectDTO createCollect(CollectDTO collectDTO) {
         MySqlCollectEntity collectEntity = collectMapper.toEntity(collectDTO);
