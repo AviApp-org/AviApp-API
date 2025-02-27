@@ -8,11 +8,11 @@ import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
 import br.com.aviapp.api.application.mappers.CollectMapperBO;
 import br.com.aviapp.api.application.mappers.EmployeeMapperBO;
-import br.com.aviapp.api.application.usecases.collect.createCollectUseCase;
-import br.com.aviapp.api.application.usecases.collect.deleteCollectUseCase;
-import br.com.aviapp.api.application.usecases.collect.listAllCollectsUseCase;
-import br.com.aviapp.api.application.usecases.collect.listCollectsByAviaryUseCase;
-import br.com.aviapp.api.application.usecases.collect.listCollectsByEmployeeUseCase;
+import br.com.aviapp.api.application.usecases.collect.CreateCollectUseCase;
+import br.com.aviapp.api.application.usecases.collect.DeleteCollectUseCase;
+import br.com.aviapp.api.application.usecases.collect.ListAllCollectsUseCase;
+import br.com.aviapp.api.application.usecases.collect.ListCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collect.ListCollectsByEmployeeUseCase;
 import br.com.aviapp.api.infra.mappers.CollectMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 
@@ -20,31 +20,31 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 public class CollectConfig {
 
     @Bean
-    public createCollectUseCase createCollectUseCase(CollectRepository repository, CollectMapperBO collectMapperBO) {
-        return new createCollectUseCase(repository, collectMapperBO);
+    public CreateCollectUseCase createCollectUseCase(CollectRepository repository, CollectMapperBO collectMapperBO) {
+        return new CreateCollectUseCase(repository, collectMapperBO);
     }
 
     @Bean
-    public listAllCollectsUseCase listAllCollectsUseCase(CollectRepository repository,
+    public ListAllCollectsUseCase listAllCollectsUseCase(CollectRepository repository,
             CollectMapperBO collectMapperBO) {
-        return new listAllCollectsUseCase(repository, collectMapperBO);
+        return new ListAllCollectsUseCase(repository, collectMapperBO);
     }
 
     @Bean
-    public listCollectsByAviaryUseCase listCollectsByAviaryUseCase(CollectRepository repository,
+    public ListCollectsByAviaryUseCase listCollectsByAviaryUseCase(CollectRepository repository,
             CollectMapperBO collectMapperBO) {
-        return new listCollectsByAviaryUseCase(repository, collectMapperBO);
+        return new ListCollectsByAviaryUseCase(repository, collectMapperBO);
     }
 
     @Bean
-    public listCollectsByEmployeeUseCase listCollectsByEmployeeUseCase(CollectRepository repository,
+    public ListCollectsByEmployeeUseCase listCollectsByEmployeeUseCase(CollectRepository repository,
             CollectMapperBO collectMapperBO) {
-        return new listCollectsByEmployeeUseCase(repository, collectMapperBO);
+        return new ListCollectsByEmployeeUseCase(repository, collectMapperBO);
     }
 
     @Bean
-    public deleteCollectUseCase deleteCollectUseCase(CollectRepository repository) {
-        return new deleteCollectUseCase(repository);
+    public DeleteCollectUseCase deleteCollectUseCase(CollectRepository repository) {
+        return new DeleteCollectUseCase(repository);
     }
 
     @Bean

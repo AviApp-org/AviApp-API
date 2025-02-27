@@ -7,11 +7,11 @@ import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.gateways.CollectRepository;
 import br.com.aviapp.api.application.mappers.CollectMapperBO;
 
-public class listCollectsByAviaryUseCase {
+public class ListCollectsByAviaryUseCase {
     private final CollectRepository collectRepository;
     private final CollectMapperBO collectMapper;
 
-    public listCollectsByAviaryUseCase(CollectRepository collectRepository, CollectMapperBO collectMapper) {
+    public ListCollectsByAviaryUseCase(CollectRepository collectRepository, CollectMapperBO collectMapper) {
         this.collectRepository = collectRepository;
         this.collectMapper = collectMapper;
     }
