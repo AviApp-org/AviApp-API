@@ -1,0 +1,41 @@
+package br.com.aviapp.api.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import br.com.aviapp.api.application.gateways.CollectChickenRepository;
+import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
+import br.com.aviapp.api.application.mappers.CollectMapperBO;
+import br.com.aviapp.api.application.usecases.collectChicken.CreateChickenCollectUseCase;
+import br.com.aviapp.api.application.usecases.collectChicken.ListAllChickenCollectUseCase;
+import br.com.aviapp.api.infra.mappers.CollectChickenMapperEntity;
+import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
+
+@Configuration
+public class CollectChickenConfig {
+
+    @Bean
+    public CreateChickenCollectUseCase createChickenCollectUseCase(
+            CollectChickenRepository collectChickenRepository,
+            CollectChickenMapperBO collectChickenMapper) {
+        return new CreateChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
+    public ListAllChickenCollectUseCase listAllChickenCollectUseCase(
+            CollectChickenRepository collectChickenRepository,
+            CollectChickenMapperBO collectChickenMapper) {
+        return new ListAllChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
+    public CollectChickenMapperBO collectChickenMapper(LookUpRepository lookUpRepository, CollectMapperBO collectMapperBO) {
+        return new CollectChickenMapperBO(lookUpRepository, collectMapperBO);
+    }
+
+    @Bean
+    public CollectChickenMapperEntity collectChickenMapperEntity(EntityLookupRepository entityLookupRepository) {
+        return new CollectChickenMapperEntity(entityLookupRepository);
+    }
+}

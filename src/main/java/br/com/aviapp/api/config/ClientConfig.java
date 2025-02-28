@@ -21,8 +21,8 @@ public class ClientConfig {
     }
 
     @Bean
-    DeleteClientUseCase deleteClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
-        return new DeleteClientUseCase(clientRepository, mapperBO);
+    DeleteClientUseCase deleteClient(ClientRepository clientRepository) {
+        return new DeleteClientUseCase(clientRepository);
     }
 
     @Bean

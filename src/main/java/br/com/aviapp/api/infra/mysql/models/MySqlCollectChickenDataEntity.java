@@ -1,7 +1,6 @@
 package br.com.aviapp.api.infra.mysql.models;
 
 import br.com.aviapp.api.infra.mysql.enums.ChickenDeathCause;
-import br.com.aviapp.api.infra.mysql.enums.ChickenGender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,10 +25,14 @@ public class MySqlCollectChickenDataEntity {
   @JoinColumn(name = "collect_id")
   private MySqlCollectEntity collect;
 
-  @Enumerated(EnumType.STRING)
-  private ChickenGender gender;
+  @Column(name = "deadRoosters")
+  private Integer deadRoosters;
 
-  private Integer quantity;
+  @Column(name = "deadChickens")
+  private Integer deadChickens;
+
+  @Column(name = "totalDeath")
+  private Integer totalDeath;
 
   @Column(name = "death_cause")
   @Enumerated(EnumType.STRING)
