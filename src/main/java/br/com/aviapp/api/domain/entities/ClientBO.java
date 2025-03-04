@@ -12,18 +12,12 @@ import lombok.Getter;
 public class ClientBO {
   private Long id;
 
-  @NotBlank(message = "Nome é obrigatório")
   private String name;
 
-  @NotBlank(message = "Email é obrigatório")
-  @Email(message = "Email inválido")
   private String email;
 
-  @NotBlank(message = "CNPJ é obrigatório")
-  @Pattern(regexp = "\\d{14}", message = "CNPJ inválido")
   private String cnpj;
 
-  @NotBlank(message = "Telefone é obrigatório")
   private String phone;
   
   private EnumStatusCliente status;
