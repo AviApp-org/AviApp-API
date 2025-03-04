@@ -12,8 +12,4 @@ import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 @Repository
 public interface CollectRepositoryJPA extends JpaRepository<MySqlCollectEntity, Long> {
 
-    List<MySqlCollectEntity> findByAviary(MySqlAviaryEntity aviaryId);
-
-    List<MySqlCollectEntity> findByEmployee(MySqlEmployeeEntity employee);
-
 }

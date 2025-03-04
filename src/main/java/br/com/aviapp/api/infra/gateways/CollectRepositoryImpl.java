@@ -31,36 +31,6 @@ public class CollectRepositoryImpl implements CollectRepository{
     }
 
     @Override
-    public List<CollectDTO> listCollectByEmployee(Long employeeId) {
-        Optional<MySqlEmployeeEntity> employeeEntity = entityLookupRepository.findEmployeeById(employeeId);
-        if (employeeEntity.isEmpty()) {
-            return List.of(); // Retorna lista vazia se o funcionário não existir
-        }
-        List<MySqlCollectEntity> collects = collectRepositoryJPA.findByEmployee(employeeEntity.get());
-        return collects.stream()
-                .map(collectMapper::toDTO)
-                .toList();
-    }
-
-    @Override
-    public List<CollectDTO> listCollectByAviary(Long aviaryId) {
-        Optional<MySqlAviaryEntity> aviaryEntity = entityLookupRepository.findAviaryById(aviaryId);
-        if (aviaryEntity.isEmpty()) {
-            return List.of(); // Retorna lista vazia se o aviário não existir
-        }
-        List<MySqlCollectEntity> collects = collectRepositoryJPA.findByAviary(aviaryEntity.get());
-        return collects.stream()
-                .map(collectMapper::toDTO)
-                .toList();
-    }
-
-    @Override
-    public List<CollectDTO> getAllCollects() {
-        List<MySqlCollectEntity> collects = collectRepositoryJPA.findAll();
-        return collectMapper.toDTOList(collects);
-    }
-
-    @Override
     public void deleteCollect(Long collectId) {
         collectRepositoryJPA.deleteById(collectId);
     }

@@ -8,7 +8,7 @@ import br.com.aviapp.api.domain.entities.CollectBO;
 public class CreateCollectUseCase {
     private final CollectRepository collectRepository;
     private final CollectMapperBO collectMapper;
-    
+
     public CreateCollectUseCase(CollectRepository collectRepository, CollectMapperBO collectMapper) {
         this.collectRepository = collectRepository;
         this.collectMapper = collectMapper;

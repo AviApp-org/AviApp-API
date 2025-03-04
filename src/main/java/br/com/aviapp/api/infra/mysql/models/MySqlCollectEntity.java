@@ -34,6 +34,6 @@ public class MySqlCollectEntity {
   private MySqlEmployeeEntity employee;
 
   @CreatedDate
-  @Column(name = "created_at", nullable = false, updatable = false)
+  @Column(name = "timestamp", nullable = false, updatable = false)
   private LocalDateTime timestamp;
 }

@@ -8,11 +8,5 @@ public interface CollectRepository {
     
     CollectDTO createCollect(CollectDTO collectDTO);
 
-    List<CollectDTO> listCollectByEmployee(Long employeeId);
-
-    List<CollectDTO> listCollectByAviary(Long aviaryId);
-
-    List<CollectDTO> getAllCollects();  
-
     void deleteCollect(Long collectId);
 }

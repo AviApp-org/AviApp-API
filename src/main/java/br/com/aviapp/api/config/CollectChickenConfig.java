@@ -1,5 +1,7 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByEmployeeUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,6 +29,20 @@ public class CollectChickenConfig {
             CollectChickenRepository collectChickenRepository,
             CollectChickenMapperBO collectChickenMapper) {
         return new ListAllChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
+    public ListChickenCollectsByEmployeeUseCase listChickenCollectsByEmployeeUseCase(
+            CollectChickenRepository collectChickenRepository,
+            CollectChickenMapperBO collectChickenMapper) {
+        return new ListChickenCollectsByEmployeeUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
+    public ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase(
+            CollectChickenRepository collectChickenRepository,
+            CollectChickenMapperBO collectChickenMapper) {
+        return new ListChickenCollectsByAviaryUseCase(collectChickenRepository, collectChickenMapper);
     }
 
     @Bean

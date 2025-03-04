@@ -1,5 +1,8 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.usecases.collectEgg.ListAllEggCollectsUseCase;
+import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByEmployeeUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +21,30 @@ public class CollectEggConfig {
             CollectEggRepository collectEggRepository,
             CollectEggMapperBO collectEggMapperBO) {
         return new CreateEggCollectUseCase(collectEggRepository, collectEggMapperBO);
+    }
+
+    @Bean
+    public ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase(
+            CollectEggRepository collectEggRepository,
+            CollectEggMapperBO collectEggMapperBO
+    ) {
+        return new ListEggCollectsByAviaryUseCase(collectEggRepository, collectEggMapperBO);
+    }
+
+    @Bean
+    public ListEggCollectsByEmployeeUseCase listEggCollectsByEmployeeUseCase(
+            CollectEggRepository collectEggRepository,
+            CollectEggMapperBO collectEggMapperBO
+    ) {
+        return new ListEggCollectsByEmployeeUseCase(collectEggRepository, collectEggMapperBO);
+    }
+
+    @Bean
+    public ListAllEggCollectsUseCase listAllEggCollectsUseCase(
+            CollectEggRepository collectEggRepository,
+            CollectEggMapperBO collectEggMapperBO
+    ) {
+        return new ListAllEggCollectsUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
