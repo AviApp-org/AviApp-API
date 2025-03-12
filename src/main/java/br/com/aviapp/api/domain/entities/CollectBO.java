@@ -1,5 +1,8 @@
 package br.com.aviapp.api.domain.entities;
 
+import br.com.aviapp.api.domain.errors.InvalidParamError;
+import br.com.aviapp.api.domain.utils.ParamValidator;
+
 import java.time.LocalDateTime;
 
 public class CollectBO {
@@ -9,7 +12,8 @@ public class CollectBO {
     private EmployeeBO employee;
     private LocalDateTime timestamp;
     
-    public CollectBO(Long id, AviaryBO aviary, EmployeeBO employee, LocalDateTime timestamp) {
+    public CollectBO(Long id, AviaryBO aviary, EmployeeBO employee, LocalDateTime timestamp) throws InvalidParamError {
+        ParamValidator.validate(aviary,employee,timestamp);
         this.id = id;
         this.aviary = aviary;
         this.employee = employee;

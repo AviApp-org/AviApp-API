@@ -7,15 +7,18 @@ public class AviaryBO {
 
     private Long id;
     private String name;
-    private Integer intialTotalAmount;
     private Integer initialAmountOfRoosters;
     private Integer initialAmountOfChickens;
     private BatchBO batchId;
 
-    public AviaryBO(Long id, String name, Integer intialTotalAmount, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, BatchBO batchId) {
+    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, BatchBO batchId) {
+
+        if (initialAmountOfRoosters < 0 || initialAmountOfChickens < 0) {
+            throw new IllegalArgumentException("Initial amount of roosters and chickens must be non-negative.");
+        }
+
         this.id = id;
         this.name = name;
-        this.intialTotalAmount = intialTotalAmount;
         this.initialAmountOfRoosters = initialAmountOfRoosters;
         this.initialAmountOfChickens = initialAmountOfChickens;
         this.batchId = batchId;

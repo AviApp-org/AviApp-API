@@ -21,7 +21,6 @@ public class AviaryMapperEntity {
         return new AviaryDTO(
             entity.getId(),
             entity.getName(),
-            entity.getIntialTotalAmount(),
             entity.getInitialAmountOfRoosters(),
             entity.getInitialAmountOfChickens(),
             entity.getBatchId().getId()
@@ -35,7 +34,6 @@ public class AviaryMapperEntity {
         return new MySqlAviaryEntity(
             dto.id(),
             dto.name(),
-            dto.intialTotalAmount(),
             dto.initialAmountOfRoosters(),
             dto.initialAmountOfChickens(),
             batch

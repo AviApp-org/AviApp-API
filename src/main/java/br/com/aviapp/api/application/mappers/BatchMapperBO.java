@@ -22,6 +22,9 @@ public class BatchMapperBO {
         Optional<FarmDTO> farm = lookUpRepository.findFarmDTOById(dto.farmId());
         return new BatchBO(
             dto.id(),
+            dto.name(),
+            dto.startDate(),
+            dto.isActive(),
             farmMapper.toBO(farm.get())
         );
     }
@@ -29,6 +32,9 @@ public class BatchMapperBO {
     public BatchDTO toDTO(BatchBO bo) {
         return new BatchDTO(
             bo.getId(),
+            bo.getName(),
+            bo.getStartDate(),
+            bo.isActive(),
             bo.getFarm().getId()
         );
     }

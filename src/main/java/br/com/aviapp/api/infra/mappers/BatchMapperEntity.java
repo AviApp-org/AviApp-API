@@ -21,6 +21,9 @@ public class BatchMapperEntity {
     public BatchDTO toDTO(MySqlBatchEntity entity) {
         return new BatchDTO(
                 entity.getId(),
+                entity.getName(),
+                entity.getStartDate(),
+                entity.isActive(),
                 entity.getFarmId().getId()
         );
     }
@@ -33,6 +36,9 @@ public class BatchMapperEntity {
         MySqlBatchEntity batch = new MySqlBatchEntity();
 
         batch.setId(batchDTO.id());
+        batch.setName(batchDTO.name());
+        batch.setStartDate(batchDTO.startDate());
+        batch.setActive(batchDTO.isActive());
         batch.setFarmId(farm);
 
         return batch;

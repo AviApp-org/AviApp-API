@@ -9,6 +9,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "batch")
@@ -16,6 +18,12 @@ public class MySqlBatchEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  private String name;
+
+  private Date startDate;
+
+  private boolean isActive;
 
   @ManyToOne
   @JoinColumn(name = "farm_id", nullable = false)

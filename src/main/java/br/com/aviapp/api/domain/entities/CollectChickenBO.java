@@ -1,6 +1,8 @@
 package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.enums.EnumChickenDeathCause;
+import br.com.aviapp.api.domain.errors.InvalidParamError;
+import br.com.aviapp.api.domain.utils.ParamValidator;
 
 public class CollectChickenBO {
 
@@ -13,7 +15,8 @@ public class CollectChickenBO {
     private final String observation;
 
     public CollectChickenBO(Long id, CollectBO collect, Integer deadRoosters, Integer deadChickens, Integer totalDeath,
-            EnumChickenDeathCause deathCause, String observation) {
+            EnumChickenDeathCause deathCause, String observation) throws InvalidParamError {
+        ParamValidator.validate(collect,deadChickens,deadRoosters,totalDeath,deathCause);
         this.id = id;
         this.collect = collect;
         this.deadRoosters = deadRoosters;
