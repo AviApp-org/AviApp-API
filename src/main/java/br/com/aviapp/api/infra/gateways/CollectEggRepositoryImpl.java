@@ -1,7 +1,6 @@
 package br.com.aviapp.api.infra.gateways;
 
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
-import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
@@ -12,7 +11,6 @@ import br.com.aviapp.api.infra.mysql.repository.CollectEggDataRepositoryJPA;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository

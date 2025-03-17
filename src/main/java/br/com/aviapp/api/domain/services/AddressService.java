@@ -1,7 +1,6 @@
 package br.com.aviapp.api.domain.services;
 
 import br.com.aviapp.api.application.dto.CepResponseDTO;
-import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.CepService;
 

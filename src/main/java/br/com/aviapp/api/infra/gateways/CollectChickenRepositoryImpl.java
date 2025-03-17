@@ -3,8 +3,6 @@ package br.com.aviapp.api.infra.gateways;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEggDataEntity;
-import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
@@ -20,7 +18,6 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
 
     private final CollectChickenMapperEntity collectChickenMapper;
     private final CollectChickenDataRepositoryJPA repositoryJPA;
-    private final EntityLookupRepository entityLookupRepository;
 
     @Override
     public CollectChickenDTO createCollectChickenData(CollectChickenDTO collectChickenDataDTO) {

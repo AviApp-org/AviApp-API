@@ -1,7 +1,6 @@
 package br.com.aviapp.api.infra.services.viaCep;
 
 import br.com.aviapp.api.application.dto.CepResponseDTO;
-import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.domain.utils.CepService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

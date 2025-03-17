@@ -13,7 +13,7 @@ public class CollectBO {
     private LocalDateTime timestamp;
     
     public CollectBO(Long id, AviaryBO aviary, EmployeeBO employee, LocalDateTime timestamp) throws InvalidParamError {
-        ParamValidator.validate(aviary,employee,timestamp);
+        ParamValidator.validate(aviary,employee);
         this.id = id;
         this.aviary = aviary;
         this.employee = employee;
