@@ -1,11 +1,11 @@
 package br.com.aviapp.api.application.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
+import br.com.aviapp.api.domain.enums.EnumBatchStatus;
+
 public record BatchDTO(Long id, String name,
-                       Date startDate, boolean isActive, Long farmId) {
+                       Date startDate, EnumBatchStatus status, Long farmId) {
 
 }

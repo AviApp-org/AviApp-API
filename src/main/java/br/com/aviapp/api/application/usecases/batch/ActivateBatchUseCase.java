@@ -1,17 +1,17 @@
 package br.com.aviapp.api.application.usecases.batch;
 
+import java.util.Optional;
+
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.gateways.BatchRepository;
 import br.com.aviapp.api.application.mappers.BatchMapperBO;
 import br.com.aviapp.api.domain.entities.BatchBO;
 
-import java.util.Optional;
-
-public class DeactivateBatchUseCase {
-    private final BatchRepository repository;
+public class ActivateBatchUseCase {
+     private final BatchRepository repository;
     private final BatchMapperBO mapper;
 
-    public DeactivateBatchUseCase(BatchRepository repository, BatchMapperBO mapper) {
+    public ActivateBatchUseCase(BatchRepository repository, BatchMapperBO mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -20,8 +20,7 @@ public class DeactivateBatchUseCase {
         Optional<BatchDTO> batchDTO = repository.findBatch(batchId);
         BatchBO batchBO = mapper.toBO(batchDTO.get());
 
-        batchBO.desativar();
+        batchBO.ativar();
         repository.save(mapper.toDTO(batchBO));
     }
-
 }

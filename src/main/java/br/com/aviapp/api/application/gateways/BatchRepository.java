@@ -15,4 +15,7 @@ public interface BatchRepository {
     List<BatchDTO> findBatchesByFarmId(Long farmId);
 
     Optional<BatchDTO> updateBatch(Long id, BatchDTO batchDTO);
+
+    void save(BatchDTO batchDTO);
+    
 }

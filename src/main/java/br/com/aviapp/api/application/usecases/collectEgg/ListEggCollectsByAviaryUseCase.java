@@ -1,6 +1,5 @@
 package br.com.aviapp.api.application.usecases.collectEgg;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.gateways.CollectEggRepository;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;

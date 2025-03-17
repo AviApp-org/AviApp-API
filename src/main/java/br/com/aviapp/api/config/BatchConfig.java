@@ -5,6 +5,7 @@ import br.com.aviapp.api.application.gateways.BatchRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.BatchMapperBO;
 import br.com.aviapp.api.application.mappers.FarmMapperBO;
+import br.com.aviapp.api.application.usecases.batch.ActivateBatchUseCase;
 import br.com.aviapp.api.application.usecases.batch.CreateBatchUseCase;
 import br.com.aviapp.api.application.usecases.batch.DeactivateBatchUseCase;
 import br.com.aviapp.api.application.usecases.batch.FindBatchByIdUseCase;
@@ -24,6 +25,11 @@ public class BatchConfig {
     @Bean
     DeactivateBatchUseCase deactivateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
         return new DeactivateBatchUseCase(batchRepository, batchMapperBO);
+    }
+
+    @Bean   
+    ActivateBatchUseCase activateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+        return new ActivateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean

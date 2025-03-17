@@ -59,4 +59,9 @@ public class BatchRepositoryImpl implements BatchRepository {
     public Optional<BatchDTO> updateBatch(Long id, BatchDTO batchDTO) {
         return Optional.empty();
     }
+
+    @Override
+    public void save(BatchDTO batchDTO) {
+        repositoryJPA.save(mapperEntity.toEntity(batchDTO));
+    }
 }

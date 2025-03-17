@@ -1,7 +1,6 @@
 package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.errors.InvalidParamError;
-import br.com.aviapp.api.domain.utils.CepService;
 import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 import lombok.Setter;

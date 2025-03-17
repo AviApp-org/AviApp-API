@@ -24,7 +24,7 @@ public class BatchMapperBO {
             dto.id(),
             dto.name(),
             dto.startDate(),
-            dto.isActive(),
+            dto.status(),
             farmMapper.toBO(farm.get())
         );
     }
@@ -34,7 +34,7 @@ public class BatchMapperBO {
             bo.getId(),
             bo.getName(),
             bo.getStartDate(),
-            bo.isActive(),
+            bo.getStatus(),
             bo.getFarm().getId()
         );
     }

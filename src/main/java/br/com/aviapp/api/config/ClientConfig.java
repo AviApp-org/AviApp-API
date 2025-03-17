@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.aviapp.api.application.gateways.ClientRepository;
 import br.com.aviapp.api.application.mappers.ClientMapperBO;
+import br.com.aviapp.api.application.usecases.client.ActivateClientUseCase;
 import br.com.aviapp.api.application.usecases.client.CreateClientUseCase;
+import br.com.aviapp.api.application.usecases.client.DeactivateClientUseCase;
 import br.com.aviapp.api.application.usecases.client.DeleteClientUseCase;
 import br.com.aviapp.api.application.usecases.client.FindClientByIdUseCase;
 import br.com.aviapp.api.application.usecases.client.ListClientsUseCase;
@@ -14,6 +16,16 @@ import br.com.aviapp.api.infra.mappers.ClientMapperEntity;
 
 @Configuration
 public class ClientConfig {
+
+    @Bean   
+    ActivateClientUseCase activateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+        return new ActivateClientUseCase(clientRepository, mapperBO);
+    }
+
+    @Bean
+    DeactivateClientUseCase deactivateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+        return new DeactivateClientUseCase(clientRepository, mapperBO);
+    }
 
     @Bean
     CreateClientUseCase createCliente(ClientRepository clientRepository, ClientMapperBO mapperBO) {
