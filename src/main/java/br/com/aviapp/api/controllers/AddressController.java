@@ -1,11 +1,8 @@
 package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
-import br.com.aviapp.api.application.usecases.address.CreateAddressUseCase;
-import br.com.aviapp.api.application.usecases.address.DeleteAddressUseCase;
-import br.com.aviapp.api.application.usecases.address.FindAddressByIdUseCase;
-import br.com.aviapp.api.application.usecases.address.ListAddressesUseCase;
-import br.com.aviapp.api.application.usecases.address.UpdateAddressUseCase;
+import br.com.aviapp.api.application.dto.CepResponseDTO;
+import br.com.aviapp.api.application.usecases.address.*;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -24,18 +21,20 @@ public class AddressController {
     private final FindAddressByIdUseCase findAddressById;
     private final ListAddressesUseCase findAllAddresses;
     private final UpdateAddressUseCase updateAddress;
+    private final ConsultCepUseCase consultCep;
 
     public AddressController(
             CreateAddressUseCase createAddress,
             DeleteAddressUseCase deleteAddress,
             FindAddressByIdUseCase findAddressById,
             ListAddressesUseCase findAllAddresses,
-            UpdateAddressUseCase updateAddress) {
+            UpdateAddressUseCase updateAddress, ConsultCepUseCase consultCep) {
         this.createAddress = createAddress;
         this.deleteAddress = deleteAddress;
         this.findAddressById = findAddressById;
         this.findAllAddresses = findAllAddresses;
         this.updateAddress = updateAddress;
+        this.consultCep = consultCep;
     }
 
     @GetMapping
@@ -70,4 +69,11 @@ public class AddressController {
         deleteAddress.invoke(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/cep/{cep}")
+    public ResponseEntity<CepResponseDTO> consultCep(@PathVariable String cep){
+        CepResponseDTO cepResponse = consultCep.invoke(cep);
+        return ResponseEntity.ok(cepResponse);
+    }
+
 }

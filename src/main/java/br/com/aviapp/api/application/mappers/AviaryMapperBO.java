@@ -23,18 +23,17 @@ public class AviaryMapperBO {
         return new AviaryBO(
             dto.id(),
             dto.name(),
-            dto.intialTotalAmount(),
-            dto.initialAmountOfRoosters(),
             dto.initialAmountOfChickens(),
+            dto.initialAmountOfRoosters(),
             batchMapper.toBO(batch.get())
         );
     }
 
     public AviaryDTO toDTO(AviaryBO bo) {
+
         return new AviaryDTO(
             bo.getId(),
             bo.getName(),
-            bo.getIntialTotalAmount(),
             bo.getInitialAmountOfRoosters(),
             bo.getInitialAmountOfChickens(),
             bo.getBatchId().getId()

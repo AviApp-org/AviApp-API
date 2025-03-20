@@ -16,6 +16,9 @@ public class CreateCollectUseCase {
 
     public CollectDTO invoke(CollectDTO collectDTO) {
         CollectBO collectBO = collectMapper.toBO(collectDTO);
+        if (collectBO.getAviary().getBatchId().getStatus().equals("INACTIVE")) {
+            throw new RuntimeException("Batch is inactive");
+        }
         return collectRepository.createCollect(collectMapper.toDTO(collectBO));
     }
 }

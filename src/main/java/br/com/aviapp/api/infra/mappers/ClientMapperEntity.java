@@ -17,7 +17,8 @@ public class ClientMapperEntity {
                 entity.getEmail(),
                 entity.getCnpj(),
                 entity.getPhone(),
-                EnumStatusCliente.valueOf(entity.getStatus().name()));
+                EnumStatusCliente.valueOf(entity.getStatus().name())
+                );
     }
 
     public MySqlClientEntity toEntity(ClientDTO dto) {

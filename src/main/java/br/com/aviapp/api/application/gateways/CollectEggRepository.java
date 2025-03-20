@@ -1,7 +1,6 @@
 package br.com.aviapp.api.application.gateways;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
-import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 
 import java.util.List;
 

@@ -8,32 +8,34 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AddressBO {
-  private Long id;
-  private String street;
-  private String number;
-  private String cep;
-  private String neighborhood;
-  private String city;
-  private String state;
+    private Long id;
+    private String street;
+    private String number;
+    private String cep;
+    private String neighborhood;
+    private String city;
+    private String state;
 
-  public AddressBO() {
-  }
 
-  public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state)
-      throws InvalidParamError {
-    ParamValidator.validate(cep, street, number, neighborhood, city, state);
-    this.id = id;
-    this.street = street.trim();
-    this.number = number.trim();
-    this.cep = cep.trim();
-    this.neighborhood = neighborhood.trim();
-    this.city = city.trim();
-    this.state = state.trim();
-  }
+    public AddressBO() {
+    }
+
+
+    public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state)
+            throws InvalidParamError {
+        ParamValidator.validate(cep, street, number, neighborhood, city, state);
+        this.id = id;
+        this.street = street.trim();
+        this.number = number.trim();
+        this.cep = cep.trim();
+        this.neighborhood = neighborhood.trim();
+        this.city = city.trim();
+        this.state = state.trim();
+    }
 
     @Override
-  public String toString() {
-    return "AddressBO [id=" + id + ", street=" + street + ", number=" + number + ", cep=" + cep + ", neighborhood="
-        + neighborhood + ", city=" + city + ", state=" + state + "]";
-  }
+    public String toString() {
+        return "AddressBO [id=" + id + ", street=" + street + ", number=" + number + ", cep=" + cep + ", neighborhood="
+                + neighborhood + ", city=" + city + ", state=" + state + "]";
+    }
 }

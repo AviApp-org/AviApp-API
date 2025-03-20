@@ -23,8 +23,6 @@ public class MySqlAviaryEntity {
 
   private String name;
 
-  private Integer intialTotalAmount;
-
   private Integer initialAmountOfRoosters;
 
   private Integer initialAmountOfChickens;

@@ -1,7 +1,6 @@
 package br.com.aviapp.api.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

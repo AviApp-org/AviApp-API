@@ -6,6 +6,7 @@ import java.util.Optional;
 import br.com.aviapp.api.application.dto.ClientDTO;
 
 public interface ClientRepository {
+
     ClientDTO createClient(ClientDTO client);
 
     List<ClientDTO> listAllClients();
@@ -15,5 +16,7 @@ public interface ClientRepository {
     void deleteClient(Long clientID);
 
     Optional<ClientDTO> updateClient(Long clientID, ClientDTO updatedClientDTO);
+
+    void save(ClientDTO clientDTO);
 
 }

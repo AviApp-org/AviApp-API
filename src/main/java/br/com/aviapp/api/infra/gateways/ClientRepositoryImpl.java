@@ -73,4 +73,10 @@ public class ClientRepositoryImpl implements ClientRepository {
                 });
     }
 
+    @Override
+    public void save(ClientDTO clientDTO) {
+        MySqlClientEntity entity = mapperEntity.toEntity(clientDTO);
+        repositoryJPA.save(entity);
+    }
+
 }
