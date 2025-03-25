@@ -2,6 +2,7 @@ package br.com.aviapp.api.domain.entities;
 
 import java.util.List;
 
+import br.com.aviapp.api.domain.enums.EnumStatusCliente;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
@@ -20,6 +21,10 @@ public class FarmBO {
   public FarmBO(Long id, String name, ClientBO client, AddressBO address, List<EmployeeBO> employees)
       throws InvalidParamError {
     ParamValidator.validate(client, address, employees);
+
+    if(client.getStatus() == EnumStatusCliente.INACTIVE) {
+      throw new InvalidParamError("O cliente deve estar ativo para criar uma granja.");
+    }
     this.id = id;
     this.name = name;
     this.client = client;

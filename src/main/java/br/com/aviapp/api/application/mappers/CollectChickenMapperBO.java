@@ -30,7 +30,6 @@ public class CollectChickenMapperBO {
             collectBO,
             dto.deadRoosters(),
             dto.deadChickens(),
-            dto.totalDeath(),
             dto.deathCause(),
             dto.observation()
         );
@@ -42,7 +41,6 @@ public class CollectChickenMapperBO {
             bo.getCollect().getId(),
             bo.getDeadRoosters(),
             bo.getDeadChickens(),
-            bo.getTotalDeath(),
             bo.getDeathCause(),
             bo.getObservation()
         );

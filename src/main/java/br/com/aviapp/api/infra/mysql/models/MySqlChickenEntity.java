@@ -20,6 +20,6 @@ public class MySqlChickenEntity {
 
     private Integer currentChickens;
 
-    private Integer currentAmount;
+
 
 }

@@ -36,8 +36,8 @@ public class FarmConfig {
     }
 
     @Bean
-    CreateFarmUseCase createFarmUseCase(FarmRepository repository) {
-        return new CreateFarmUseCase(repository);
+    CreateFarmUseCase createFarmUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
+        return new CreateFarmUseCase(repository, mapperBO);
     }
 
     @Bean

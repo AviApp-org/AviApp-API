@@ -28,8 +28,8 @@ public class AviaryConfig {
     }
 
     @Bean
-    public DeleteAviaryUseCase deleteAviaryUseCase(AviaryRepository aviaryRepository) {
-        return new DeleteAviaryUseCase(aviaryRepository);
+    public DeleteAviaryUseCase deleteAviaryUseCase(AviaryRepository aviaryRepository, AviaryMapperBO aviaryMapperBO) {
+        return new DeleteAviaryUseCase(aviaryRepository, aviaryMapperBO);
     }
 
     @Bean

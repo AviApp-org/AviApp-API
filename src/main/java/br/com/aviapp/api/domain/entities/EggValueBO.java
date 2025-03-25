@@ -11,16 +11,22 @@ import lombok.Getter;
 @Getter
 public class EggValueBO {
 
-    private Long id;
+    private final Long id;
 
     private EnumEggType eggType;
 
-    private LocalDateTime timestamp;
+    private final LocalDateTime timestamp;
 
-    private BigDecimal value;
+    private final BigDecimal value;
 
     public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, BigDecimal value) throws InvalidParamError {
         ParamValidator.validate(eggType,timestamp,value);
+
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
+            throw new InvalidParamError("Não é permitido valores negativos para valor do ovo.");
+
+        }
+
         this.id = id;
         this.eggType = eggType;
         this.timestamp = timestamp;

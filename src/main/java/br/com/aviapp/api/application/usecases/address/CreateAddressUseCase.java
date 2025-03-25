@@ -19,7 +19,6 @@ public class CreateAddressUseCase {
 
         AddressBO addressBO = mapper.toBO(addressDTO);
 
-        // Convert back to DTO for persistence
         AddressDTO validatedAddress = mapper.toDTO(addressBO);
 
         return repository.createAddress(validatedAddress);

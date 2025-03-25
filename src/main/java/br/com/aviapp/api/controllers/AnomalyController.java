@@ -29,8 +29,7 @@ public class AnomalyController {
     private final ListAllAnomaliesUseCase listAllAnomaliesUseCase;
 
     public AnomalyController(CreateAnomalyUseCase createAnomalyUseCase, DeleteAnomalyUseCase deleteAnomalyUseCase,
-            ListAllAnomaliesUseCase listAllAnomaliesUseCase
- ) {
+            ListAllAnomaliesUseCase listAllAnomaliesUseCase) {
         this.createAnomalyUseCase = createAnomalyUseCase;
         this.deleteAnomalyUseCase = deleteAnomalyUseCase;
         this.listAllAnomaliesUseCase = listAllAnomaliesUseCase;
@@ -42,8 +41,6 @@ public class AnomalyController {
         URI location = URI.create("/api/anomalies/" + newAnomaly.id());
         return ResponseEntity.created(location).body(newAnomaly);
     }
-
-
 
     @GetMapping
     public ResponseEntity<List<AnomalyDTO>> listAllAnomalies() {

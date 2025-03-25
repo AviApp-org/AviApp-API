@@ -31,9 +31,6 @@ public class MySqlCollectChickenDataEntity {
   @Column(name = "deadChickens")
   private Integer deadChickens;
 
-  @Column(name = "totalDeath")
-  private Integer totalDeath;
-
   @Column(name = "death_cause")
   @Enumerated(EnumType.STRING)
   private ChickenDeathCause deathCause;

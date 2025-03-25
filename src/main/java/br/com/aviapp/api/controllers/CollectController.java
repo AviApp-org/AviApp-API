@@ -19,8 +19,7 @@ public class CollectController {
     private final DeleteCollectUseCase deleteCollectUseCase;
 
 
-    public CollectController(CreateCollectUseCase createCollectUseCase, DeleteCollectUseCase deleteCollectUseCase
-  ) {
+    public CollectController(CreateCollectUseCase createCollectUseCase, DeleteCollectUseCase deleteCollectUseCase) {
         this.createCollectUseCase = createCollectUseCase;
         this.deleteCollectUseCase = deleteCollectUseCase;
 

@@ -24,7 +24,6 @@ public class CollectChickenMapperEntity {
                 entity.getCollect().getId(),
                 entity.getDeadRoosters(),
                 entity.getDeadChickens(),
-                entity.getTotalDeath(),
                 EnumChickenDeathCause.valueOf(entity.getDeathCause().name()),
                 entity.getObservation());
     }
@@ -38,7 +37,6 @@ public class CollectChickenMapperEntity {
         entity.setCollect(collect);
         entity.setDeadRoosters(dto.deadRoosters());
         entity.setDeadChickens(dto.deadChickens());
-        entity.setTotalDeath(dto.totalDeath());
         entity.setDeathCause(ChickenDeathCause.valueOf(dto.deathCause().name()));
         entity.setObservation(dto.observation());
 

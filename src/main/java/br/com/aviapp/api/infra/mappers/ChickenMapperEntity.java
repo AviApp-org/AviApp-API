@@ -12,16 +12,16 @@ public class ChickenMapperEntity {
         return new ChickenDTO(
                 entity.getId(),
                 entity.getCurrentRoosters(),
-                entity.getCurrentChickens(),
-                entity.getCurrentAmount());
+                entity.getCurrentChickens()
+                );
     }
 
     public MySqlChickenEntity toEntity(ChickenDTO dto) {
         return new MySqlChickenEntity(
                 dto.id(),
                 dto.currentRoosters(),
-                dto.currentChickens(),
-                dto.currentAmount());
+                dto.currentChickens()
+                );
     }
 
     public List<ChickenDTO> toDTOList(List<MySqlChickenEntity> entities) {

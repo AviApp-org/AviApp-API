@@ -1,20 +1,29 @@
 package br.com.aviapp.api.domain.entities;
 
+import br.com.aviapp.api.domain.enums.EnumBatchStatus;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
+import br.com.aviapp.api.domain.utils.DeletableEntity;
+import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 
 @Getter
-public class AviaryBO {
+public class AviaryBO implements DeletableEntity {
 
-    private Long id;
+    private final Long id;
     private String name;
-    private Integer initialAmountOfRoosters;
-    private Integer initialAmountOfChickens;
-    private BatchBO batchId;
+    private final Integer initialAmountOfRoosters;
+    private final Integer initialAmountOfChickens;
+    private final BatchBO batchId;
 
-    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, BatchBO batchId) {
+    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, BatchBO batchId) throws IllegalArgumentException {
+        ParamValidator.validate(name, initialAmountOfRoosters, initialAmountOfChickens, batchId);
 
         if (initialAmountOfRoosters < 0 || initialAmountOfChickens < 0) {
-            throw new IllegalArgumentException("Initial amount of roosters and chickens must be non-negative.");
+            throw new IllegalArgumentException("A quantidade inicial de galinhas e galos não pode ser negativa.");
+        }
+
+        if(batchId.getStatus() == EnumBatchStatus.INACTIVE){
+            throw new IllegalArgumentException("O lote deve estar ativo para criar um aviário.");
         }
 
         this.id = id;
@@ -28,5 +37,12 @@ public class AviaryBO {
         this.name = name;
     }
 
+    public Integer getInitialAmountOfBirds() {
+        return initialAmountOfRoosters + initialAmountOfChickens;
+    }
 
+    @Override
+    public void validateDeletion() throws BusinessRuleException {
+
+    }
 }

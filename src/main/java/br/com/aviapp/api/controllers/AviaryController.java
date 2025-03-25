@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
+import br.com.aviapp.api.domain.errors.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,7 +65,13 @@ public class AviaryController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAviary(@PathVariable Long id) {
-        deleteAviaryUseCase.invoke(id);
+        try {
+            deleteAviaryUseCase.invoke(id);
+        } catch (BusinessRuleException e) {
+            throw new RuntimeException(e);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return ResponseEntity.noContent().build();
     }
 }

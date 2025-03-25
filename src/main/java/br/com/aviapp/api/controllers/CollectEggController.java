@@ -21,7 +21,8 @@ public class CollectEggController {
     private final ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase;
     private final ListEggCollectsByEmployeeUseCase listEggCollectsByEmployeeUseCase;
 
-    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, ListEggCollectsByEmployeeUseCase listEggCollectsByEmployeeUseCase) {
+    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase,
+                                ListEggCollectsByEmployeeUseCase listEggCollectsByEmployeeUseCase) {
         this.createEggCollectUseCase = createEggCollectUseCase;
         this.listAllEggCollectsUseCase = listAllEggCollectsUseCase;
         this.listEggCollectsByAviaryUseCase = listEggCollectsByAviaryUseCase;

@@ -8,7 +8,6 @@ public interface AnomalyRepository {
 
      AnomalyDTO createAnomaly(AnomalyDTO anomalyDTO);
 
-
      List<AnomalyDTO> listAllAnomalies();
 
      void deleteAnomaly(Long anomalyId);

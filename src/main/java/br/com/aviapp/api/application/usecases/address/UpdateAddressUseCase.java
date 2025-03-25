@@ -6,7 +6,8 @@ import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.gateways.AddressRepository;
 
 public class UpdateAddressUseCase {
-        private final AddressRepository repository;
+
+    private final AddressRepository repository;
 
     public UpdateAddressUseCase(AddressRepository repository) {
         this.repository = repository;

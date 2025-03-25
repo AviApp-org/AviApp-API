@@ -17,8 +17,8 @@ public class FindAddressByIdUseCase {
 
     public Optional<AddressDTO> invoke(Long addressID) {
         return repository.findAddress(addressID)
-                .map(mapper::toBO)  // Convert to domain for any business rules
-                .map(mapper::toDTO); // Convert back to DTO for response
+                .map(mapper::toBO)
+                .map(mapper::toDTO);
     }
     
 }

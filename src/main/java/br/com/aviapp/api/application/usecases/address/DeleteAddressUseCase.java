@@ -11,6 +11,7 @@ public class DeleteAddressUseCase {
     }
 
     public void invoke (Long addressID){
+
         repository.deleteAddress(addressID);
     }
 }

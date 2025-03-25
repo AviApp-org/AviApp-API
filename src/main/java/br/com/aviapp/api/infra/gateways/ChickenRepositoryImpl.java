@@ -44,9 +44,7 @@ public class ChickenRepositoryImpl implements ChickenRepository {
                     if (chickenDTO.currentChickens() != null) {
                         existingChicken.setCurrentChickens(chickenDTO.currentChickens());
                     }
-                    if (chickenDTO.currentAmount() != null) {
-                        existingChicken.setCurrentAmount(chickenDTO.currentAmount());
-                    }
+
 
                     MySqlChickenEntity savedEntity = repositoryJPA.save(existingChicken);
                     return mapperEntity.toDTO(savedEntity);

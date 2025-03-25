@@ -31,8 +31,7 @@ public class EmployeeController {
     private final ListAllEmployeesUseCase listAllEmployees;
 
     public EmployeeController(CreateEmployeeUseCase createEmployee, DeleteEmployeeUseCase deleteEmployee,
-            FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees
-            ) {
+            FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees) {
         this.createEmployee = createEmployee;
         this.deleteEmployee = deleteEmployee;
         this.findEmployeeById = findEmployeeById;

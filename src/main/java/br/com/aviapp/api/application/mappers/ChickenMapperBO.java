@@ -12,8 +12,7 @@ public class ChickenMapperBO {
         return new ChickenBO(
             dto.id(),
             dto.currentRoosters(),
-            dto.currentChickens(),
-            dto.currentAmount()
+            dto.currentChickens()
         );
     }
 
@@ -21,8 +20,7 @@ public class ChickenMapperBO {
         return new ChickenDTO(
             bo.getId(),
             bo.getCurrentRoosters(),
-            bo.getCurrentChickens(),
-            bo.getCurrentAmount()
+            bo.getCurrentChickens()
         );
     }
 
