@@ -3,6 +3,7 @@ package br.com.aviapp.api.application.usecases.address;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
+import br.com.aviapp.api.application.exceptions.NotFoundException;
 import br.com.aviapp.api.application.gateways.AddressRepository;
 import br.com.aviapp.api.application.mappers.AddressMapperBO;
 
@@ -16,9 +17,11 @@ public class FindAddressByIdUseCase {
     }
 
     public Optional<AddressDTO> invoke(Long addressID) {
-        return repository.findAddress(addressID)
+        return Optional.ofNullable(repository.findAddress(addressID)
                 .map(mapper::toBO)
-                .map(mapper::toDTO);
+                .map(mapper::toDTO)
+                .orElseThrow(() -> new NotFoundException(addressID)));
+
     }
     
 }
