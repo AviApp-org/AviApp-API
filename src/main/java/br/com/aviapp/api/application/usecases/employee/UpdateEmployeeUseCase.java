@@ -18,10 +18,10 @@ public class UpdateEmployeeUseCase {
     }
 
     public Optional<EmployeeDTO> invoke(Long employeeId, EmployeeDTO employeeDTO) {
-        EmployeeBO employeeBO = mapperBO.toBO(employeeDTO);
+//        EmployeeBO employeeBO = mapperBO.toBO(employeeDTO);
+//
+//        EmployeeDTO validatedEmployee = mapperBO.toDTO(employeeBO);
 
-        EmployeeDTO validatedEmployee = mapperBO.toDTO(employeeBO);
-
-        return repository.updateEmployee(employeeId,validatedEmployee);
+        return repository.updateEmployee(employeeId,employeeDTO);
     }
 }

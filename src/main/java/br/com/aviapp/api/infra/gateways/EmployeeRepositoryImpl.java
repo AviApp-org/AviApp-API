@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.aviapp.api.infra.mysql.enums.EmployeeRole;
+import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 
@@ -40,21 +42,21 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
-    MySqlEmployeeEntity entity = employeeMapper.toEntity(employeeDTO);
-    
-    // Save the employee
-    MySqlEmployeeEntity savedEmployee = employeeRepositoryJPA.save(entity);
-    
-    // Update the farm's employee list
-    MySqlFarmEntity farm = entity.getFarmId();
-    if (farm.getEmployeeId() == null) {
-        farm.setEmployeeId(new ArrayList<>());
+        MySqlEmployeeEntity entity = employeeMapper.toEntity(employeeDTO);
+
+        // Save the employee
+        MySqlEmployeeEntity savedEmployee = employeeRepositoryJPA.save(entity);
+
+        // Update the farm's employee list
+        MySqlFarmEntity farm = entity.getFarmId();
+        if (farm.getEmployeeId() == null) {
+            farm.setEmployeeId(new ArrayList<>());
+        }
+        farm.getEmployeeId().add(savedEmployee);
+        farmRepositoryJPA.save(farm);
+
+        return employeeMapper.toDTO(savedEmployee);
     }
-    farm.getEmployeeId().add(savedEmployee);
-    farmRepositoryJPA.save(farm);
-    
-    return employeeMapper.toDTO(savedEmployee);
-}
 
     @Override
     public void deleteEmployee(Long employeeId) {
@@ -63,7 +65,24 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Optional<EmployeeDTO> updateEmployee(Long employeeId, EmployeeDTO employeeDTO) {
-        return Optional.empty();
+        return employeeRepositoryJPA.findById(employeeId)
+                .map(existingEmployee -> {
+                    if (employeeDTO.cpf() != null) {
+                        existingEmployee.setCpf(employeeDTO.cpf());
+                    }
+                    if (employeeDTO.name() != null) {
+                        existingEmployee.setName(employeeDTO.name());
+                    }
+                    if (employeeDTO.phone() != null) {
+                        existingEmployee.setPhone(employeeDTO.phone());
+                    }
+                    if (employeeDTO.role() != null) {
+                        existingEmployee.setRole(EmployeeRole.valueOf(employeeDTO.role().name()));
+                    }
+
+                    MySqlEmployeeEntity savedEntity = employeeRepositoryJPA.save(existingEmployee);
+                    return employeeMapper.toDTO(savedEntity);
+                });
     }
 
 }

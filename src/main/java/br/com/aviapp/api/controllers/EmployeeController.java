@@ -3,21 +3,11 @@ package br.com.aviapp.api.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.aviapp.api.application.usecases.employee.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.aviapp.api.application.dto.EmployeeDTO;
-import br.com.aviapp.api.application.usecases.employee.CreateEmployeeUseCase;
-import br.com.aviapp.api.application.usecases.employee.DeleteEmployeeUseCase;
-import br.com.aviapp.api.application.usecases.employee.FindEmployeeByIdUseCase;
-import br.com.aviapp.api.application.usecases.employee.ListAllEmployeesUseCase;
 import jakarta.validation.Valid;
 
 @RestController
@@ -29,13 +19,15 @@ public class EmployeeController {
     private final DeleteEmployeeUseCase deleteEmployee;
     private final FindEmployeeByIdUseCase findEmployeeById;
     private final ListAllEmployeesUseCase listAllEmployees;
+    private final UpdateEmployeeUseCase updateEmployee;
 
     public EmployeeController(CreateEmployeeUseCase createEmployee, DeleteEmployeeUseCase deleteEmployee,
-            FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees) {
+                              FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees, UpdateEmployeeUseCase updateEmployee) {
         this.createEmployee = createEmployee;
         this.deleteEmployee = deleteEmployee;
         this.findEmployeeById = findEmployeeById;
         this.listAllEmployees = listAllEmployees;
+        this.updateEmployee = updateEmployee;
     }
 
     @GetMapping
@@ -62,4 +54,10 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO employeeDTO) {
+        Optional<EmployeeDTO> updatedEmployee = updateEmployee.invoke(id, employeeDTO);
+        return updatedEmployee.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
