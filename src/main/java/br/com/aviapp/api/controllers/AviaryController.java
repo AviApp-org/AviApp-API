@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.aviapp.api.application.usecases.aviary.*;
 import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import br.com.aviapp.api.domain.errors.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
-import br.com.aviapp.api.application.usecases.aviary.CreateAviaryUseCase;
-import br.com.aviapp.api.application.usecases.aviary.DeleteAviaryUseCase;
-import br.com.aviapp.api.application.usecases.aviary.FindAviaryByIdUseCase;
-import br.com.aviapp.api.application.usecases.aviary.ListAviariesByBatchUseCase;
 import jakarta.validation.Valid;
 
 @RestController
@@ -32,14 +29,16 @@ public class AviaryController {
     private final ListAviariesByBatchUseCase listAviariesByBatchUseCase;
     private final FindAviaryByIdUseCase findAviaryByIdUseCase;
     private final DeleteAviaryUseCase deleteAviaryUseCase;
+    private final ListAllAviariesUseCase listAllAviariesUseCase;
 
     public AviaryController(CreateAviaryUseCase createAviaryUseCase,
-            ListAviariesByBatchUseCase listAviariesByBatchUseCase, FindAviaryByIdUseCase findAviaryByIdUseCase,
-            DeleteAviaryUseCase deleteAviaryUseCase) {
+                            ListAviariesByBatchUseCase listAviariesByBatchUseCase, FindAviaryByIdUseCase findAviaryByIdUseCase,
+                            DeleteAviaryUseCase deleteAviaryUseCase, ListAllAviariesUseCase listAllAviariesUseCase) {
         this.createAviaryUseCase = createAviaryUseCase;
         this.listAviariesByBatchUseCase = listAviariesByBatchUseCase;
         this.findAviaryByIdUseCase = findAviaryByIdUseCase;
         this.deleteAviaryUseCase = deleteAviaryUseCase;
+        this.listAllAviariesUseCase = listAllAviariesUseCase;
     }
 
     @PostMapping
@@ -47,6 +46,12 @@ public class AviaryController {
         AviaryDTO newAviary = createAviaryUseCase.invoke(aviaryDTO);
         URI location = URI.create("/api/aviaries/" + newAviary.id());
         return ResponseEntity.created(location).body(newAviary);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AviaryDTO>> listAllAviarys() {
+        List<AviaryDTO> aviaries = listAllAviariesUseCase.invoke();
+        return ResponseEntity.ok(aviaries);
     }
 
     @GetMapping("/batch/{batchId}")

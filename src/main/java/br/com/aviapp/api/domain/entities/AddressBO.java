@@ -16,10 +16,8 @@ public class AddressBO {
     private String city;
     private String state;
 
-
     public AddressBO() {
     }
-
 
     public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state)
             throws InvalidParamError {

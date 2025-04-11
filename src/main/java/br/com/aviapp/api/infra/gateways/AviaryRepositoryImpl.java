@@ -54,6 +54,11 @@ public class AviaryRepositoryImpl implements AviaryRepository {
     }
 
     @Override
+    public List<AviaryDTO> listAllAviarys() {
+        return aviaryMapper.toDTOList(aviaryRepositoryJPA.findAll());
+    }
+
+    @Override
     public Optional<AviaryDTO> updateAviary(Long aviaryId, AviaryDTO aviaryDTO) {
         return aviaryRepositoryJPA.findById(aviaryId)
                 .map(existingAviary -> {

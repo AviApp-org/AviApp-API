@@ -6,6 +6,7 @@ import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.gateways.AddressRepository;
 
 public class ListAddressesUseCase {
+
     private final AddressRepository repository;
 
     public ListAddressesUseCase(AddressRepository repository) {

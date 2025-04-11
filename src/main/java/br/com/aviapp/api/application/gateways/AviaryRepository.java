@@ -13,6 +13,8 @@ public interface AviaryRepository {
 
     Optional<AviaryDTO> findAviaryById(Long aviaryId);
 
+    List<AviaryDTO> listAllAviarys();
+
     Optional<AviaryDTO> updateAviary(Long aviaryId, AviaryDTO aviaryDTO);
 
     void deleteAviary(Long aviaryId);

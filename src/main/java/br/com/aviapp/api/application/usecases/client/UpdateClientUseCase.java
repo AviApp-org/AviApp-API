@@ -20,14 +20,11 @@ public class UpdateClientUseCase {
     public Optional<ClientDTO> invoke(Long clientId, ClientDTO clientDTO) {
         return repository.findClient(clientId)
                 .map(existingClient -> {
-                    // Convert to domain objects
                     ClientBO existingBO = mapper.toBO(existingClient);
                     ClientBO updateBO = mapper.toBO(clientDTO);
 
-                    // Apply domain validations and update rules
                     validateUpdate(existingBO, updateBO);
 
-                    // Convert back to DTO for persistence
                     ClientDTO validatedDTO = mapper.toDTO(updateBO);
 
                     return repository.updateClient(clientId, validatedDTO);
@@ -36,6 +33,5 @@ public class UpdateClientUseCase {
     }
 
     private void validateUpdate(ClientBO existing, ClientBO update) {
-        // Domain validation rules for updates
     }
 }

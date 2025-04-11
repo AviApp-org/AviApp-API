@@ -44,8 +44,6 @@ public class BatchBO {
 
     }
 
-
-
     public void desativar() {
         this.status = EnumBatchStatus.INACTIVE;
     }
