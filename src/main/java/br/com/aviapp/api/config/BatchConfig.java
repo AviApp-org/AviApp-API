@@ -40,6 +40,11 @@ public class BatchConfig {
     }
 
     @Bean
+    DeleteBatchUseCase deleteBatchUseCase(BatchRepository batchRepository) {
+        return new DeleteBatchUseCase(batchRepository);
+    }
+
+    @Bean
     BatchMapperEntity batchMapperEntity(EntityLookupRepository repository) {
         return new BatchMapperEntity(repository);
     }

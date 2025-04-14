@@ -24,14 +24,16 @@ public class BatchController {
     private final DeactivateBatchUseCase deactivateBatchUseCase;
     private final ActivateBatchUseCase  activateBatchUseCase;   
     private final ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase;
+    private final DeleteBatchUseCase deleteBatchUseCase;
 
     public BatchController(CreateBatchUseCase createBatchUseCase, FindBatchByIdUseCase findBatchByIdUseCase,
-                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase) {
+                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase, DeleteBatchUseCase deleteBatchUseCase) {
         this.createBatchUseCase = createBatchUseCase;
         this.findBatchByIdUseCase = findBatchByIdUseCase;
         this.deactivateBatchUseCase = deactivateBatchUseCase;
         this.activateBatchUseCase = activateBatchUseCase;
         this.listBatchesByFarmIdUseCase = listBatchesByFarmIdUseCase;
+        this.deleteBatchUseCase = deleteBatchUseCase;
     }
 
     @PostMapping
@@ -74,4 +76,9 @@ public class BatchController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBatch(@PathVariable Long id) {
+        deleteBatchUseCase.invoke(id);
+        return ResponseEntity.noContent().build();
+    }
 }
