@@ -22,29 +22,31 @@ public class BatchController {
     private final CreateBatchUseCase createBatchUseCase;
     private final FindBatchByIdUseCase findBatchByIdUseCase;
     private final DeactivateBatchUseCase deactivateBatchUseCase;
-    private final ActivateBatchUseCase  activateBatchUseCase;   
+    private final ActivateBatchUseCase activateBatchUseCase;
     private final ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase;
     private final DeleteBatchUseCase deleteBatchUseCase;
+    private final UpdateBatchUseCase updateBatchUseCase;
 
     public BatchController(CreateBatchUseCase createBatchUseCase, FindBatchByIdUseCase findBatchByIdUseCase,
-                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase, DeleteBatchUseCase deleteBatchUseCase) {
+                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase, DeleteBatchUseCase deleteBatchUseCase, UpdateBatchUseCase updateBatchUseCase) {
         this.createBatchUseCase = createBatchUseCase;
         this.findBatchByIdUseCase = findBatchByIdUseCase;
         this.deactivateBatchUseCase = deactivateBatchUseCase;
         this.activateBatchUseCase = activateBatchUseCase;
         this.listBatchesByFarmIdUseCase = listBatchesByFarmIdUseCase;
         this.deleteBatchUseCase = deleteBatchUseCase;
+        this.updateBatchUseCase = updateBatchUseCase;
     }
 
     @PostMapping
-    public ResponseEntity<BatchDTO> createBatch(@Valid @RequestBody BatchDTO batchDTO){
+    public ResponseEntity<BatchDTO> createBatch(@Valid @RequestBody BatchDTO batchDTO) {
         BatchDTO newBatch = createBatchUseCase.invoke(batchDTO);
         URI location = URI.create("/api/addresses/" + newBatch.id());
         return ResponseEntity.created(location).body(newBatch);
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<BatchDTO> getBatchById(@PathVariable Long id){
+    public ResponseEntity<BatchDTO> getBatchById(@PathVariable Long id) {
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(id);
         return batchDTO.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -74,6 +76,13 @@ public class BatchController {
         } catch (BCException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BatchDTO> updateBatch(@PathVariable Long id, @Valid @RequestBody BatchDTO batchDTO) {
+        Optional<BatchDTO> updatedBatch = updateBatchUseCase.invoke(id, batchDTO);
+        return updatedBatch.map(ResponseEntity::ok).
+                orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")

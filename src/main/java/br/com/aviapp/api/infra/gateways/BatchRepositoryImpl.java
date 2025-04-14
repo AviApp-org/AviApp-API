@@ -3,6 +3,7 @@ package br.com.aviapp.api.infra.gateways;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.gateways.BatchRepository;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
+import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
@@ -57,7 +58,18 @@ public class BatchRepositoryImpl implements BatchRepository {
 
     @Override
     public Optional<BatchDTO> updateBatch(Long id, BatchDTO batchDTO) {
-        return Optional.empty();
+        return repositoryJPA.findById(id)
+                .map(existingBatch -> {
+                    if (batchDTO.name() != null) {
+                        existingBatch.setName(batchDTO.name());
+                    }
+                    if (batchDTO.startDate() != null) {
+                        existingBatch.setStartDate(batchDTO.startDate());
+                    }
+
+                    MySqlBatchEntity savedEntity = repositoryJPA.save(existingBatch);
+                    return mapperEntity.toDTO(savedEntity);
+                });
     }
 
     @Override

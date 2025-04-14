@@ -18,10 +18,10 @@ public class UpdateBatchUseCase {
     }
 
     public Optional<BatchDTO> invoke(Long batchId, BatchDTO batch){
-        BatchBO batchBO = mapper.toBO(batch);
+     //   BatchBO batchBO = mapper.toBO(batch);
 
-        BatchDTO validatedBatch = mapper.toDTO(batchBO);
+       // BatchDTO validatedBatch = mapper.toDTO(batchBO);
 
-        return repository.updateBatch(batchId,validatedBatch);
+        return repository.updateBatch(batchId, batch);
     }
 }

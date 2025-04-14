@@ -24,9 +24,14 @@ public class BatchConfig {
         return new DeactivateBatchUseCase(batchRepository, batchMapperBO);
     }
 
-    @Bean   
+    @Bean
     ActivateBatchUseCase activateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
         return new ActivateBatchUseCase(batchRepository, batchMapperBO);
+    }
+
+    @Bean
+    UpdateBatchUseCase updateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+        return new UpdateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
