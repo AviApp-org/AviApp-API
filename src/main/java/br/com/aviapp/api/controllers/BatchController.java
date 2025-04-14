@@ -1,10 +1,7 @@
 package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
-import br.com.aviapp.api.application.usecases.batch.ActivateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.CreateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.DeactivateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.FindBatchByIdUseCase;
+import br.com.aviapp.api.application.usecases.batch.*;
 import jakarta.validation.Valid;
 
 import org.aspectj.weaver.BCException;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,14 +23,15 @@ public class BatchController {
     private final FindBatchByIdUseCase findBatchByIdUseCase;
     private final DeactivateBatchUseCase deactivateBatchUseCase;
     private final ActivateBatchUseCase  activateBatchUseCase;   
-
+    private final ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase;
 
     public BatchController(CreateBatchUseCase createBatchUseCase, FindBatchByIdUseCase findBatchByIdUseCase,
-            DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase) {
+                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase) {
         this.createBatchUseCase = createBatchUseCase;
         this.findBatchByIdUseCase = findBatchByIdUseCase;
         this.deactivateBatchUseCase = deactivateBatchUseCase;
         this.activateBatchUseCase = activateBatchUseCase;
+        this.listBatchesByFarmIdUseCase = listBatchesByFarmIdUseCase;
     }
 
     @PostMapping
@@ -47,6 +46,12 @@ public class BatchController {
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(id);
         return batchDTO.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/farm/{farmId}")
+    public ResponseEntity<List<BatchDTO>> getBatchesByFarmId(@PathVariable Long farmId) {
+        List<BatchDTO> batches = listBatchesByFarmIdUseCase.invoke(farmId);
+        return ResponseEntity.ok(batches);
     }
 
     @PatchMapping("/{batchId}/activate")

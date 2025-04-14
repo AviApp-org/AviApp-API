@@ -47,7 +47,7 @@ public class BatchRepositoryImpl implements BatchRepository {
     public List<BatchDTO> findBatchesByFarmId(Long farmId) {
         Optional<MySqlFarmEntity> farmEntity = entityLookupRepository.findFarmById(farmId);
         if (farmEntity.isEmpty()) {
-            return List.of(); // Retorna lista vazia se a fazenda não existir
+            return List.of();
         }
         List<MySqlBatchEntity> entities = repositoryJPA.findByFarmId(farmEntity.get());
         return entities.stream()

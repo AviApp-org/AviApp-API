@@ -5,10 +5,7 @@ import br.com.aviapp.api.application.gateways.BatchRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.BatchMapperBO;
 import br.com.aviapp.api.application.mappers.FarmMapperBO;
-import br.com.aviapp.api.application.usecases.batch.ActivateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.CreateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.DeactivateBatchUseCase;
-import br.com.aviapp.api.application.usecases.batch.FindBatchByIdUseCase;
+import br.com.aviapp.api.application.usecases.batch.*;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +32,11 @@ public class BatchConfig {
     @Bean
     FindBatchByIdUseCase findBatchByIdUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
         return new FindBatchByIdUseCase(batchRepository, batchMapperBO);
+    }
+
+    @Bean
+    ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+        return new ListBatchesByFarmIdUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
