@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.usecases.collect.CreateCollectUseCase;
 import br.com.aviapp.api.application.usecases.collect.DeleteCollectUseCase;
 

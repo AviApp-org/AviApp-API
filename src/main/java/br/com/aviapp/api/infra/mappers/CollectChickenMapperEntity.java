@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.domain.enums.EnumChickenDeathCause;
-import br.com.aviapp.api.infra.mysql.enums.ChickenDeathCause;
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectChickenDataEntity;
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import jakarta.persistence.EntityNotFoundException;
 

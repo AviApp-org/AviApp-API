@@ -4,33 +4,32 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.domain.entities.AviaryBO;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
-import br.com.aviapp.api.domain.entities.CollectBO;
 
 public class CollectChickenMapperBO {
     private final LookUpRepository lookUpRepository;
-    private final CollectMapperBO collectMapper;
+    private final AviaryMapperBO aviaryMapperBO;
 
-    public CollectChickenMapperBO(LookUpRepository lookUpRepository, CollectMapperBO collectMapper) {
+    public CollectChickenMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
         this.lookUpRepository = lookUpRepository;
-        this.collectMapper = collectMapper;
+        this.aviaryMapperBO = aviaryMapperBO;
     }
 
     public CollectChickenBO toBO(CollectChickenDTO dto) {
-        Optional<CollectDTO> collect = lookUpRepository.findCollectById(dto.collectId());
+        Optional<AviaryDTO> collect = lookUpRepository.findAviaryDTOById(dto.aviaryId());
         if (collect.isEmpty()) {
             throw new IllegalArgumentException("Collect not found");
         }
-        CollectBO collectBO = collectMapper.toBO(collect.get());
+        AviaryBO aviaryBO = aviaryMapperBO.toBO(collect.get());
         return new CollectChickenBO(
             dto.id(),
-            collectBO,
+            aviaryBO,
             dto.deadRoosters(),
             dto.deadChickens(),
-            dto.deathCause(),
             dto.observation()
         );
     }
@@ -38,10 +37,9 @@ public class CollectChickenMapperBO {
     public CollectChickenDTO toDTO(CollectChickenBO bo) {
         return new CollectChickenDTO(
             bo.getId(),
-            bo.getCollect().getId(),
+            bo.getAviary().getId(),
             bo.getDeadRoosters(),
             bo.getDeadChickens(),
-            bo.getDeathCause(),
             bo.getObservation()
         );
     }

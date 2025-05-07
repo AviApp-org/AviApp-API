@@ -3,10 +3,7 @@ package br.com.aviapp.api.infra.gateways;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.gateways.CollectRepository;
-import br.com.aviapp.api.infra.mappers.CollectMapperEntity;
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
 import br.com.aviapp.api.infra.mysql.repository.CollectRepositoryJPA;
 import lombok.AllArgsConstructor;
 

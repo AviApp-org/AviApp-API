@@ -1,28 +1,29 @@
 package br.com.aviapp.api.infra.mysql.models;
 
 import br.com.aviapp.api.infra.mysql.enums.EggType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "collect_egg_data")
 @Entity
 public class MySqlCollectEggDataEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "collect_id")
-  private MySqlCollectEntity collect;
+  @JoinColumn(name = "aviary_id", nullable = false)
+  private MySqlAviaryEntity aviary;
 
-  private EggType egg;
+  @Column(nullable = false)
+  private LocalDateTime collectionDate;
 
-  private Integer quantity;
+  @OneToMany(mappedBy = "eggCollection", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<MySqlEggDetailEntity> eggDetails = new ArrayList<>();
 }

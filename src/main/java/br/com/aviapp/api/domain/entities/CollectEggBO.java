@@ -6,24 +6,36 @@ import br.com.aviapp.api.domain.utils.ParamValidator;
 import br.com.aviapp.api.domain.utils.ValidateNegative;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+
 @Getter
 public class CollectEggBO {
-    
+
     private final Long id;
-    private final CollectBO collect;
-    private final EnumEggType egg;
-    private final Integer quantity;
+    private final AviaryBO aviary;
+    private final List<EggDetailBO> eggDetails;
+    private final LocalDateTime collectionDate;
 
-    public CollectEggBO(Long id, CollectBO collect, EnumEggType egg, Integer quantity) throws InvalidParamError {
-        ParamValidator.validate(collect,egg,quantity);
+    public CollectEggBO(Long id, AviaryBO aviary, List<EggDetailBO> eggDetails,
+                        LocalDateTime collectionDate) throws InvalidParamError {
+        ParamValidator.validate(aviary, eggDetails, collectionDate);
 
-        if (ValidateNegative.isNegative(quantity)){
-            throw new InvalidParamError("Não é permitido valores negativos para quantidade de ovos.");
+        if (eggDetails == null || eggDetails.isEmpty()) {
+            throw new InvalidParamError("É necessário informar pelo menos um tipo de ovo coletado.");
         }
+
         this.id = id;
-        this.collect = collect;
-        this.egg = egg;
-        this.quantity = quantity;
+        this.aviary = aviary;
+        this.eggDetails = Collections.unmodifiableList(eggDetails);
+        this.collectionDate = collectionDate;
+    }
+
+    public Integer getTotalEggs() {
+        return eggDetails.stream()
+                .mapToInt(EggDetailBO::getQuantity)
+                .sum();
     }
 
 }

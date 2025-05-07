@@ -1,12 +1,10 @@
 package br.com.aviapp.api.infra.mysql.repository;
 
-
+import br.com.aviapp.api.infra.mysql.models.MySqlEggDetailEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
-
 @Repository
-public interface CollectRepositoryJPA extends JpaRepository<MySqlCollectEntity, Long> {
+public interface EggDetailRepositoryJPA extends JpaRepository<MySqlEggDetailEntity, Long> {
 
 }

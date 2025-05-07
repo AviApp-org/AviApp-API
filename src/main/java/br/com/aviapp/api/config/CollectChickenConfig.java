@@ -1,5 +1,6 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.mappers.AviaryMapperBO;
 import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByAviaryUseCase;
 import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByEmployeeUseCase;
 import org.springframework.context.annotation.Bean;
@@ -46,8 +47,8 @@ public class CollectChickenConfig {
     }
 
     @Bean
-    public CollectChickenMapperBO collectChickenMapper(LookUpRepository lookUpRepository, CollectMapperBO collectMapperBO) {
-        return new CollectChickenMapperBO(lookUpRepository, collectMapperBO);
+    public CollectChickenMapperBO collectChickenMapper(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
+        return new CollectChickenMapperBO(lookUpRepository, aviaryMapperBO);
     }
 
     @Bean

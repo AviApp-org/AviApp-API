@@ -1,8 +1,6 @@
 package br.com.aviapp.api.application.mappers;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
-import br.com.aviapp.api.domain.entities.CollectBO;
 
 import jakarta.persistence.EntityNotFoundException;
 

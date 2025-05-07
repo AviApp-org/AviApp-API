@@ -8,7 +8,6 @@ import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
-import br.com.aviapp.api.infra.mysql.models.MySqlCollectEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 
@@ -26,5 +25,4 @@ public interface EntityLookupRepository {
 
     Optional<MySqlAviaryEntity> findAviaryById(Long id);
 
-    Optional<MySqlCollectEntity> findCollectById(Long id);
 }

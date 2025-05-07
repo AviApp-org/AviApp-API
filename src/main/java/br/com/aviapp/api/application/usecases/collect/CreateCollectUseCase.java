@@ -1,9 +1,7 @@
 package br.com.aviapp.api.application.usecases.collect;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.gateways.CollectRepository;
 import br.com.aviapp.api.application.mappers.CollectMapperBO;
-import br.com.aviapp.api.domain.entities.CollectBO;
 
 public class CreateCollectUseCase {
     private final CollectRepository collectRepository;

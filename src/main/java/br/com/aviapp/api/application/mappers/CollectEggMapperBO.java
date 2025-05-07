@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import br.com.aviapp.api.application.dto.CollectDTO;
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
-import br.com.aviapp.api.domain.entities.CollectBO;
 
 public class CollectEggMapperBO {
     private final LookUpRepository lookUpRepository;

@@ -10,7 +10,6 @@ import br.com.aviapp.api.application.mappers.CollectMapperBO;
 import br.com.aviapp.api.application.mappers.EmployeeMapperBO;
 import br.com.aviapp.api.application.usecases.collect.CreateCollectUseCase;
 import br.com.aviapp.api.application.usecases.collect.DeleteCollectUseCase;
-import br.com.aviapp.api.infra.mappers.CollectMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 
 @Configuration

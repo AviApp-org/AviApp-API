@@ -1,6 +1,5 @@
 package br.com.aviapp.api.domain.entities;
 
-import br.com.aviapp.api.domain.enums.EnumChickenDeathCause;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ParamValidator;
 import br.com.aviapp.api.domain.utils.ValidateNegative;
@@ -10,24 +9,22 @@ import lombok.Getter;
 public class CollectChickenBO {
 
     private final Long id;
-    private final CollectBO collect;
+    private final AviaryBO aviary;
     private final Integer deadRoosters;
     private final Integer deadChickens;
-    private final EnumChickenDeathCause deathCause;
     private final String observation;
 
-    public CollectChickenBO(Long id, CollectBO collect, Integer deadRoosters, Integer deadChickens,
-            EnumChickenDeathCause deathCause, String observation) throws InvalidParamError {
-        ParamValidator.validate(collect,deadChickens,deadRoosters,deathCause);
+    public CollectChickenBO(Long id, AviaryBO aviary, Integer deadRoosters, Integer deadChickens,
+           String observation) throws InvalidParamError {
+        ParamValidator.validate(aviary,deadChickens,deadRoosters);
 
         if(ValidateNegative.isNegative(deadChickens) || ValidateNegative.isNegative(deadRoosters)) {
             throw new InvalidParamError("Não é permitido valores negativos para aves mortas.");
         }
         this.id = id;
-        this.collect = collect;
+        this.aviary = aviary;
         this.deadRoosters = deadRoosters;
         this.deadChickens = deadChickens;
-        this.deathCause = deathCause;
         this.observation = observation;
     }
 
