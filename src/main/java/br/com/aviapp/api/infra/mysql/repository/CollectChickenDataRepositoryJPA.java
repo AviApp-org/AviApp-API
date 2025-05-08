@@ -10,9 +10,5 @@ import java.util.List;
 
 @Repository
 public interface CollectChickenDataRepositoryJPA extends JpaRepository<MySqlCollectChickenDataEntity, Long> {
-    @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE c.collect.aviary.id = :aviaryId")
-    List<MySqlCollectChickenDataEntity> findChickenCollectsByAviaryId(Long aviaryId);
 
-    @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE c.collect.employee.id = :employeeId")
-    List<MySqlCollectChickenDataEntity> findChickenCollectsByEmployeeId(Long employeeId);
 }

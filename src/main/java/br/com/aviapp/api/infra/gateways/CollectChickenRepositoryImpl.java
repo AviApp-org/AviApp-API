@@ -34,14 +34,16 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
 
     @Override
     public List<CollectChickenDTO> listChickenCollectByEmployee(Long employeeId) {
-        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByEmployeeId(employeeId);
-        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
+      //  List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByEmployeeId(employeeId);
+     //   return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<CollectChickenDTO> listChickenCollectByAviary(Long aviaryId) {
-        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByAviaryId(aviaryId);
-        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
+//        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByAviaryId(aviaryId);
+//        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
+        return null;
     }
 
 

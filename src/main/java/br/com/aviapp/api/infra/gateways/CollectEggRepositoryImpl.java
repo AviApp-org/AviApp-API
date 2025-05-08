@@ -30,14 +30,16 @@ public class CollectEggRepositoryImpl implements CollectEggRepository {
 
     @Override
     public List<CollectEggDataDTO> listEggCollectByEmployee(Long employeeId) {
-        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByEmployeeId(employeeId);
-        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+//        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByEmployeeId(employeeId);
+//        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());\
+        return null;
     }
 
     @Override
     public List<CollectEggDataDTO> listEggCollectByAviary(Long aviaryId) {
-        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByAviaryId(aviaryId);
-        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+//        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByAviaryId(aviaryId);
+//        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+        return null;
     }
 
     @Override
