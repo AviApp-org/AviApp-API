@@ -22,5 +22,4 @@ public interface LookUpRepository {
 
     Optional<AviaryDTO> findAviaryDTOById(Long id);
 
-    Optional<CollectDTO> findCollectById(Long id);
 }

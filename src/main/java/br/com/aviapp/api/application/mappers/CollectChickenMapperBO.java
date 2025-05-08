@@ -1,5 +1,6 @@
 package br.com.aviapp.api.application.mappers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,7 +31,9 @@ public class CollectChickenMapperBO {
             aviaryBO,
             dto.deadRoosters(),
             dto.deadChickens(),
-            dto.observation()
+            dto.observation(),
+            LocalDateTime.now()
+
         );
     }
 
@@ -40,7 +43,8 @@ public class CollectChickenMapperBO {
             bo.getAviary().getId(),
             bo.getDeadRoosters(),
             bo.getDeadChickens(),
-            bo.getObservation()
+            bo.getObservation(),
+            bo.getCollectionDate()
         );
     }
 

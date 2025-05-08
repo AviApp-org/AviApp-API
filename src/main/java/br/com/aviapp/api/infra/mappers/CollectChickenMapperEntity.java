@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
+import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectChickenDataEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,25 +19,25 @@ public class CollectChickenMapperEntity {
     public CollectChickenDTO toDTO(MySqlCollectChickenDataEntity entity) {
         return new CollectChickenDTO(
                 entity.getId(),
-                entity.getCollect().getId(),
+                entity.getAviary().getId(),
                 entity.getDeadRoosters(),
                 entity.getDeadChickens(),
-                EnumChickenDeathCause.valueOf(entity.getDeathCause().name()),
-                entity.getObservation());
+                entity.getObservation(),
+                entity.getCollectionDate()
+        );
     }
 
     public MySqlCollectChickenDataEntity toEntity(CollectChickenDTO dto) {
-        MySqlCollectEntity collect = lookupRepository.findCollectById(dto.collectId())
-                .orElseThrow(() -> new EntityNotFoundException("Collect not found"));
+        MySqlAviaryEntity aviary = lookupRepository.findAviaryById(dto.aviaryId())
+                .orElseThrow(() -> new EntityNotFoundException("Aviário não encontrado"));
 
         MySqlCollectChickenDataEntity entity = new MySqlCollectChickenDataEntity();
         entity.setId(dto.id());
-        entity.setCollect(collect);
+        entity.setAviary(aviary);
         entity.setDeadRoosters(dto.deadRoosters());
         entity.setDeadChickens(dto.deadChickens());
-        entity.setDeathCause(ChickenDeathCause.valueOf(dto.deathCause().name()));
         entity.setObservation(dto.observation());
-
+        entity.setCollectionDate(dto.collectionDate());
         return entity;
     }
 

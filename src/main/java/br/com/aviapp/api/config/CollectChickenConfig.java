@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import br.com.aviapp.api.application.gateways.CollectChickenRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
-import br.com.aviapp.api.application.mappers.CollectMapperBO;
 import br.com.aviapp.api.application.usecases.collectChicken.CreateChickenCollectUseCase;
 import br.com.aviapp.api.application.usecases.collectChicken.ListAllChickenCollectUseCase;
 import br.com.aviapp.api.infra.mappers.CollectChickenMapperEntity;

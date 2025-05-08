@@ -3,11 +3,14 @@ package br.com.aviapp.api.infra.mysql.models;
 import br.com.aviapp.api.infra.mysql.enums.EggType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @Table(name = "collect_egg_data")
 @Entity
@@ -21,6 +24,7 @@ public class MySqlCollectEggDataEntity {
   @JoinColumn(name = "aviary_id", nullable = false)
   private MySqlAviaryEntity aviary;
 
+  @CreatedDate
   @Column(nullable = false)
   private LocalDateTime collectionDate;
 

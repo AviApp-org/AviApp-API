@@ -1,5 +1,6 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.mappers.AviaryMapperBO;
 import br.com.aviapp.api.application.usecases.collectEgg.ListAllEggCollectsUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByAviaryUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByEmployeeUseCase;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import br.com.aviapp.api.application.gateways.CollectEggRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
-import br.com.aviapp.api.application.mappers.CollectMapperBO;
 import br.com.aviapp.api.application.usecases.collectEgg.CreateEggCollectUseCase;
 import br.com.aviapp.api.infra.mappers.CollectEggMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
@@ -48,8 +48,8 @@ public class CollectEggConfig {
     }
 
     @Bean
-    public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, CollectMapperBO collectMapper) {
-        return new CollectEggMapperBO(lookUpRepository, collectMapper);
+    public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
+        return new CollectEggMapperBO(lookUpRepository, aviaryMapperBO);
     }
 
     @Bean

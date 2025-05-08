@@ -1,42 +1,46 @@
 package br.com.aviapp.api.application.mappers;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.domain.entities.AviaryBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
 
 public class CollectEggMapperBO {
     private final LookUpRepository lookUpRepository;
-    private final CollectMapperBO collectMapper;
+    private final AviaryMapperBO aviaryMapperBO;
 
-    public CollectEggMapperBO(LookUpRepository lookUpRepository, CollectMapperBO collectMapper) {
+    public CollectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
         this.lookUpRepository = lookUpRepository;
-        this.collectMapper = collectMapper;
+        this.aviaryMapperBO = aviaryMapperBO;
     }
 
     public CollectEggBO toBO(CollectEggDataDTO dto) {
-        Optional<CollectDTO> collect = lookUpRepository.findCollectById(dto.collectId());
-        if (collect.isEmpty()) {
-            throw new IllegalArgumentException("Collect not found");
+        Optional<AviaryDTO> aviaryDTO = lookUpRepository.findAviaryDTOById(dto.aviaryId());
+        if (aviaryDTO.isEmpty()) {
+            throw new IllegalArgumentException("Aviário não encontrado.");
         }
-        CollectBO collectBO = collectMapper.toBO(collect.get());
+        AviaryBO aviaryBO = aviaryMapperBO.toBO(aviaryDTO.get());
         return new CollectEggBO(
             dto.id(),
-            collectBO,
-            dto.egg(),
-            dto.quantity()
+            aviaryBO,
+            dto.eggDetailBOS(),
+            LocalDateTime.now()
         );
     }
 
     public CollectEggDataDTO toDTO(CollectEggBO bo) {
         return new CollectEggDataDTO(
             bo.getId(),
-            bo.getCollect().getId(),
-            bo.getEgg(),
-            bo.getQuantity()
+            bo.getAviary().getId(),
+            bo.getEggDetails().stream().toList(),
+            bo.getCollectionDate()
         );
     }
 

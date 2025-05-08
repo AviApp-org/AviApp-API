@@ -21,7 +21,6 @@ import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
-import br.com.aviapp.api.infra.mysql.repository.CollectRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
 import lombok.AllArgsConstructor;
@@ -42,8 +41,6 @@ public class BusinessLookUpRepositoryImpl implements LookUpRepository {
     private final BatchRepositoryJPA batchRepository;
     private final  AviaryMapperEntity aviaryMapper;
     private final AviaryRepositoryJPA aviaryRepository;
-    private final CollectMapperEntity collectMapper;
-    private final CollectRepositoryJPA collectRepository;
 
 
     @Override
@@ -82,10 +79,5 @@ public class BusinessLookUpRepositoryImpl implements LookUpRepository {
         .map(aviaryMapper::toDTO);
     }
 
-    @Override
-    public Optional<CollectDTO> findCollectById(Long id) {
-        return collectRepository.findById(id)
-        .map(collectMapper::toDTO);
-    }
 
 }
