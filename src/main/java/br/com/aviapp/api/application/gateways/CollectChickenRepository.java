@@ -2,6 +2,7 @@ package br.com.aviapp.api.application.gateways;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CollectChickenRepository {
@@ -10,9 +11,7 @@ public interface CollectChickenRepository {
 
     List<CollectChickenDTO> listCollectChickenData();
 
-    List<CollectChickenDTO> listChickenCollectByEmployee(Long employeeId);
-
     List<CollectChickenDTO> listChickenCollectByAviary(Long aviaryId);
 
-
+    List<CollectChickenDTO> getChickenCollectByDate(LocalDateTime date);
 }

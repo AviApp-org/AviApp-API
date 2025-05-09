@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.gateways;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,17 +34,15 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
     }
 
     @Override
-    public List<CollectChickenDTO> listChickenCollectByEmployee(Long employeeId) {
-      //  List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByEmployeeId(employeeId);
-     //   return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
-        return null;
+    public List<CollectChickenDTO> listChickenCollectByAviary(Long aviaryId) {
+        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByAviary(aviaryId);
+        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<CollectChickenDTO> listChickenCollectByAviary(Long aviaryId) {
-//        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findChickenCollectsByAviaryId(aviaryId);
-//        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
-        return null;
+    public List<CollectChickenDTO> getChickenCollectByDate(LocalDateTime date) {
+       List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
+        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }
 
 

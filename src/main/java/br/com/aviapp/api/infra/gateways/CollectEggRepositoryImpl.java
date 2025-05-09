@@ -14,6 +14,7 @@ import br.com.aviapp.api.infra.mysql.models.MySqlCollectEggDataEntity;
 import br.com.aviapp.api.infra.mysql.repository.CollectEggDataRepositoryJPA;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,22 +44,20 @@ public class CollectEggRepositoryImpl implements CollectEggRepository {
     }
 
     @Override
-    public List<CollectEggDataDTO> listEggCollectByEmployee(Long employeeId) {
-//        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByEmployeeId(employeeId);
-//        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());\
-        return null;
-    }
-
-    @Override
     public List<CollectEggDataDTO> listEggCollectByAviary(Long aviaryId) {
-//        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findEggCollectsByAviaryId(aviaryId);
-//        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
-        return null;
+        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByAviary(aviaryId);
+        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
     public List<CollectEggDataDTO> getAllEggCollects() {
         return repositoryJPA.findAll().stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CollectEggDataDTO> getEggCollectByDate(LocalDateTime date) {
+        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
+        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
     }
 
 

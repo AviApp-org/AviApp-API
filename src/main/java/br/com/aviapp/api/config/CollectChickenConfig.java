@@ -1,8 +1,8 @@
 package br.com.aviapp.api.config;
 
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
+import br.com.aviapp.api.application.usecases.collectChicken.GetChickenCollectByDateUseCase;
 import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByAviaryUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByEmployeeUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,30 +18,22 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 public class CollectChickenConfig {
 
     @Bean
-    public CreateChickenCollectUseCase createChickenCollectUseCase(
-            CollectChickenRepository collectChickenRepository,
-            CollectChickenMapperBO collectChickenMapper) {
+    public CreateChickenCollectUseCase createChickenCollectUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         return new CreateChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
     }
 
     @Bean
-    public ListAllChickenCollectUseCase listAllChickenCollectUseCase(
-            CollectChickenRepository collectChickenRepository,
-            CollectChickenMapperBO collectChickenMapper) {
+    public ListAllChickenCollectUseCase listAllChickenCollectUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         return new ListAllChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
     }
 
     @Bean
-    public ListChickenCollectsByEmployeeUseCase listChickenCollectsByEmployeeUseCase(
-            CollectChickenRepository collectChickenRepository,
-            CollectChickenMapperBO collectChickenMapper) {
-        return new ListChickenCollectsByEmployeeUseCase(collectChickenRepository, collectChickenMapper);
+    public GetChickenCollectByDateUseCase getChickenCollectByDateUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
+        return new GetChickenCollectByDateUseCase(collectChickenRepository, collectChickenMapper);
     }
 
     @Bean
-    public ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase(
-            CollectChickenRepository collectChickenRepository,
-            CollectChickenMapperBO collectChickenMapper) {
+    public ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         return new ListChickenCollectsByAviaryUseCase(collectChickenRepository, collectChickenMapper);
     }
 
