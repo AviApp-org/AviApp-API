@@ -1,9 +1,11 @@
 package br.com.aviapp.api.config;
 
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
+import br.com.aviapp.api.application.mappers.EggDetailMapperBO;
 import br.com.aviapp.api.application.usecases.collectEgg.ListAllEggCollectsUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByAviaryUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByEmployeeUseCase;
+import br.com.aviapp.api.infra.mappers.EggDetailsMapperEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,12 +50,22 @@ public class CollectEggConfig {
     }
 
     @Bean
-    public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
-        return new CollectEggMapperBO(lookUpRepository, aviaryMapperBO);
+    public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO, EggDetailMapperBO eggDetailMapperBO) {
+        return new CollectEggMapperBO(lookUpRepository, aviaryMapperBO, eggDetailMapperBO);
     }
 
     @Bean
-    public CollectEggMapperEntity collectEggMapperEntity(EntityLookupRepository entityLookupRepository) {
-        return new CollectEggMapperEntity(entityLookupRepository);
+    public CollectEggMapperEntity collectEggMapperEntity(EntityLookupRepository entityLookupRepository, EggDetailsMapperEntity eggDetailsMapperEntity) {
+        return new CollectEggMapperEntity(entityLookupRepository, eggDetailsMapperEntity);
+    }
+
+    @Bean
+    public EggDetailMapperBO eggDetailMapperBO() {
+        return new EggDetailMapperBO();
+    }
+
+    @Bean
+    public EggDetailsMapperEntity eggDetailsMapperEntity() {
+        return new EggDetailsMapperEntity();
     }
 }

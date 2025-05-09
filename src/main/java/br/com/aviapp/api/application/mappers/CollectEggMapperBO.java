@@ -8,17 +8,21 @@ import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
+import br.com.aviapp.api.application.dto.EggDetailDTO;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.domain.entities.AviaryBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
+import br.com.aviapp.api.domain.entities.EggDetailBO;
 
 public class CollectEggMapperBO {
     private final LookUpRepository lookUpRepository;
     private final AviaryMapperBO aviaryMapperBO;
+    private final EggDetailMapperBO eggDetailMapperBO;
 
-    public CollectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
+    public CollectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         this.lookUpRepository = lookUpRepository;
         this.aviaryMapperBO = aviaryMapperBO;
+        this.eggDetailMapperBO = eggDetailMapperBO;
     }
 
     public CollectEggBO toBO(CollectEggDataDTO dto) {
@@ -27,32 +31,36 @@ public class CollectEggMapperBO {
             throw new IllegalArgumentException("Aviário não encontrado.");
         }
         AviaryBO aviaryBO = aviaryMapperBO.toBO(aviaryDTO.get());
+        List<EggDetailBO> eggDetails = eggDetailMapperBO.toBOList(dto.eggDetail());
+
         return new CollectEggBO(
-            dto.id(),
-            aviaryBO,
-            dto.eggDetailBOS(),
-            LocalDateTime.now()
+                dto.id(),
+                aviaryBO,
+                eggDetails,
+                LocalDateTime.now()
         );
     }
 
     public CollectEggDataDTO toDTO(CollectEggBO bo) {
+
+        List<EggDetailDTO> eggDetailDTOs = eggDetailMapperBO.toDTOList(bo.getEggDetails());
         return new CollectEggDataDTO(
-            bo.getId(),
-            bo.getAviary().getId(),
-            bo.getEggDetails().stream().toList(),
-            bo.getCollectionDate()
+                bo.getId(),
+                bo.getAviary().getId(),
+                eggDetailDTOs,
+                bo.getCollectionDate()
         );
     }
 
     public List<CollectEggBO> toBOList(List<CollectEggDataDTO> dtos) {
         return dtos.stream()
-            .map(this::toBO)
-            .collect(Collectors.toList());
+                .map(this::toBO)
+                .collect(Collectors.toList());
     }
 
     public List<CollectEggDataDTO> toDTOList(List<CollectEggBO> bos) {
         return bos.stream()
-            .map(this::toDTO)
-            .collect(Collectors.toList());
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 }

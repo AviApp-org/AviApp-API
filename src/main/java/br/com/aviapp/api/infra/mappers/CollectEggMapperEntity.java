@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
+import br.com.aviapp.api.application.dto.EggDetailDTO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
-import br.com.aviapp.api.domain.enums.EnumEggType;
-import br.com.aviapp.api.infra.mysql.enums.EggType;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectEggDataEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEggDetailEntity;
@@ -16,27 +15,30 @@ import jakarta.persistence.EntityNotFoundException;
 public class CollectEggMapperEntity {
 
     private final EntityLookupRepository repository;
-    private final EggDetailMapperEntity eggDetailMapper;
+    private final EggDetailsMapperEntity eggDetailMapper;
+    private final EggDetailsMapperEntity eggDetailsMapper;
 
-    public CollectEggMapperEntity(EntityLookupRepository repository) {
+    public CollectEggMapperEntity(EntityLookupRepository repository, EggDetailsMapperEntity eggDetailsMapper) {
         this.repository = repository;
-        this.eggDetailMapper = new EggDetailMapperEntity();
+        this.eggDetailsMapper = eggDetailsMapper;
+        this.eggDetailMapper = new EggDetailsMapperEntity();
     }
 
     public CollectEggDataDTO toDTO(MySqlCollectEggDataEntity entity) {
-        List<EggDetailBO> eggDetails = eggDetailMapper.toBOList(entity.getEggDetails());
+
+        List<EggDetailDTO> eggDetailDTOs = eggDetailsMapper.toDTOList(entity.getEggDetails());
 
         return new CollectEggDataDTO(
                 entity.getId(),
                 entity.getAviary().getId(),
-                eggDetails,
+                eggDetailDTOs,
                 entity.getCollectionDate()
         );
     }
 
     public MySqlCollectEggDataEntity toEntity(CollectEggDataDTO dto) {
         MySqlAviaryEntity aviary = repository.findAviaryById(dto.aviaryId())
-                .orElseThrow(() -> new EntityNotFoundException("Aviary not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Aviário não encontrado."));
 
         MySqlCollectEggDataEntity entity = new MySqlCollectEggDataEntity();
         entity.setId(dto.id());
@@ -49,8 +51,8 @@ public class CollectEggMapperEntity {
         return entity;
     }
 
-    public void setEggDetailsToEntity(MySqlCollectEggDataEntity entity, List<EggDetailBO> eggDetails) {
-        List<MySqlEggDetailEntity> eggDetailEntities = eggDetailMapper.toEntityList(eggDetails, entity);
+    public void setEggDetailsToEntity(MySqlCollectEggDataEntity entity, List<EggDetailDTO> eggDetails) {
+        List<MySqlEggDetailEntity> eggDetailEntities = eggDetailMapper.toEntityList(eggDetails);
         entity.setEggDetails(eggDetailEntities);
     }
 

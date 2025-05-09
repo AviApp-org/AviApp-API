@@ -1,6 +1,10 @@
 package br.com.aviapp.api.infra.gateways;
 
 
+import br.com.aviapp.api.application.dto.EggDetailDTO;
+import br.com.aviapp.api.infra.mappers.EggDetailsMapperEntity;
+import br.com.aviapp.api.infra.mysql.models.MySqlEggDetailEntity;
+import br.com.aviapp.api.infra.mysql.repository.EggDetailRepositoryJPA;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
@@ -16,15 +20,25 @@ import java.util.stream.Collectors;
 @Repository
 @AllArgsConstructor
 public class CollectEggRepositoryImpl implements CollectEggRepository {
-
     private final CollectEggMapperEntity collectEggMapper;
     private final CollectEggDataRepositoryJPA repositoryJPA;
-
+    private final EggDetailRepositoryJPA eggDetailRepositoryJPA;
+    private final EggDetailsMapperEntity eggDetailMapper;
 
     @Override
     public CollectEggDataDTO createCollectEgg(CollectEggDataDTO collectEggDataDTO) {
         MySqlCollectEggDataEntity entity = collectEggMapper.toEntity(collectEggDataDTO);
         MySqlCollectEggDataEntity savedEntity = repositoryJPA.save(entity);
+
+        List<EggDetailDTO> eggDetails = collectEggDataDTO.eggDetail();
+
+        List<MySqlEggDetailEntity> eggDetailEntity = eggDetailMapper.toEntityList(eggDetails);
+
+        for (MySqlEggDetailEntity eggDetail : eggDetailEntity) {
+            eggDetail.setEggCollection(savedEntity);
+            eggDetailRepositoryJPA.save(eggDetail);
+        }
+
         return collectEggMapper.toDTO(savedEntity);
     }
 

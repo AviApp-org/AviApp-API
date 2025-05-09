@@ -4,12 +4,13 @@ import br.com.aviapp.api.domain.enums.EnumEggType;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 import br.com.aviapp.api.domain.utils.ValidateNegative;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 public class EggDetailBO {
 
-    private final EnumEggType type;
-    private final Integer quantity;
+    private  EnumEggType type;
+    private  Integer quantity;
 
     public EggDetailBO(EnumEggType type, Integer quantity) throws InvalidParamError {
         if (type == null) {
