@@ -16,4 +16,8 @@ public interface CollectChickenDataRepositoryJPA extends JpaRepository<MySqlColl
 
     @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE FUNCTION('DATE', c.collectionDate) = FUNCTION('DATE', :date)")
     List<MySqlCollectChickenDataEntity> findByCollectionDateIgnoringTime(LocalDateTime date);
+
+    @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE c.aviary.id = :aviaryId AND FUNCTION('DATE', c.collectionDate) = FUNCTION('DATE', :date)")
+    List<MySqlCollectChickenDataEntity> findByAviaryAndCollectionDateIgnoringTime(Long aviaryId, LocalDateTime date);
+
 }

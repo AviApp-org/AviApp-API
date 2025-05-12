@@ -14,4 +14,6 @@ public interface CollectChickenRepository {
     List<CollectChickenDTO> listChickenCollectByAviary(Long aviaryId);
 
     List<CollectChickenDTO> getChickenCollectByDate(LocalDateTime date);
+
+    List<CollectChickenDTO> getChickenCollectByAviaryAndDate(Long aviaryId, LocalDateTime date);
 }

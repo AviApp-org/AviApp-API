@@ -60,5 +60,11 @@ public class CollectEggRepositoryImpl implements CollectEggRepository {
         return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDateTime date) {
+        List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByAviaryAndCollectionDateIgnoringTime(aviaryId, date);
+        return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+    }
+
 
 }

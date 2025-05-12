@@ -20,9 +20,3 @@ INSERT INTO batch (id, name, start_date, status, farm_id) VALUES
 (1, 'Lote 2023-01', '2023-01-15', 'ACTIVE', 1),
 (2, 'Lote 2023-02', '2023-03-20', 'ACTIVE', 1),
 (3, 'Lote 2023-A', '2023-02-10', 'ACTIVE', 2);
-
----- Inserir aviários
---INSERT INTO aviary (id, name, initial_amount_of_roosters, initial_amount_of_chickens, batch_id) VALUES
---(1, 'Aviário 1', 50, 500, 1),
---(2, 'Aviário 2', 45, 450, 1),
---(3, 'Aviário A', 60, 600, 3);

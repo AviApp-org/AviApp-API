@@ -1,10 +1,9 @@
 package br.com.aviapp.api.config;
 
+
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
 import br.com.aviapp.api.application.mappers.EggDetailMapperBO;
-import br.com.aviapp.api.application.usecases.collectEgg.GetEggCollectByDateUseCase;
-import br.com.aviapp.api.application.usecases.collectEgg.ListAllEggCollectsUseCase;
-import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectEgg.*;
 import br.com.aviapp.api.infra.mappers.EggDetailsMapperEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import br.com.aviapp.api.application.gateways.CollectEggRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
-import br.com.aviapp.api.application.usecases.collectEgg.CreateEggCollectUseCase;
 import br.com.aviapp.api.infra.mappers.CollectEggMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 
 @Configuration
 public class CollectEggConfig {
+
     @Bean
     public CreateEggCollectUseCase createEggCollectUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new CreateEggCollectUseCase(collectEggRepository, collectEggMapperBO);
@@ -36,6 +35,11 @@ public class CollectEggConfig {
     @Bean
     public GetEggCollectByDateUseCase getEggCollectByDateUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new GetEggCollectByDateUseCase(collectEggRepository, collectEggMapperBO);
+    }
+
+    @Bean
+    public ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+        return new ListEggCollectsByDateAndAviaryUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean

@@ -14,4 +14,6 @@ public interface CollectEggRepository {
     List<CollectEggDataDTO> getAllEggCollects();
 
     List<CollectEggDataDTO> getEggCollectByDate(LocalDateTime date);
+
+    List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDateTime date);
 }

@@ -1,16 +1,13 @@
 package br.com.aviapp.api.config;
 
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
-import br.com.aviapp.api.application.usecases.collectChicken.GetChickenCollectByDateUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectChicken.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.aviapp.api.application.gateways.CollectChickenRepository;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
-import br.com.aviapp.api.application.usecases.collectChicken.CreateChickenCollectUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListAllChickenCollectUseCase;
 import br.com.aviapp.api.infra.mappers.CollectChickenMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 
@@ -35,6 +32,11 @@ public class CollectChickenConfig {
     @Bean
     public ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         return new ListChickenCollectsByAviaryUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
+    public ListChickenCollectsByDateAndAviaryUseCase listChickenCollectsByDateAndAviaryUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
+        return new ListChickenCollectsByDateAndAviaryUseCase(collectChickenRepository, collectChickenMapper);
     }
 
     @Bean

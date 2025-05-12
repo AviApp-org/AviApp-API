@@ -25,6 +25,7 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
     private final CollectChickenMapperEntity collectChickenMapper;
     private final CollectChickenDataRepositoryJPA repositoryJPA;
     private final AviaryRepositoryJPA aviaryRepositoryJPA;
+
     @Override
     public CollectChickenDTO createCollectChickenData(CollectChickenDTO collectChickenDataDTO) {
         MySqlCollectChickenDataEntity entity = collectChickenMapper.toEntity(collectChickenDataDTO);
@@ -71,7 +72,13 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
 
     @Override
     public List<CollectChickenDTO> getChickenCollectByDate(LocalDateTime date) {
-       List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
+        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
+        return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CollectChickenDTO> getChickenCollectByAviaryAndDate(Long aviaryId, LocalDateTime date) {
+        List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByAviaryAndCollectionDateIgnoringTime(aviaryId, date);
         return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }
 
