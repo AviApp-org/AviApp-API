@@ -13,9 +13,12 @@ public class AviaryBO implements DeletableEntity {
     private String name;
     private final Integer initialAmountOfRoosters;
     private final Integer initialAmountOfChickens;
+    private final Integer currentAmountOfRoosters;
+    private final Integer currentAmountOfChickens;
     private final BatchBO batchId;
 
-    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, BatchBO batchId) throws IllegalArgumentException {
+    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, Integer currentAmountOfRoosters, Integer currentAmountOfChickens, BatchBO batchId) throws IllegalArgumentException {
+
         ParamValidator.validate(name, initialAmountOfRoosters, initialAmountOfChickens, batchId);
 
         if (initialAmountOfRoosters < 0 || initialAmountOfChickens < 0) {
@@ -30,6 +33,8 @@ public class AviaryBO implements DeletableEntity {
         this.name = name;
         this.initialAmountOfRoosters = initialAmountOfRoosters;
         this.initialAmountOfChickens = initialAmountOfChickens;
+        this.currentAmountOfRoosters = currentAmountOfRoosters;
+        this.currentAmountOfChickens = currentAmountOfChickens;
         this.batchId = batchId;
     }
 

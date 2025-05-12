@@ -1,12 +1,6 @@
 package br.com.aviapp.api.infra.mysql.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,19 +11,32 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MySqlAviaryEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private String name;
+    private String name;
 
-  private Integer initialAmountOfRoosters;
+    private Integer initialAmountOfRoosters;
 
-  private Integer initialAmountOfChickens;
+    private Integer initialAmountOfChickens;
 
-  @ManyToOne
-  @JoinColumn(name = "batch_id")
-  private MySqlBatchEntity batchId;
+    private Integer currentAmountOfRoosters;
 
+    private Integer currentAmountOfChickens;
 
+    @ManyToOne
+    @JoinColumn(name = "batch_id")
+    private MySqlBatchEntity batchId;
+
+    @PrePersist
+    public void prePersist() {
+        // Initialize current amounts with initial amounts if they are null
+        if (currentAmountOfRoosters == null) {
+            currentAmountOfRoosters = initialAmountOfRoosters;
+        }
+        if (currentAmountOfChickens == null) {
+            currentAmountOfChickens = initialAmountOfChickens;
+        }
+    }
 }

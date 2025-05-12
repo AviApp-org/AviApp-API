@@ -23,6 +23,8 @@ public class AviaryMapperEntity {
             entity.getName(),
             entity.getInitialAmountOfRoosters(),
             entity.getInitialAmountOfChickens(),
+            entity.getCurrentAmountOfRoosters(),
+            entity.getCurrentAmountOfChickens(),
             entity.getBatchId().getId()
         );
     }
@@ -36,6 +38,8 @@ public class AviaryMapperEntity {
             dto.name(),
             dto.initialAmountOfRoosters(),
             dto.initialAmountOfChickens(),
+            dto.currentAmountOfRooster(),
+            dto.currentAmountOfChickens(),
             batch
         );
     }
