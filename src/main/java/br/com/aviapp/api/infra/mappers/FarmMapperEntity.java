@@ -44,8 +44,8 @@ public class FarmMapperEntity {
         return new FarmDTO(
             entity.getId(),
             entity.getName(),
-            entity.getAddressId().getId(),
             entity.getClientId().getId(),
+            entity.getAddressId().getId(),
             entity.getEmployeeId().stream()
                 .map(MySqlEmployeeEntity::getId)
                 .collect(Collectors.toList())

@@ -45,9 +45,6 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-# Application properties
-src/main/resources/application.properties
-src/main/resources/application-*.properties
 
 # IDE files
 .idea/
