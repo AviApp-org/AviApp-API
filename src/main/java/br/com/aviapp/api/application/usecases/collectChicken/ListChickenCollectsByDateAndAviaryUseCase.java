@@ -18,7 +18,7 @@ public class ListChickenCollectsByDateAndAviaryUseCase {
         this.collectChickenMapper = collectChickenMapper;
     }
 
-    public List<CollectChickenDTO> execute(Long aviaryId, LocalDateTime date) {
+    public List<CollectChickenDTO> invoke(Long aviaryId, LocalDateTime date) {
         return collectChickenRepository.getChickenCollectByAviaryAndDate(aviaryId, date).stream()
                 .map(collectChickenMapper::toBO)
                 .map(collectChickenMapper::toDTO)

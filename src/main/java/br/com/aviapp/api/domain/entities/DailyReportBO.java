@@ -16,8 +16,6 @@ public class DailyReportBO {
 
     private Date date;
     private List<AviaryReportBO> aviaryReports;
-    private List<CollectEggBO> collectEggs;
-    private List<CollectChickenBO> collectChickens;
     private int totalEggsCollected;
     private int totalDeadBirds;
     private int totalDeadChickens;

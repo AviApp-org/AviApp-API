@@ -8,20 +8,18 @@ import java.util.List;
 
 public class AviaryReportFactory extends CollectCalculator{
 
-    @Autowired
-    private EggDetailMapperBO eggDetailMapperBO;
-
     public static AviaryReportBO createFromAviary(AviaryBO aviary, List<CollectEggBO> collectEggs, List<CollectChickenBO> collectChickens) {
         int totalEggsCollected = calculateTotalEggs(collectEggs);
         int totalDeadChickens = calculateDeadChickens(collectChickens);
         int totalDeadRoosters = calculateDeadRoosters(collectChickens);
         int totalDeadBirds = totalDeadChickens + totalDeadRoosters;
 
-        int currentChickens = aviary.getInitialAmountOfChickens() - totalDeadChickens;
-        int currentRoosters = aviary.getInitialAmountOfRoosters() - totalDeadRoosters;
+        int currentChickens = aviary.getCurrentAmountOfChickens();
+        int currentRoosters = aviary.getCurrentAmountOfRoosters();
         int totalBirds = currentChickens + currentRoosters;
 
         return new AviaryReportBO(aviary.getName(), collectEggs, collectChickens, totalEggsCollected, totalDeadBirds, totalDeadChickens, totalDeadRoosters, currentChickens, currentRoosters, totalBirds);
     }
 
 }
+

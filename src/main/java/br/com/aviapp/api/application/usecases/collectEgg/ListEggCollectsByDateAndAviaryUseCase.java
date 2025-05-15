@@ -17,7 +17,7 @@ public class ListEggCollectsByDateAndAviaryUseCase {
         this.collectEggMapper = collectEggMapper;
     }
 
-    public List<CollectEggDataDTO> execute(Long aviaryId, LocalDateTime date) {
+    public List<CollectEggDataDTO> invoke(Long aviaryId, LocalDateTime date) {
         return collectEggRepository.getEggCollectByAviaryAndDate(aviaryId, date).stream()
                 .map(collectEggMapper::toBO)
                 .map(collectEggMapper::toDTO)
