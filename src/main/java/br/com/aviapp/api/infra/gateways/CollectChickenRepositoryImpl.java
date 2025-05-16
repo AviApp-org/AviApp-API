@@ -82,5 +82,15 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
         return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteCollectChickenData(Long id) {
+        repositoryJPA.deleteById(id);
+    }
+
+    @Override
+    public Optional<CollectChickenDTO> getCollectChickenDataById(Long id) {
+        return repositoryJPA.findById(id).map(collectChickenMapper::toDTO);
+    }
+
 
 }

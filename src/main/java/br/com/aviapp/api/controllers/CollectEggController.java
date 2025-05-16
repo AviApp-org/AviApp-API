@@ -1,14 +1,12 @@
 package br.com.aviapp.api.controllers;
 
-import br.com.aviapp.api.application.usecases.collectEgg.GetEggCollectByDateUseCase;
-import br.com.aviapp.api.application.usecases.collectEgg.ListAllEggCollectsUseCase;
-import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectEgg.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
-import br.com.aviapp.api.application.usecases.collectEgg.CreateEggCollectUseCase;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,12 +21,14 @@ public class CollectEggController {
     private final ListAllEggCollectsUseCase listAllEggCollectsUseCase;
     private final ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase;
     private final GetEggCollectByDateUseCase getEggCollectByDateUseCase;
+    private final DeleteEggCollectUseCase deleteEggCollectUseCase;
 
-    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, GetEggCollectByDateUseCase getEggCollectByDateUseCase) {
+    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, GetEggCollectByDateUseCase getEggCollectByDateUseCase, DeleteEggCollectUseCase deleteEggCollectUseCase) {
         this.createEggCollectUseCase = createEggCollectUseCase;
         this.listAllEggCollectsUseCase = listAllEggCollectsUseCase;
         this.listEggCollectsByAviaryUseCase = listEggCollectsByAviaryUseCase;
         this.getEggCollectByDateUseCase = getEggCollectByDateUseCase;
+        this.deleteEggCollectUseCase = deleteEggCollectUseCase;
     }
 
     @PostMapping
@@ -58,4 +58,9 @@ public class CollectEggController {
         return ResponseEntity.ok(chickenCollects);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCollectEggData(@PathVariable Long id) {
+        deleteEggCollectUseCase.invoke(id);
+        return ResponseEntity.noContent().build();
+    }
 }

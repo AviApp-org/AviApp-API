@@ -19,8 +19,7 @@ public class EmployeeConfig {
     }
 
     @Bean
-    CreateEmployeeUseCase createEmployeeUseCase(EmployeeRepository employeeRepository,
-                                                EmployeeMapperBO employeeMapperBO) {
+    CreateEmployeeUseCase createEmployeeUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new CreateEmployeeUseCase(employeeRepository, employeeMapperBO);
     }
 
@@ -30,8 +29,7 @@ public class EmployeeConfig {
     }
 
     @Bean
-    ListAllEmployeesUseCase listAllEmployeesUseCase(EmployeeRepository employeeRepository,
-                                                    EmployeeMapperBO employeeMapperBO) {
+    ListAllEmployeesUseCase listAllEmployeesUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new ListAllEmployeesUseCase(employeeRepository, employeeMapperBO);
     }
 

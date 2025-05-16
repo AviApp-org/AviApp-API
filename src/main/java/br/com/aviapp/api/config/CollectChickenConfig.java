@@ -40,6 +40,11 @@ public class CollectChickenConfig {
     }
 
     @Bean
+    public DeleteChickenCollectUseCase deleteChickenCollectUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
+        return new DeleteChickenCollectUseCase(collectChickenRepository, collectChickenMapper);
+    }
+
+    @Bean
     public CollectChickenMapperBO collectChickenMapper(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
         return new CollectChickenMapperBO(lookUpRepository, aviaryMapperBO);
     }

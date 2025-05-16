@@ -5,15 +5,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import br.com.aviapp.api.application.usecases.collectChicken.GetChickenCollectByDateUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.collectChicken.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.usecases.collectChicken.CreateChickenCollectUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListAllChickenCollectUseCase;
 
 @RestController
 @RequestMapping("/api/collect-chicken")
@@ -24,13 +21,15 @@ public class CollectChickenController {
     private final ListAllChickenCollectUseCase listAllChickenCollectUseCase;
     private final ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase;
     private final GetChickenCollectByDateUseCase getChickenCollectByDateUseCase;
+    private final DeleteChickenCollectUseCase deleteChickenCollectUseCase;
 
     public CollectChickenController(CreateChickenCollectUseCase createChickenCollectUseCase,
-                                    ListAllChickenCollectUseCase listAllChickenCollectUseCase, ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase, GetChickenCollectByDateUseCase getChickenCollectByDateUseCase) {
+                                    ListAllChickenCollectUseCase listAllChickenCollectUseCase, ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase, GetChickenCollectByDateUseCase getChickenCollectByDateUseCase, DeleteChickenCollectUseCase deleteChickenCollectUseCase) {
         this.createChickenCollectUseCase = createChickenCollectUseCase;
         this.listAllChickenCollectUseCase = listAllChickenCollectUseCase;
         this.listChickenCollectsByAviaryUseCase = listChickenCollectsByAviaryUseCase;
         this.getChickenCollectByDateUseCase = getChickenCollectByDateUseCase;
+        this.deleteChickenCollectUseCase = deleteChickenCollectUseCase;
     }
 
     @PostMapping
@@ -61,4 +60,9 @@ public class CollectChickenController {
         return ResponseEntity.ok(chickenCollects);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteChickenCollect(@PathVariable Long id) {
+        deleteChickenCollectUseCase.invoke(id);
+        return ResponseEntity.noContent().build();
+    }
 }

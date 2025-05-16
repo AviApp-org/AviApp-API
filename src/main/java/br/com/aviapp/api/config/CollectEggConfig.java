@@ -43,6 +43,11 @@ public class CollectEggConfig {
     }
 
     @Bean
+    public DeleteEggCollectUseCase deleteEggCollectUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+        return new DeleteEggCollectUseCase(collectEggRepository, collectEggMapperBO);
+    }
+
+    @Bean
     public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         return new CollectEggMapperBO(lookUpRepository, aviaryMapperBO, eggDetailMapperBO);
     }

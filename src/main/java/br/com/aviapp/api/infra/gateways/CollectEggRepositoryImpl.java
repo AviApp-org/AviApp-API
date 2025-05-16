@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -64,6 +65,16 @@ public class CollectEggRepositoryImpl implements CollectEggRepository {
     public List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDateTime date) {
         List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByAviaryAndCollectionDateIgnoringTime(aviaryId, date);
         return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCollectEggData(Long id) {
+        repositoryJPA.deleteById(id);
+    }
+
+    @Override
+    public Optional<CollectEggDataDTO> getCollectEggDataById(Long id) {
+        return repositoryJPA.findById(id).map(collectEggMapper::toDTO);
     }
 
 
