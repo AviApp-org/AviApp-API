@@ -14,17 +14,15 @@ import java.util.Optional;
 public class DailyReportController {
 
     private final GenerateDailyReportUseCase generateDailyReportUseCase;
-    private final DailyReportMapperBO dailyReportMapperBO;
 
-    public DailyReportController(GenerateDailyReportUseCase generateDailyReportUseCase, DailyReportMapperBO dailyReportMapperBO) {
+    public DailyReportController(GenerateDailyReportUseCase generateDailyReportUseCase) {
         this.generateDailyReportUseCase = generateDailyReportUseCase;
-        this.dailyReportMapperBO = dailyReportMapperBO;
     }
 
     @GetMapping("/{batchId}")
     public ResponseEntity<DailyReportDTO> generateDailyReport(@PathVariable Long batchId) {
         System.out.println("Received batchId: " + batchId);
-        DailyReportDTO dailyReport = dailyReportMapperBO.toDTO(generateDailyReportUseCase.invoke(batchId));
+        DailyReportDTO dailyReport = generateDailyReportUseCase.invoke(batchId);
         return ResponseEntity.ok(dailyReport);
     }
 }

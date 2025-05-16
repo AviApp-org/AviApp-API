@@ -1,16 +1,28 @@
 package br.com.aviapp.api.application.mappers;
 
+import br.com.aviapp.api.application.dto.AviaryReportDTO;
 import br.com.aviapp.api.application.dto.DailyReportDTO;
+import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.DailyReportBO;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DailyReportMapperBO {
+
+    private final AviaryReportMapperBO aviaryReportMapperBO;
+
+    public DailyReportMapperBO(AviaryReportMapperBO aviaryReportMapperBO) {
+        this.aviaryReportMapperBO = aviaryReportMapperBO;
+    }
+
     public DailyReportBO toBO(DailyReportDTO dto) {
+
+        List<AviaryReportBO> aviaryReports =aviaryReportMapperBO.toBOList(dto.aviaryReports());
+
         return new DailyReportBO(
                 dto.date(),
-                dto.aviaryReports(),
+                aviaryReports,
                 dto.totalEggsCollected(),
                 dto.totalDeadBirds(),
                 dto.totalDeadChickens(),
@@ -22,9 +34,12 @@ public class DailyReportMapperBO {
     }
 
     public DailyReportDTO toDTO(DailyReportBO bo) {
+
+        List<AviaryReportDTO> aviaryReportDTOs = aviaryReportMapperBO.toDTOList(bo.getAviaryReports());
+
         return new DailyReportDTO(
                 bo.getDate(),
-                bo.getAviaryReports(),
+                aviaryReportDTOs,
                 bo.getTotalEggsCollected(),
                 bo.getTotalDeadBirds(),
                 bo.getTotalDeadChickens(),
