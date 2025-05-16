@@ -18,8 +18,21 @@ public class AviaryReportFactory extends CollectCalculator{
         int currentRoosters = aviary.getCurrentAmountOfRoosters();
         int totalBirds = currentChickens + currentRoosters;
 
-        return new AviaryReportBO(aviary.getName(), collectEggs, collectChickens, totalEggsCollected, totalDeadBirds, totalDeadChickens, totalDeadRoosters, currentChickens, currentRoosters, totalBirds);
-    }
+        List<EggDetailBO> quantityByEggType = calculateEggsByType(collectEggs);
 
+        return new AviaryReportBO(
+                aviary.getName(),
+                collectEggs,
+                collectChickens,
+                totalEggsCollected,
+                totalDeadBirds,
+                totalDeadChickens,
+                totalDeadRoosters,
+                currentChickens,
+                currentRoosters,
+                totalBirds,
+                quantityByEggType
+        );
+    }
 }
 

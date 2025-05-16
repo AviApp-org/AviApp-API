@@ -23,5 +23,7 @@ public class DailyReportBO {
     private int currentChickens;
     private int currentRoosters;
     private int totalBirds;
+    private List<EggDetailBO> quantityByEggType; // New field for egg details by type
+
 
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public record DailyReportDTO(Date date, List<AviaryReportDTO> aviaryReports, int totalEggsCollected, int totalDeadBirds,
                              int totalDeadChickens, int totalDeadRoosters, int currentChickens, int currentRoosters,
-                             int totalBirds) {
+                             int totalBirds, List<EggDetailDTO> quantityByEggType) {
 }

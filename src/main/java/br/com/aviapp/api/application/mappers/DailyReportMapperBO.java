@@ -2,8 +2,10 @@ package br.com.aviapp.api.application.mappers;
 
 import br.com.aviapp.api.application.dto.AviaryReportDTO;
 import br.com.aviapp.api.application.dto.DailyReportDTO;
+import br.com.aviapp.api.application.dto.EggDetailDTO;
 import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.DailyReportBO;
+import br.com.aviapp.api.domain.entities.EggDetailBO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,14 +13,20 @@ import java.util.stream.Collectors;
 public class DailyReportMapperBO {
 
     private final AviaryReportMapperBO aviaryReportMapperBO;
+    private final EggDetailMapperBO eggDetailMapperBO;
 
-    public DailyReportMapperBO(AviaryReportMapperBO aviaryReportMapperBO) {
+    public DailyReportMapperBO(AviaryReportMapperBO aviaryReportMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         this.aviaryReportMapperBO = aviaryReportMapperBO;
+        this.eggDetailMapperBO = eggDetailMapperBO;
     }
 
     public DailyReportBO toBO(DailyReportDTO dto) {
 
-        List<AviaryReportBO> aviaryReports =aviaryReportMapperBO.toBOList(dto.aviaryReports());
+        List<AviaryReportBO> aviaryReports = aviaryReportMapperBO.toBOList(dto.aviaryReports());
+        List<EggDetailBO> quantityByEggType = dto.quantityByEggType() != null ?
+                eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
+                null;
+
 
         return new DailyReportBO(
                 dto.date(),
@@ -29,13 +37,17 @@ public class DailyReportMapperBO {
                 dto.totalDeadRoosters(),
                 dto.currentChickens(),
                 dto.currentRoosters(),
-                dto.totalBirds()
+                dto.totalBirds(),
+                quantityByEggType
         );
     }
 
     public DailyReportDTO toDTO(DailyReportBO bo) {
 
         List<AviaryReportDTO> aviaryReportDTOs = aviaryReportMapperBO.toDTOList(bo.getAviaryReports());
+        List<EggDetailDTO> quantityByEggType = bo.getQuantityByEggType() != null ?
+                eggDetailMapperBO.toDTOList(bo.getQuantityByEggType()) :
+                null;
 
         return new DailyReportDTO(
                 bo.getDate(),
@@ -46,7 +58,8 @@ public class DailyReportMapperBO {
                 bo.getTotalDeadRoosters(),
                 bo.getCurrentChickens(),
                 bo.getCurrentRoosters(),
-                bo.getTotalBirds()
+                bo.getTotalBirds(),
+                quantityByEggType
         );
     }
 
