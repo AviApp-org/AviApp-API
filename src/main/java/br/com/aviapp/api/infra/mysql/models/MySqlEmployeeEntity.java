@@ -32,6 +32,8 @@ public class MySqlEmployeeEntity {
 
   private String cpf;
 
+  private Date birthDate;
+
   private String phone;
 
   @Enumerated(EnumType.STRING)

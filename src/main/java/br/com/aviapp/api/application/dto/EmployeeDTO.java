@@ -6,5 +6,5 @@ import br.com.aviapp.api.domain.enums.EnumEmployeeRole;
 import org.hibernate.validator.constraints.br.CPF;
 
 public record EmployeeDTO(Long id, String name,
-                          @CPF String cpf, String phone, EnumEmployeeRole role, Date createdAt, Long farmId) {
+                          @CPF String cpf, Date birthDate, String phone, EnumEmployeeRole role, Date createdAt, Long farmId) {
 }

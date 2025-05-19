@@ -23,6 +23,7 @@ public class EmployeeMapperEntity {
                 entity.getId(),
                 entity.getName(),
                 entity.getCpf(),
+                entity.getBirthDate(),
                 entity.getPhone(),
                 EnumEmployeeRole.valueOf(entity.getRole().name()),
                 entity.getCreatedAt(),
@@ -37,6 +38,7 @@ public class EmployeeMapperEntity {
         employee.setId(dto.id());
         employee.setName(dto.name());
         employee.setCpf(dto.cpf());
+        employee.setBirthDate(dto.birthDate());
         employee.setPhone(dto.phone());
         employee.setRole(EmployeeRole.valueOf(dto.role().name()));
         employee.setCreatedAt(dto.createdAt());
