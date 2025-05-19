@@ -14,6 +14,7 @@ public class EmployeeBO {
     private Long id;
     private String name;
     private String cpf;
+    private Date birthDate;
     private String phone;
     private EnumEmployeeRole role;
     private Date createdAt;
@@ -22,12 +23,13 @@ public class EmployeeBO {
     public EmployeeBO() {
     }
 
-    public EmployeeBO(Long id, String name,String cpf, String phone, EnumEmployeeRole role, Date createdAt, FarmBO farm)
+    public EmployeeBO(Long id, String name,String cpf, Date birthDate, String phone, EnumEmployeeRole role, Date createdAt, FarmBO farm)
             throws InvalidParamError {
-        ParamValidator.validate(name, role, createdAt, farm);
+        ParamValidator.validate(name,cpf,birthDate, role, createdAt, farm);
         this.id = id;
         this.name = name;
         this.cpf = cpf;
+        this.birthDate = birthDate;
         this.phone = phone;
         this.role = role;
         this.createdAt = createdAt;

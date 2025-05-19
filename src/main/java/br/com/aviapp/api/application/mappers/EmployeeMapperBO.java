@@ -38,6 +38,7 @@ public class EmployeeMapperBO {
                 dto.id(),
                 dto.name(),
                 dto.cpf(),
+                dto.birthDate(),
                 dto.phone(),
                 dto.role(),
                 new Date(), // Set current date here
@@ -54,6 +55,7 @@ public class EmployeeMapperBO {
                 bo.getId(),
                 bo.getName(),
                 bo.getCpf(),
+                bo.getBirthDate(),
                 bo.getPhone(),
                 bo.getRole(),
                 bo.getCreatedAt(),

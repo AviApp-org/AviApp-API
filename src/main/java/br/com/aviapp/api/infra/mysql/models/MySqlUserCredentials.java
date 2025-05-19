@@ -30,7 +30,5 @@ public class MySqlUserCredentials {
   @Column(nullable = false)
   private String password;
 
-  
-
   private LocalDateTime created_at;
 }
