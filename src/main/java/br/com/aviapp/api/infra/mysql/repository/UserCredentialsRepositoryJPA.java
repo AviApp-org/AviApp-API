@@ -8,4 +8,5 @@ import br.com.aviapp.api.infra.mysql.models.MySqlUserCredentials;
 @Repository
 public interface UserCredentialsRepositoryJPA  extends JpaRepository<MySqlUserCredentials, Long> {
 
+    MySqlUserCredentials findByUsername(String username);
 }
