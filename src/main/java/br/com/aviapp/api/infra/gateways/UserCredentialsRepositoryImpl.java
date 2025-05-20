@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserCredentialsRepositoryImpl implements UserDetailsService {
+public class UserCredentialsRepositoryImpl  {
 
     private final UserCredentialsRepositoryJPA repositoryJPA;
 
@@ -15,9 +15,4 @@ public class UserCredentialsRepositoryImpl implements UserDetailsService {
         this.repositoryJPA = repositoryJPA;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repositoryJPA.findByUsernameIgnoreCase(username)
-                .orElseThrow(() -> new UsernameNotFoundException("O usuário não foi encontrado"));
-    }
 }
