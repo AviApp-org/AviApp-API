@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.infra.mysql.models.MySqlUserCredentials;
 
+import java.util.Optional;
+
 @Repository
 public interface UserCredentialsRepositoryJPA  extends JpaRepository<MySqlUserCredentials, Long> {
 
-    MySqlUserCredentials findByUsername(String username);
+   Optional<MySqlUserCredentials> findByUsernameIgnoreCase(String username);
 }

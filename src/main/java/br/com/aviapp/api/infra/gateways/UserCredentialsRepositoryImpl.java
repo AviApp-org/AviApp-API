@@ -4,7 +4,9 @@ import br.com.aviapp.api.infra.mysql.repository.UserCredentialsRepositoryJPA;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserCredentialsRepositoryImpl implements UserDetailsService {
 
     private final UserCredentialsRepositoryJPA repositoryJPA;
@@ -15,6 +17,7 @@ public class UserCredentialsRepositoryImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repositoryJPA.findByUsername(username);
+        return repositoryJPA.findByUsernameIgnoreCase(username)
+                .orElseThrow(() -> new UsernameNotFoundException("O usuário não foi encontrado"));
     }
 }
