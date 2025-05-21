@@ -41,6 +41,11 @@ public class AviaryConfig {
     }
 
     @Bean
+    public UpdateAviaryUseCase updateAviaryUseCase(AviaryRepository aviaryRepository, AviaryMapperBO aviaryMapperBO) {
+        return new UpdateAviaryUseCase(aviaryRepository, aviaryMapperBO);
+    }
+
+    @Bean
     public AviaryMapperBO aviaryMapperBO(BatchMapperBO batchMapperBO, LookUpRepository repository) {
         return new AviaryMapperBO(batchMapperBO, repository);
     }

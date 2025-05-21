@@ -8,14 +8,7 @@ import br.com.aviapp.api.application.usecases.aviary.*;
 import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import br.com.aviapp.api.domain.errors.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import jakarta.validation.Valid;
@@ -30,15 +23,17 @@ public class AviaryController {
     private final FindAviaryByIdUseCase findAviaryByIdUseCase;
     private final DeleteAviaryUseCase deleteAviaryUseCase;
     private final ListAllAviariesUseCase listAllAviariesUseCase;
+    private final UpdateAviaryUseCase updateAviaryUseCase;
 
     public AviaryController(CreateAviaryUseCase createAviaryUseCase,
                             ListAviariesByBatchUseCase listAviariesByBatchUseCase, FindAviaryByIdUseCase findAviaryByIdUseCase,
-                            DeleteAviaryUseCase deleteAviaryUseCase, ListAllAviariesUseCase listAllAviariesUseCase) {
+                            DeleteAviaryUseCase deleteAviaryUseCase, ListAllAviariesUseCase listAllAviariesUseCase, UpdateAviaryUseCase updateAviaryUseCase) {
         this.createAviaryUseCase = createAviaryUseCase;
         this.listAviariesByBatchUseCase = listAviariesByBatchUseCase;
         this.findAviaryByIdUseCase = findAviaryByIdUseCase;
         this.deleteAviaryUseCase = deleteAviaryUseCase;
         this.listAllAviariesUseCase = listAllAviariesUseCase;
+        this.updateAviaryUseCase = updateAviaryUseCase;
     }
 
     @PostMapping
@@ -65,6 +60,13 @@ public class AviaryController {
     public ResponseEntity<AviaryDTO> findAviaryById(@PathVariable Long id) {
         Optional<AviaryDTO> aviary = findAviaryByIdUseCase.invoke(id);
         return aviary.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AviaryDTO> updateAviary(@PathVariable Long id, @Valid @RequestBody AviaryDTO aviaryDTO) {
+        Optional<AviaryDTO> updatedAviary = updateAviaryUseCase.invoke(id, aviaryDTO);
+        return updatedAviary.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 

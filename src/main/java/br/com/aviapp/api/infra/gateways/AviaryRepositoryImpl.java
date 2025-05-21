@@ -60,11 +60,19 @@ public class AviaryRepositoryImpl implements AviaryRepository {
 
     @Override
     public Optional<AviaryDTO> updateAviary(Long aviaryId, AviaryDTO aviaryDTO) {
-        return aviaryRepositoryJPA.findById(aviaryId)
+      return aviaryRepositoryJPA.findById(aviaryId)
                 .map(existingAviary -> {
-                    MySqlAviaryEntity aviaryToUpdate = aviaryMapper.toEntity(aviaryDTO);
-                    aviaryToUpdate.setId(aviaryId);
-                    MySqlAviaryEntity updatedAviary = aviaryRepositoryJPA.save(aviaryToUpdate);
+                    if (aviaryDTO.name() != null) {
+                        existingAviary.setName(aviaryDTO.name());
+                    }
+                    if (aviaryDTO.initialAmountOfChickens() != null) {
+                        existingAviary.setInitialAmountOfChickens(aviaryDTO.initialAmountOfChickens());
+                    }
+                    if (aviaryDTO.initialAmountOfRoosters() != null) {
+                        existingAviary.setInitialAmountOfRoosters(aviaryDTO.initialAmountOfRoosters());
+                    }
+
+                    MySqlAviaryEntity updatedAviary = aviaryRepositoryJPA.save(existingAviary);
                     return aviaryMapper.toDTO(updatedAviary);
                 });
     }
