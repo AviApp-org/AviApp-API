@@ -17,6 +17,11 @@ public class AviaryReportFactory extends CollectCalculator{
         int currentChickens = aviary.getCurrentAmountOfChickens();
         int currentRoosters = aviary.getCurrentAmountOfRoosters();
         int totalBirds = currentChickens + currentRoosters;
+        float production = (float) totalEggsCollected / currentChickens;
+        float roosterMortality= (float) totalDeadRoosters / currentRoosters;
+        float chickenMortality = (float) totalDeadChickens / currentChickens;
+        float mortality = (float) totalDeadBirds / totalBirds;
+        float chickenRoosterProportion = (float) currentChickens / currentRoosters;
 
         List<EggDetailBO> quantityByEggType = calculateEggsByType(collectEggs);
 
@@ -31,6 +36,11 @@ public class AviaryReportFactory extends CollectCalculator{
                 currentChickens,
                 currentRoosters,
                 totalBirds,
+                production,
+                roosterMortality,
+                chickenMortality,
+                mortality,
+                chickenRoosterProportion,
                 quantityByEggType
         );
     }

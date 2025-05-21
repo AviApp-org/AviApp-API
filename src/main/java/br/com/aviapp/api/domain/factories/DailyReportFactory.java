@@ -22,9 +22,15 @@ public class DailyReportFactory extends CollectCalculator {
 
         int currentChickens = aviaryReports.stream().mapToInt(AviaryReportBO::getCurrentChickens).sum();
         int currentRoosters = aviaryReports.stream().mapToInt(AviaryReportBO::getCurrentRoosters).sum();
+
         int totalBirds = currentChickens + currentRoosters;
 
-        // Calculate total eggs by type across all aviaries
+        float production = (float) totalEggsCollected / currentChickens;
+        float roosterMortality= (float) totalDeadRoosters / currentRoosters;
+        float chickenMortality = (float) totalDeadChickens / currentChickens;
+        float mortality = (float) totalDeadBirds / totalBirds;
+        float chickenRoosterProportion = (float) currentChickens / currentRoosters;
+
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
         return new DailyReportBO(
@@ -37,6 +43,11 @@ public class DailyReportFactory extends CollectCalculator {
                 currentChickens,
                 currentRoosters,
                 totalBirds,
+                production,
+                roosterMortality,
+                chickenMortality,
+                mortality,
+                chickenRoosterProportion,
                 quantityByEggType
         );
     }

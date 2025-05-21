@@ -38,22 +38,19 @@ public abstract class CollectCalculator {
         return collectChickens.stream().mapToInt(CollectChickenBO::getDeadRoosters).sum();
     }
 
+
     protected static List<EggDetailBO> calculateEggsByType(List<CollectEggBO> collectEggs) {
         Map<String, Integer> eggTypeQuantityMap = new HashMap<>();
 
-        // Iterate through each egg collection
         for (CollectEggBO collectEgg : collectEggs) {
-            // Add quantities from each egg detail to the map
             for (EggDetailBO eggDetail : collectEgg.getEggDetails()) {
                 String type = String.valueOf(eggDetail.getType());
                 int quantity = eggDetail.getQuantity();
 
-                // Update the map with the new quantity
                 eggTypeQuantityMap.put(type, eggTypeQuantityMap.getOrDefault(type, 0) + quantity);
             }
         }
 
-        // Convert the map back to a list of EggDetailBO
         return eggTypeQuantityMap.entrySet().stream()
                 .map(entry -> new EggDetailBO(EnumEggType.valueOf(entry.getKey()), entry.getValue())).collect(Collectors.toList());
     }

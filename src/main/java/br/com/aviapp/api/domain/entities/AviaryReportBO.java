@@ -23,6 +23,11 @@ public class AviaryReportBO {
     private int currentChickens;
     private int currentRoosters;
     private int totalBirds;
+    private float production;
+    private float roosterMortality;
+    private float chickenMortality;
+    private float mortality;
+    private float chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType; // New field for egg details by type
 
 
