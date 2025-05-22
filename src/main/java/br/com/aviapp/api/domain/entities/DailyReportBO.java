@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -24,11 +23,11 @@ public class DailyReportBO {
     private int currentChickens;
     private int currentRoosters;
     private int totalBirds;
-    private BigDecimal production;
-    private BigDecimal roosterMortality;
-    private BigDecimal chickenMortality;
-    private BigDecimal mortality;
-    private BigDecimal chickenRoosterProportion;
+    private double production;
+    private double roosterMortality;
+    private double chickenMortality;
+    private double mortality;
+    private double chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType;
 
 
