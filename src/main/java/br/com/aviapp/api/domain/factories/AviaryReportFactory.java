@@ -1,9 +1,8 @@
 package br.com.aviapp.api.domain.factories;
 
-import br.com.aviapp.api.application.mappers.EggDetailMapperBO;
 import br.com.aviapp.api.domain.entities.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class AviaryReportFactory extends CollectCalculator{
@@ -17,11 +16,11 @@ public class AviaryReportFactory extends CollectCalculator{
         int currentChickens = aviary.getCurrentAmountOfChickens();
         int currentRoosters = aviary.getCurrentAmountOfRoosters();
         int totalBirds = currentChickens + currentRoosters;
-        float production = (float) totalEggsCollected / currentChickens;
-        float roosterMortality= (float) totalDeadRoosters / currentRoosters;
-        float chickenMortality = (float) totalDeadChickens / currentChickens;
-        float mortality = (float) totalDeadBirds / totalBirds;
-        float chickenRoosterProportion = (float) currentChickens / currentRoosters;
+        BigDecimal production = BigDecimal.valueOf(totalEggsCollected / currentChickens);
+        BigDecimal roosterMortality= BigDecimal.valueOf(totalDeadRoosters / currentRoosters);
+        BigDecimal chickenMortality = BigDecimal.valueOf(totalDeadChickens / currentChickens);
+        BigDecimal mortality = BigDecimal.valueOf(totalDeadBirds / totalBirds);
+        BigDecimal chickenRoosterProportion = BigDecimal.valueOf(currentChickens / currentRoosters);
 
         List<EggDetailBO> quantityByEggType = calculateEggsByType(collectEggs);
 

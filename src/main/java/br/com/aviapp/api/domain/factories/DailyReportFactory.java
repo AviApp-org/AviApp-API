@@ -5,6 +5,7 @@ import br.com.aviapp.api.domain.entities.*;
 import br.com.aviapp.api.domain.enums.EnumEggType;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
@@ -26,11 +27,11 @@ public class DailyReportFactory extends CollectCalculator {
 
         int totalBirds = currentChickens + currentRoosters;
 
-        float production = (float) totalEggsCollected / currentChickens;
-        float roosterMortality= (float) totalDeadRoosters / currentRoosters;
-        float chickenMortality = (float) totalDeadChickens / currentChickens;
-        float mortality = (float) totalDeadBirds / totalBirds;
-        float chickenRoosterProportion = (float) currentChickens / currentRoosters;
+        BigDecimal production = BigDecimal.valueOf(totalEggsCollected / currentChickens);
+        BigDecimal roosterMortality= BigDecimal.valueOf(totalDeadRoosters / currentRoosters);
+        BigDecimal chickenMortality = BigDecimal.valueOf(totalDeadChickens / currentChickens);
+        BigDecimal mortality = BigDecimal.valueOf(totalDeadBirds / totalBirds);
+        BigDecimal chickenRoosterProportion = BigDecimal.valueOf(currentChickens / currentRoosters);
 
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
