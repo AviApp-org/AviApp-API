@@ -6,6 +6,7 @@ import br.com.aviapp.api.domain.enums.EnumEggType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class DailyReportFactory extends CollectCalculator {
 
-    public static DailyReportBO createDailyReport(List<AviaryReportBO> aviaryReports) {
+    public static DailyReportBO createDailyReport(List<AviaryReportBO> aviaryReports, Date date) {
         int totalEggsCollected = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalEggsCollected).sum();
         int totalDeadChickens = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadChickens).sum();
         int totalDeadRoosters = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadRoosters).sum();
@@ -34,7 +35,7 @@ public class DailyReportFactory extends CollectCalculator {
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
         return new DailyReportBO(
-                Date.from(Instant.now()),
+                date,
                 aviaryReports,
                 totalEggsCollected,
                 totalDeadBirds,

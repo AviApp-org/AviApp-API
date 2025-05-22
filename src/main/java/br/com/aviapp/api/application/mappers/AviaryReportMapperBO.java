@@ -45,6 +45,11 @@ public class AviaryReportMapperBO {
                 dto.currentChickens(),
                 dto.currentRoosters(),
                 dto.totalBirds(),
+                dto.production(),
+                dto.roosterMortality(),
+                dto.chickenMortality(),
+                dto.mortality(),
+                dto.chickenRoosterProportion(),
                 quantityByEggType
         );
     }
@@ -66,6 +71,11 @@ public class AviaryReportMapperBO {
                 bo.getCurrentChickens(),
                 bo.getCurrentRoosters(),
                 bo.getTotalBirds(),
+                bo.getProduction(),
+                bo.getRoosterMortality(),
+                bo.getChickenMortality(),
+                bo.getMortality(),
+                bo.getChickenRoosterProportion(),
                 quantityByEggType
         );
     }
