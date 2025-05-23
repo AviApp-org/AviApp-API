@@ -3,10 +3,10 @@ package br.com.aviapp.api.domain.entities;
 import br.com.aviapp.api.domain.enums.EnumEggType;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 
-public class EggDetailPercentage extends EggDetailBO {
+public class EggDetailPercentageVO extends EggDetailBO {
     private double percentage;
 
-    public EggDetailPercentage(EnumEggType type, Integer quantity, double percentage) throws InvalidParamError {
+    public EggDetailPercentageVO(EnumEggType type, Integer quantity, double percentage) throws InvalidParamError {
         super(type, quantity);
         this.percentage = percentage;
     }

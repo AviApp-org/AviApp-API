@@ -27,7 +27,7 @@ public class DailyReportFactory extends CollectCalculator {
 
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
-        List<EggDetailPercentage> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
+        List<EggDetailPercentageVO> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
 
         return new DailyReportBO(
                 date,

@@ -28,7 +28,7 @@ public class AviaryReportMapperBO {
                 eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
                 null;
 
-        List<EggDetailPercentage> eggDetailPercentages = dto.percentageByEggType() != null ?
+        List<EggDetailPercentageVO> eggDetailPercentageVOS = dto.percentageByEggType() != null ?
                 eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
                 null;
 
@@ -49,7 +49,7 @@ public class AviaryReportMapperBO {
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentages
+                eggDetailPercentageVOS
 
         );
     }

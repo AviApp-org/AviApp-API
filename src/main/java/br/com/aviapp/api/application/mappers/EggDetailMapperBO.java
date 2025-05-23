@@ -3,7 +3,7 @@ package br.com.aviapp.api.application.mappers;
 import br.com.aviapp.api.application.dto.EggDetailDTO;
 import br.com.aviapp.api.application.dto.EggDetailPercentageDTO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
-import br.com.aviapp.api.domain.entities.EggDetailPercentage;
+import br.com.aviapp.api.domain.entities.EggDetailPercentageVO;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 import java.util.List;
@@ -23,26 +23,26 @@ public class EggDetailMapperBO {
                 bo.getQuantity());
     }
 
-    public EggDetailPercentage toPercentageBO(EggDetailPercentageDTO dto) throws InvalidParamError {
-        return new EggDetailPercentage(
+    public EggDetailPercentageVO toPercentageBO(EggDetailPercentageDTO dto) throws InvalidParamError {
+        return new EggDetailPercentageVO(
                 dto.type(),
                 0,
                 dto.percentage());
     }
 
-    public EggDetailPercentageDTO toPercentageDTO(EggDetailPercentage bo) {
+    public EggDetailPercentageDTO toPercentageDTO(EggDetailPercentageVO bo) {
         return new EggDetailPercentageDTO(
                 bo.getType(),
                 bo.getPercentage());
     }
 
-    public List<EggDetailPercentageDTO> toPercentageDTOList(List<EggDetailPercentage> bos) {
+    public List<EggDetailPercentageDTO> toPercentageDTOList(List<EggDetailPercentageVO> bos) {
         return bos.stream()
                 .map(this::toPercentageDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<EggDetailPercentage> toBOListPercentagem(List<EggDetailPercentageDTO> dtos) {
+    public List<EggDetailPercentageVO> toBOListPercentagem(List<EggDetailPercentageDTO> dtos) {
         return dtos.stream()
                 .map(dto -> {
                     try {

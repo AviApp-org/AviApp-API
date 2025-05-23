@@ -7,7 +7,7 @@ import br.com.aviapp.api.application.dto.EggDetailPercentageDTO;
 import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.DailyReportBO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
-import br.com.aviapp.api.domain.entities.EggDetailPercentage;
+import br.com.aviapp.api.domain.entities.EggDetailPercentageVO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ public class DailyReportMapperBO {
                 eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
                 null;
 
-        List<EggDetailPercentage> eggDetailPercentages = dto.percentageByEggType() != null ?
+        List<EggDetailPercentageVO> eggDetailPercentageVOS = dto.percentageByEggType() != null ?
                 eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
                     null;
 
@@ -49,7 +49,7 @@ public class DailyReportMapperBO {
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentages
+                eggDetailPercentageVOS
         );
     }
 

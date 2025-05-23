@@ -3,7 +3,7 @@ package br.com.aviapp.api.domain.factories;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
-import br.com.aviapp.api.domain.entities.EggDetailPercentage;
+import br.com.aviapp.api.domain.entities.EggDetailPercentageVO;
 import br.com.aviapp.api.domain.enums.EnumEggType;
 
 import java.util.ArrayList;
@@ -55,16 +55,16 @@ public abstract class CollectCalculator {
         return eggTypeQuantityMap.entrySet().stream().map(entry -> new EggDetailBO(EnumEggType.valueOf(entry.getKey()), entry.getValue())).collect(Collectors.toList());
     }
 
-    protected static List<EggDetailPercentage> calculateEggPercentageByType(List<EggDetailBO> eggDetails, int totalEggs) {
+    protected static List<EggDetailPercentageVO> calculateEggPercentageByType(List<EggDetailBO> eggDetails, int totalEggs) {
         if (totalEggs == 0) {
             return new ArrayList<>();
         }
 
-        List<EggDetailPercentage> percentages = new ArrayList<>();
+        List<EggDetailPercentageVO> percentages = new ArrayList<>();
 
         for (EggDetailBO eggDetail : eggDetails) {
             double percentage = (double) eggDetail.getQuantity() / totalEggs * 100;
-            percentages.add(new EggDetailPercentage(eggDetail.getType(), eggDetail.getQuantity(), percentage));
+            percentages.add(new EggDetailPercentageVO(eggDetail.getType(), eggDetail.getQuantity(), percentage));
         }
 
         return percentages;
