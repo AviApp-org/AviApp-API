@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.text.SimpleDateFormat;
 
 @Configuration
-//@EnableJpaAuditing
+@EnableJpaAuditing
 public class AppConfig {
     @Bean
     public RestTemplate restTemplate() {

@@ -44,9 +44,6 @@ public class CollectEggMapperEntity {
         entity.setId(dto.id());
         entity.setAviary(aviary);
         entity.setCollectionDate(dto.collectionDate());
-        // Save the entity first to get an ID
-        // Then set the egg details
-        // Note: This might need to be handled in the service layer
 
         return entity;
     }

@@ -1,14 +1,8 @@
 package br.com.aviapp.api.application.mappers;
 
-import br.com.aviapp.api.application.dto.AviaryReportDTO;
-import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.dto.CollectEggDataDTO;
-import br.com.aviapp.api.application.dto.EggDetailDTO;
+import br.com.aviapp.api.application.dto.*;
 import br.com.aviapp.api.application.gateways.LookUpRepository;
-import br.com.aviapp.api.domain.entities.AviaryReportBO;
-import br.com.aviapp.api.domain.entities.CollectChickenBO;
-import br.com.aviapp.api.domain.entities.CollectEggBO;
-import br.com.aviapp.api.domain.entities.EggDetailBO;
+import br.com.aviapp.api.domain.entities.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +28,10 @@ public class AviaryReportMapperBO {
                 eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
                 null;
 
+        List<EggDetailPercentage> eggDetailPercentages = dto.percentageByEggType() != null ?
+                eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
+                null;
+
         return new AviaryReportBO(
                 dto.name(),
                 collectEggs,
@@ -50,7 +48,9 @@ public class AviaryReportMapperBO {
                 dto.chickenMortality(),
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
-                quantityByEggType
+                quantityByEggType,
+                eggDetailPercentages
+
         );
     }
 
@@ -60,6 +60,11 @@ public class AviaryReportMapperBO {
         List<EggDetailDTO> quantityByEggType = bo.getQuantityByEggType() != null ?
                 eggDetailMapperBO.toDTOList(bo.getQuantityByEggType()) :
                 null;
+
+        List<EggDetailPercentageDTO> eggDetailPercentages = bo.getPercentageByEggType() != null ?
+                eggDetailMapperBO.toPercentageDTOList(bo.getPercentageByEggType()) :
+                null;
+
         return new AviaryReportDTO(
                 bo.getName(),
                 eggCollects,
@@ -76,7 +81,8 @@ public class AviaryReportMapperBO {
                 bo.getChickenMortality(),
                 bo.getMortality(),
                 bo.getChickenRoosterProportion(),
-                quantityByEggType
+                quantityByEggType,
+                eggDetailPercentages
         );
     }
 

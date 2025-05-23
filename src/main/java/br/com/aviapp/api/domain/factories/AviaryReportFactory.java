@@ -23,6 +23,8 @@ public class AviaryReportFactory extends CollectCalculator {
 
         List<EggDetailBO> quantityByEggType = calculateEggsByType(collectEggs);
 
+        List<EggDetailPercentage> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
+
         return new AviaryReportBO(
                 aviary.getName(),
                 collectEggs,
@@ -39,7 +41,8 @@ public class AviaryReportFactory extends CollectCalculator {
                 chickenMortality,
                 mortality,
                 chickenRoosterProportion,
-                quantityByEggType
+                quantityByEggType,
+                percentageByEggType
         );
     }
 }

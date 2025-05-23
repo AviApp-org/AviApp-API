@@ -20,7 +20,7 @@ public class EggValueBO {
     private final BigDecimal value;
 
     public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, BigDecimal value) throws InvalidParamError {
-        ParamValidator.validate(eggType,timestamp,value);
+        ParamValidator.validate(eggType,value);
 
         if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new InvalidParamError("Não é permitido valores negativos para valor do ovo.");

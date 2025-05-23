@@ -41,7 +41,7 @@ public class EmployeeMapperBO {
                 dto.birthDate(),
                 dto.phone(),
                 dto.role(),
-                new Date(), // Set current date here
+                dto.createdAt(), // Set current date here
                 new FarmBO(
                         farm.id(),
                         farm.name(),

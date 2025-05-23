@@ -3,9 +3,11 @@ package br.com.aviapp.api.application.mappers;
 import br.com.aviapp.api.application.dto.AviaryReportDTO;
 import br.com.aviapp.api.application.dto.DailyReportDTO;
 import br.com.aviapp.api.application.dto.EggDetailDTO;
+import br.com.aviapp.api.application.dto.EggDetailPercentageDTO;
 import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.DailyReportBO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
+import br.com.aviapp.api.domain.entities.EggDetailPercentage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +29,9 @@ public class DailyReportMapperBO {
                 eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
                 null;
 
+        List<EggDetailPercentage> eggDetailPercentages = dto.percentageByEggType() != null ?
+                eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
+                    null;
 
         return new DailyReportBO(
                 dto.date(),
@@ -43,7 +48,8 @@ public class DailyReportMapperBO {
                 dto.chickenMortality(),
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
-                quantityByEggType
+                quantityByEggType,
+                eggDetailPercentages
         );
     }
 
@@ -52,6 +58,10 @@ public class DailyReportMapperBO {
         List<AviaryReportDTO> aviaryReportDTOs = aviaryReportMapperBO.toDTOList(bo.getAviaryReports());
         List<EggDetailDTO> quantityByEggType = bo.getQuantityByEggType() != null ?
                 eggDetailMapperBO.toDTOList(bo.getQuantityByEggType()) :
+                null;
+
+        List<EggDetailPercentageDTO> eggDetailPercentages = bo.getPercentageByEggType() != null ?
+                eggDetailMapperBO.toPercentageDTOList(bo.getPercentageByEggType()) :
                 null;
 
         return new DailyReportDTO(
@@ -69,7 +79,8 @@ public class DailyReportMapperBO {
                 bo.getChickenMortality(),
                 bo.getMortality(),
                 bo.getChickenRoosterProportion(),
-                quantityByEggType
+                quantityByEggType,
+                eggDetailPercentages
         );
     }
 

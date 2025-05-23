@@ -29,7 +29,6 @@ public class AviaryReportBO {
     private double mortality;
     private double chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType; // New field for egg details by type
-
-
+    private List<EggDetailPercentage> percentageByEggType;
 
 }

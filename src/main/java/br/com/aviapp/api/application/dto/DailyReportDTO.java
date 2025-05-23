@@ -7,6 +7,7 @@ public record DailyReportDTO(Date date, List<AviaryReportDTO> aviaryReports, int
                              int totalDeadChickens, int totalDeadRoosters, int currentChickens, int currentRoosters,
                              int totalBirds, double production,
                              double roosterMortality, double chickenMortality, double mortality,
-                             double chickenRoosterProportion, List<EggDetailDTO> quantityByEggType) {
+                             double chickenRoosterProportion, List<EggDetailDTO> quantityByEggType,
+                             List<EggDetailPercentageDTO> percentageByEggType) {
 }
 

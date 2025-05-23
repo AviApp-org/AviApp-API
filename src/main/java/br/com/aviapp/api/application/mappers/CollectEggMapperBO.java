@@ -37,7 +37,7 @@ public class CollectEggMapperBO {
                 dto.id(),
                 aviaryBO,
                 eggDetails,
-                LocalDateTime.now()
+                dto.collectionDate()
         );
     }
 

@@ -29,6 +29,7 @@ public class DailyReportBO {
     private double mortality;
     private double chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType;
+    private List<EggDetailPercentage> percentageByEggType;
 
 
 }

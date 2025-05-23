@@ -20,7 +20,7 @@ public class CollectEggBO {
 
     public CollectEggBO(Long id, AviaryBO aviary, List<EggDetailBO> eggDetails,
                         LocalDateTime collectionDate) throws InvalidParamError {
-        ParamValidator.validate(aviary, eggDetails, collectionDate);
+        ParamValidator.validate(aviary, eggDetails);
 
         if (eggDetails == null || eggDetails.isEmpty()) {
             throw new InvalidParamError("É necessário informar pelo menos um tipo de ovo coletado.");
@@ -30,12 +30,6 @@ public class CollectEggBO {
         this.aviary = aviary;
         this.eggDetails = Collections.unmodifiableList(eggDetails);
         this.collectionDate = collectionDate;
-    }
-
-    public Integer getTotalEggs() {
-        return eggDetails.stream()
-                .mapToInt(EggDetailBO::getQuantity)
-                .sum();
     }
 
 }

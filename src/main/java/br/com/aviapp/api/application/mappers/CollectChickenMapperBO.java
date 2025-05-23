@@ -32,7 +32,7 @@ public class CollectChickenMapperBO {
             dto.deadRoosters(),
             dto.deadChickens(),
             dto.observation(),
-            LocalDateTime.now()
+            dto.collectionDate()
 
         );
     }

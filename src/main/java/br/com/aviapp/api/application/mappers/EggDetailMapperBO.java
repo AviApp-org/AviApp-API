@@ -1,7 +1,9 @@
 package br.com.aviapp.api.application.mappers;
 
 import br.com.aviapp.api.application.dto.EggDetailDTO;
+import br.com.aviapp.api.application.dto.EggDetailPercentageDTO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
+import br.com.aviapp.api.domain.entities.EggDetailPercentage;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
 
 import java.util.List;
@@ -19,6 +21,39 @@ public class EggDetailMapperBO {
         return new EggDetailDTO(
                 bo.getType(),
                 bo.getQuantity());
+    }
+
+    public EggDetailPercentage toPercentageBO(EggDetailPercentageDTO dto) throws InvalidParamError {
+        return new EggDetailPercentage(
+                dto.type(),
+                0,
+                dto.percentage());
+    }
+
+    public EggDetailPercentageDTO toPercentageDTO(EggDetailPercentage bo) {
+        return new EggDetailPercentageDTO(
+                bo.getType(),
+                bo.getPercentage());
+    }
+
+    public List<EggDetailPercentageDTO> toPercentageDTOList(List<EggDetailPercentage> bos) {
+        return bos.stream()
+                .map(this::toPercentageDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<EggDetailPercentage> toBOListPercentagem(List<EggDetailPercentageDTO> dtos) {
+        return dtos.stream()
+                .map(dto -> {
+                    try {
+                        return this.toPercentageBO(dto);
+                    } catch (InvalidParamError e) {
+                        // Você pode escolher como lidar com essa exceção
+                        // Por exemplo, lançar uma RuntimeException ou registrar o erro
+                        throw new RuntimeException("Erro ao converter EggDetailPercentageDTO para EggDetailPercentageBO", e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     public List<EggDetailBO> toBOList(List<EggDetailDTO> dtos) {
