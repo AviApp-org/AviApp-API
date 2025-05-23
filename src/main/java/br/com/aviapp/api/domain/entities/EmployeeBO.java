@@ -20,9 +20,6 @@ public class EmployeeBO {
     private Date createdAt;
     private FarmBO farm;
 
-    public EmployeeBO() {
-    }
-
     public EmployeeBO(Long id, String name,String cpf, Date birthDate, String phone, EnumEmployeeRole role, Date createdAt, FarmBO farm)
             throws InvalidParamError {
         ParamValidator.validate(name,cpf,birthDate, role, farm);
