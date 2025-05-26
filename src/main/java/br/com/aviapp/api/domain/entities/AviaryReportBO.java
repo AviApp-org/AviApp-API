@@ -30,5 +30,8 @@ public class AviaryReportBO {
     private double chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType; // New field for egg details by type
     private List<EggDetailPercentageVO> percentageByEggType;
+    private int marketEggs;
+    private int dumpEggs;
+    private int incubateEggs;
 
 }

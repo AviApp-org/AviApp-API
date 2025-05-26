@@ -49,7 +49,10 @@ public class AviaryReportMapperBO {
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentageVOS
+                eggDetailPercentageVOS,
+                dto.marketEggs(),
+                dto.dumpEggs(),
+                dto.incubateEggs()
 
         );
     }
@@ -82,7 +85,10 @@ public class AviaryReportMapperBO {
                 bo.getMortality(),
                 bo.getChickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentages
+                eggDetailPercentages,
+                bo.getMarketEggs(),
+                bo.getDumpEggs(),
+                bo.getIncubateEggs()
         );
     }
 

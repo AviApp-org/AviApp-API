@@ -49,7 +49,10 @@ public class DailyReportMapperBO {
                 dto.mortality(),
                 dto.chickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentageVOS
+                eggDetailPercentageVOS,
+                dto.marketEggs(),
+                dto.dumpEggs(),
+                dto.incubateEggs()
         );
     }
 
@@ -80,7 +83,10 @@ public class DailyReportMapperBO {
                 bo.getMortality(),
                 bo.getChickenRoosterProportion(),
                 quantityByEggType,
-                eggDetailPercentages
+                eggDetailPercentages,
+                bo.getMarketEggs(),
+                bo.getDumpEggs(),
+                bo.getIncubateEggs()
         );
     }
 

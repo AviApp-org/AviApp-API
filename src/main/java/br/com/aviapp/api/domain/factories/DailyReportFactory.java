@@ -28,6 +28,10 @@ public class DailyReportFactory extends CollectCalculator {
 
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
+        int marketEggs = calculateMarketEggsByType(quantityByEggType);
+        int dumpEggs = calculateDumpEggsByType(quantityByEggType);
+        int incubateEggs = calculateIncubateEggs(quantityByEggType);
+
         List<EggDetailPercentageVO> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
 
         return new DailyReportBO(
@@ -46,7 +50,10 @@ public class DailyReportFactory extends CollectCalculator {
                 mortality,
                 chickenRoosterProportion,
                 quantityByEggType,
-                percentageByEggType
+                percentageByEggType,
+                marketEggs,
+                dumpEggs,
+                incubateEggs
         );
     }
 

@@ -69,4 +69,36 @@ public abstract class CollectCalculator {
 
         return percentages;
     }
+
+    protected static int calculateMarketEggsByType(List<EggDetailBO> eggDetails) {
+        if (eggDetails == null) return 0;
+
+        return eggDetails.stream()
+                .filter(eggDetail -> eggDetail.getType() == EnumEggType.THIN_SHELL ||
+                        eggDetail.getType() == EnumEggType.SMALL ||
+                        eggDetail.getType() == EnumEggType.DOUBLE_YOLK)
+                .mapToInt(EggDetailBO::getQuantity)
+                .sum();
+    }
+
+    protected static int calculateDumpEggsByType(List<EggDetailBO> eggDetails) {
+        if (eggDetails == null) return 0;
+
+        return eggDetails.stream()
+                .filter(eggDetail -> eggDetail.getType() == EnumEggType.BROKEN ||
+                        eggDetail.getType() == EnumEggType.CRACKED )
+                .mapToInt(EggDetailBO::getQuantity)
+                .sum();
+    }
+
+    protected static int calculateIncubateEggs(List<EggDetailBO> eggDetails) {
+        if (eggDetails == null) return 0;
+
+        return eggDetails.stream()
+                .filter(eggDetail -> eggDetail.getType() == EnumEggType.CLEAN ||
+                        eggDetail.getType() == EnumEggType.BED_DIRTY ||
+                        eggDetail.getType() == EnumEggType.NEST_DIRTY)
+                .mapToInt(EggDetailBO::getQuantity)
+                .sum();
+    }
 }

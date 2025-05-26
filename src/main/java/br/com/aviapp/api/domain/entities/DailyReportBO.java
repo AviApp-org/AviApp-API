@@ -31,6 +31,8 @@ public class DailyReportBO {
     private double chickenRoosterProportion;
     private List<EggDetailBO> quantityByEggType;
     private List<EggDetailPercentageVO> percentageByEggType;
-
+    private int marketEggs;
+    private int dumpEggs;
+    private int incubateEggs;
 
 }
