@@ -14,6 +14,7 @@ import br.com.aviapp.api.infra.mysql.models.MySqlCollectEggDataEntity;
 import br.com.aviapp.api.infra.mysql.repository.CollectEggDataRepositoryJPA;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -56,13 +57,13 @@ public class CollectEggRepositoryImpl implements CollectEggRepository {
     }
 
     @Override
-    public List<CollectEggDataDTO> getEggCollectByDate(LocalDateTime date) {
+    public List<CollectEggDataDTO> getEggCollectByDate(LocalDate date) {
         List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
         return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDateTime date) {
+    public List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDate date) {
         List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByAviaryAndCollectionDateIgnoringTime(aviaryId, date);
         return entities.stream().map(collectEggMapper::toDTO).collect(Collectors.toList());
     }

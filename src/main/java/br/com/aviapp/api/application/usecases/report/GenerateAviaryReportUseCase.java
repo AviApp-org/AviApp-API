@@ -15,6 +15,7 @@ import br.com.aviapp.api.domain.entities.CollectChickenBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
 import br.com.aviapp.api.domain.factories.AviaryReportFactory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +41,7 @@ public class GenerateAviaryReportUseCase {
         this.aviaryReportMapperBO = aviaryReportMapperBO;
     }
 
-    public AviaryReportDTO invoke(Long aviaryId, LocalDateTime date) {
+    public AviaryReportDTO invoke(Long aviaryId, LocalDate date) {
 
         List<CollectEggBO> collectEgg = collectEggMapperBO.toBOList(listEggCollectsByDateAndAviaryUseCase.invoke(aviaryId, date));
         List<CollectChickenBO> collectChicken = collectChickenMapperBO.toBOList(listCollectChickensByDateAndAviaryUseCase.invoke(aviaryId, date));

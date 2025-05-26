@@ -2,6 +2,7 @@ package br.com.aviapp.api.application.gateways;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +15,9 @@ public interface CollectEggRepository {
 
     List<CollectEggDataDTO> getAllEggCollects();
 
-    List<CollectEggDataDTO> getEggCollectByDate(LocalDateTime date);
+    List<CollectEggDataDTO> getEggCollectByDate(LocalDate date);
 
-    List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDateTime date);
+    List<CollectEggDataDTO> getEggCollectByAviaryAndDate(Long aviaryId, LocalDate date);
 
     void deleteCollectEggData(Long id);
 

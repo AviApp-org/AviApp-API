@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.gateways;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -71,13 +72,13 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
     }
 
     @Override
-    public List<CollectChickenDTO> getChickenCollectByDate(LocalDateTime date) {
+    public List<CollectChickenDTO> getChickenCollectByDate(LocalDate date) {
         List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByCollectionDateIgnoringTime(date);
         return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<CollectChickenDTO> getChickenCollectByAviaryAndDate(Long aviaryId, LocalDateTime date) {
+    public List<CollectChickenDTO> getChickenCollectByAviaryAndDate(Long aviaryId, LocalDate date) {
         List<MySqlCollectChickenDataEntity> entities = repositoryJPA.findByAviaryAndCollectionDateIgnoringTime(aviaryId, date);
         return entities.stream().map(collectChickenMapper::toDTO).collect(Collectors.toList());
     }

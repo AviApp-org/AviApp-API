@@ -50,12 +50,11 @@ public class CollectEggController {
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<CollectEggDataDTO>> getChickenCollectByDate(
+    public ResponseEntity<List<CollectEggDataDTO>> getEggCollectByDate(
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        // Convertendo LocalDate para LocalDateTime (início do dia)
-        LocalDateTime dateTime = date.atStartOfDay();
-        List<CollectEggDataDTO> chickenCollects = getEggCollectByDateUseCase.invoke(dateTime);
-        return ResponseEntity.ok(chickenCollects);
+
+        List<CollectEggDataDTO> eggCollects = getEggCollectByDateUseCase.invoke(date);
+        return ResponseEntity.ok(eggCollects);
     }
 
     @DeleteMapping("/{id}")

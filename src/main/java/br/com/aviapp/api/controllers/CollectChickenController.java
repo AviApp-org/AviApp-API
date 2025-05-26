@@ -54,9 +54,8 @@ public class CollectChickenController {
     @GetMapping("/date/{date}")
     public ResponseEntity<List<CollectChickenDTO>> getChickenCollectByDate(
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        // Convertendo LocalDate para LocalDateTime (início do dia)
-        LocalDateTime dateTime = date.atStartOfDay();
-        List<CollectChickenDTO> chickenCollects = getChickenCollectByDateUseCase.invoke(dateTime);
+
+        List<CollectChickenDTO> chickenCollects = getChickenCollectByDateUseCase.invoke(date);
         return ResponseEntity.ok(chickenCollects);
     }
 

@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.gateways.CollectEggRepository;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class ListEggCollectsByDateAndAviaryUseCase {
         this.collectEggMapper = collectEggMapper;
     }
 
-    public List<CollectEggDataDTO> invoke(Long aviaryId, LocalDateTime date) {
+    public List<CollectEggDataDTO> invoke(Long aviaryId, LocalDate date) {
         return collectEggRepository.getEggCollectByAviaryAndDate(aviaryId, date).stream()
                 .map(collectEggMapper::toBO)
                 .map(collectEggMapper::toDTO)

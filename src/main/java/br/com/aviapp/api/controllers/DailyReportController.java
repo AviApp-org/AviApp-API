@@ -26,15 +26,13 @@ public class DailyReportController {
 
     @GetMapping("/{batchId}/{localDate}")
     public ResponseEntity<DailyReportDTO> generateDailyReport(@PathVariable Long batchId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
-        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        DailyReportDTO dailyReport = generateDailyReportUseCase.invoke(batchId, date);
+        DailyReportDTO dailyReport = generateDailyReportUseCase.invoke(batchId, localDate);
         return ResponseEntity.ok(dailyReport);
     }
 
     @GetMapping("/week/{batchId}/{localDate}")
     public ResponseEntity<WeeklyReportDTO> generateWeeklyReport(@PathVariable Long batchId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
-        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        WeeklyReportDTO weeklyReport = generateDailyReportUseCase.generateWeeklyReport(batchId, date);
+        WeeklyReportDTO weeklyReport = generateDailyReportUseCase.generateWeeklyReport(batchId, localDate);
         return ResponseEntity.ok(weeklyReport);
     }
 }

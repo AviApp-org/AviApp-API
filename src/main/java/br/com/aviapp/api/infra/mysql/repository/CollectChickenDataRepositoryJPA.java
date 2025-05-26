@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectChickenDataEntity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public interface CollectChickenDataRepositoryJPA extends JpaRepository<MySqlColl
     List<MySqlCollectChickenDataEntity> findByAviary(Long aviaryId);
 
     @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE FUNCTION('DATE', c.collectionDate) = FUNCTION('DATE', :date)")
-    List<MySqlCollectChickenDataEntity> findByCollectionDateIgnoringTime(LocalDateTime date);
+    List<MySqlCollectChickenDataEntity> findByCollectionDateIgnoringTime(LocalDate date);
 
     @Query("SELECT c FROM MySqlCollectChickenDataEntity c WHERE c.aviary.id = :aviaryId AND FUNCTION('DATE', c.collectionDate) = FUNCTION('DATE', :date)")
-    List<MySqlCollectChickenDataEntity> findByAviaryAndCollectionDateIgnoringTime(Long aviaryId, LocalDateTime date);
+    List<MySqlCollectChickenDataEntity> findByAviaryAndCollectionDateIgnoringTime(Long aviaryId, LocalDate date);
 
 }

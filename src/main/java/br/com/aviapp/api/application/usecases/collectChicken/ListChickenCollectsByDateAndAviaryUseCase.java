@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.CollectChickenDTO;
 import br.com.aviapp.api.application.gateways.CollectChickenRepository;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class ListChickenCollectsByDateAndAviaryUseCase {
         this.collectChickenMapper = collectChickenMapper;
     }
 
-    public List<CollectChickenDTO> invoke(Long aviaryId, LocalDateTime date) {
+    public List<CollectChickenDTO> invoke(Long aviaryId, LocalDate date) {
         return collectChickenRepository.getChickenCollectByAviaryAndDate(aviaryId, date).stream()
                 .map(collectChickenMapper::toBO)
                 .map(collectChickenMapper::toDTO)

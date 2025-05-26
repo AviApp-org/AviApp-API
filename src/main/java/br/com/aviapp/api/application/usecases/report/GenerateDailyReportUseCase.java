@@ -11,6 +11,7 @@ import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.DailyReportBO;
 import br.com.aviapp.api.domain.factories.DailyReportFactory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -36,14 +37,13 @@ public class GenerateDailyReportUseCase {
         this.findBatchByIdUseCase = findBatchByIdUseCase;
     }
 
-    public DailyReportDTO invoke(Long batchId, Date date) {
+    public DailyReportDTO invoke(Long batchId, LocalDate date) {
         Optional<List<AviaryDTO>> aviaryDTO = listAviariesByBatchUseCase.invoke(batchId);
         List<AviaryBO> aviaryBO = aviaryMapperBO.toBOList(aviaryDTO.get());
         List<AviaryReportDTO> aviaryReports = new ArrayList<>();
-        LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         for (AviaryBO aviary : aviaryBO) {
-          aviaryReports.add(generateAviaryReportUseCase.invoke(aviary.getId(), localDateTime));
+          aviaryReports.add(generateAviaryReportUseCase.invoke(aviary.getId(), date));
         }
 
         List<AviaryReportBO> aviaryReportBO = aviaryReportMapperBO.toBOList(aviaryReports);
@@ -53,27 +53,23 @@ public class GenerateDailyReportUseCase {
         return dailyReportMapperBO.toDTO(dailyReportBO);
     }
 
-    public WeeklyReportDTO generateWeeklyReport(Long batchId, Date startDate) {
+    public WeeklyReportDTO generateWeeklyReport(Long batchId, LocalDate startDate) {
         List<DailyReportDTO> dailyReports = new ArrayList<>();
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
 
-        LocalDateTime currentDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime endDate = currentDate.plusDays(6);
+        LocalDate endDate = startDate.plusDays(6);
 
         for (int i = 0; i < 7; i++) {
-            Date reportDate = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-            DailyReportDTO dailyReport = invoke(batchId, reportDate);
+            DailyReportDTO dailyReport = invoke(batchId, startDate);
 
             dailyReports.add(dailyReport);
 
-            currentDate = currentDate.plusDays(1);
+            startDate = startDate.plusDays(1);
         }
 
-        Date start = Date.from(startDate.toInstant());
-        Date end = Date.from(endDate.atZone(ZoneId.systemDefault()).toInstant());
 
-        return new WeeklyReportDTO(batchDTO.get().name(), start, end, dailyReports);
+        return new WeeklyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
     }
 
 

@@ -3,12 +3,13 @@ package br.com.aviapp.api.domain.factories;
 import br.com.aviapp.api.domain.entities.*;
 import br.com.aviapp.api.domain.enums.EnumEggType;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class DailyReportFactory extends CollectCalculator {
 
-    public static DailyReportBO createDailyReport(List<AviaryReportBO> aviaryReports, Date date) {
+    public static DailyReportBO createDailyReport(List<AviaryReportBO> aviaryReports, LocalDate date) {
         int totalEggsCollected = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalEggsCollected).sum();
         int totalDeadChickens = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadChickens).sum();
         int totalDeadRoosters = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadRoosters).sum();

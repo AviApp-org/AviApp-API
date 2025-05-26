@@ -18,7 +18,7 @@ public class GetChickenCollectByDateUseCase {
         this.collectMapper = collectMapper;
     }
 
-    public List<CollectChickenDTO> invoke(LocalDateTime date) {
+    public List<CollectChickenDTO> invoke(LocalDate date) {
         return collectRepository.getChickenCollectByDate(date).stream()
                 .map(collectMapper::toBO)
                 .map(collectMapper::toDTO)

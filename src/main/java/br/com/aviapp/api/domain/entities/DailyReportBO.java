@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DailyReportBO {
 
-    private Date date;
+    private LocalDate date;
     private List<AviaryReportBO> aviaryReports;
     private int totalEggsCollected;
     private int totalDeadBirds;
