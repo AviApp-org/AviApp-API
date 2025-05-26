@@ -53,7 +53,7 @@ public class CollectChickenController {
 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<CollectChickenDTO>> getChickenCollectByDate(
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
         List<CollectChickenDTO> chickenCollects = getChickenCollectByDateUseCase.invoke(date);
         return ResponseEntity.ok(chickenCollects);

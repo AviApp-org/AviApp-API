@@ -51,7 +51,7 @@ public class CollectEggController {
 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<CollectEggDataDTO>> getEggCollectByDate(
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
         List<CollectEggDataDTO> eggCollects = getEggCollectByDateUseCase.invoke(date);
         return ResponseEntity.ok(eggCollects);

@@ -34,14 +34,18 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
         Optional<MySqlAviaryEntity> aviaryOptional = entityLookupRepository.findAviaryById(collectChickenDataDTO.aviaryId());
 
         if (aviaryOptional.isPresent()) {
-
             MySqlAviaryEntity aviary = aviaryOptional.get();
 
-            Integer currentRoosters = aviary.getCurrentAmountOfRoosters();
-            Integer currentChickens = aviary.getCurrentAmountOfChickens();
+            if (aviary.getCurrentAmountOfRoosters() < collectChickenDataDTO.deadRoosters()) {
+                throw new IllegalArgumentException("The number of dead roosters exceeds the current amount in the aviary.");
+            }
 
-            System.out.println("Current Roosters: " + currentRoosters);
-            System.out.println("Current Chickens: " + currentChickens);
+            if (aviary.getCurrentAmountOfChickens() < collectChickenDataDTO.deadChickens()) {
+                throw new IllegalArgumentException("The number of dead chickens exceeds the current amount in the aviary.");
+            }
+
+            int currentRoosters = aviary.getCurrentAmountOfRoosters();
+            int currentChickens = aviary.getCurrentAmountOfChickens();
 
             currentRoosters -= collectChickenDataDTO.deadRoosters();
             currentChickens -= collectChickenDataDTO.deadChickens();
@@ -54,6 +58,7 @@ public class CollectChickenRepositoryImpl implements CollectChickenRepository {
 
             aviaryRepositoryJPA.save(aviary);
         }
+
 
         MySqlCollectChickenDataEntity savedEntity = repositoryJPA.save(entity);
         return collectChickenMapper.toDTO(savedEntity);
