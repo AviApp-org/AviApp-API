@@ -3,9 +3,12 @@ package br.com.aviapp.api.infra.mysql.enums;
 public enum EggType {
 
     CLEAN("Limpo"),
-    DIRTY("Sujo"),
-    DOUBLE_YOLK("Duas gemas"),
+    NEST_DIRTY("Sujo de ninho"),
+    BED_DIRTY("Sujo de cama"),
+    BROKEN("Quebrado"),
     CRACKED("Trincado"),
+    SMALL("Pequeno"),
+    DOUBLE_YOLK("Duas gemas"),
     THIN_SHELL("Casca fina");
 
     private final String description;

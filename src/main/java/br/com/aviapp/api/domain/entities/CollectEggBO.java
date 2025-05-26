@@ -22,9 +22,6 @@ public class CollectEggBO {
                         LocalDateTime collectionDate) throws InvalidParamError {
         ParamValidator.validate(aviary, eggDetails);
 
-        if (eggDetails == null || eggDetails.isEmpty()) {
-            throw new InvalidParamError("É necessário informar pelo menos um tipo de ovo coletado.");
-        }
 
         this.id = id;
         this.aviary = aviary;

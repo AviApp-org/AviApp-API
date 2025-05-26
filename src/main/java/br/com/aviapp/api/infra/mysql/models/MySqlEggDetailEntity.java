@@ -20,7 +20,7 @@ public class MySqlEggDetailEntity {
     private MySqlCollectEggDataEntity eggCollection;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private EggType type;
 
     @Column(nullable = false)
