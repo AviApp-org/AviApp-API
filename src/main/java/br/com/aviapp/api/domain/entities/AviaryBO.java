@@ -17,18 +17,17 @@ public class AviaryBO implements DeletableEntity {
     private final Integer currentAmountOfChickens;
     private final BatchBO batchId;
 
-    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters, Integer initialAmountOfChickens, Integer currentAmountOfRoosters, Integer currentAmountOfChickens, BatchBO batchId) throws IllegalArgumentException {
 
+    public AviaryBO(Long id, String name, Integer initialAmountOfRoosters,
+                    Integer initialAmountOfChickens, Integer currentAmountOfRoosters,
+                    Integer currentAmountOfChickens, BatchBO batchId) {
         ParamValidator.validate(name, initialAmountOfRoosters, initialAmountOfChickens, batchId);
 
         if (initialAmountOfRoosters < 0 || initialAmountOfChickens < 0) {
-            throw new IllegalArgumentException("A quantidade inicial de galinhas e galos não pode ser negativa.");
+            throw new IllegalArgumentException("A quantidade inicial não pode ser negativa.");
         }
 
-        if(batchId.getStatus() == EnumBatchStatus.INACTIVE){
-            throw new IllegalArgumentException("O lote deve estar ativo para criar um aviário.");
-        }
-
+        // Atribuições
         this.id = id;
         this.name = name;
         this.initialAmountOfRoosters = initialAmountOfRoosters;
@@ -38,16 +37,16 @@ public class AviaryBO implements DeletableEntity {
         this.batchId = batchId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getInitialAmountOfBirds() {
-        return initialAmountOfRoosters + initialAmountOfChickens;
+    public void validateForCreation() throws BusinessRuleException {
+        if(batchId.getStatus() == EnumBatchStatus.INACTIVE){
+            throw new BusinessRuleException("O lote deve estar ativo para criar um aviário.");
+        }
     }
 
     @Override
     public void validateDeletion() throws BusinessRuleException {
-
+        if(batchId.getStatus() == EnumBatchStatus.ACTIVE){
+            throw new BusinessRuleException("O lote deve estar inativo para excluir o aviário.");
+        }
     }
 }

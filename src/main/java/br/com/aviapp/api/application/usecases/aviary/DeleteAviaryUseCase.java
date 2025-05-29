@@ -19,13 +19,10 @@ public class DeleteAviaryUseCase {
     }
 
     public void invoke(Long aviaryId) throws BusinessRuleException, ResourceNotFoundException {
-        AviaryBO aviaryBO = aviaryMapperBO.toBO(aviaryRepository.findAviaryById(aviaryId).get()) ;
+        AviaryBO aviaryBO = aviaryMapperBO.toBO(aviaryRepository.findAviaryById(aviaryId)
+                .orElseThrow(() -> new NotFoundException(aviaryId)));
 
-        if (aviaryBO == null) {
-            throw new NotFoundException(aviaryId);
-        }
-
-        DeletionValidator.validateDeletion(aviaryBO, "Aviario não encontrado");
+        aviaryBO.validateDeletion();
 
         aviaryRepository.deleteAviary(aviaryId);
     }

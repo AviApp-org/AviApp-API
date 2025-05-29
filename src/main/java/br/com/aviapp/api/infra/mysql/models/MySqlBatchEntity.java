@@ -27,6 +27,4 @@ public class MySqlBatchEntity {
   @JoinColumn(name = "farm_id", nullable = false)
   private MySqlFarmEntity farmId;
 
-  @OneToMany(mappedBy = "batchId", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<MySqlAviaryEntity> aviaries;
 }

@@ -37,7 +37,7 @@ public class AviaryController {
     }
 
     @PostMapping
-    public ResponseEntity<AviaryDTO> createAviary(@Valid @RequestBody AviaryDTO aviaryDTO) {
+    public ResponseEntity<AviaryDTO> createAviary(@Valid @RequestBody AviaryDTO aviaryDTO) throws BusinessRuleException {
         AviaryDTO newAviary = createAviaryUseCase.invoke(aviaryDTO);
         URI location = URI.create("/api/aviaries/" + newAviary.id());
         return ResponseEntity.created(location).body(newAviary);
@@ -71,14 +71,9 @@ public class AviaryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAviary(@PathVariable Long id) {
-        try {
-            deleteAviaryUseCase.invoke(id);
-        } catch (BusinessRuleException e) {
-            throw new RuntimeException(e);
-        } catch (ResourceNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public ResponseEntity<Void> deleteAviary(@PathVariable Long id) throws BusinessRuleException, ResourceNotFoundException {
+        deleteAviaryUseCase.invoke(id);
         return ResponseEntity.noContent().build();
     }
+
 }
