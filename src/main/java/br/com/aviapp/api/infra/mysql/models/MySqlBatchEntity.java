@@ -1,17 +1,10 @@
 package br.com.aviapp.api.infra.mysql.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 import br.com.aviapp.api.infra.mysql.enums.BatchStatusType;
 
@@ -33,4 +26,7 @@ public class MySqlBatchEntity {
   @ManyToOne
   @JoinColumn(name = "farm_id", nullable = false)
   private MySqlFarmEntity farmId;
+
+  @OneToMany(mappedBy = "batchId", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<MySqlAviaryEntity> aviaries;
 }
