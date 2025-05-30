@@ -15,13 +15,11 @@ import jakarta.persistence.EntityNotFoundException;
 public class CollectEggMapperEntity {
 
     private final EntityLookupRepository repository;
-    private final EggDetailsMapperEntity eggDetailMapper;
     private final EggDetailsMapperEntity eggDetailsMapper;
 
     public CollectEggMapperEntity(EntityLookupRepository repository, EggDetailsMapperEntity eggDetailsMapper) {
         this.repository = repository;
         this.eggDetailsMapper = eggDetailsMapper;
-        this.eggDetailMapper = new EggDetailsMapperEntity();
     }
 
     public CollectEggDataDTO toDTO(MySqlCollectEggDataEntity entity) {
@@ -48,10 +46,6 @@ public class CollectEggMapperEntity {
         return entity;
     }
 
-    public void setEggDetailsToEntity(MySqlCollectEggDataEntity entity, List<EggDetailDTO> eggDetails) {
-        List<MySqlEggDetailEntity> eggDetailEntities = eggDetailMapper.toEntityList(eggDetails);
-        entity.setEggDetails(eggDetailEntities);
-    }
 
     public List<CollectEggDataDTO> toDTOList(List<MySqlCollectEggDataEntity> entities) {
         return entities.stream()

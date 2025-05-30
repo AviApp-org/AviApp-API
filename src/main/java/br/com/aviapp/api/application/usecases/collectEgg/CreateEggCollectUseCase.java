@@ -17,7 +17,7 @@ public class CreateEggCollectUseCase {
 
     public CollectEggDataDTO invoke(CollectEggDataDTO collectEggDataDTO) {
         CollectEggBO collectEggData = collectEggMapperBO.toBO(collectEggDataDTO);
-        System.out.println(collectEggData);
+
         return collectEggRepository.createCollectEgg(collectEggMapperBO.toDTO(collectEggData));
     }
 }

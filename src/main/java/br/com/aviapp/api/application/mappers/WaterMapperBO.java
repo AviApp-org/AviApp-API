@@ -29,7 +29,8 @@ public class WaterMapperBO {
         return new WaterBO(
                 dto.id(),
                 aviaryMapperBO.toBO(aviary.get()),
-                dto.volume()
+                dto.volume(),
+                dto.collectionDate()
         );
     }
 
@@ -37,7 +38,8 @@ public class WaterMapperBO {
         return new WaterDTO(
                 bo.getId(),
                 bo.getAviary().getId(),
-                bo.getVolume()
+                bo.getVolume(),
+                bo.getCollectionDate()
         );
     }
 
