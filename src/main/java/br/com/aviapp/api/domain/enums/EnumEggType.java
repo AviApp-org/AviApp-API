@@ -1,5 +1,8 @@
 package br.com.aviapp.api.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum EnumEggType {
     CLEAN("Limpo"),
     NEST_DIRTY("Sujo de ninho"),
@@ -16,7 +19,5 @@ public enum EnumEggType {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
+
 }
