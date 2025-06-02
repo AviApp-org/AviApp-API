@@ -8,19 +8,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetWaterRecordByDateUseCase {
+public class ListWaterRecordsByDateAndAviaryUseCase {
 
     private final WaterRepository waterRepository;
     private final WaterMapperBO mapperBO;
 
-    public GetWaterRecordByDateUseCase(WaterRepository waterRepository, WaterMapperBO mapperBO) {
+    public ListWaterRecordsByDateAndAviaryUseCase(WaterRepository waterRepository, WaterMapperBO mapperBO) {
         this.waterRepository = waterRepository;
         this.mapperBO = mapperBO;
     }
 
-    public List<WaterDTO> invoke(LocalDate date) {
-        return waterRepository.getWaterRecordByDate(date).stream()
-                .map(mapperBO ::toBO)
+    public List<WaterDTO> invoke(LocalDate date, Long aviaryId) {
+        return waterRepository.getWaterRecordByAviaryAndDate(aviaryId, date).stream()
+                .map(mapperBO::toBO)
                 .map(mapperBO::toDTO)
                 .collect(Collectors.toList());
     }

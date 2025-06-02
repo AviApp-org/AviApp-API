@@ -14,37 +14,37 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 public class EmployeeConfig {
 
     @Bean
-    UpdateEmployeeUseCase updateEmployeeUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
+    public UpdateEmployeeUseCase updateEmployeeUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new UpdateEmployeeUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    CreateEmployeeUseCase createEmployeeUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
+    public CreateEmployeeUseCase createEmployeeUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new CreateEmployeeUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    DeleteEmployeeUseCase deleteEmployeeUseCase(EmployeeRepository employeeRepository) {
+    public DeleteEmployeeUseCase deleteEmployeeUseCase(EmployeeRepository employeeRepository) {
         return new DeleteEmployeeUseCase(employeeRepository);
     }
 
     @Bean
-    ListAllEmployeesUseCase listAllEmployeesUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
+    public ListAllEmployeesUseCase listAllEmployeesUseCase(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new ListAllEmployeesUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    FindEmployeeByIdUseCase findEmployeeById(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
+    public FindEmployeeByIdUseCase findEmployeeById(EmployeeRepository employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new FindEmployeeByIdUseCase(employeeRepository, employeeMapperBO);
     }
 
     @Bean
-    EmployeeMapperEntity employeeMapper(EntityLookupRepository entityLookupRepository) {
+    public EmployeeMapperEntity employeeMapper(EntityLookupRepository entityLookupRepository) {
         return new EmployeeMapperEntity(entityLookupRepository);
     }
 
     @Bean
-    EmployeeMapperBO employeeMapperBO(LookUpRepository lookUpRepository) {
+    public EmployeeMapperBO employeeMapperBO(LookUpRepository lookUpRepository) {
         return new EmployeeMapperBO(lookUpRepository);
     }
 }

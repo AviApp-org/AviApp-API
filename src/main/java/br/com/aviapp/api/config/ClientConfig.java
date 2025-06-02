@@ -18,47 +18,47 @@ import br.com.aviapp.api.infra.mappers.ClientMapperEntity;
 public class ClientConfig {
 
     @Bean   
-    ActivateClientUseCase activateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public ActivateClientUseCase activateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new ActivateClientUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    DeactivateClientUseCase deactivateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public DeactivateClientUseCase deactivateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new DeactivateClientUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    CreateClientUseCase createCliente(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public CreateClientUseCase createCliente(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new CreateClientUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    DeleteClientUseCase deleteClient(ClientRepository clientRepository) {
+    public DeleteClientUseCase deleteClient(ClientRepository clientRepository) {
         return new DeleteClientUseCase(clientRepository);
     }
 
     @Bean
-    FindClientByIdUseCase findClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public FindClientByIdUseCase findClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new FindClientByIdUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    ListClientsUseCase listAllClients(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public ListClientsUseCase listAllClients(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new ListClientsUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    UpdateClientUseCase updateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
+    public UpdateClientUseCase updateClient(ClientRepository clientRepository, ClientMapperBO mapperBO) {
         return new UpdateClientUseCase(clientRepository, mapperBO);
     }
 
     @Bean
-    ClientMapperEntity returnClientEntityMapper() {
+    public ClientMapperEntity returnClientEntityMapper() {
         return new ClientMapperEntity();
     }
 
     @Bean
-    ClientMapperBO returnClientMapperBO() {
+    public ClientMapperBO returnClientMapperBO() {
         return new ClientMapperBO();
     }
 }

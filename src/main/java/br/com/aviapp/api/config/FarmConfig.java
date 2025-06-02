@@ -22,12 +22,12 @@ public class FarmConfig {
 
 
     @Bean
-    FarmMapperEntity farmMapperEntity(EntityLookupRepository lookupRepository) {
+    public FarmMapperEntity farmMapperEntity(EntityLookupRepository lookupRepository) {
         return new FarmMapperEntity(lookupRepository);
     }
 
     @Bean
-    FarmMapperBO farmMapperBO(
+    public FarmMapperBO farmMapperBO(
             LookUpRepository lookupRepository,
             ClientMapperBO clientMapper,
             AddressMapperBO addressMapper,
@@ -36,22 +36,22 @@ public class FarmConfig {
     }
 
     @Bean
-    CreateFarmUseCase createFarmUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
+    public CreateFarmUseCase createFarmUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
         return new CreateFarmUseCase(repository, mapperBO);
     }
 
     @Bean
-    FindFarmByIdUseCase findFarmByIdUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
+    public FindFarmByIdUseCase findFarmByIdUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
         return new FindFarmByIdUseCase(repository, mapperBO);
     }
 
     @Bean
-    ListAllFarmsUseCase listAllFarmsUseCase(FarmRepository repository, FarmMapperBO mapperBO){
+    public ListAllFarmsUseCase listAllFarmsUseCase(FarmRepository repository, FarmMapperBO mapperBO){
         return new ListAllFarmsUseCase(repository, mapperBO);
     }
 
     @Bean
-    DeleteFarmByIdUseCase deleteFarmByIdUseCase (FarmRepository repository) {
+    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (FarmRepository repository) {
         return new DeleteFarmByIdUseCase(repository);
     }
 }
