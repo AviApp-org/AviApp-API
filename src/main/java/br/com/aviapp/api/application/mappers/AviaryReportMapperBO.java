@@ -88,7 +88,7 @@ public class AviaryReportMapperBO {
                 eggDetailPercentages,
                 bo.getMarketEggs(),
                 bo.getDumpEggs(),
-                bo.getIncubateEggs()
+                bo.getHatchableEggs()
         );
     }
 
