@@ -3,6 +3,7 @@ package br.com.aviapp.api.controllers;
 import br.com.aviapp.api.application.dto.EggValueDTO;
 import br.com.aviapp.api.application.usecases.eggValue.CreateEggValueUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.DeleteEggValueUseCase;
+import br.com.aviapp.api.application.usecases.eggValue.GetLastInsertedEggValueUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.ListAllEggValuesUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,13 @@ public class EggValueController {
     private final CreateEggValueUseCase createEggValueUseCase;
     private final ListAllEggValuesUseCase listAllEggValuesUseCase;
     private final DeleteEggValueUseCase deleteEggValueUseCase;
+    private final GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase;
 
-    public EggValueController(CreateEggValueUseCase createEggValueUseCase, ListAllEggValuesUseCase listAllEggValuesUseCase, DeleteEggValueUseCase deleteEggValueUseCase) {
+    public EggValueController(CreateEggValueUseCase createEggValueUseCase, ListAllEggValuesUseCase listAllEggValuesUseCase, DeleteEggValueUseCase deleteEggValueUseCase, GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase) {
         this.createEggValueUseCase = createEggValueUseCase;
         this.listAllEggValuesUseCase = listAllEggValuesUseCase;
         this.deleteEggValueUseCase = deleteEggValueUseCase;
+        this.getLastInsertedEggValueUseCase = getLastInsertedEggValueUseCase;
     }
 
     @PostMapping
@@ -37,6 +40,12 @@ public class EggValueController {
     public ResponseEntity<List<EggValueDTO>> listAllEggValues() {
         List<EggValueDTO> eggValues = listAllEggValuesUseCase.invoke();
         return ResponseEntity.ok(eggValues);
+    }
+
+    @GetMapping("/last")
+    public ResponseEntity<EggValueDTO> getLastInsertedEggValue() {
+        EggValueDTO lastInsertedEggValue = getLastInsertedEggValueUseCase.invoke();
+        return ResponseEntity.ok(lastInsertedEggValue);
     }
 
     @DeleteMapping("/{id}")

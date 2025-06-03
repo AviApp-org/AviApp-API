@@ -1,7 +1,6 @@
 package br.com.aviapp.api.application.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public record DailyReportDTO(LocalDate date, List<AviaryReportDTO> aviaryReports, int totalEggsCollected, int totalDeadBirds,
@@ -10,6 +9,6 @@ public record DailyReportDTO(LocalDate date, List<AviaryReportDTO> aviaryReports
                              double roosterMortality, double chickenMortality, double mortality,
                              double chickenRoosterProportion, List<EggDetailDTO> quantityByEggType,
                              List<EggDetailPercentageDTO> percentageByEggType,
-                             int marketEggs, int dumpEggs, int incubateEggs) {
+                             int marketEggs, int dumpEggs, int hatchableEggs) {
 }
 

@@ -6,17 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DailyReportBO {
+public class DailyReportVO {
 
     private LocalDate date;
-    private List<AviaryReportBO> aviaryReports;
+    private List<AviaryReportVO> aviaryReports;
     private int totalEggsCollected;
     private int totalDeadBirds;
     private int totalDeadChickens;
@@ -33,6 +32,6 @@ public class DailyReportBO {
     private List<EggDetailPercentageVO> percentageByEggType;
     private int marketEggs;
     private int dumpEggs;
-    private int incubateEggs;
+    private int hatchableEggs;
 
 }

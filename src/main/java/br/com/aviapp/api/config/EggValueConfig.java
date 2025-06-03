@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.gateways.EggValueRepository;
 import br.com.aviapp.api.application.mappers.EggValueMapperBO;
 import br.com.aviapp.api.application.usecases.eggValue.CreateEggValueUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.DeleteEggValueUseCase;
+import br.com.aviapp.api.application.usecases.eggValue.GetLastInsertedEggValueUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.ListAllEggValuesUseCase;
 import br.com.aviapp.api.infra.mappers.EggValueMapperEntity;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,11 @@ public class EggValueConfig {
     @Bean
     public CreateEggValueUseCase createEggValueUseCase(EggValueMapperBO mapperBO, EggValueRepository repository) {
         return new CreateEggValueUseCase(repository, mapperBO);
+    }
+
+    @Bean
+    public GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase(EggValueRepository repository, EggValueMapperBO mapperBO) {
+        return new GetLastInsertedEggValueUseCase(repository, mapperBO);
     }
 
     @Bean

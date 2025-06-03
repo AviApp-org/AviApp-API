@@ -11,4 +11,6 @@ public interface EggValueRepository {
     List<EggValueDTO> listAllEggValues();
 
     void deleteEggValue(Long eggValueId);
+
+    EggValueDTO getLastInsertedEggValue();
 }

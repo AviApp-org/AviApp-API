@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 public class DailyReportFactory extends CollectCalculator {
 
-    public static DailyReportBO createDailyReport(List<AviaryReportBO> aviaryReports, LocalDate date) {
-        int totalEggsCollected = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalEggsCollected).sum();
-        int totalDeadChickens = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadChickens).sum();
-        int totalDeadRoosters = aviaryReports.stream().mapToInt(AviaryReportBO::getTotalDeadRoosters).sum();
+    public static DailyReportVO createDailyReport(List<AviaryReportVO> aviaryReports, LocalDate date) {
+        int totalEggsCollected = aviaryReports.stream().mapToInt(AviaryReportVO::getTotalEggsCollected).sum();
+        int totalDeadChickens = aviaryReports.stream().mapToInt(AviaryReportVO::getTotalDeadChickens).sum();
+        int totalDeadRoosters = aviaryReports.stream().mapToInt(AviaryReportVO::getTotalDeadRoosters).sum();
         int totalDeadBirds = totalDeadChickens + totalDeadRoosters;
 
-        int currentChickens = aviaryReports.stream().mapToInt(AviaryReportBO::getCurrentChickens).sum();
-        int currentRoosters = aviaryReports.stream().mapToInt(AviaryReportBO::getCurrentRoosters).sum();
+        int currentChickens = aviaryReports.stream().mapToInt(AviaryReportVO::getCurrentChickens).sum();
+        int currentRoosters = aviaryReports.stream().mapToInt(AviaryReportVO::getCurrentRoosters).sum();
 
         int totalBirds = currentChickens + currentRoosters;
 
@@ -28,13 +28,13 @@ public class DailyReportFactory extends CollectCalculator {
 
         List<EggDetailBO> quantityByEggType = calculateTotalEggsByType(aviaryReports);
 
-        int marketEggs = calculateMarketEggsByType(quantityByEggType);
-        int dumpEggs = calculateDumpEggsByType(quantityByEggType);
-        int incubateEggs = calculateIncubateEggs(quantityByEggType);
+        int marketEggs = calculateMarketEggs(quantityByEggType);
+        int dumpEggs = calculateDumpEggs(quantityByEggType);
+        int incubateEggs = calculateHatchableEggs(quantityByEggType);
 
         List<EggDetailPercentageVO> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
 
-        return new DailyReportBO(
+        return new DailyReportVO(
                 date,
                 aviaryReports,
                 totalEggsCollected,
@@ -57,10 +57,10 @@ public class DailyReportFactory extends CollectCalculator {
         );
     }
 
-    private static List<EggDetailBO> calculateTotalEggsByType(List<AviaryReportBO> aviaryReports) {
+    private static List<EggDetailBO> calculateTotalEggsByType(List<AviaryReportVO> aviaryReports) {
         Map<String, Integer> eggTypeQuantityMap = new HashMap<>();
 
-        for (AviaryReportBO aviaryReport : aviaryReports) {
+        for (AviaryReportVO aviaryReport : aviaryReports) {
             if (aviaryReport.getQuantityByEggType() != null) {
                 for (EggDetailBO eggDetail : aviaryReport.getQuantityByEggType()) {
                     String type = String.valueOf(eggDetail.getType());

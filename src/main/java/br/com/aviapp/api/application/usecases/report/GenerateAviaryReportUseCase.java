@@ -10,13 +10,11 @@ import br.com.aviapp.api.application.usecases.aviary.FindAviaryByIdUseCase;
 import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByDateAndAviaryUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByDateAndAviaryUseCase;
 import br.com.aviapp.api.domain.entities.AviaryBO;
-import br.com.aviapp.api.domain.entities.AviaryReportBO;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
 import br.com.aviapp.api.domain.factories.AviaryReportFactory;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +29,8 @@ public class GenerateAviaryReportUseCase {
     private final AviaryReportMapperBO aviaryReportMapperBO;
 
     public GenerateAviaryReportUseCase(ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase, ListChickenCollectsByDateAndAviaryUseCase listCollectChickensByDateAndAviaryUseCase,
-                                       FindAviaryByIdUseCase findAviaryByIdUseCase, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, AviaryMapperBO aviaryMapperBO, AviaryReportMapperBO aviaryReportMapperBO) {
+                                       FindAviaryByIdUseCase findAviaryByIdUseCase, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, AviaryMapperBO aviaryMapperBO,
+                                       AviaryReportMapperBO aviaryReportMapperBO) {
         this.listEggCollectsByDateAndAviaryUseCase = listEggCollectsByDateAndAviaryUseCase;
         this.listCollectChickensByDateAndAviaryUseCase = listCollectChickensByDateAndAviaryUseCase;
         this.findAviaryByIdUseCase = findAviaryByIdUseCase;

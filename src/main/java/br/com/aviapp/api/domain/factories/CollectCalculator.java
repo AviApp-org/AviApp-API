@@ -70,7 +70,7 @@ public abstract class CollectCalculator {
         return percentages;
     }
 
-    protected static int calculateMarketEggsByType(List<EggDetailBO> eggDetails) {
+    protected static int calculateMarketEggs(List<EggDetailBO> eggDetails) {
         if (eggDetails == null) return 0;
 
         return eggDetails.stream()
@@ -81,7 +81,7 @@ public abstract class CollectCalculator {
                 .sum();
     }
 
-    protected static int calculateDumpEggsByType(List<EggDetailBO> eggDetails) {
+    protected static int calculateDumpEggs(List<EggDetailBO> eggDetails) {
         if (eggDetails == null) return 0;
 
         return eggDetails.stream()
@@ -91,7 +91,7 @@ public abstract class CollectCalculator {
                 .sum();
     }
 
-    protected static int calculateIncubateEggs(List<EggDetailBO> eggDetails) {
+    protected static int calculateHatchableEggs(List<EggDetailBO> eggDetails) {
         if (eggDetails == null) return 0;
 
         return eggDetails.stream()

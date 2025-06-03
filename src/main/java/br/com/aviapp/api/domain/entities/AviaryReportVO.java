@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AviaryReportBO {
+public class AviaryReportVO {
 
     private String name;
     private List<CollectEggBO> collectEggs;
@@ -32,6 +32,6 @@ public class AviaryReportBO {
     private List<EggDetailPercentageVO> percentageByEggType;
     private int marketEggs;
     private int dumpEggs;
-    private int incubateEggs;
+    private int hatchableEggs;
 
 }

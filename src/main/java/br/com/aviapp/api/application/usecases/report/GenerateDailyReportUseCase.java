@@ -7,15 +7,12 @@ import br.com.aviapp.api.application.mappers.DailyReportMapperBO;
 import br.com.aviapp.api.application.usecases.aviary.ListAviariesByBatchUseCase;
 import br.com.aviapp.api.application.usecases.batch.FindBatchByIdUseCase;
 import br.com.aviapp.api.domain.entities.AviaryBO;
-import br.com.aviapp.api.domain.entities.AviaryReportBO;
-import br.com.aviapp.api.domain.entities.DailyReportBO;
+import br.com.aviapp.api.domain.entities.AviaryReportVO;
+import br.com.aviapp.api.domain.entities.DailyReportVO;
 import br.com.aviapp.api.domain.factories.DailyReportFactory;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +43,11 @@ public class GenerateDailyReportUseCase {
           aviaryReports.add(generateAviaryReportUseCase.invoke(aviary.getId(), date));
         }
 
-        List<AviaryReportBO> aviaryReportBO = aviaryReportMapperBO.toBOList(aviaryReports);
+        List<AviaryReportVO> aviaryReportVO = aviaryReportMapperBO.toBOList(aviaryReports);
 
-        DailyReportBO dailyReportBO = DailyReportFactory.createDailyReport(aviaryReportBO, date);
+        DailyReportVO dailyReportVO = DailyReportFactory.createDailyReport(aviaryReportVO, date);
 
-        return dailyReportMapperBO.toDTO(dailyReportBO);
+        return dailyReportMapperBO.toDTO(dailyReportVO);
     }
 
     public WeeklyReportDTO generateWeeklyReport(Long batchId, LocalDate startDate) {
@@ -72,5 +69,22 @@ public class GenerateDailyReportUseCase {
         return new WeeklyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
     }
 
+    public MonthlyReportDTO generateMonthlyReport(Long batchId, LocalDate startDate) {
+        List<DailyReportDTO> dailyReports = new ArrayList<>();
+        Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
+
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+
+        while (startDate.isBefore(endDate)) {
+
+            DailyReportDTO dailyReport = invoke(batchId, startDate);
+
+            dailyReports.add(dailyReport);
+
+            startDate = startDate.plusDays(1);
+
+        }
+        return new MonthlyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
+    }
 
 }

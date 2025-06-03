@@ -38,4 +38,9 @@ public class EggValueRepositoryImpl implements EggValueRepository {
         repositoryJPA.deleteById(eggValueId);
     }
 
+    @Override
+    public EggValueDTO getLastInsertedEggValue() {
+        return  mapperEntity.toDTO(repositoryJPA.findLastInsertedEggValue());
+    }
+
 }

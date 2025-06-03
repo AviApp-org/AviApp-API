@@ -4,8 +4,8 @@ import br.com.aviapp.api.application.dto.AviaryReportDTO;
 import br.com.aviapp.api.application.dto.DailyReportDTO;
 import br.com.aviapp.api.application.dto.EggDetailDTO;
 import br.com.aviapp.api.application.dto.EggDetailPercentageDTO;
-import br.com.aviapp.api.domain.entities.AviaryReportBO;
-import br.com.aviapp.api.domain.entities.DailyReportBO;
+import br.com.aviapp.api.domain.entities.AviaryReportVO;
+import br.com.aviapp.api.domain.entities.DailyReportVO;
 import br.com.aviapp.api.domain.entities.EggDetailBO;
 import br.com.aviapp.api.domain.entities.EggDetailPercentageVO;
 
@@ -22,9 +22,9 @@ public class DailyReportMapperBO {
         this.eggDetailMapperBO = eggDetailMapperBO;
     }
 
-    public DailyReportBO toBO(DailyReportDTO dto) {
+    public DailyReportVO toBO(DailyReportDTO dto) {
 
-        List<AviaryReportBO> aviaryReports = aviaryReportMapperBO.toBOList(dto.aviaryReports());
+        List<AviaryReportVO> aviaryReports = aviaryReportMapperBO.toBOList(dto.aviaryReports());
         List<EggDetailBO> quantityByEggType = dto.quantityByEggType() != null ?
                 eggDetailMapperBO.toBOList(dto.quantityByEggType()) :
                 null;
@@ -33,7 +33,7 @@ public class DailyReportMapperBO {
                 eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
                     null;
 
-        return new DailyReportBO(
+        return new DailyReportVO(
                 dto.date(),
                 aviaryReports,
                 dto.totalEggsCollected(),
@@ -52,11 +52,11 @@ public class DailyReportMapperBO {
                 eggDetailPercentageVOS,
                 dto.marketEggs(),
                 dto.dumpEggs(),
-                dto.incubateEggs()
+                dto.hatchableEggs()
         );
     }
 
-    public DailyReportDTO toDTO(DailyReportBO bo) {
+    public DailyReportDTO toDTO(DailyReportVO bo) {
 
         List<AviaryReportDTO> aviaryReportDTOs = aviaryReportMapperBO.toDTOList(bo.getAviaryReports());
         List<EggDetailDTO> quantityByEggType = bo.getQuantityByEggType() != null ?
@@ -86,17 +86,17 @@ public class DailyReportMapperBO {
                 eggDetailPercentages,
                 bo.getMarketEggs(),
                 bo.getDumpEggs(),
-                bo.getIncubateEggs()
+                bo.getHatchableEggs()
         );
     }
 
-    public List<DailyReportBO> toBOList(List<DailyReportDTO> dtos) {
+    public List<DailyReportVO> toBOList(List<DailyReportDTO> dtos) {
         return dtos.stream()
                 .map(this::toBO)
                 .collect(Collectors.toList());
     }
 
-    public List<DailyReportDTO> toDTOList(List<DailyReportBO> bos) {
+    public List<DailyReportDTO> toDTOList(List<DailyReportVO> bos) {
         return bos.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());

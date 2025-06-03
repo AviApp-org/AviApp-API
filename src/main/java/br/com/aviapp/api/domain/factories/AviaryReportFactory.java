@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AviaryReportFactory extends CollectCalculator {
 
-    public static AviaryReportBO createFromAviary(AviaryBO aviary, List<CollectEggBO> collectEggs, List<CollectChickenBO> collectChickens) {
+    public static AviaryReportVO createFromAviary(AviaryBO aviary, List<CollectEggBO> collectEggs, List<CollectChickenBO> collectChickens) {
         int totalEggsCollected = calculateTotalEggs(collectEggs);
         int totalDeadChickens = calculateDeadChickens(collectChickens);
         int totalDeadRoosters = calculateDeadRoosters(collectChickens);
@@ -23,13 +23,13 @@ public class AviaryReportFactory extends CollectCalculator {
 
         List<EggDetailBO> quantityByEggType = calculateEggsByType(collectEggs);
 
-        int marketEggs = calculateMarketEggsByType(quantityByEggType);
-        int dumpEggs = calculateDumpEggsByType(quantityByEggType);
-        int incubateEggs = calculateIncubateEggs(quantityByEggType);
+        int marketEggs = calculateMarketEggs(quantityByEggType);
+        int dumpEggs = calculateDumpEggs(quantityByEggType);
+        int incubateEggs = calculateHatchableEggs(quantityByEggType);
 
         List<EggDetailPercentageVO> percentageByEggType = calculateEggPercentageByType(quantityByEggType, totalEggsCollected);
 
-        return new AviaryReportBO(
+        return new AviaryReportVO(
                 aviary.getName(),
                 collectEggs,
                 collectChickens,

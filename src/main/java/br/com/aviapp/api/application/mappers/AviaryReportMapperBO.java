@@ -21,7 +21,7 @@ public class AviaryReportMapperBO {
         this.eggDetailMapperBO = eggDetailMapperBO;
     }
 
-    public AviaryReportBO toBO(AviaryReportDTO dto) {
+    public AviaryReportVO toBO(AviaryReportDTO dto) {
         List<CollectEggBO> collectEggs = collectEggMapperBO.toBOList(dto.eggCollects());
         List<CollectChickenBO> collectChickens = collectChickenMapperBO.toBOList(dto.chickenCollect());
         List<EggDetailBO> quantityByEggType = dto.quantityByEggType() != null ?
@@ -32,7 +32,7 @@ public class AviaryReportMapperBO {
                 eggDetailMapperBO.toBOListPercentagem(dto.percentageByEggType()) :
                 null;
 
-        return new AviaryReportBO(
+        return new AviaryReportVO(
                 dto.name(),
                 collectEggs,
                 collectChickens,
@@ -52,12 +52,12 @@ public class AviaryReportMapperBO {
                 eggDetailPercentageVOS,
                 dto.marketEggs(),
                 dto.dumpEggs(),
-                dto.incubateEggs()
+                dto.hatchableEggs()
 
         );
     }
 
-    public AviaryReportDTO toDTO(AviaryReportBO bo) {
+    public AviaryReportDTO toDTO(AviaryReportVO bo) {
         List<CollectEggDataDTO> eggCollects = collectEggMapperBO.toDTOList(bo.getCollectEggs());
         List<CollectChickenDTO> chickenCollect = collectChickenMapperBO.toDTOList(bo.getCollectChickens());
         List<EggDetailDTO> quantityByEggType = bo.getQuantityByEggType() != null ?
@@ -92,13 +92,13 @@ public class AviaryReportMapperBO {
         );
     }
 
-    public List<AviaryReportBO> toBOList(List<AviaryReportDTO> dtos) {
+    public List<AviaryReportVO> toBOList(List<AviaryReportDTO> dtos) {
         return dtos.stream()
                 .map(this::toBO)
                 .collect(Collectors.toList());
     }
 
-    public List<AviaryReportDTO> toDTOList(List<AviaryReportBO> bos) {
+    public List<AviaryReportDTO> toDTOList(List<AviaryReportVO> bos) {
         return bos.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());

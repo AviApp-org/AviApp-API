@@ -7,5 +7,5 @@ public record AviaryReportDTO(String name, List<CollectEggDataDTO> eggCollects, 
                               int currentChickens, int currentRoosters, int totalBirds, double production,
                               double roosterMortality, double chickenMortality, double mortality,
                               double chickenRoosterProportion, List<EggDetailDTO> quantityByEggType, List<EggDetailPercentageDTO> percentageByEggType,
-                              int marketEggs, int dumpEggs, int incubateEggs) {
+                              int marketEggs, int dumpEggs, int hatchableEggs) {
 }
