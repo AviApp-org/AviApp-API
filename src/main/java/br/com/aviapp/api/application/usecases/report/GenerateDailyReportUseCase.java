@@ -73,9 +73,9 @@ public class GenerateDailyReportUseCase {
         List<DailyReportDTO> dailyReports = new ArrayList<>();
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
 
-        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+        LocalDate endDate = startDate.plusMonths(1);
 
-        while (startDate.isBefore(endDate)) {
+        while (!startDate.isEqual(endDate)) {
 
             DailyReportDTO dailyReport = invoke(batchId, startDate);
 
