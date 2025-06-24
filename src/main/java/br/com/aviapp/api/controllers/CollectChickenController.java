@@ -22,14 +22,16 @@ public class CollectChickenController {
     private final ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase;
     private final GetChickenCollectByDateUseCase getChickenCollectByDateUseCase;
     private final DeleteChickenCollectUseCase deleteChickenCollectUseCase;
+    private final ListChickenCollectsByDateAndAviaryUseCase listChickenCollectsByDateAndAviaryUseCase;
 
     public CollectChickenController(CreateChickenCollectUseCase createChickenCollectUseCase,
-                                    ListAllChickenCollectUseCase listAllChickenCollectUseCase, ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase, GetChickenCollectByDateUseCase getChickenCollectByDateUseCase, DeleteChickenCollectUseCase deleteChickenCollectUseCase) {
+                                    ListAllChickenCollectUseCase listAllChickenCollectUseCase, ListChickenCollectsByAviaryUseCase listChickenCollectsByAviaryUseCase, GetChickenCollectByDateUseCase getChickenCollectByDateUseCase, DeleteChickenCollectUseCase deleteChickenCollectUseCase, ListChickenCollectsByDateAndAviaryUseCase listChickenCollectsByDateAndAviaryUseCase) {
         this.createChickenCollectUseCase = createChickenCollectUseCase;
         this.listAllChickenCollectUseCase = listAllChickenCollectUseCase;
         this.listChickenCollectsByAviaryUseCase = listChickenCollectsByAviaryUseCase;
         this.getChickenCollectByDateUseCase = getChickenCollectByDateUseCase;
         this.deleteChickenCollectUseCase = deleteChickenCollectUseCase;
+        this.listChickenCollectsByDateAndAviaryUseCase = listChickenCollectsByDateAndAviaryUseCase;
     }
 
     @PostMapping
@@ -56,6 +58,15 @@ public class CollectChickenController {
             @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
         List<CollectChickenDTO> chickenCollects = getChickenCollectByDateUseCase.invoke(date);
+        return ResponseEntity.ok(chickenCollects);
+    }
+
+    @GetMapping("/date-aviary/{date}/aviary/{aviaryId}")
+    public ResponseEntity<List<CollectChickenDTO>> listChickenCollectsByDateAndAviary(
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,
+            @PathVariable Long aviaryId) {
+
+        List<CollectChickenDTO> chickenCollects = listChickenCollectsByDateAndAviaryUseCase.invoke(aviaryId, date);
         return ResponseEntity.ok(chickenCollects);
     }
 
