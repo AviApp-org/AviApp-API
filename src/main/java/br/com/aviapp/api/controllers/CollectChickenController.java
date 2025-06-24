@@ -61,7 +61,7 @@ public class CollectChickenController {
         return ResponseEntity.ok(chickenCollects);
     }
 
-    @GetMapping("/date-aviary/{date}/aviary/{aviaryId}")
+    @GetMapping("/date/{date}/aviary/{aviaryId}")
     public ResponseEntity<List<CollectChickenDTO>> listChickenCollectsByDateAndAviary(
             @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,
             @PathVariable Long aviaryId) {
