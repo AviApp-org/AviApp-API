@@ -22,13 +22,15 @@ public class CollectEggController {
     private final ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase;
     private final GetEggCollectByDateUseCase getEggCollectByDateUseCase;
     private final DeleteEggCollectUseCase deleteEggCollectUseCase;
+    private final ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase;
 
-    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, GetEggCollectByDateUseCase getEggCollectByDateUseCase, DeleteEggCollectUseCase deleteEggCollectUseCase) {
+    public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, GetEggCollectByDateUseCase getEggCollectByDateUseCase, DeleteEggCollectUseCase deleteEggCollectUseCase, ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase) {
         this.createEggCollectUseCase = createEggCollectUseCase;
         this.listAllEggCollectsUseCase = listAllEggCollectsUseCase;
         this.listEggCollectsByAviaryUseCase = listEggCollectsByAviaryUseCase;
         this.getEggCollectByDateUseCase = getEggCollectByDateUseCase;
         this.deleteEggCollectUseCase = deleteEggCollectUseCase;
+        this.listEggCollectsByDateAndAviaryUseCase = listEggCollectsByDateAndAviaryUseCase;
     }
 
     @PostMapping
@@ -54,6 +56,15 @@ public class CollectEggController {
             @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
         List<CollectEggDataDTO> eggCollects = getEggCollectByDateUseCase.invoke(date);
+        return ResponseEntity.ok(eggCollects);
+    }
+
+    @GetMapping("/date/{date}/aviary/{aviaryId}")
+    public ResponseEntity<List<CollectEggDataDTO>> getEggCollectByDateAndAviary(
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,
+            @PathVariable Long aviaryId) {
+
+        List<CollectEggDataDTO> eggCollects = listEggCollectsByDateAndAviaryUseCase.invoke(aviaryId, date);
         return ResponseEntity.ok(eggCollects);
     }
 

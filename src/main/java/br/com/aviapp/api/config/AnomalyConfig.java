@@ -28,8 +28,6 @@ public class AnomalyConfig {
         return new ListAllAnomaliesUseCase(repository, mapperBO);
     }
 
-
-
     @Bean
     public AnomalyMapperBO anomalyMapperBO() {
         return new AnomalyMapperBO();
