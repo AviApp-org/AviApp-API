@@ -35,8 +35,11 @@ public class GenerateDailyReportUseCase {
     }
 
     public DailyReportDTO invoke(Long batchId, LocalDate date) {
+
         Optional<List<AviaryDTO>> aviaryDTO = listAviariesByBatchUseCase.invoke(batchId);
+
         List<AviaryBO> aviaryBO = aviaryMapperBO.toBOList(aviaryDTO.get());
+
         List<AviaryReportDTO> aviaryReports = new ArrayList<>();
 
         for (AviaryBO aviary : aviaryBO) {
@@ -51,7 +54,9 @@ public class GenerateDailyReportUseCase {
     }
 
     public WeeklyReportDTO generateWeeklyReport(Long batchId, LocalDate startDate) {
+
         List<DailyReportDTO> dailyReports = new ArrayList<>();
+
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
 
         LocalDate endDate = startDate.plusDays(6);
@@ -70,7 +75,9 @@ public class GenerateDailyReportUseCase {
     }
 
     public MonthlyReportDTO generateMonthlyReport(Long batchId, LocalDate startDate) {
+
         List<DailyReportDTO> dailyReports = new ArrayList<>();
+
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
 
         LocalDate endDate = startDate.plusMonths(1);
@@ -84,6 +91,7 @@ public class GenerateDailyReportUseCase {
             startDate = startDate.plusDays(1);
 
         }
+
         return new MonthlyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
     }
 
