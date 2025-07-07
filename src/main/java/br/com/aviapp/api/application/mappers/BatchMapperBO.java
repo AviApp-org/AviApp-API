@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.BatchBO;
 
 public class BatchMapperBO {
     private final FarmMapperBO farmMapper;
-    private final LookUpRepository lookUpRepository;
+    private final ILookUp lookUpRepository;
 
-    public BatchMapperBO(FarmMapperBO farmMapper, LookUpRepository lookUpRepository) {
+    public BatchMapperBO(FarmMapperBO farmMapper, ILookUp lookUpRepository) {
         this.farmMapper = farmMapper;
         this.lookUpRepository = lookUpRepository;
     }

@@ -4,14 +4,14 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.exceptions.NotFoundException;
-import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.gateways.IAddress;
 import br.com.aviapp.api.application.mappers.AddressMapperBO;
 
 public class FindAddressByIdUseCase {
-    private final AddressRepository repository;
+    private final IAddress repository;
     private final AddressMapperBO mapper;
 
-    public FindAddressByIdUseCase(AddressRepository repository, AddressMapperBO mapper) {
+    public FindAddressByIdUseCase(IAddress repository, AddressMapperBO mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

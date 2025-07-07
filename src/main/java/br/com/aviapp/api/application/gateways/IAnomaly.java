@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.aviapp.api.application.dto.AnomalyDTO;
 
-public interface AnomalyRepository {
+public interface IAnomaly {
 
      AnomalyDTO createAnomaly(AnomalyDTO anomalyDTO);
 

@@ -1,7 +1,7 @@
 package br.com.aviapp.api.infra.gateways;
 
 import br.com.aviapp.api.application.dto.WaterDTO;
-import br.com.aviapp.api.application.gateways.WaterRepository;
+import br.com.aviapp.api.application.gateways.IWater;
 import br.com.aviapp.api.infra.mappers.WaterMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlWaterEntity;
 import br.com.aviapp.api.infra.mysql.repository.WaterRepositoryJPA;
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class WaterRepositoryImpl implements WaterRepository {
+public class WaterRepository implements IWater {
 
     private final WaterRepositoryJPA repositoryJPA;
     private final WaterMapperEntity mapperEntity;
 
-    public WaterRepositoryImpl(WaterRepositoryJPA repositoryJPA, WaterMapperEntity mapperEntity) {
+    public WaterRepository(WaterRepositoryJPA repositoryJPA, WaterMapperEntity mapperEntity) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
     }

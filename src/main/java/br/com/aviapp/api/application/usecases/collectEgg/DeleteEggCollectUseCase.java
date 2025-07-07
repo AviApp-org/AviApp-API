@@ -1,14 +1,14 @@
 package br.com.aviapp.api.application.usecases.collectEgg;
 
-import br.com.aviapp.api.application.gateways.CollectEggRepository;
+import br.com.aviapp.api.application.gateways.ICollectEgg;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
 
 public class DeleteEggCollectUseCase {
 
-    private final CollectEggRepository collectEggRepository;
+    private final ICollectEgg collectEggRepository;
     private final CollectEggMapperBO collectEggMapperBO;
 
-    public DeleteEggCollectUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public DeleteEggCollectUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         this.collectEggRepository = collectEggRepository;
         this.collectEggMapperBO = collectEggMapperBO;
     }

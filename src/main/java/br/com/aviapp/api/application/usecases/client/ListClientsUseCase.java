@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.ClientDTO;
-import br.com.aviapp.api.application.gateways.ClientRepository;
+import br.com.aviapp.api.application.gateways.IClient;
 import br.com.aviapp.api.application.mappers.ClientMapperBO;
 
 public class ListClientsUseCase {
 
-    private final ClientRepository repository;
+    private final IClient repository;
     private final ClientMapperBO mapper;
 
-    public ListClientsUseCase(ClientRepository repository, ClientMapperBO mapper) {
+    public ListClientsUseCase(IClient repository, ClientMapperBO mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

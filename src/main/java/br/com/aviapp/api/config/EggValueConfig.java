@@ -1,6 +1,6 @@
 package br.com.aviapp.api.config;
 
-import br.com.aviapp.api.application.gateways.EggValueRepository;
+import br.com.aviapp.api.application.gateways.IEggValue;
 import br.com.aviapp.api.application.mappers.EggValueMapperBO;
 import br.com.aviapp.api.application.usecases.eggValue.CreateEggValueUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.DeleteEggValueUseCase;
@@ -24,22 +24,22 @@ public class EggValueConfig {
     }
 
     @Bean
-    public CreateEggValueUseCase createEggValueUseCase(EggValueMapperBO mapperBO, EggValueRepository repository) {
+    public CreateEggValueUseCase createEggValueUseCase(EggValueMapperBO mapperBO, IEggValue repository) {
         return new CreateEggValueUseCase(repository, mapperBO);
     }
 
     @Bean
-    public GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase(EggValueRepository repository, EggValueMapperBO mapperBO) {
+    public GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase(IEggValue repository, EggValueMapperBO mapperBO) {
         return new GetLastInsertedEggValueUseCase(repository, mapperBO);
     }
 
     @Bean
-    public DeleteEggValueUseCase deleteEggValueUseCase(EggValueRepository repository) {
+    public DeleteEggValueUseCase deleteEggValueUseCase(IEggValue repository) {
         return new DeleteEggValueUseCase(repository);
     }
 
     @Bean
-    public ListAllEggValuesUseCase listAllEggValuesUseCase(EggValueRepository repository, EggValueMapperBO mapperBO) {
+    public ListAllEggValuesUseCase listAllEggValuesUseCase(IEggValue repository, EggValueMapperBO mapperBO) {
         return new ListAllEggValuesUseCase(repository, mapperBO);
     }
 }

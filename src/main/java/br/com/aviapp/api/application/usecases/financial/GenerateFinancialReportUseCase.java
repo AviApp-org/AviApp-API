@@ -3,9 +3,7 @@ package br.com.aviapp.api.application.usecases.financial;
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.FinancialDetailsDTO;
 import br.com.aviapp.api.application.mappers.*;
-import br.com.aviapp.api.application.usecases.aviary.FindAviaryByIdUseCase;
 import br.com.aviapp.api.application.usecases.aviary.ListAviariesByBatchUseCase;
-import br.com.aviapp.api.application.usecases.collectChicken.ListChickenCollectsByDateAndAviaryUseCase;
 import br.com.aviapp.api.application.usecases.collectEgg.ListEggCollectsByDateAndAviaryUseCase;
 import br.com.aviapp.api.application.usecases.eggValue.GetLastInsertedEggValueUseCase;
 import br.com.aviapp.api.domain.entities.*;
@@ -38,9 +36,14 @@ public class GenerateFinancialReportUseCase {
     }
 
 
-    public List<FinancialDetailsDTO> getDailyFinancialReport(LocalDate date, Long batchId) {
+    public List<FinancialDetailsDTO> getDailyFinancialReport(LocalDate date, Long batchId) throws Exception {
 
         Optional<List<AviaryDTO>> aviaries = listAviariesByBatchUseCase.invoke(batchId);
+
+        if (aviaries.isEmpty()){
+            throw new Exception("Nenhum aviário encontrado para o lote");
+        }
+
         List<FinancialDetailsVO> financialDetails = new ArrayList<>();
 
         for (AviaryDTO aviary : aviaries.get()) {

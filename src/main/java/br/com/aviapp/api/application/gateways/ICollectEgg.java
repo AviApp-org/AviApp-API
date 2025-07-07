@@ -3,11 +3,10 @@ package br.com.aviapp.api.application.gateways;
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface CollectEggRepository {
+public interface ICollectEgg {
 
     CollectEggDataDTO createCollectEgg(CollectEggDataDTO collectEggDataDTO);
 

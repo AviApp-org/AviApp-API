@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.AnomalyDTO;
-import br.com.aviapp.api.application.gateways.AnomalyRepository;
+import br.com.aviapp.api.application.gateways.IAnomaly;
 import br.com.aviapp.api.application.mappers.AnomalyMapperBO;
 
 public class ListAllAnomaliesUseCase {
-    private final AnomalyRepository anomalyRepository;
+    private final IAnomaly anomalyRepository;
     private final AnomalyMapperBO anomalyMapperBO;
 
-    public ListAllAnomaliesUseCase(AnomalyRepository anomalyRepository, AnomalyMapperBO anomalyMapperBO) {
+    public ListAllAnomaliesUseCase(IAnomaly anomalyRepository, AnomalyMapperBO anomalyMapperBO) {
         this.anomalyRepository = anomalyRepository;
         this.anomalyMapperBO = anomalyMapperBO;
     }

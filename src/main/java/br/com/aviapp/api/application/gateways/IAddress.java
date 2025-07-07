@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
 
-public interface AddressRepository {
+public interface IAddress {
 
     AddressDTO createAddress(AddressDTO address);
 

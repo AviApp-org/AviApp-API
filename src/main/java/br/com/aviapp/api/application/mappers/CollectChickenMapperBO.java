@@ -1,21 +1,20 @@
 package br.com.aviapp.api.application.mappers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.AviaryBO;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
 
 public class CollectChickenMapperBO {
-    private final LookUpRepository lookUpRepository;
+    private final ILookUp lookUpRepository;
     private final AviaryMapperBO aviaryMapperBO;
 
-    public CollectChickenMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO) {
+    public CollectChickenMapperBO(ILookUp lookUpRepository, AviaryMapperBO aviaryMapperBO) {
         this.lookUpRepository = lookUpRepository;
         this.aviaryMapperBO = aviaryMapperBO;
     }

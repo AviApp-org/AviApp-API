@@ -3,11 +3,10 @@ package br.com.aviapp.api.application.gateways;
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface CollectChickenRepository {
+public interface ICollectChicken {
 
     CollectChickenDTO createCollectChickenData(CollectChickenDTO collectChickenDataDTO);
 

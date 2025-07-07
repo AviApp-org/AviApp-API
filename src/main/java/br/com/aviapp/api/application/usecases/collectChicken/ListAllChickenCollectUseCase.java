@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.gateways.CollectChickenRepository;
+import br.com.aviapp.api.application.gateways.ICollectChicken;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
 
 public class ListAllChickenCollectUseCase {
     
-    private final CollectChickenRepository collectChickenRepository;
+    private final ICollectChicken collectChickenRepository;
     private final CollectChickenMapperBO collectChickenMapper;
 
-    public ListAllChickenCollectUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
+    public ListAllChickenCollectUseCase(ICollectChicken collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         this.collectChickenRepository = collectChickenRepository;
         this.collectChickenMapper = collectChickenMapper;
     }

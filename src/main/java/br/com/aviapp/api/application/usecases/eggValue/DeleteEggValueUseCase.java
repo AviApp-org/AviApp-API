@@ -1,12 +1,12 @@
 package br.com.aviapp.api.application.usecases.eggValue;
 
-import br.com.aviapp.api.application.gateways.EggValueRepository;
+import br.com.aviapp.api.application.gateways.IEggValue;
 
 public class DeleteEggValueUseCase {
 
-    private final EggValueRepository repository;
+    private final IEggValue repository;
 
-    public DeleteEggValueUseCase(EggValueRepository repository) {
+    public DeleteEggValueUseCase(IEggValue repository) {
         this.repository = repository;
     }
 

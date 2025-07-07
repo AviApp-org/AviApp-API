@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
 
-public interface AviaryRepository {
+public interface IAviary {
     
     AviaryDTO createAviary(AviaryDTO aviaryDTO);
 

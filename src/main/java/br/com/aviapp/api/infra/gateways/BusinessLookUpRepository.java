@@ -10,7 +10,7 @@ import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 import br.com.aviapp.api.infra.mappers.AviaryMapperEntity;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Repository
-public class BusinessLookUpRepositoryImpl implements LookUpRepository {
+public class BusinessLookUpRepository implements ILookUp {
 
     private final ClientRepositoryJPA clientRepository;
     private final AddressRepositoryJPA addressRepository;

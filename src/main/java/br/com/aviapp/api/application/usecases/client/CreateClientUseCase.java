@@ -1,16 +1,16 @@
 package br.com.aviapp.api.application.usecases.client;
 
 import br.com.aviapp.api.application.dto.ClientDTO;
-import br.com.aviapp.api.application.gateways.ClientRepository;
+import br.com.aviapp.api.application.gateways.IClient;
 import br.com.aviapp.api.application.mappers.ClientMapperBO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 
 public class CreateClientUseCase {
 
-    private final ClientRepository repository;
+    private final IClient repository;
     private final ClientMapperBO mapper;
 
-    public CreateClientUseCase(ClientRepository repository, ClientMapperBO mapper) {
+    public CreateClientUseCase(IClient repository, ClientMapperBO mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

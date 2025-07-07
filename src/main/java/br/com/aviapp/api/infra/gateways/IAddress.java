@@ -6,18 +6,17 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
-import br.com.aviapp.api.application.gateways.AddressRepository;
 import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 
 @Repository
-public class AddressRepositoryImpl implements AddressRepository {
+public class IAddress implements br.com.aviapp.api.application.gateways.IAddress {
 
     private final AddressRepositoryJPA repositoryJPA;
     private final AddressMapperEntity mapperEntity;
 
-    public AddressRepositoryImpl(AddressRepositoryJPA repositoryJPA, AddressMapperEntity mapperEntity) {
+    public IAddress(AddressRepositoryJPA repositoryJPA, AddressMapperEntity mapperEntity) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
     }

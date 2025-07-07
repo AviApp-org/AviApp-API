@@ -2,7 +2,7 @@ package br.com.aviapp.api.application.mappers;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.WaterDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.WaterBO;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class WaterMapperBO {
 
     private final AviaryMapperBO aviaryMapperBO;
-    private final LookUpRepository lookUpRepository;
+    private final ILookUp lookUpRepository;
 
-    public WaterMapperBO(AviaryMapperBO aviaryMapperBO, LookUpRepository lookUpRepository) {
+    public WaterMapperBO(AviaryMapperBO aviaryMapperBO, ILookUp lookUpRepository) {
         this.aviaryMapperBO = aviaryMapperBO;
         this.lookUpRepository = lookUpRepository;
     }

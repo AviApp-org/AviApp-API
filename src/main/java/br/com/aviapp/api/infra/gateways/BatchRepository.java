@@ -1,9 +1,8 @@
 package br.com.aviapp.api.infra.gateways;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
-import br.com.aviapp.api.application.gateways.BatchRepository;
+import br.com.aviapp.api.application.gateways.IBatch;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
-import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
@@ -13,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class BatchRepositoryImpl implements BatchRepository {
+public class BatchRepository implements IBatch {
 
     private final BatchRepositoryJPA repositoryJPA;
     private final BatchMapperEntity mapperEntity;
-    private final EntityLookupRepositoryImpl entityLookupRepository;
+    private final EntityLookupRepository entityLookupRepository;
 
-    public BatchRepositoryImpl(BatchRepositoryJPA repositoryJPA, BatchMapperEntity mapperEntity, EntityLookupRepositoryImpl entityLookupRepository) {
+    public BatchRepository(BatchRepositoryJPA repositoryJPA, BatchMapperEntity mapperEntity, EntityLookupRepository entityLookupRepository) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
 
@@ -54,6 +53,13 @@ public class BatchRepositoryImpl implements BatchRepository {
         return entities.stream()
                 .map(mapperEntity::toDTO)
                 .toList();
+    }
+
+    @Override
+    public List<BatchDTO> listBatchesActiveByFarm(Long farmId) {
+
+        return mapperEntity.toDTOList(repositoryJPA.listActiveBatchesByFarm(farmId));
+
     }
 
     @Override

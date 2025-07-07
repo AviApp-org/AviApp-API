@@ -1,7 +1,7 @@
 package br.com.aviapp.api.application.usecases.water;
 
 import br.com.aviapp.api.application.dto.WaterDTO;
-import br.com.aviapp.api.application.gateways.WaterRepository;
+import br.com.aviapp.api.application.gateways.IWater;
 import br.com.aviapp.api.application.mappers.WaterMapperBO;
 
 import java.time.LocalDate;
@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 
 public class ListWaterRecordsByDateAndAviaryUseCase {
 
-    private final WaterRepository waterRepository;
+    private final IWater waterRepository;
     private final WaterMapperBO mapperBO;
 
-    public ListWaterRecordsByDateAndAviaryUseCase(WaterRepository waterRepository, WaterMapperBO mapperBO) {
+    public ListWaterRecordsByDateAndAviaryUseCase(IWater waterRepository, WaterMapperBO mapperBO) {
         this.waterRepository = waterRepository;
         this.mapperBO = mapperBO;
     }

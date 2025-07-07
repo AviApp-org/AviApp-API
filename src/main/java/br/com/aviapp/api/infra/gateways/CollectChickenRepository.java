@@ -1,7 +1,6 @@
 package br.com.aviapp.api.infra.gateways;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,7 +11,7 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.gateways.CollectChickenRepository;
+import br.com.aviapp.api.application.gateways.ICollectChicken;
 import br.com.aviapp.api.infra.mappers.CollectChickenMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectChickenDataEntity;
 import br.com.aviapp.api.infra.mysql.repository.CollectChickenDataRepositoryJPA;
@@ -20,7 +19,7 @@ import lombok.AllArgsConstructor;
 
 @Repository
 @AllArgsConstructor
-public class CollectChickenRepositoryImpl implements CollectChickenRepository {
+public class CollectChickenRepository implements ICollectChicken {
 
     private final EntityLookupRepository entityLookupRepository;
     private final CollectChickenMapperEntity collectChickenMapper;

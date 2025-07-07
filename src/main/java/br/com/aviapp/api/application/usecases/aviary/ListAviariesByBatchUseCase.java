@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
-import br.com.aviapp.api.application.gateways.AviaryRepository;
+import br.com.aviapp.api.application.gateways.IAviary;
 
 public class ListAviariesByBatchUseCase {
-    private final AviaryRepository aviaryRepository;
+    private final IAviary aviaryRepository;
 
-    public ListAviariesByBatchUseCase(AviaryRepository aviaryRepository) {
+    public ListAviariesByBatchUseCase(IAviary aviaryRepository) {
         this.aviaryRepository = aviaryRepository;
     }
 

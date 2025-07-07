@@ -1,14 +1,13 @@
 package br.com.aviapp.api.application.mappers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.entities.EmployeeBO;
@@ -17,9 +16,9 @@ import jakarta.persistence.EntityNotFoundException;
 
 public class EmployeeMapperBO {
 
-    private final LookUpRepository lookUpRepository;
+    private final ILookUp lookUpRepository;
 
-    public EmployeeMapperBO(LookUpRepository lookUpRepository) {
+    public EmployeeMapperBO(ILookUp lookUpRepository) {
         this.lookUpRepository = lookUpRepository;
     }
 

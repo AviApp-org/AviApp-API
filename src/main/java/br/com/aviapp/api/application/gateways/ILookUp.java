@@ -9,7 +9,7 @@ import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 
-public interface LookUpRepository {
+public interface ILookUp {
     Optional<ClientDTO> findClientDTOById(Long id);
 
     Optional<AddressDTO> findAddressDTOById(Long id);

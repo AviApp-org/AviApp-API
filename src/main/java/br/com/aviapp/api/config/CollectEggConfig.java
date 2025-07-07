@@ -8,8 +8,8 @@ import br.com.aviapp.api.infra.mappers.EggDetailsMapperEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.aviapp.api.application.gateways.CollectEggRepository;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ICollectEgg;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
 import br.com.aviapp.api.infra.mappers.CollectEggMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
@@ -18,37 +18,37 @@ import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 public class CollectEggConfig {
 
     @Bean
-    public CreateEggCollectUseCase createEggCollectUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public CreateEggCollectUseCase createEggCollectUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new CreateEggCollectUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new ListEggCollectsByAviaryUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public ListAllEggCollectsUseCase listAllEggCollectsUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public ListAllEggCollectsUseCase listAllEggCollectsUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new ListAllEggCollectsUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public GetEggCollectByDateUseCase getEggCollectByDateUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public GetEggCollectByDateUseCase getEggCollectByDateUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new GetEggCollectByDateUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new ListEggCollectsByDateAndAviaryUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public DeleteEggCollectUseCase deleteEggCollectUseCase(CollectEggRepository collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
+    public DeleteEggCollectUseCase deleteEggCollectUseCase(ICollectEgg collectEggRepository, CollectEggMapperBO collectEggMapperBO) {
         return new DeleteEggCollectUseCase(collectEggRepository, collectEggMapperBO);
     }
 
     @Bean
-    public CollectEggMapperBO collectEggMapperBO(LookUpRepository lookUpRepository, AviaryMapperBO aviaryMapperBO, EggDetailMapperBO eggDetailMapperBO) {
+    public CollectEggMapperBO collectEggMapperBO(ILookUp lookUpRepository, AviaryMapperBO aviaryMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         return new CollectEggMapperBO(lookUpRepository, aviaryMapperBO, eggDetailMapperBO);
     }
 

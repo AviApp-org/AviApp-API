@@ -14,9 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class FinancialDetailConfig {
 
     @Bean
-    public GenerateFinancialReportUseCase generateFinancialReportUseCase(FinancialDetailMapperBO mapperBO, ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase,
-                                                                         ListAviariesByBatchUseCase listAviariesByBatchUseCase, CollectEggMapperBO eggMapperBO, GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase,
-                                                                         EggValueMapperBO eggValueMapperBO) {
+    public GenerateFinancialReportUseCase generateFinancialReportUseCase(FinancialDetailMapperBO mapperBO, ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase, ListAviariesByBatchUseCase listAviariesByBatchUseCase, CollectEggMapperBO eggMapperBO, GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase, EggValueMapperBO eggValueMapperBO) {
         return new GenerateFinancialReportUseCase(mapperBO, listEggCollectsByDateAndAviaryUseCase, listAviariesByBatchUseCase, eggMapperBO, getLastInsertedEggValueUseCase, eggValueMapperBO);
     }
 

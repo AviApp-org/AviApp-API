@@ -1,16 +1,16 @@
 package br.com.aviapp.api.application.usecases.collectChicken;
 
 import br.com.aviapp.api.application.dto.CollectChickenDTO;
-import br.com.aviapp.api.application.gateways.CollectChickenRepository;
+import br.com.aviapp.api.application.gateways.ICollectChicken;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
 
 public class CreateChickenCollectUseCase {
     
-    private final CollectChickenRepository collectChickenRepository;
+    private final ICollectChicken collectChickenRepository;
     private final CollectChickenMapperBO collectChickenMapper;
 
-    public CreateChickenCollectUseCase(CollectChickenRepository collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
+    public CreateChickenCollectUseCase(ICollectChicken collectChickenRepository, CollectChickenMapperBO collectChickenMapper) {
         this.collectChickenRepository = collectChickenRepository;
         this.collectChickenMapper = collectChickenMapper;
     }

@@ -6,7 +6,7 @@ import br.com.aviapp.api.domain.utils.CepService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.gateways.IAddress;
 import br.com.aviapp.api.application.mappers.AddressMapperBO;
 import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 
@@ -14,8 +14,8 @@ import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 public class AddressConfig {
 
     @Bean
-    CreateAddressUseCase createAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
-        return new CreateAddressUseCase(addressRepository, mapperBO);
+    CreateAddressUseCase createAddress(IAddress IAddress, AddressMapperBO mapperBO) {
+        return new CreateAddressUseCase(IAddress, mapperBO);
     }
 
     @Bean
@@ -30,23 +30,23 @@ public class AddressConfig {
 
 
     @Bean
-    DeleteAddressUseCase deleteAddress(AddressRepository addressRepository) {
-        return new DeleteAddressUseCase(addressRepository);
+    DeleteAddressUseCase deleteAddress(IAddress IAddress) {
+        return new DeleteAddressUseCase(IAddress);
     }
 
     @Bean
-    FindAddressByIdUseCase findAddress(AddressRepository addressRepository, AddressMapperBO mapperBO) {
-        return new FindAddressByIdUseCase(addressRepository, mapperBO);
+    FindAddressByIdUseCase findAddress(IAddress IAddress, AddressMapperBO mapperBO) {
+        return new FindAddressByIdUseCase(IAddress, mapperBO);
     }
 
     @Bean
-    ListAddressesUseCase listAllAdresses(AddressRepository addressRepository) {
-        return new ListAddressesUseCase(addressRepository);
+    ListAddressesUseCase listAllAdresses(IAddress IAddress) {
+        return new ListAddressesUseCase(IAddress);
     }
 
     @Bean
-    UpdateAddressUseCase updateAddress(AddressRepository addressRepository) {
-        return new UpdateAddressUseCase(addressRepository);
+    UpdateAddressUseCase updateAddress(IAddress IAddress) {
+        return new UpdateAddressUseCase(IAddress);
     }
 
     @Bean

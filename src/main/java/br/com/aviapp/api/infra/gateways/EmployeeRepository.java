@@ -5,25 +5,24 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.aviapp.api.infra.mysql.enums.EmployeeRole;
-import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.EmployeeDTO;
-import br.com.aviapp.api.application.gateways.EmployeeRepository;
+import br.com.aviapp.api.application.gateways.IEmployee;
 import br.com.aviapp.api.infra.mappers.EmployeeMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
 
 @Repository
-public class EmployeeRepositoryImpl implements EmployeeRepository {
+public class EmployeeRepository implements IEmployee {
     private final EmployeeRepositoryJPA employeeRepositoryJPA;
     private final EmployeeMapperEntity employeeMapper;
     private final FarmRepositoryJPA farmRepositoryJPA;
 
-    public EmployeeRepositoryImpl(EmployeeRepositoryJPA employeeRepositoryJPA, EmployeeMapperEntity employeeMapper, FarmRepositoryJPA farmRepositoryJPA) {
+    public EmployeeRepository(EmployeeRepositoryJPA employeeRepositoryJPA, EmployeeMapperEntity employeeMapper, FarmRepositoryJPA farmRepositoryJPA) {
         this.employeeRepositoryJPA = employeeRepositoryJPA;
         this.employeeMapper = employeeMapper;
         this.farmRepositoryJPA = farmRepositoryJPA;

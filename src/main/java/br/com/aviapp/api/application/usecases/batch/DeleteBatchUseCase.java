@@ -1,13 +1,13 @@
 package br.com.aviapp.api.application.usecases.batch;
 
-import br.com.aviapp.api.application.gateways.BatchRepository;
+import br.com.aviapp.api.application.gateways.IBatch;
 
 public class DeleteBatchUseCase {
 
-    private final BatchRepository repository;
+    private final IBatch repository;
 
 
-    public DeleteBatchUseCase(BatchRepository repository) {
+    public DeleteBatchUseCase(IBatch repository) {
         this.repository = repository;
     }
 

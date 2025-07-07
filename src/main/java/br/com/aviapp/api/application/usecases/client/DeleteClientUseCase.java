@@ -1,12 +1,12 @@
 package br.com.aviapp.api.application.usecases.client;
 
-import br.com.aviapp.api.application.gateways.ClientRepository;
+import br.com.aviapp.api.application.gateways.IClient;
 
 public class DeleteClientUseCase {
 
-    private final ClientRepository repository;
+    private final IClient repository;
 
-    public DeleteClientUseCase(ClientRepository repository) {
+    public DeleteClientUseCase(IClient repository) {
         this.repository = repository;
     }
 

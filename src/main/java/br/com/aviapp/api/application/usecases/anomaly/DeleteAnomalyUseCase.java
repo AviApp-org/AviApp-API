@@ -1,11 +1,11 @@
 package br.com.aviapp.api.application.usecases.anomaly;
 
-import br.com.aviapp.api.application.gateways.AnomalyRepository;
+import br.com.aviapp.api.application.gateways.IAnomaly;
 
 public class DeleteAnomalyUseCase {
-    private final AnomalyRepository anomalyRepository;
+    private final IAnomaly anomalyRepository;
 
-    public DeleteAnomalyUseCase(AnomalyRepository anomalyRepository) {
+    public DeleteAnomalyUseCase(IAnomaly anomalyRepository) {
         this.anomalyRepository = anomalyRepository;
     }
 

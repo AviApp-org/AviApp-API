@@ -1,6 +1,6 @@
 package br.com.aviapp.api.config;
 
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.application.mappers.*;
 import br.com.aviapp.api.application.usecases.aviary.FindAviaryByIdUseCase;
 import br.com.aviapp.api.application.usecases.aviary.ListAviariesByBatchUseCase;
@@ -31,7 +31,7 @@ public class DailyReportConfig {
     }
 
     @Bean
-    public AviaryReportMapperBO aviaryReportMapperBO(LookUpRepository lookUpRepository, EggDetailMapperBO eggDetailMapperBO, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO) {
+    public AviaryReportMapperBO aviaryReportMapperBO(ILookUp lookUpRepository, EggDetailMapperBO eggDetailMapperBO, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO) {
         return new AviaryReportMapperBO(lookUpRepository, collectEggMapperBO, collectChickenMapperBO, eggDetailMapperBO);
     }
 

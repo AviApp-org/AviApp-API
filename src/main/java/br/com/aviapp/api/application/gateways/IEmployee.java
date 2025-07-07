@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 
-public interface EmployeeRepository {
+public interface IEmployee {
 
     List<EmployeeDTO> listAllEmployees();
 

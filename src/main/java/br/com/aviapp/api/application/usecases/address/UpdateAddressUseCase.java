@@ -3,13 +3,13 @@ package br.com.aviapp.api.application.usecases.address;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
-import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.gateways.IAddress;
 
 public class UpdateAddressUseCase {
 
-    private final AddressRepository repository;
+    private final IAddress repository;
 
-    public UpdateAddressUseCase(AddressRepository repository) {
+    public UpdateAddressUseCase(IAddress repository) {
         this.repository = repository;
     }
 

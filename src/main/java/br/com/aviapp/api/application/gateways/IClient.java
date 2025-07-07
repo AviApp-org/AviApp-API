@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.ClientDTO;
 
-public interface ClientRepository {
+public interface IClient {
 
     ClientDTO createClient(ClientDTO client);
 

@@ -6,21 +6,21 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
-import br.com.aviapp.api.application.gateways.AviaryRepository;
+import br.com.aviapp.api.application.gateways.IAviary;
 import br.com.aviapp.api.infra.mappers.AviaryMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 
 @Repository
-public class AviaryRepositoryImpl implements AviaryRepository {
+public class AviaryRepository implements IAviary {
 
     private final AviaryRepositoryJPA aviaryRepositoryJPA;
     private final AviaryMapperEntity aviaryMapper;
-    private final EntityLookupRepositoryImpl entityLookupRepository;
+    private final EntityLookupRepository entityLookupRepository;
 
-    public AviaryRepositoryImpl(AviaryRepositoryJPA aviaryRepositoryJPA, AviaryMapperEntity aviaryMapper,
-            EntityLookupRepositoryImpl entityLookupRepository) {
+    public AviaryRepository(AviaryRepositoryJPA aviaryRepositoryJPA, AviaryMapperEntity aviaryMapper,
+                            EntityLookupRepository entityLookupRepository) {
         this.aviaryRepositoryJPA = aviaryRepositoryJPA;
         this.aviaryMapper = aviaryMapper;
         this.entityLookupRepository = entityLookupRepository;

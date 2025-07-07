@@ -1,7 +1,7 @@
 package br.com.aviapp.api.application.mappers;
 
 import br.com.aviapp.api.application.dto.*;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.*;
 
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 public class AviaryReportMapperBO {
 
-    private final LookUpRepository lookUpRepository;
+    private final ILookUp lookUpRepository;
     private final CollectEggMapperBO collectEggMapperBO;
     private final CollectChickenMapperBO collectChickenMapperBO;
     private final EggDetailMapperBO eggDetailMapperBO;
 
-    public AviaryReportMapperBO(LookUpRepository lookUpRepository, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, EggDetailMapperBO eggDetailMapperBO) {
+    public AviaryReportMapperBO(ILookUp lookUpRepository, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         this.lookUpRepository = lookUpRepository;
         this.collectEggMapperBO = collectEggMapperBO;
         this.collectChickenMapperBO = collectChickenMapperBO;

@@ -1,17 +1,17 @@
 package br.com.aviapp.api.application.usecases.aviary;
 
 import br.com.aviapp.api.application.dto.AviaryDTO;
-import br.com.aviapp.api.application.gateways.AviaryRepository;
+import br.com.aviapp.api.application.gateways.IAviary;
 import br.com.aviapp.api.application.mappers.AviaryMapperBO;
 import br.com.aviapp.api.domain.entities.AviaryBO;
 import br.com.aviapp.api.domain.errors.BusinessRuleException;
 
 public class CreateAviaryUseCase {
 
-    private final AviaryRepository aviaryRepository;
+    private final IAviary aviaryRepository;
     private final AviaryMapperBO aviaryMapperBO;
 
-    public CreateAviaryUseCase(AviaryRepository aviaryRepository, AviaryMapperBO aviaryMapperBO) {
+    public CreateAviaryUseCase(IAviary aviaryRepository, AviaryMapperBO aviaryMapperBO) {
         this.aviaryRepository = aviaryRepository;
         this.aviaryMapperBO = aviaryMapperBO;
     }

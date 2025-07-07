@@ -8,21 +8,20 @@ import br.com.aviapp.api.infra.mysql.repository.EggDetailRepositoryJPA;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.CollectEggDataDTO;
-import br.com.aviapp.api.application.gateways.CollectEggRepository;
+import br.com.aviapp.api.application.gateways.ICollectEgg;
 import br.com.aviapp.api.infra.mappers.CollectEggMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlCollectEggDataEntity;
 import br.com.aviapp.api.infra.mysql.repository.CollectEggDataRepositoryJPA;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
-public class CollectEggRepositoryImpl implements CollectEggRepository {
+public class CollectEggRepository implements ICollectEgg {
     private final CollectEggMapperEntity collectEggMapper;
     private final CollectEggDataRepositoryJPA repositoryJPA;
     private final EggDetailRepositoryJPA eggDetailRepositoryJPA;

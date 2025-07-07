@@ -14,13 +14,12 @@ import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.EmployeeRepositoryJPA;
-import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Repository
-public class EntityLookupRepositoryImpl implements EntityLookupRepository {
+public class EntityLookupRepository implements br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository {
     private final ClientRepositoryJPA clientRepository;
     private final AddressRepositoryJPA addressRepository;
     private final EmployeeRepositoryJPA employeeRepository;

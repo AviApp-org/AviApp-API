@@ -1,12 +1,12 @@
 package br.com.aviapp.api.application.usecases.address;
 
-import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.gateways.IAddress;
 
 public class DeleteAddressUseCase {
 
-    private final AddressRepository repository;
+    private final IAddress repository;
 
-    public DeleteAddressUseCase(AddressRepository repository) {
+    public DeleteAddressUseCase(IAddress repository) {
         this.repository = repository;
     }
 

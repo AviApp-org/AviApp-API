@@ -1,16 +1,16 @@
 package br.com.aviapp.api.application.usecases.address;
 
 import br.com.aviapp.api.application.dto.AddressDTO;
-import br.com.aviapp.api.application.gateways.AddressRepository;
+import br.com.aviapp.api.application.gateways.IAddress;
 import br.com.aviapp.api.application.mappers.AddressMapperBO;
 import br.com.aviapp.api.domain.entities.AddressBO;
 
 public class CreateAddressUseCase {
 
-    private final AddressRepository repository;
+    private final IAddress repository;
     private final AddressMapperBO mapper;
 
-    public CreateAddressUseCase(AddressRepository repository, AddressMapperBO mapper) {
+    public CreateAddressUseCase(IAddress repository, AddressMapperBO mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

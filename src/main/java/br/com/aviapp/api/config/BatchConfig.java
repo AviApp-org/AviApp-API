@@ -1,8 +1,8 @@
 package br.com.aviapp.api.config;
 
 
-import br.com.aviapp.api.application.gateways.BatchRepository;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.IBatch;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.application.mappers.BatchMapperBO;
 import br.com.aviapp.api.application.mappers.FarmMapperBO;
 import br.com.aviapp.api.application.usecases.batch.*;
@@ -15,37 +15,42 @@ import org.springframework.context.annotation.Configuration;
 public class BatchConfig {
 
     @Bean
-    CreateBatchUseCase createBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    CreateBatchUseCase createBatchUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new CreateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    DeactivateBatchUseCase deactivateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    DeactivateBatchUseCase deactivateBatchUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new DeactivateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    ActivateBatchUseCase activateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    ActivateBatchUseCase activateBatchUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new ActivateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    UpdateBatchUseCase updateBatchUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    UpdateBatchUseCase updateBatchUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new UpdateBatchUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    FindBatchByIdUseCase findBatchByIdUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    FindBatchByIdUseCase findBatchByIdUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new FindBatchByIdUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase(BatchRepository batchRepository, BatchMapperBO batchMapperBO) {
+    ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase(IBatch batchRepository, BatchMapperBO batchMapperBO) {
         return new ListBatchesByFarmIdUseCase(batchRepository, batchMapperBO);
     }
 
     @Bean
-    DeleteBatchUseCase deleteBatchUseCase(BatchRepository batchRepository) {
+    ListActiveBatchesByFarmUseCase listActiveBatchesByFarmUseCase (IBatch batchRepository) {
+        return new ListActiveBatchesByFarmUseCase(batchRepository);
+    }
+
+    @Bean
+    DeleteBatchUseCase deleteBatchUseCase(IBatch batchRepository) {
         return new DeleteBatchUseCase(batchRepository);
     }
 
@@ -55,7 +60,7 @@ public class BatchConfig {
     }
 
     @Bean
-    BatchMapperBO batchMapperBO(FarmMapperBO farmMapperBO, LookUpRepository repository) {
+    BatchMapperBO batchMapperBO(FarmMapperBO farmMapperBO, ILookUp repository) {
         return new BatchMapperBO(farmMapperBO, repository);
     }
 }

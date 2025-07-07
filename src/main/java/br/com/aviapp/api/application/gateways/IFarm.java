@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.FarmDTO;
 
-public interface FarmRepository {
+public interface IFarm {
 
     FarmDTO createFarm(FarmDTO farm);
 

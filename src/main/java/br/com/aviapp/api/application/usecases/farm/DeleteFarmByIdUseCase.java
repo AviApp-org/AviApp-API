@@ -1,12 +1,12 @@
 package br.com.aviapp.api.application.usecases.farm;
 
-import br.com.aviapp.api.application.gateways.FarmRepository;
+import br.com.aviapp.api.application.gateways.IFarm;
 
 public class DeleteFarmByIdUseCase {
 
-    private final FarmRepository repository;
+    private final IFarm repository;
 
-    public DeleteFarmByIdUseCase(FarmRepository repository) {
+    public DeleteFarmByIdUseCase(IFarm repository) {
         this.repository = repository;
     }
 

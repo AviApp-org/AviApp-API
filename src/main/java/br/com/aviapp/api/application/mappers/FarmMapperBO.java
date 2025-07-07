@@ -8,7 +8,7 @@ import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.entities.EmployeeBO;
@@ -16,13 +16,13 @@ import br.com.aviapp.api.domain.entities.FarmBO;
 import jakarta.persistence.EntityNotFoundException;
 
 public class FarmMapperBO {
-    private final LookUpRepository lookupRepository;
+    private final ILookUp lookupRepository;
     private final ClientMapperBO clientMapper;
     private final AddressMapperBO addressMapper;
     private final EmployeeMapperBO employeeMapper;
 
     public FarmMapperBO(
-        LookUpRepository lookupRepository,
+        ILookUp lookupRepository,
         ClientMapperBO clientMapper,
         AddressMapperBO addressMapper,
         EmployeeMapperBO employeeMapper

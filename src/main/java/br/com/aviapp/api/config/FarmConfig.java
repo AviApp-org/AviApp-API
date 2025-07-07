@@ -5,8 +5,8 @@ import br.com.aviapp.api.application.usecases.farm.ListAllFarmsUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.aviapp.api.application.gateways.FarmRepository;
-import br.com.aviapp.api.application.gateways.LookUpRepository;
+import br.com.aviapp.api.application.gateways.IFarm;
+import br.com.aviapp.api.application.gateways.ILookUp;
 import br.com.aviapp.api.application.mappers.AddressMapperBO;
 import br.com.aviapp.api.application.mappers.ClientMapperBO;
 import br.com.aviapp.api.application.mappers.EmployeeMapperBO;
@@ -28,7 +28,7 @@ public class FarmConfig {
 
     @Bean
     public FarmMapperBO farmMapperBO(
-            LookUpRepository lookupRepository,
+            ILookUp lookupRepository,
             ClientMapperBO clientMapper,
             AddressMapperBO addressMapper,
             EmployeeMapperBO employeeMapper) {
@@ -36,22 +36,22 @@ public class FarmConfig {
     }
 
     @Bean
-    public CreateFarmUseCase createFarmUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
+    public CreateFarmUseCase createFarmUseCase(IFarm repository, FarmMapperBO mapperBO) {
         return new CreateFarmUseCase(repository, mapperBO);
     }
 
     @Bean
-    public FindFarmByIdUseCase findFarmByIdUseCase(FarmRepository repository, FarmMapperBO mapperBO) {
+    public FindFarmByIdUseCase findFarmByIdUseCase(IFarm repository, FarmMapperBO mapperBO) {
         return new FindFarmByIdUseCase(repository, mapperBO);
     }
 
     @Bean
-    public ListAllFarmsUseCase listAllFarmsUseCase(FarmRepository repository, FarmMapperBO mapperBO){
+    public ListAllFarmsUseCase listAllFarmsUseCase(IFarm repository, FarmMapperBO mapperBO){
         return new ListAllFarmsUseCase(repository, mapperBO);
     }
 
     @Bean
-    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (FarmRepository repository) {
+    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (IFarm repository) {
         return new DeleteFarmByIdUseCase(repository);
     }
 }

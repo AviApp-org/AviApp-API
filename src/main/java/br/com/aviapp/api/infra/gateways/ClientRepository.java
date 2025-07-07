@@ -6,19 +6,19 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.ClientDTO;
-import br.com.aviapp.api.application.gateways.ClientRepository;
+import br.com.aviapp.api.application.gateways.IClient;
 import br.com.aviapp.api.infra.mappers.ClientMapperEntity;
 import br.com.aviapp.api.infra.mysql.enums.ClientStatusType;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
 
 @Repository
-public class ClientRepositoryImpl implements ClientRepository {
+public class ClientRepository implements IClient {
 
     private final ClientRepositoryJPA repositoryJPA;
     private final ClientMapperEntity mapperEntity;
 
-    public ClientRepositoryImpl(ClientRepositoryJPA repositoryJPA, ClientMapperEntity mapperEntity) {
+    public ClientRepository(ClientRepositoryJPA repositoryJPA, ClientMapperEntity mapperEntity) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
     }

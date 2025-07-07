@@ -1,13 +1,12 @@
 package br.com.aviapp.api.application.gateways;
 
-import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.dto.WaterDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface WaterRepository {
+public interface IWater {
 
      WaterDTO createWaterReport(WaterDTO waterDTO);
 

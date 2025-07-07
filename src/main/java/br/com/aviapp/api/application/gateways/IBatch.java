@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
 
-public interface BatchRepository {
+public interface IBatch {
     BatchDTO createBatch(BatchDTO batchDTO);
 
     void deleteBatch(Long batchID);
@@ -13,6 +13,8 @@ public interface BatchRepository {
     Optional<BatchDTO> findBatch(Long batchID);
 
     List<BatchDTO> findBatchesByFarmId(Long farmId);
+
+    List<BatchDTO> listBatchesActiveByFarm(Long farmId);
 
     Optional<BatchDTO> updateBatch(Long id, BatchDTO batchDTO);
 

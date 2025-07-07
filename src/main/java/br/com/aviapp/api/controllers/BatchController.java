@@ -24,16 +24,18 @@ public class BatchController {
     private final DeactivateBatchUseCase deactivateBatchUseCase;
     private final ActivateBatchUseCase activateBatchUseCase;
     private final ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase;
+    private final ListActiveBatchesByFarmUseCase listActiveBatchesByFarmUseCase;
     private final DeleteBatchUseCase deleteBatchUseCase;
     private final UpdateBatchUseCase updateBatchUseCase;
 
     public BatchController(CreateBatchUseCase createBatchUseCase, FindBatchByIdUseCase findBatchByIdUseCase,
-                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase, DeleteBatchUseCase deleteBatchUseCase, UpdateBatchUseCase updateBatchUseCase) {
+                           DeactivateBatchUseCase deactivateBatchUseCase, ActivateBatchUseCase activateBatchUseCase, ListBatchesByFarmIdUseCase listBatchesByFarmIdUseCase, ListActiveBatchesByFarmUseCase listActiveBatchesByFarmUseCase, DeleteBatchUseCase deleteBatchUseCase, UpdateBatchUseCase updateBatchUseCase) {
         this.createBatchUseCase = createBatchUseCase;
         this.findBatchByIdUseCase = findBatchByIdUseCase;
         this.deactivateBatchUseCase = deactivateBatchUseCase;
         this.activateBatchUseCase = activateBatchUseCase;
         this.listBatchesByFarmIdUseCase = listBatchesByFarmIdUseCase;
+        this.listActiveBatchesByFarmUseCase = listActiveBatchesByFarmUseCase;
         this.deleteBatchUseCase = deleteBatchUseCase;
         this.updateBatchUseCase = updateBatchUseCase;
     }
@@ -45,11 +47,17 @@ public class BatchController {
         return ResponseEntity.created(location).body(newBatch);
     }
 
-    @GetMapping({"/{id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<BatchDTO> getBatchById(@PathVariable Long id) {
         Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(id);
         return batchDTO.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/active/farm/{farmId}")
+    public ResponseEntity<List<BatchDTO>> getActiveBatches(@PathVariable Long farmId) {
+        List<BatchDTO> batches = listActiveBatchesByFarmUseCase.invoke(farmId);
+        return ResponseEntity.ok(batches);
     }
 
     @GetMapping("/farm/{farmId}")

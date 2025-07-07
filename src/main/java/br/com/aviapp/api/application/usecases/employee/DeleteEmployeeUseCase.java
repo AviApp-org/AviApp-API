@@ -1,12 +1,12 @@
 package br.com.aviapp.api.application.usecases.employee;
 
-import br.com.aviapp.api.application.gateways.EmployeeRepository;
+import br.com.aviapp.api.application.gateways.IEmployee;
 
 public class DeleteEmployeeUseCase {
 
-    private final EmployeeRepository repository;
+    private final IEmployee repository;
 
-    public DeleteEmployeeUseCase(EmployeeRepository repository) {
+    public DeleteEmployeeUseCase(IEmployee repository) {
         this.repository = repository;
 
     }

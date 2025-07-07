@@ -6,18 +6,18 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.gateways.FarmRepository;
+import br.com.aviapp.api.application.gateways.IFarm;
 import br.com.aviapp.api.infra.mappers.FarmMapperEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
 
 @Repository
-public class FarmRepositoryImpl implements FarmRepository {
+public class FarmRepository implements IFarm {
 
     private final FarmRepositoryJPA farmRepositoryJPA;
     private final FarmMapperEntity farmMapper;
 
-    public FarmRepositoryImpl(FarmRepositoryJPA farmRepositoryJPA, FarmMapperEntity farmMapper) {
+    public FarmRepository(FarmRepositoryJPA farmRepositoryJPA, FarmMapperEntity farmMapper) {
         this.farmRepositoryJPA = farmRepositoryJPA;
         this.farmMapper = farmMapper;
     }

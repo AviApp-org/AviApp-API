@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.aviapp.api.application.dto.EggValueDTO;
 
-public interface EggValueRepository {
+public interface IEggValue {
 
     EggValueDTO createEggValue(EggValueDTO eggValueDTO);
 
