@@ -12,6 +12,7 @@ import br.com.aviapp.api.infra.mysql.enums.BatchStatusType;
 @Entity
 @Table(name = "batch")
 public class MySqlBatchEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

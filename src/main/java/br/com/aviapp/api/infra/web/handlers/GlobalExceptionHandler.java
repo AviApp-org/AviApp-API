@@ -14,6 +14,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(BusinessRuleException.class)
     public ResponseEntity<Map<String, Object>> handleBusinessRuleException(
             BusinessRuleException ex, WebRequest request) {
@@ -46,7 +47,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleRuntimeException(
             RuntimeException ex, WebRequest request) {
 
-        // Se a causa for BusinessRuleException ou ResourceNotFoundException, trate especificamente
         if (ex.getCause() instanceof BusinessRuleException) {
             return handleBusinessRuleException((BusinessRuleException) ex.getCause(), request);
         }

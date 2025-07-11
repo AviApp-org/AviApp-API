@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MySqlFarmEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -37,4 +38,5 @@ public class MySqlFarmEntity {
   @OneToMany
   @JoinColumn(name = "employee_id")
   private List<MySqlEmployeeEntity> employeeId;
+
 }

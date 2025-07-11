@@ -18,6 +18,11 @@ public class DeactivateBatchUseCase {
 
     public void invoke(Long batchId) {
         Optional<BatchDTO> batchDTO = repository.findBatch(batchId);
+
+        if (batchDTO.isEmpty()) {
+            throw new RuntimeException("Lote não encontrado");
+        }
+
         BatchBO batchBO = mapper.toBO(batchDTO.get());
 
         batchBO.desativar();

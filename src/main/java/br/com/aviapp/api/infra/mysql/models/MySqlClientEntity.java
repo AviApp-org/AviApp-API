@@ -7,11 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "client", uniqueConstraints={@UniqueConstraint(columnNames={"cnpj"})})
+@Table(name = "client")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class MySqlClientEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -19,7 +20,7 @@ public class MySqlClientEntity {
   @Column(nullable = false)
   private String name;
 
-  @Column(nullable = false, length = 14 )
+  @Column(nullable = false, length = 14, unique = true)
   private String cnpj;
 
   @Column(nullable = false)
@@ -31,4 +32,5 @@ public class MySqlClientEntity {
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private ClientStatusType status;
+
 }

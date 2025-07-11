@@ -18,54 +18,21 @@ import lombok.Data;
 @Entity
 @Data
 public class MySqlUserCredentials {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @OneToOne
   @JoinColumn(name = "client_id")
-  private MySqlClientEntity clientId;
+  private MySqlClientEntity client;
 
-  @Column(nullable = false, length = 18, unique = true)
-  private String username;
+  @Column(nullable = false, unique = true)
+  private String login;
 
   @Column(nullable = false)
   private String password;
 
   private LocalDateTime created_at;
 
-//  @Override
-//  public Collection<? extends GrantedAuthority> getAuthorities() {
-//    return List.of();
-//  }
-//
-//  @Override
-//  public String getPassword() {
-//    return password;
-//  }
-//
-//  @Override
-//  public String getUsername() {
-//    return username;
-//  }
-//
-//  @Override
-//  public boolean isAccountNonExpired() {
-//    return false;
-//  }
-//
-//  @Override
-//  public boolean isAccountNonLocked() {
-//    return false;
-//  }
-//
-//  @Override
-//  public boolean isCredentialsNonExpired() {
-//    return false;
-//  }
-//
-//  @Override
-//  public boolean isEnabled() {
-//    return false;
-//  }
 }

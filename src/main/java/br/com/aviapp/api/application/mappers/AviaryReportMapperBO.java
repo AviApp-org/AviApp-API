@@ -9,13 +9,11 @@ import java.util.stream.Collectors;
 
 public class AviaryReportMapperBO {
 
-    private final ILookUp lookUpRepository;
     private final CollectEggMapperBO collectEggMapperBO;
     private final CollectChickenMapperBO collectChickenMapperBO;
     private final EggDetailMapperBO eggDetailMapperBO;
 
-    public AviaryReportMapperBO(ILookUp lookUpRepository, CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, EggDetailMapperBO eggDetailMapperBO) {
-        this.lookUpRepository = lookUpRepository;
+    public AviaryReportMapperBO( CollectEggMapperBO collectEggMapperBO, CollectChickenMapperBO collectChickenMapperBO, EggDetailMapperBO eggDetailMapperBO) {
         this.collectEggMapperBO = collectEggMapperBO;
         this.collectChickenMapperBO = collectChickenMapperBO;
         this.eggDetailMapperBO = eggDetailMapperBO;

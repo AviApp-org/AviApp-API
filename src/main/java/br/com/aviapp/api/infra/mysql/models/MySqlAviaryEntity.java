@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MySqlAviaryEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +32,6 @@ public class MySqlAviaryEntity {
 
     @PrePersist
     public void prePersist() {
-        // Initialize current amounts with initial amounts if they are null
         if (currentAmountOfRoosters == null) {
             currentAmountOfRoosters = initialAmountOfRoosters;
         }
