@@ -13,6 +13,8 @@ public interface IAddress {
 
     Optional<AddressDTO> findAddress(Long addressID);
 
+    Optional<AddressDTO> getAddressByFarmId(Long farmId);
+
     void deleteAddress(Long addressID);
 
     Optional<AddressDTO> updateAddress(Long addressID, AddressDTO updatedAddress);

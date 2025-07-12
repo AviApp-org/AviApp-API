@@ -7,28 +7,30 @@ import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.domain.entities.AddressBO;
 
 public class AddressMapperBO {
-    
+
     public AddressBO toBO(AddressDTO dto) {
         return new AddressBO(
-            dto.id(), 
-            dto.street(), 
-            dto.number(), 
-            dto.cep(), 
-            dto.neighborhood(), 
-            dto.city(), 
-            dto.state()
+                dto.id(),
+                dto.street(),
+                dto.number(),
+                dto.cep(),
+                dto.neighborhood(),
+                dto.city(),
+                dto.state(),
+                dto.farmId()
         );
     }
 
     public AddressDTO toDTO(AddressBO bo) {
         return new AddressDTO(
-            bo.getId(),
-            bo.getStreet(),
-            bo.getNumber(), 
-            bo.getCep(),
-            bo.getNeighborhood(),
-            bo.getCity(),
-            bo.getState()
+                bo.getId(),
+                bo.getStreet(),
+                bo.getNumber(),
+                bo.getCep(),
+                bo.getNeighborhood(),
+                bo.getCity(),
+                bo.getState(),
+                bo.getFarmId()
         );
     }
 

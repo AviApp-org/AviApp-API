@@ -15,11 +15,12 @@ public class AddressBO {
     private String neighborhood;
     private String city;
     private String state;
+    private Long farmId;
 
     public AddressBO() {
     }
 
-    public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state)
+    public AddressBO(Long id, String street, String number, String cep, String neighborhood, String city, String state, Long farmId)
             throws InvalidParamError {
         ParamValidator.validate(cep, street, number, neighborhood, city, state);
         this.id = id;
@@ -29,6 +30,7 @@ public class AddressBO {
         this.neighborhood = neighborhood.trim();
         this.city = city.trim();
         this.state = state.trim();
+        this.farmId = farmId;
     }
 
     @Override

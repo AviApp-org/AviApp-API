@@ -34,7 +34,7 @@ public class FarmMapperEntity {
         farm.setId(dto.id());
         farm.setName(dto.name());
         farm.setClientId(client);
-        farm.setAddressId(address);
+        farm.setAddress(address);
         farm.setEmployeeId(employees);
         
         return farm;
@@ -45,7 +45,7 @@ public class FarmMapperEntity {
             entity.getId(),
             entity.getName(),
             entity.getClientId().getId(),
-            entity.getAddressId().getId(),
+            entity.getAddress().getId(),
             entity.getEmployeeId().stream()
                 .map(MySqlEmployeeEntity::getId)
                 .collect(Collectors.toList())

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -22,19 +23,21 @@ public class AddressController {
     private final ListAddressesUseCase findAllAddresses;
     private final UpdateAddressUseCase updateAddress;
     private final ConsultCepUseCase consultCep;
+    private final GetAddressByFarmIdUseCase getAddressByFarmIdUseCase;
 
     public AddressController(
             CreateAddressUseCase createAddress,
             DeleteAddressUseCase deleteAddress,
             FindAddressByIdUseCase findAddressById,
             ListAddressesUseCase findAllAddresses,
-            UpdateAddressUseCase updateAddress, ConsultCepUseCase consultCep) {
+            UpdateAddressUseCase updateAddress, ConsultCepUseCase consultCep, GetAddressByFarmIdUseCase getAddressByFarmIdUseCase) {
         this.createAddress = createAddress;
         this.deleteAddress = deleteAddress;
         this.findAddressById = findAddressById;
         this.findAllAddresses = findAllAddresses;
         this.updateAddress = updateAddress;
         this.consultCep = consultCep;
+        this.getAddressByFarmIdUseCase = getAddressByFarmIdUseCase;
     }
 
     @GetMapping
@@ -46,6 +49,13 @@ public class AddressController {
     @GetMapping("/{id}")
     public ResponseEntity<AddressDTO> getAddressById(@PathVariable Long id) {
         Optional<AddressDTO> address = findAddressById.invoke(id);
+        return address.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/farm/{farmId}")
+    public ResponseEntity<AddressDTO> getAddressByFarmId(@PathVariable Long farmId) {
+        Optional<AddressDTO> address = getAddressByFarmIdUseCase.invoke(farmId);
         return address.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -71,7 +81,7 @@ public class AddressController {
     }
 
     @GetMapping("/cep/{cep}")
-    public ResponseEntity<CepResponseDTO> consultCep(@PathVariable String cep){
+    public ResponseEntity<CepResponseDTO> consultCep(@PathVariable String cep) {
         CepResponseDTO cepResponse = consultCep.invoke(cep);
         return ResponseEntity.ok(cepResponse);
     }

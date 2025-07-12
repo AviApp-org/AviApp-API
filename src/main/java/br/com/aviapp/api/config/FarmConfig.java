@@ -1,7 +1,6 @@
 package br.com.aviapp.api.config;
 
-import br.com.aviapp.api.application.usecases.farm.DeleteFarmByIdUseCase;
-import br.com.aviapp.api.application.usecases.farm.ListAllFarmsUseCase;
+import br.com.aviapp.api.application.usecases.farm.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +11,6 @@ import br.com.aviapp.api.application.mappers.ClientMapperBO;
 import br.com.aviapp.api.application.mappers.EmployeeMapperBO;
 import br.com.aviapp.api.application.mappers.FarmMapperBO;
 
-import br.com.aviapp.api.application.usecases.farm.CreateFarmUseCase;
-import br.com.aviapp.api.application.usecases.farm.FindFarmByIdUseCase;
 import br.com.aviapp.api.infra.mappers.FarmMapperEntity;
 import br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository;
 
@@ -48,6 +45,11 @@ public class FarmConfig {
     @Bean
     public ListAllFarmsUseCase listAllFarmsUseCase(IFarm repository, FarmMapperBO mapperBO){
         return new ListAllFarmsUseCase(repository, mapperBO);
+    }
+
+    @Bean
+    public GetFarmByClientIdUseCase getFarmByClientIdUseCase(IFarm repository) {
+        return new GetFarmByClientIdUseCase(repository);
     }
 
     @Bean

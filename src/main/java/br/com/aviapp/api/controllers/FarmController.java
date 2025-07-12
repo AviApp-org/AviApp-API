@@ -4,14 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.aviapp.api.application.usecases.farm.DeleteFarmByIdUseCase;
-import br.com.aviapp.api.application.usecases.farm.ListAllFarmsUseCase;
+import br.com.aviapp.api.application.usecases.farm.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.aviapp.api.application.dto.FarmDTO;
-import br.com.aviapp.api.application.usecases.farm.CreateFarmUseCase;
-import br.com.aviapp.api.application.usecases.farm.FindFarmByIdUseCase;
 import jakarta.validation.Valid;
 
 @RestController
@@ -23,12 +20,14 @@ public class FarmController {
     private final FindFarmByIdUseCase findFarm;
     private final ListAllFarmsUseCase listFarms;
     private final DeleteFarmByIdUseCase deleteFarm;
+    private final GetFarmByClientIdUseCase getFarmByClientIdUseCase;
 
-    public FarmController(CreateFarmUseCase createFarm, FindFarmByIdUseCase findFarm, ListAllFarmsUseCase listFarms, DeleteFarmByIdUseCase deleteFarm) {
+    public FarmController(CreateFarmUseCase createFarm, FindFarmByIdUseCase findFarm, ListAllFarmsUseCase listFarms, DeleteFarmByIdUseCase deleteFarm, GetFarmByClientIdUseCase getFarmByClientIdUseCase) {
         this.createFarm = createFarm;
         this.findFarm = findFarm;
         this.listFarms = listFarms;
         this.deleteFarm = deleteFarm;
+        this.getFarmByClientIdUseCase = getFarmByClientIdUseCase;
     }
 
     @GetMapping
@@ -40,6 +39,13 @@ public class FarmController {
     @GetMapping("/{id}")
     public ResponseEntity<FarmDTO> getFarmById(@PathVariable Long id) {
         Optional<FarmDTO> farm = findFarm.invoke(id);
+        return farm.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<FarmDTO> getFarmByClientId(@PathVariable Long clientId) {
+        Optional<FarmDTO> farm = getFarmByClientIdUseCase.invoke(clientId);
         return farm.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

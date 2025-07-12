@@ -2,14 +2,7 @@ package br.com.aviapp.api.infra.mysql.models;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +19,9 @@ public class MySqlFarmEntity {
 
   private String name;
 
-  @ManyToOne
-  @JoinColumn(name = "address_id")
-  private MySqlAddressEntity addressId;
+  @OneToOne
+  @JoinColumn(name = "address_id", unique = true)  // unique garante o 1:1
+  private MySqlAddressEntity address;
 
   @ManyToOne
   @JoinColumn(name = "client_id")
