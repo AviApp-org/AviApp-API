@@ -33,6 +33,10 @@ public class EmployeeConfig {
         return new ListAllEmployeesUseCase(employeeRepository, employeeMapperBO);
     }
 
+    @Bean GetEmployeesByFarmIdUseCase getEmployeesByFarmIdUseCase (IEmployee repository) {
+        return new GetEmployeesByFarmIdUseCase(repository);
+    }
+
     @Bean
     public FindEmployeeByIdUseCase findEmployeeById(IEmployee employeeRepository, EmployeeMapperBO employeeMapperBO) {
         return new FindEmployeeByIdUseCase(employeeRepository, employeeMapperBO);

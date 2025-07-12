@@ -40,6 +40,11 @@ public class EmployeeRepository implements IEmployee {
     }
 
     @Override
+    public List<EmployeeDTO> getEmployeeByFarmId(Long farmId) {
+        return employeeMapper.toDTOList(employeeRepositoryJPA.findByFarmId(farmId));
+    }
+
+    @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         MySqlEmployeeEntity entity = employeeMapper.toEntity(employeeDTO);
 
