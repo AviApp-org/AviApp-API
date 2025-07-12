@@ -30,6 +30,7 @@ public class MySqlEmployeeEntity {
 
   private String name;
 
+  @Column(name = "cpf", nullable = false, unique = true)
   private String cpf;
 
   private Date birthDate;

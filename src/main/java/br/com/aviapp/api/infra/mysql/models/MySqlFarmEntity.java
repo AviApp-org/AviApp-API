@@ -20,7 +20,7 @@ public class MySqlFarmEntity {
   private String name;
 
   @OneToOne
-  @JoinColumn(name = "address_id", unique = true)  // unique garante o 1:1
+  @JoinColumn(name = "address_id", unique = true)
   private MySqlAddressEntity address;
 
   @ManyToOne
