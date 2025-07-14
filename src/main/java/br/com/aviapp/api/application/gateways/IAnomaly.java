@@ -10,5 +10,7 @@ public interface IAnomaly {
 
      List<AnomalyDTO> listAllAnomalies();
 
+     List<AnomalyDTO> getAnomamliesByAviary(Long aviaryId);
+
      void deleteAnomaly(Long anomalyId);
 }

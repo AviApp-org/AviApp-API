@@ -35,6 +35,12 @@ public class AnomalyRepository implements IAnomaly {
     }
 
     @Override
+    public List<AnomalyDTO> getAnomamliesByAviary(Long aviaryId) {
+
+        return mapperEntity.toDTOList(repositoryJPA.findByAviaryId(aviaryId));
+    }
+
+    @Override
     public void deleteAnomaly(Long anomalyId) {
         repositoryJPA.deleteById(anomalyId);
     }

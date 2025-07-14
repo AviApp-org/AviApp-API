@@ -40,7 +40,8 @@ public class AviaryMapperEntity {
             dto.initialAmountOfChickens(),
             dto.currentAmountOfRooster(),
             dto.currentAmountOfChickens(),
-            batch
+            batch,
+            null
         );
     }
 

@@ -12,14 +12,15 @@ public class AnomalyMapperEntity {
         MySqlAnomalyEntity anomaly = new MySqlAnomalyEntity();
         anomaly.setId(dto.id());
         anomaly.setDescription(dto.description());
-        
+
         return anomaly;
     }
 
     public AnomalyDTO toDTO(MySqlAnomalyEntity entity) {
         return new AnomalyDTO(
-            entity.getId(),
-            entity.getDescription()
+                entity.getId(),
+                entity.getDescription(),
+                entity.getAviary().getId()
         );
     }
 

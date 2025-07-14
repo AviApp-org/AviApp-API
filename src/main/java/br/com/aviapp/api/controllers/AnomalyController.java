@@ -3,6 +3,7 @@ package br.com.aviapp.api.controllers;
 import java.net.URI;
 import java.util.List;
 
+import br.com.aviapp.api.application.usecases.anomaly.GetAnomalyByAviaryUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,12 +28,14 @@ public class AnomalyController {
     private final CreateAnomalyUseCase createAnomalyUseCase;
     private final DeleteAnomalyUseCase deleteAnomalyUseCase;
     private final ListAllAnomaliesUseCase listAllAnomaliesUseCase;
+    private final GetAnomalyByAviaryUseCase getAnomalyByAviaryUseCase;
 
     public AnomalyController(CreateAnomalyUseCase createAnomalyUseCase, DeleteAnomalyUseCase deleteAnomalyUseCase,
-            ListAllAnomaliesUseCase listAllAnomaliesUseCase) {
+                             ListAllAnomaliesUseCase listAllAnomaliesUseCase, GetAnomalyByAviaryUseCase getAnomalyByAviaryUseCase) {
         this.createAnomalyUseCase = createAnomalyUseCase;
         this.deleteAnomalyUseCase = deleteAnomalyUseCase;
         this.listAllAnomaliesUseCase = listAllAnomaliesUseCase;
+        this.getAnomalyByAviaryUseCase = getAnomalyByAviaryUseCase;
     }
 
     @PostMapping
@@ -45,6 +48,12 @@ public class AnomalyController {
     @GetMapping
     public ResponseEntity<List<AnomalyDTO>> listAllAnomalies() {
         List<AnomalyDTO> anomalies = listAllAnomaliesUseCase.invoke();
+        return ResponseEntity.ok(anomalies);
+    }
+
+    @GetMapping("/aviary/{aviaryId}")
+    public ResponseEntity<List<AnomalyDTO>> getAnomaliesByAviary(@PathVariable Long aviaryId) {
+        List<AnomalyDTO> anomalies = getAnomalyByAviaryUseCase.invoke(aviaryId);
         return ResponseEntity.ok(anomalies);
     }
 

@@ -9,11 +9,13 @@ public class AnomalyBO {
     
     private Long id;
     private String description;
+    private AviaryBO aviary;
 
-    public AnomalyBO(Long id, String description) throws InvalidParamError{
+    public AnomalyBO(Long id, String description, AviaryBO aviary) throws InvalidParamError{
         ParamValidator.validate(description);
         this.id = id;
         this.description = description;
+        this.aviary = aviary;
     }
 
     public void setDescription(String description) {
