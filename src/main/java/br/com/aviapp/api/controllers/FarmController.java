@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.usecases.farm.*;
+import br.com.aviapp.api.infra.services.security.SecurityUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,15 @@ public class FarmController {
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<FarmDTO> getFarmByClientId(@PathVariable Long clientId) {
+        Optional<FarmDTO> farm = getFarmByClientIdUseCase.invoke(clientId);
+        return farm.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/currentClient")
+    public ResponseEntity<FarmDTO> getFarmByCurrentClientId() {
+        Long clientId = SecurityUtils.getCurrentClientId();
+
         Optional<FarmDTO> farm = getFarmByClientIdUseCase.invoke(clientId);
         return farm.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

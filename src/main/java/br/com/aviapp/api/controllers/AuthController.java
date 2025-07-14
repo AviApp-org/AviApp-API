@@ -41,8 +41,19 @@ public class AuthController {
     public ResponseEntity<LoginResponseDTO> login (@RequestBody @Valid LoginDTO loginDTO) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(loginDTO.login(), loginDTO.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        var token = tokenService.generateToken((MySqlUserCredentials) auth.getPrincipal());
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+
+        MySqlUserCredentials userCredentials = (MySqlUserCredentials) auth.getPrincipal();
+        var token = tokenService.generateToken(userCredentials);
+
+        LoginResponseDTO response = new LoginResponseDTO(
+                token,
+                userCredentials.getClient().getId(),
+                userCredentials.getClient().getName(),
+                userCredentials.getRole().name(),
+                userCredentials.getLogin()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
