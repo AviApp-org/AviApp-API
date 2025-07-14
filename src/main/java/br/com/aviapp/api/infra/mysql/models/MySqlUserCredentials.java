@@ -37,8 +37,6 @@ public class MySqlUserCredentials implements UserDetails {
     @Column(nullable = false)
     private UserType role;
 
-    private LocalDateTime created_at;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserType.ADMIN)

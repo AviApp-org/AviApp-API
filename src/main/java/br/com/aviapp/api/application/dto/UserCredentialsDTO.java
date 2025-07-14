@@ -1,7 +1,7 @@
 package br.com.aviapp.api.application.dto;
 
 
-import java.time.LocalDateTime;
+import br.com.aviapp.api.domain.enums.EnumUserType;
 
-public record UserCredentialsDTO (Long clientId, String username, String password, LocalDateTime created_at){
+public record UserCredentialsDTO (Long id, Long clientId, String login, String password, EnumUserType role){
 }
