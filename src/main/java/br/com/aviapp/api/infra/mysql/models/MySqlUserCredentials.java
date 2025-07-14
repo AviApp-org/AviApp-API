@@ -28,13 +28,14 @@ public class MySqlUserCredentials implements UserDetails {
     @JoinColumn(name = "client_id")
     private MySqlClientEntity client;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "login",nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserType role;
 
     @Override
