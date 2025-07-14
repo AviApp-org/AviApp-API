@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MySqlAnomalyEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -18,6 +19,7 @@ public class MySqlAnomalyEntity {
   @Lob
   @Column(nullable = true)
   private String description;
+
 
   @ManyToOne
   @JoinColumn(name = "aviary_id")

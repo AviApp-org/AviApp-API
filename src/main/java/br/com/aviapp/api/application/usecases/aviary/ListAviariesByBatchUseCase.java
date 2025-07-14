@@ -7,6 +7,7 @@ import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.gateways.IAviary;
 
 public class ListAviariesByBatchUseCase {
+
     private final IAviary aviaryRepository;
 
     public ListAviariesByBatchUseCase(IAviary aviaryRepository) {
@@ -16,4 +17,5 @@ public class ListAviariesByBatchUseCase {
     public Optional<List<AviaryDTO>> invoke(Long batchId) {
         return aviaryRepository.listAllAviarysByBatchId(batchId);
     }
+
 }

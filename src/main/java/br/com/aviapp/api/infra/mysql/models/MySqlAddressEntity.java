@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MySqlAddressEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +35,7 @@ public class MySqlAddressEntity {
 
     @Column(nullable = false)
     private String state;
+
 
     @OneToOne(mappedBy = "address")
     private MySqlFarmEntity farm;

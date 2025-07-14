@@ -18,9 +18,15 @@ public class ActivateBatchUseCase {
 
     public void invoke(Long batchId) {
         Optional<BatchDTO> batchDTO = repository.findBatch(batchId);
+
+        if (batchDTO.isEmpty()) {
+            throw new RuntimeException("Lote não encontrado");
+        }
+
         BatchBO batchBO = mapper.toBO(batchDTO.get());
 
         batchBO.ativar();
+
         repository.save(mapper.toDTO(batchBO));
     }
 }
