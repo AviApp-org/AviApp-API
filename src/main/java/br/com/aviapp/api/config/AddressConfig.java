@@ -3,6 +3,7 @@ package br.com.aviapp.api.config;
 import br.com.aviapp.api.application.usecases.address.*;
 import br.com.aviapp.api.domain.services.AddressService;
 import br.com.aviapp.api.domain.utils.CepService;
+import br.com.aviapp.api.infra.mysql.repository.FarmRepositoryJPA;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,7 +29,6 @@ public class AddressConfig {
         return new AddressService(cepService);
     }
 
-
     @Bean
     DeleteAddressUseCase deleteAddress(IAddress IAddress) {
         return new DeleteAddressUseCase(IAddress);
@@ -37,6 +37,11 @@ public class AddressConfig {
     @Bean
     FindAddressByIdUseCase findAddress(IAddress IAddress, AddressMapperBO mapperBO) {
         return new FindAddressByIdUseCase(IAddress, mapperBO);
+    }
+
+    @Bean
+    GetAddressByFarmIdUseCase getAddressByFarmIdUseCase(IAddress repository) {
+        return new GetAddressByFarmIdUseCase(repository);
     }
 
     @Bean
@@ -50,8 +55,8 @@ public class AddressConfig {
     }
 
     @Bean
-    AddressMapperEntity returnAddressEntityMapper() {
-        return new AddressMapperEntity();
+    AddressMapperEntity returnAddressEntityMapper(FarmRepositoryJPA farmRepositoryJPA) {
+        return new AddressMapperEntity(farmRepositoryJPA);
     }
 
     @Bean

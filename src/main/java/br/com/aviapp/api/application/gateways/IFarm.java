@@ -13,6 +13,8 @@ public interface IFarm {
 
     Optional<FarmDTO> findFarm(Long farmID);
 
+    Optional<FarmDTO> findFarmByClient(Long clientId);
+
     void deleteFarm(Long farmID);
 
     Optional<FarmDTO> updateFarm(Long farmID, FarmDTO farm);

@@ -11,12 +11,12 @@ import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 
 @Repository
-public class IAddress implements br.com.aviapp.api.application.gateways.IAddress {
+public class AddressRepository implements br.com.aviapp.api.application.gateways.IAddress {
 
     private final AddressRepositoryJPA repositoryJPA;
     private final AddressMapperEntity mapperEntity;
 
-    public IAddress(AddressRepositoryJPA repositoryJPA, AddressMapperEntity mapperEntity) {
+    public AddressRepository(AddressRepositoryJPA repositoryJPA, AddressMapperEntity mapperEntity) {
         this.repositoryJPA = repositoryJPA;
         this.mapperEntity = mapperEntity;
     }
@@ -36,6 +36,12 @@ public class IAddress implements br.com.aviapp.api.application.gateways.IAddress
     @Override
     public Optional<AddressDTO> findAddress(Long addressID) {
         return repositoryJPA.findById(addressID)
+                .map(mapperEntity::toDTO);
+    }
+
+    @Override
+    public Optional<AddressDTO> getAddressByFarmId(Long farmId) {
+        return repositoryJPA.findAddressByFarmId(farmId)
                 .map(mapperEntity::toDTO);
     }
 

@@ -41,6 +41,12 @@ public class FarmRepository implements IFarm {
     }
 
     @Override
+    public Optional<FarmDTO> findFarmByClient(Long clientId) {
+        MySqlFarmEntity mySqlFarmEntity = farmRepositoryJPA.findByClient(clientId).get();
+        return Optional.ofNullable(farmMapper.toDTO(mySqlFarmEntity));
+    }
+
+    @Override
     public void deleteFarm(Long farmID) {
         farmRepositoryJPA.deleteById(farmID);
     }

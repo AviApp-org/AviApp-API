@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "aviary")
@@ -29,6 +32,11 @@ public class MySqlAviaryEntity {
     @ManyToOne
     @JoinColumn(name = "batch_id")
     private MySqlBatchEntity batchId;
+
+
+    @OneToMany(mappedBy = "aviary", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<MySqlAnomalyEntity> anomalies;
+
 
     @PrePersist
     public void prePersist() {

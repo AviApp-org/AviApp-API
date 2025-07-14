@@ -1,5 +1,8 @@
 package br.com.aviapp.api.config;
 
+import br.com.aviapp.api.application.mappers.AviaryMapperBO;
+import br.com.aviapp.api.application.usecases.anomaly.GetAnomalyByAviaryUseCase;
+import br.com.aviapp.api.application.usecases.aviary.FindAviaryByIdUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,8 +32,13 @@ public class AnomalyConfig {
     }
 
     @Bean
-    public AnomalyMapperBO anomalyMapperBO() {
-        return new AnomalyMapperBO();
+    public GetAnomalyByAviaryUseCase getAnomalyByAviaryUseCase(IAnomaly repository) {
+        return new GetAnomalyByAviaryUseCase(repository);
+    }
+
+    @Bean
+    public AnomalyMapperBO anomalyMapperBO(FindAviaryByIdUseCase findAviaryByIdUseCase, AviaryMapperBO aviaryMapperBO) {
+        return new AnomalyMapperBO(findAviaryByIdUseCase, aviaryMapperBO);
     }
 
     @Bean

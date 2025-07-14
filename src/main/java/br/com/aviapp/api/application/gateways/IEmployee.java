@@ -11,6 +11,8 @@ public interface IEmployee {
 
     Optional<EmployeeDTO> findEmployee(Long id);
 
+    List<EmployeeDTO> getEmployeeByFarmId(Long farmId);
+
     EmployeeDTO createEmployee(EmployeeDTO employeeDTO);
 
     void deleteEmployee(Long employeeId);

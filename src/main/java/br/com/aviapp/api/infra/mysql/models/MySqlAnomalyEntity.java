@@ -1,17 +1,15 @@
 package br.com.aviapp.api.infra.mysql.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@Table
+@Data
+@Table(name = "anomaly")
+@NoArgsConstructor
+@AllArgsConstructor
 public class MySqlAnomalyEntity {
 
   @Id
@@ -22,4 +20,8 @@ public class MySqlAnomalyEntity {
   @Column(nullable = true)
   private String description;
 
+
+  @ManyToOne
+  @JoinColumn(name = "aviary_id")
+  private MySqlAviaryEntity aviary;
 }

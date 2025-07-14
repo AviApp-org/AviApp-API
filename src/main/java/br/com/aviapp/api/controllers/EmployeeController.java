@@ -20,14 +20,16 @@ public class EmployeeController {
     private final FindEmployeeByIdUseCase findEmployeeById;
     private final ListAllEmployeesUseCase listAllEmployees;
     private final UpdateEmployeeUseCase updateEmployee;
+    private final GetEmployeesByFarmIdUseCase getEmployeesByFarmIdUseCase;
 
     public EmployeeController(CreateEmployeeUseCase createEmployee, DeleteEmployeeUseCase deleteEmployee,
-                              FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees, UpdateEmployeeUseCase updateEmployee) {
+                              FindEmployeeByIdUseCase findEmployeeById, ListAllEmployeesUseCase listAllEmployees, UpdateEmployeeUseCase updateEmployee, GetEmployeesByFarmIdUseCase getEmployeesByFarmIdUseCase) {
         this.createEmployee = createEmployee;
         this.deleteEmployee = deleteEmployee;
         this.findEmployeeById = findEmployeeById;
         this.listAllEmployees = listAllEmployees;
         this.updateEmployee = updateEmployee;
+        this.getEmployeesByFarmIdUseCase = getEmployeesByFarmIdUseCase;
     }
 
     @GetMapping
@@ -40,6 +42,12 @@ public class EmployeeController {
     public ResponseEntity<EmployeeDTO> findEmployeeById(@PathVariable Long id) {
         Optional<EmployeeDTO> employee = findEmployeeById.invoke(id);
         return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/farm/{farmId}")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeesByFarm(@PathVariable Long farmId) {
+        List<EmployeeDTO> employees = getEmployeesByFarmIdUseCase.invoke(farmId);
+        return ResponseEntity.ok(employees);
     }
 
     @PostMapping
