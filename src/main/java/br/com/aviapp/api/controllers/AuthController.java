@@ -2,9 +2,12 @@ package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.LoginDTO;
+import br.com.aviapp.api.application.dto.LoginResponseDTO;
 import br.com.aviapp.api.application.dto.UserCredentialsDTO;
 import br.com.aviapp.api.application.usecases.userCredentials.FindByLoginUseCase;
 import br.com.aviapp.api.application.usecases.userCredentials.RegisterUserUseCase;
+import br.com.aviapp.api.infra.mysql.models.MySqlUserCredentials;
+import br.com.aviapp.api.infra.services.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +34,15 @@ public class AuthController {
     @Autowired
     private RegisterUserUseCase registerUserUseCase;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity<UserCredentialsDTO> login (@RequestBody @Valid LoginDTO loginDTO) {
+    public ResponseEntity<LoginResponseDTO> login (@RequestBody @Valid LoginDTO loginDTO) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(loginDTO.login(), loginDTO.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((MySqlUserCredentials) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
