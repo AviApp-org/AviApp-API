@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum UserType {
     ADMIN("Administrador"),
-    EMPLOYEE("Funcionário"),
+    USER("Usuário"),
     MANAGER("Gerente");
 
     private final String description;
