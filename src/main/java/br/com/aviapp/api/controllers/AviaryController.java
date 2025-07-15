@@ -51,9 +51,8 @@ public class AviaryController {
 
     @GetMapping("/batch/{batchId}")
     public ResponseEntity<List<AviaryDTO>> listAviariesByBatch(@PathVariable Long batchId) {
-        Optional<List<AviaryDTO>> aviaries = listAviariesByBatchUseCase.invoke(batchId);
-        return aviaries.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        List<AviaryDTO> aviaries = listAviariesByBatchUseCase.invoke(batchId);
+        return ResponseEntity.ok(aviaries);
     }
 
     @GetMapping("/{id}")

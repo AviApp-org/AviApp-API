@@ -14,7 +14,7 @@ public class ListAviariesByBatchUseCase {
         this.aviaryRepository = aviaryRepository;
     }
 
-    public Optional<List<AviaryDTO>> invoke(Long batchId) {
+    public List<AviaryDTO> invoke(Long batchId) {
         return aviaryRepository.listAllAviarysByBatchId(batchId);
     }
 

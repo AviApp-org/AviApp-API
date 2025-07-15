@@ -38,7 +38,7 @@ public class GenerateFinancialReportUseCase {
 
     public List<FinancialDetailsDTO> getDailyFinancialReport(LocalDate date, Long batchId) throws Exception {
 
-        Optional<List<AviaryDTO>> aviaries = listAviariesByBatchUseCase.invoke(batchId);
+        List<AviaryDTO> aviaries = listAviariesByBatchUseCase.invoke(batchId);
 
         if (aviaries.isEmpty()){
             throw new Exception("Nenhum aviário encontrado para o lote");
@@ -46,7 +46,7 @@ public class GenerateFinancialReportUseCase {
 
         List<FinancialDetailsVO> financialDetails = new ArrayList<>();
 
-        for (AviaryDTO aviary : aviaries.get()) {
+        for (AviaryDTO aviary : aviaries) {
             List<CollectEggBO> eggsCollects = collectEggMapperBO.toBOList(listEggCollectsByDateAndAviaryUseCase.invoke(aviary.id(), date));
             EggValueBO eggValue = eggValueMapperBO.toBO(getLastInsertedEggValueUseCase.invoke());
 

@@ -9,7 +9,7 @@ public interface IAviary {
     
     AviaryDTO createAviary(AviaryDTO aviaryDTO);
 
-    Optional<List<AviaryDTO>> listAllAviarysByBatchId(Long batchId);
+    List<AviaryDTO> listAllAviarysByBatchId(Long batchId);
 
     Optional<AviaryDTO> findAviaryById(Long aviaryId);
 

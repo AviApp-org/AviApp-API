@@ -34,16 +34,16 @@ public class AviaryRepository implements IAviary {
     }
 
     @Override
-    public Optional<List<AviaryDTO>> listAllAviarysByBatchId(Long batchId) {
+    public List<AviaryDTO> listAllAviarysByBatchId(Long batchId) {
         Optional<MySqlBatchEntity> batchEntity = entityLookupRepository.findBatchById(batchId);
         if (batchEntity.isEmpty()) {
-            return Optional.empty();
+            return List.of();
         }
         List<MySqlAviaryEntity> entities = aviaryRepositoryJPA.findByBatchId(batchEntity.get());
         List<AviaryDTO> aviaryDTOs = entities.stream()
                 .map(aviaryMapper::toDTO)
                 .toList();
-        return Optional.of(aviaryDTOs);
+        return List.copyOf(aviaryDTOs);
     }
 
 
