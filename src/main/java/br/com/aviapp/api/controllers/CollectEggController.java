@@ -1,7 +1,9 @@
 package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.usecases.collectEgg.*;
+import br.com.aviapp.api.infra.services.webSocket.CollectEggNotifier;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/collect-egg")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class CollectEggController {
 
     private final CreateEggCollectUseCase createEggCollectUseCase;
@@ -23,6 +25,9 @@ public class CollectEggController {
     private final GetEggCollectByDateUseCase getEggCollectByDateUseCase;
     private final DeleteEggCollectUseCase deleteEggCollectUseCase;
     private final ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase;
+
+    @Autowired
+    CollectEggNotifier collectEggNotifier;
 
     public CollectEggController(CreateEggCollectUseCase createEggCollectUseCase, ListAllEggCollectsUseCase listAllEggCollectsUseCase, ListEggCollectsByAviaryUseCase listEggCollectsByAviaryUseCase, GetEggCollectByDateUseCase getEggCollectByDateUseCase, DeleteEggCollectUseCase deleteEggCollectUseCase, ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase) {
         this.createEggCollectUseCase = createEggCollectUseCase;
@@ -36,6 +41,8 @@ public class CollectEggController {
     @PostMapping
     public ResponseEntity<CollectEggDataDTO> createCollectEgg(@RequestBody CollectEggDataDTO collectEggDataDTO) {
         CollectEggDataDTO collectEggData = createEggCollectUseCase.invoke(collectEggDataDTO);
+        collectEggNotifier.notifyNewCollect(collectEggData);
+
         return ResponseEntity.ok(collectEggData);
     }
 
