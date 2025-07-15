@@ -48,7 +48,7 @@ public class GenerateFinancialReportUseCase {
 
         for (AviaryDTO aviary : aviaries) {
             List<CollectEggBO> eggsCollects = collectEggMapperBO.toBOList(listEggCollectsByDateAndAviaryUseCase.invoke(aviary.id(), date));
-            EggValueBO eggValue = eggValueMapperBO.toBO(getLastInsertedEggValueUseCase.invoke());
+            EggValueBO eggValue = eggValueMapperBO.toBO(getLastInsertedEggValueUseCase.invoke(batchId));
 
             financialDetails.add(FinancialDetailsFactory.createFinancialDetails(eggValue, eggsCollects));
         }

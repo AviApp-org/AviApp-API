@@ -42,9 +42,9 @@ public class EggValueController {
         return ResponseEntity.ok(eggValues);
     }
 
-    @GetMapping("/last")
-    public ResponseEntity<EggValueDTO> getLastInsertedEggValue() {
-        EggValueDTO lastInsertedEggValue = getLastInsertedEggValueUseCase.invoke();
+    @GetMapping("/last/batch/{batchId}")
+    public ResponseEntity<EggValueDTO> getLastInsertedEggValue(@PathVariable Long batchId) {
+        EggValueDTO lastInsertedEggValue = getLastInsertedEggValueUseCase.invoke(batchId);
         return ResponseEntity.ok(lastInsertedEggValue);
     }
 

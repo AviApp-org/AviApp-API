@@ -15,9 +15,9 @@ public class GetLastInsertedEggValueUseCase {
         this.mapperBO = mapperBO;
     }
 
-    public EggValueDTO invoke() {
+    public EggValueDTO invoke(Long batchId) {
 
-        EggValueBO eggValueBO = mapperBO.toBO(repository.getLastInsertedEggValue());
+        EggValueBO eggValueBO = mapperBO.toBO(repository.getLastInsertedEggValueByBatchId(batchId));
 
         return mapperBO.toDTO(eggValueBO);
     }

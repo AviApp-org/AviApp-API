@@ -4,16 +4,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.aviapp.api.application.dto.EggValueDTO;
+import br.com.aviapp.api.application.gateways.ILookUp;
+import br.com.aviapp.api.domain.entities.BatchBO;
 import br.com.aviapp.api.domain.entities.EggValueBO;
 
 public class EggValueMapperBO {
 
+    private final ILookUp lookupRepository;
+    private final BatchMapperBO batchMapperBO;
+
+    public EggValueMapperBO(ILookUp lookupRepository, BatchMapperBO batchMapperBO) {
+        this.lookupRepository = lookupRepository;
+        this.batchMapperBO = batchMapperBO;
+    }
+
     public EggValueBO toBO(EggValueDTO dto) {
+        BatchBO batchBO = batchMapperBO.toBO(lookupRepository.findBatchDTOById(dto.batchId()).orElseThrow());
+
         return new EggValueBO(
                 dto.id(),
                 dto.egg(),
                 dto.timeStamp(),
-                dto.value());
+                dto.value(),
+                batchBO);
     }
 
     public EggValueDTO toDTO(EggValueBO bo) {
@@ -21,7 +34,8 @@ public class EggValueMapperBO {
                 bo.getId(),
                 bo.getEggType(),
                 bo.getTimestamp(),
-                bo.getValue());
+                bo.getValue(),
+                bo.getBatch().getId());
     }
 
     public List<EggValueBO> toBOList(List<EggValueDTO> dtos) {

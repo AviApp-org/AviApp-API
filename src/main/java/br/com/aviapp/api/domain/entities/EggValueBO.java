@@ -19,7 +19,9 @@ public class EggValueBO {
 
     private final BigDecimal value;
 
-    public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, BigDecimal value) throws InvalidParamError {
+    private BatchBO batch;
+
+    public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, BigDecimal value, BatchBO batch) throws InvalidParamError {
         ParamValidator.validate(eggType,value);
 
         if (value.compareTo(BigDecimal.ZERO) < 0) {
@@ -31,6 +33,7 @@ public class EggValueBO {
         this.eggType = eggType;
         this.timestamp = timestamp;
         this.value = value;
+        this.batch = batch;
     }
 
     public void setEggType(EnumEggType eggType) {

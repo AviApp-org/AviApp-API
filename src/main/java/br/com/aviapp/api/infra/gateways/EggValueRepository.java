@@ -39,8 +39,8 @@ public class EggValueRepository implements IEggValue {
     }
 
     @Override
-    public EggValueDTO getLastInsertedEggValue() {
-        return  mapperEntity.toDTO(repositoryJPA.findLastInsertedEggValue());
+    public EggValueDTO getLastInsertedEggValueByBatchId(Long batchId) {
+        return  mapperEntity.toDTO(repositoryJPA.findLastInsertedEggValue(batchId).orElseThrow());
     }
 
 }

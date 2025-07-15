@@ -12,5 +12,5 @@ public interface IEggValue {
 
     void deleteEggValue(Long eggValueId);
 
-    EggValueDTO getLastInsertedEggValue();
+    EggValueDTO getLastInsertedEggValueByBatchId(Long batchId);
 }
