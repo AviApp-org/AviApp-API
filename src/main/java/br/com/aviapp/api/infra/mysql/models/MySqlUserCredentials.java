@@ -28,7 +28,7 @@ public class MySqlUserCredentials implements UserDetails {
     @JoinColumn(name = "client_id")
     private MySqlClientEntity client;
 
-    @Column(name = "login",nullable = false, unique = true)
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
@@ -40,10 +40,22 @@ public class MySqlUserCredentials implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserType.ADMIN)
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == UserType.ADMIN) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_MANAGER"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+            );
+        } else if (this.role == UserType.MANAGER) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_MANAGER"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+            );
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
+
 
     @Override
     public String getUsername() {

@@ -29,32 +29,40 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/addresses/cep/**").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/register").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/addresses/cep/**").authenticated()
 
                         // Report endpoints
-                        .requestMatchers(HttpMethod.GET, "/api/daily-report/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/financial-details/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/daily-report/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.GET, "/api/financial-details/**").hasRole("MANAGER")
 
                         // Batch management
+                        .requestMatchers(HttpMethod.GET, "/api/batches").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/batches/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/batches").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/batches/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/batches/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/batches/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/batches").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/api/batches/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/batches/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/batches/**").hasRole("MANAGER")
 
                         // Aviary management
+                        .requestMatchers(HttpMethod.GET, "/api/aviaries").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/aviaries/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/aviaries").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/aviaries/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/aviaries/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/aviaries").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/api/aviaries/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/aviaries/**").hasRole("MANAGER")
 
                         // Egg collection
+                        .requestMatchers(HttpMethod.GET, "/api/collect-egg").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/collect-egg/date/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/collect-egg/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/collect-egg").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/collect-egg/**").hasRole("ADMIN")
 
                         // Chicken collection
+                        .requestMatchers(HttpMethod.GET, "/api/collect-chicken").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/collect-chicken/date/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/collect-chicken/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/collect-chicken").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/collect-chicken/**").hasRole("ADMIN")
@@ -82,14 +90,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/farms/**").hasRole("ADMIN")
 
                         // Employee management (admin only)
-                        .requestMatchers("/api/employees/**").hasRole("ADMIN")
+                        .requestMatchers("/api/employees/**").hasRole("MANAGER")
 
-                        // Client management
-                        .requestMatchers(HttpMethod.GET, "/api/clients/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/clients").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/clients/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/clients/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/clients/**").hasRole("ADMIN")
+
+                        .requestMatchers("/api/clients/**").hasRole("ADMIN")
+
 
                         // Address management
                         .requestMatchers(HttpMethod.GET, "/api/addresses").authenticated()

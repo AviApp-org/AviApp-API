@@ -44,7 +44,7 @@ public class AviaryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AviaryDTO>> listAllAviarys() {
+    public ResponseEntity<List<AviaryDTO>> listAllAviaries() {
         List<AviaryDTO> aviaries = listAllAviariesUseCase.invoke();
         return ResponseEntity.ok(aviaries);
     }
