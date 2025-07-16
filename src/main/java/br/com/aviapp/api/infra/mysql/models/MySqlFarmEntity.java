@@ -24,7 +24,7 @@ public class MySqlFarmEntity {
   @JoinColumn(name = "address_id", unique = true)
   private MySqlAddressEntity address;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "client_id")
   private MySqlClientEntity clientId;
 
