@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.gateways.IBatch;
 import br.com.aviapp.api.application.mappers.BatchMapperBO;
 import br.com.aviapp.api.domain.entities.BatchBO;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 
 public class CreateBatchUseCase {
 
@@ -16,11 +17,11 @@ public class CreateBatchUseCase {
         this.mapper = mapper;
     }
 
-    public BatchDTO invoke(BatchDTO batchDTO){
+    public BatchDTO invoke(BatchDTO batchDTO) throws BusinessRuleException {
         BatchBO batchBO = mapper.toBO(batchDTO);
 
-        BatchDTO validatedBatch = mapper.toDTO(batchBO);
+        batchBO.validateForCreation();
 
-        return repository.createBatch(validatedBatch);
+        return repository.createBatch(mapper.toDTO(batchBO));
     }
 }
