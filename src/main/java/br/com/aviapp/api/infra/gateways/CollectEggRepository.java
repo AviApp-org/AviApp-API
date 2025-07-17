@@ -32,7 +32,7 @@ public class CollectEggRepository implements ICollectEgg {
         MySqlCollectEggDataEntity entity = collectEggMapper.toEntity(collectEggDataDTO);
         MySqlCollectEggDataEntity savedEntity = repositoryJPA.save(entity);
 
-        List<EggDetailDTO> eggDetails = collectEggDataDTO.eggDetail();
+        List<EggDetailDTO> eggDetails = collectEggDataDTO.eggDetails();
 
         List<MySqlEggDetailEntity> eggDetailEntity = eggDetailMapper.toEntityList(eggDetails);
 

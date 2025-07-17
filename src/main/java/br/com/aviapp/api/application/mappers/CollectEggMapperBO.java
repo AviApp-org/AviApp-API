@@ -29,7 +29,7 @@ public class CollectEggMapperBO {
             throw new IllegalArgumentException("Aviário não encontrado.");
         }
         AviaryBO aviaryBO = aviaryMapperBO.toBO(aviaryDTO.get());
-        List<EggDetailBO> eggDetails = eggDetailMapperBO.toBOList(dto.eggDetail());
+        List<EggDetailBO> eggDetails = eggDetailMapperBO.toBOList(dto.eggDetails());
 
         return new CollectEggBO(
                 dto.id(),
