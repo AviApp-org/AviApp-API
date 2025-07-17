@@ -1,5 +1,8 @@
 package br.com.aviapp.api.infra.mysql.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum EggType {
 
     CLEAN("Limpo"),
@@ -15,10 +18,6 @@ public enum EggType {
 
     EggType(String description) {
         this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
 }

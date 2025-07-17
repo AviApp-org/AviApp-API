@@ -2,12 +2,13 @@ package br.com.aviapp.api.domain.entities;
 
 import br.com.aviapp.api.domain.enums.EnumBatchStatus;
 import br.com.aviapp.api.domain.errors.BusinessRuleException;
+import br.com.aviapp.api.domain.utils.CreationValidator;
 import br.com.aviapp.api.domain.utils.DeletableEntity;
 import br.com.aviapp.api.domain.utils.ParamValidator;
 import lombok.Getter;
 
 @Getter
-public class AviaryBO implements DeletableEntity {
+public class AviaryBO implements DeletableEntity, CreationValidator {
 
     private final Long id;
     private String name;
@@ -27,7 +28,6 @@ public class AviaryBO implements DeletableEntity {
             throw new IllegalArgumentException("A quantidade inicial não pode ser negativa.");
         }
 
-        // Atribuições
         this.id = id;
         this.name = name;
         this.initialAmountOfRoosters = initialAmountOfRoosters;
@@ -37,6 +37,7 @@ public class AviaryBO implements DeletableEntity {
         this.batchId = batchId;
     }
 
+    @Override
     public void validateForCreation() throws BusinessRuleException {
         if(batchId.getStatus() == EnumBatchStatus.INACTIVE){
             throw new BusinessRuleException("O lote deve estar ativo para criar um aviário.");

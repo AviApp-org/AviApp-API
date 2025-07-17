@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.CollectEggDataDTO;
 import br.com.aviapp.api.application.gateways.ICollectEgg;
 import br.com.aviapp.api.application.mappers.CollectEggMapperBO;
 import br.com.aviapp.api.domain.entities.CollectEggBO;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 
 public class CreateEggCollectUseCase {
     
@@ -15,8 +16,10 @@ public class CreateEggCollectUseCase {
         this.collectEggMapperBO = collectEggMapperBO;
     }
 
-    public CollectEggDataDTO invoke(CollectEggDataDTO collectEggDataDTO) {
+    public CollectEggDataDTO invoke(CollectEggDataDTO collectEggDataDTO) throws BusinessRuleException {
         CollectEggBO collectEggData = collectEggMapperBO.toBO(collectEggDataDTO);
+
+        collectEggData.validateForCreation();
 
         return collectEggRepository.createCollectEgg(collectEggMapperBO.toDTO(collectEggData));
     }

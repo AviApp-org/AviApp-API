@@ -1,6 +1,7 @@
 package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.usecases.collectEgg.*;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import br.com.aviapp.api.infra.services.webSocket.CollectEggNotifier;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CollectEggController {
     }
 
     @PostMapping
-    public ResponseEntity<CollectEggDataDTO> createCollectEgg(@RequestBody CollectEggDataDTO collectEggDataDTO) {
+    public ResponseEntity<CollectEggDataDTO> createCollectEgg(@RequestBody CollectEggDataDTO collectEggDataDTO) throws BusinessRuleException {
         CollectEggDataDTO collectEggData = createEggCollectUseCase.invoke(collectEggDataDTO);
         collectEggNotifier.notifyNewCollect(collectEggData);
 
