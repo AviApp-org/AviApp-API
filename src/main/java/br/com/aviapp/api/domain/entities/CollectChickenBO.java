@@ -1,6 +1,9 @@
 package br.com.aviapp.api.domain.entities;
 
+import br.com.aviapp.api.domain.enums.EnumBatchStatus;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import br.com.aviapp.api.domain.errors.InvalidParamError;
+import br.com.aviapp.api.domain.utils.CreationValidator;
 import br.com.aviapp.api.domain.utils.ParamValidator;
 import br.com.aviapp.api.domain.utils.ValidateNegative;
 import lombok.Getter;
@@ -8,7 +11,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class CollectChickenBO {
+public class CollectChickenBO implements CreationValidator {
 
     private final Long id;
     private final AviaryBO aviary;
@@ -22,9 +25,6 @@ public class CollectChickenBO {
 
         ParamValidator.validate(aviary, deadChickens, deadRoosters);
 
-        if (ValidateNegative.isNegative(deadChickens) || ValidateNegative.isNegative(deadRoosters)) {
-            throw new InvalidParamError("Não é permitido valores negativos para aves mortas.");
-        }
         this.id = id;
         this.aviary = aviary;
         this.deadRoosters = deadRoosters;
@@ -33,8 +33,14 @@ public class CollectChickenBO {
         this.collectionDate = collectionDate;
     }
 
-    public Integer getTotalDeadBirds() {
-        return deadRoosters + deadChickens;
-    }
+    @Override
+    public void validateForCreation() throws BusinessRuleException {
+        if (ValidateNegative.isNegative(deadChickens) || ValidateNegative.isNegative(deadRoosters)) {
+            throw new InvalidParamError("Não é permitido valores negativos para aves mortas.");
+        }
 
+        if (aviary.getBatchId().getStatus() == EnumBatchStatus.INACTIVE) {
+            throw new BusinessRuleException("O lote deve estar ativo para enviar relatório de aves.");
+        }
+    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.aviapp.api.application.usecases.farm.*;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import br.com.aviapp.api.infra.services.security.SecurityUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,14 +62,14 @@ public class FarmController {
     }
 
     @PostMapping
-    public ResponseEntity<FarmDTO> createFarm(@Valid @RequestBody FarmDTO farmDTO) {
+    public ResponseEntity<FarmDTO> createFarm(@Valid @RequestBody FarmDTO farmDTO) throws BusinessRuleException {
         FarmDTO newFarm = createFarm.invoke(farmDTO);
         URI location = URI.create("/api/farms/" + newFarm.id());
         return ResponseEntity.created(location).body(newFarm);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFarm(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteFarm(@PathVariable Long id) throws BusinessRuleException {
         deleteFarm.invoke(id);
         return ResponseEntity.noContent().build();
     }

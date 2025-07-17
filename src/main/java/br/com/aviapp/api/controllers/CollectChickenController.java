@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import br.com.aviapp.api.application.usecases.collectChicken.*;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class CollectChickenController {
     }
 
     @PostMapping
-    public ResponseEntity<CollectChickenDTO> createChickenCollect(@RequestBody CollectChickenDTO collectChickenDTO) {
-        CollectChickenDTO chickenCollected = createChickenCollectUseCase.invoken(collectChickenDTO);
+    public ResponseEntity<CollectChickenDTO> createChickenCollect(@RequestBody CollectChickenDTO collectChickenDTO) throws BusinessRuleException {
+        CollectChickenDTO chickenCollected = createChickenCollectUseCase.invoke(collectChickenDTO);
         URI location = URI.create("/api/chicken-collects/" + chickenCollected.id());
         return ResponseEntity.created(location).body(chickenCollected);
     }

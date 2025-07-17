@@ -4,6 +4,7 @@ import br.com.aviapp.api.application.dto.CollectChickenDTO;
 import br.com.aviapp.api.application.gateways.ICollectChicken;
 import br.com.aviapp.api.application.mappers.CollectChickenMapperBO;
 import br.com.aviapp.api.domain.entities.CollectChickenBO;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 
 public class CreateChickenCollectUseCase {
     
@@ -15,9 +16,11 @@ public class CreateChickenCollectUseCase {
         this.collectChickenMapper = collectChickenMapper;
     }
 
-    public CollectChickenDTO invoken(CollectChickenDTO chickenDTO) {
+    public CollectChickenDTO invoke(CollectChickenDTO chickenDTO) throws BusinessRuleException {
         CollectChickenBO collectChickenBO = collectChickenMapper.toBO(chickenDTO);
-        CollectChickenDTO validatedChickenDTO = collectChickenMapper.toDTO(collectChickenBO);
-        return collectChickenRepository.createCollectChickenData(validatedChickenDTO);
+
+        collectChickenBO.validateForCreation();
+
+        return collectChickenRepository.createCollectChickenData(collectChickenMapper.toDTO(collectChickenBO));
     }
 }

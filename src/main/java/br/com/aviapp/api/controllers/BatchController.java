@@ -2,6 +2,7 @@ package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.usecases.batch.*;
+import br.com.aviapp.api.domain.errors.BusinessRuleException;
 import jakarta.validation.Valid;
 
 import org.aspectj.weaver.BCException;
@@ -41,7 +42,7 @@ public class BatchController {
     }
 
     @PostMapping
-    public ResponseEntity<BatchDTO> createBatch(@Valid @RequestBody BatchDTO batchDTO) {
+    public ResponseEntity<BatchDTO> createBatch(@Valid @RequestBody BatchDTO batchDTO) throws BusinessRuleException {
         BatchDTO newBatch = createBatchUseCase.invoke(batchDTO);
         URI location = URI.create("/api/addresses/" + newBatch.id());
         return ResponseEntity.created(location).body(newBatch);
