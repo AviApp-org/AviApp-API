@@ -53,7 +53,7 @@ public class FarmConfig {
     }
 
     @Bean
-    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (IFarm repository) {
-        return new DeleteFarmByIdUseCase(repository);
+    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (IFarm repository, FarmMapperBO mapperBO) {
+        return new DeleteFarmByIdUseCase(repository, mapperBO);
     }
 }
