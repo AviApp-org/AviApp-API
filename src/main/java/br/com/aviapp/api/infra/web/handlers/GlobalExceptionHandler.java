@@ -21,12 +21,12 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("timestamp", LocalDateTime.now());
-        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        errorResponse.put("status", HttpStatus.UNPROCESSABLE_ENTITY.value());
         errorResponse.put("error", "Business Rule Violation");
         errorResponse.put("message", ex.getMessage());
         errorResponse.put("path", request.getDescription(false).replace("uri=", ""));
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
