@@ -16,8 +16,7 @@ public class AddressMapperBO {
                 dto.cep(),
                 dto.neighborhood(),
                 dto.city(),
-                dto.state(),
-                dto.farmId()
+                dto.state()
         );
     }
 
@@ -29,8 +28,7 @@ public class AddressMapperBO {
                 bo.getCep(),
                 bo.getNeighborhood(),
                 bo.getCity(),
-                bo.getState(),
-                bo.getFarmId()
+                bo.getState()
         );
     }
 

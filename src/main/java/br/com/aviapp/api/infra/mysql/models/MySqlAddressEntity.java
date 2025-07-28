@@ -36,7 +36,4 @@ public class MySqlAddressEntity {
     @Column(nullable = false)
     private String state;
 
-
-    @OneToOne(mappedBy = "address")
-    private MySqlFarmEntity farm;
 }

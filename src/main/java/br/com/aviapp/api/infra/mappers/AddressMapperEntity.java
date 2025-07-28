@@ -24,12 +24,12 @@ public class AddressMapperEntity {
                 entity.getCep(),
                 entity.getNeighborhood(),
                 entity.getCity(),
-                entity.getState(),
-                entity.getFarm().getId());
+                entity.getState()
+        );
     }
 
     public MySqlAddressEntity toEntity(AddressDTO dto) {
-        MySqlFarmEntity mySqlFarmEntity = farmRepositoryJPA.findById(dto.farmId()).orElseThrow();
+
         return new MySqlAddressEntity(
                 dto.id(),
                 dto.street(),
@@ -37,8 +37,7 @@ public class AddressMapperEntity {
                 dto.cep(),
                 dto.neighborhood(),
                 dto.city(),
-                dto.state(),
-                mySqlFarmEntity
+                dto.state()
                 );
     }
 

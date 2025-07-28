@@ -39,7 +39,7 @@ public class GenerateDailyReportUseCase {
         List<AviaryDTO> aviaryDTO = listAviariesByBatchUseCase.invoke(batchId);
 
         if (aviaryDTO.isEmpty()) {
-            throw new RuntimeException("Batch not found");
+            throw new RuntimeException("Não existem aviários cadastrados para esse lote");
         }
 
         List<AviaryBO> aviaryBO = aviaryMapperBO.toBOList(aviaryDTO);
