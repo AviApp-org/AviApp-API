@@ -16,26 +16,35 @@ import lombok.Setter;
 public class FarmBO implements CreationValidator, DeletableEntity {
     private Long id;
     private String name;
-
     private ClientBO client;
-    private AddressBO address;
     private List<EmployeeBO> employees;
+    private String street;
+    private String number;
+    private String cep;
+    private String neighborhood;
+    private String city;
+    private String state;
 
-    public FarmBO(Long id, String name, ClientBO client, AddressBO address, List<EmployeeBO> employees)
+    public FarmBO(Long id, String name, ClientBO client, List<EmployeeBO> employees, String street, String number, String cep, String neighborhood, String city, String state )
             throws InvalidParamError {
-        ParamValidator.validate(client, address, employees);
+        ParamValidator.validate(client, employees);
 
         this.id = id;
         this.name = name;
         this.client = client;
-        this.address = address;
         this.employees = List.copyOf(employees);
+        this.street = street;
+        this.number = number;
+        this.cep = cep;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
     }
 
 
     @Override
     public String toString() {
-        return "FarmBO [id=" + id + ", client=" + client + ", address=" + address + "]";
+        return "FarmBO [id=" + id + ", client=" + client + ",]";
     }
 
     @Override

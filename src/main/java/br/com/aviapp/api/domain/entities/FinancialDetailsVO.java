@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Setter
 public class FinancialDetailsVO {
-
+    private String aviary;
     private BigDecimal hatchableTotal;
     private BigDecimal marketTotal;
     private BigDecimal total;

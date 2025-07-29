@@ -1,10 +1,8 @@
 package br.com.aviapp.api.infra.mappers;
 
-import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.UserCredentialsDTO;
 import br.com.aviapp.api.domain.enums.EnumUserType;
 import br.com.aviapp.api.infra.mysql.enums.UserType;
-import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlUserCredentials;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;

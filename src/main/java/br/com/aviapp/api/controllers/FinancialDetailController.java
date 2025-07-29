@@ -25,10 +25,10 @@ public class FinancialDetailController {
     }
 
     @GetMapping("/{batchId}/{localDate}")
-    public ResponseEntity<List<FinancialDetailsDTO>> generateFinancialDetail(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate localDate) throws Exception {
+    public ResponseEntity<FinancialDetailsDTO> generateFinancialDetail(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate localDate) throws Exception {
         println("localDate: " + localDate);
 
-        List<FinancialDetailsDTO> financialDetails = generateFinancialReportUseCase.getDailyFinancialReport(localDate, batchId);
+        FinancialDetailsDTO financialDetails = generateFinancialReportUseCase.getDailyFinancialReport(localDate, batchId);
         return ResponseEntity.ok(financialDetails);
     }
 }

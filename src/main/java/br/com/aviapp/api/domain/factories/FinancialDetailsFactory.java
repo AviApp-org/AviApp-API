@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FinancialDetailsFactory extends CollectCalculator {
 
-    public static FinancialDetailsVO createFinancialDetails(EggValueBO eggValueBO, List<CollectEggBO> eggCollects) {
+    public static FinancialDetailsVO createFinancialDetails(String aviaryName,EggValueBO eggValueBO, List<CollectEggBO> eggCollects) {
 
         List<EggDetailBO> eggDetails = calculateEggsByType(eggCollects);
 
@@ -22,6 +22,7 @@ public class FinancialDetailsFactory extends CollectCalculator {
         BigDecimal totalValue = marketEggsValue.add(hatchableEggsValue);
 
         return new FinancialDetailsVO(
+                aviaryName,
                 hatchableEggsValue,
                 marketEggsValue,
                 totalValue

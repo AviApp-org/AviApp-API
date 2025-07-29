@@ -1,6 +1,10 @@
 package br.com.aviapp.api.application.dto;
 
-import java.math.BigDecimal;
+import br.com.aviapp.api.domain.entities.FinancialDetailsVO;
 
-public record FinancialDetailsDTO(BigDecimal hatchableTotal, BigDecimal marketTotal, BigDecimal total) {
+import java.math.BigDecimal;
+import java.util.List;
+
+public record FinancialDetailsDTO(List<FinancialDetailsVO> aviaryDetails, BigDecimal hatchableTotal,
+                                  BigDecimal marketTotal, BigDecimal total) {
 }

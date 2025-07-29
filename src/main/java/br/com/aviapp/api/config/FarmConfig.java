@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.aviapp.api.application.gateways.IFarm;
 import br.com.aviapp.api.application.gateways.ILookUp;
-import br.com.aviapp.api.application.mappers.AddressMapperBO;
 import br.com.aviapp.api.application.mappers.ClientMapperBO;
 import br.com.aviapp.api.application.mappers.EmployeeMapperBO;
 import br.com.aviapp.api.application.mappers.FarmMapperBO;
@@ -27,9 +26,8 @@ public class FarmConfig {
     public FarmMapperBO farmMapperBO(
             ILookUp lookupRepository,
             ClientMapperBO clientMapper,
-            AddressMapperBO addressMapper,
             EmployeeMapperBO employeeMapper) {
-        return new FarmMapperBO(lookupRepository, clientMapper, addressMapper, employeeMapper);
+        return new FarmMapperBO(lookupRepository, clientMapper, employeeMapper);
     }
 
     @Bean

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 import br.com.aviapp.api.application.gateways.ILookUp;
-import br.com.aviapp.api.domain.entities.AddressBO;
 import br.com.aviapp.api.domain.entities.ClientBO;
 import br.com.aviapp.api.domain.entities.EmployeeBO;
 import br.com.aviapp.api.domain.entities.FarmBO;
@@ -45,8 +44,14 @@ public class EmployeeMapperBO {
                         farm.id(),
                         farm.name(),
                         new ClientBO(), // Create empty objects instead of null
-                        new AddressBO(),
-                        new ArrayList<>()));
+                        new ArrayList<>(),
+                        farm.street(),
+                        farm.number(),
+                        farm.cep(),
+                        farm.neighborhood(),
+                        farm.city(),
+                        farm.state()
+                ));
     }
 
     public EmployeeDTO toDTO(EmployeeBO bo) {

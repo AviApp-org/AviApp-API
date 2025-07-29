@@ -3,13 +3,11 @@ package br.com.aviapp.api.infra.gateways;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlEmployeeEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
-import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
@@ -21,7 +19,6 @@ import lombok.AllArgsConstructor;
 @Repository
 public class EntityLookupRepository implements br.com.aviapp.api.infra.mysql.repository.EntityLookupRepository {
     private final ClientRepositoryJPA clientRepository;
-    private final AddressRepositoryJPA addressRepository;
     private final EmployeeRepositoryJPA employeeRepository;
     private final FarmRepositoryJPA farmRepository;
     private final BatchRepositoryJPA batchRepository;
@@ -30,11 +27,6 @@ public class EntityLookupRepository implements br.com.aviapp.api.infra.mysql.rep
     @Override
     public Optional<MySqlClientEntity> findClientById(Long id) {
         return clientRepository.findById(id);
-    }
-
-    @Override
-    public Optional<MySqlAddressEntity> findAddressById(Long id) {
-        return addressRepository.findById(id);
     }
 
     @Override

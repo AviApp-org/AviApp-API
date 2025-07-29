@@ -2,7 +2,6 @@ package br.com.aviapp.api.application.gateways;
 
 import java.util.Optional;
 
-import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
@@ -12,7 +11,6 @@ import br.com.aviapp.api.application.dto.FarmDTO;
 public interface ILookUp {
     Optional<ClientDTO> findClientDTOById(Long id);
 
-    Optional<AddressDTO> findAddressDTOById(Long id);
 
     Optional<EmployeeDTO> findEmployeeDTOById(Long id);
 

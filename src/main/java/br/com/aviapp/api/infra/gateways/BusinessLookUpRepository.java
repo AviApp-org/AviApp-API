@@ -4,20 +4,17 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.application.dto.AddressDTO;
 import br.com.aviapp.api.application.dto.AviaryDTO;
 import br.com.aviapp.api.application.dto.BatchDTO;
 import br.com.aviapp.api.application.dto.ClientDTO;
 import br.com.aviapp.api.application.dto.EmployeeDTO;
 import br.com.aviapp.api.application.dto.FarmDTO;
 import br.com.aviapp.api.application.gateways.ILookUp;
-import br.com.aviapp.api.infra.mappers.AddressMapperEntity;
 import br.com.aviapp.api.infra.mappers.AviaryMapperEntity;
 import br.com.aviapp.api.infra.mappers.BatchMapperEntity;
 import br.com.aviapp.api.infra.mappers.ClientMapperEntity;
 import br.com.aviapp.api.infra.mappers.EmployeeMapperEntity;
 import br.com.aviapp.api.infra.mappers.FarmMapperEntity;
-import br.com.aviapp.api.infra.mysql.repository.AddressRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.AviaryRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.BatchRepositoryJPA;
 import br.com.aviapp.api.infra.mysql.repository.ClientRepositoryJPA;
@@ -30,11 +27,9 @@ import lombok.AllArgsConstructor;
 public class BusinessLookUpRepository implements ILookUp {
 
     private final ClientRepositoryJPA clientRepository;
-    private final AddressRepositoryJPA addressRepository;
     private final EmployeeRepositoryJPA employeeRepository;
     private final FarmRepositoryJPA farmRepository;
     private final ClientMapperEntity clientMapper;
-    private final AddressMapperEntity addressMapper;
     private final EmployeeMapperEntity employeeMapper;
     private final FarmMapperEntity farmMapper;
     private final BatchMapperEntity batchMapper;
@@ -49,11 +44,6 @@ public class BusinessLookUpRepository implements ILookUp {
                 .map(clientMapper::toDTO);
     }
 
-    @Override
-    public Optional<AddressDTO> findAddressDTOById(Long id) {
-        return addressRepository.findById(id)
-                .map(addressMapper::toDTO);
-    }
 
     @Override
     public Optional<EmployeeDTO> findEmployeeDTOById(Long id) {

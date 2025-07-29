@@ -9,14 +9,13 @@ import br.com.aviapp.api.application.usecases.eggValue.GetLastInsertedEggValueUs
 import br.com.aviapp.api.domain.entities.*;
 import br.com.aviapp.api.domain.factories.FinancialDetailsFactory;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class GenerateFinancialReportUseCase {
 
-    private final FinancialDetailMapperBO financialDetailMapperBO;
     private final ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase;
     private final ListAviariesByBatchUseCase listAviariesByBatchUseCase;
     private final CollectEggMapperBO collectEggMapperBO;
@@ -24,9 +23,8 @@ public class GenerateFinancialReportUseCase {
     private final EggValueMapperBO eggValueMapperBO;
 
 
-    public GenerateFinancialReportUseCase(FinancialDetailMapperBO financialDetailMapperBO, ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase,
+    public GenerateFinancialReportUseCase( ListEggCollectsByDateAndAviaryUseCase listEggCollectsByDateAndAviaryUseCase,
                                           ListAviariesByBatchUseCase listAviariesByBatchUseCase, CollectEggMapperBO collectEggMapperBO, GetLastInsertedEggValueUseCase getLastInsertedEggValueUseCase, EggValueMapperBO eggValueMapperBO) {
-        this.financialDetailMapperBO = financialDetailMapperBO;
         this.listEggCollectsByDateAndAviaryUseCase = listEggCollectsByDateAndAviaryUseCase;
         this.listAviariesByBatchUseCase = listAviariesByBatchUseCase;
         this.collectEggMapperBO = collectEggMapperBO;
@@ -36,24 +34,31 @@ public class GenerateFinancialReportUseCase {
     }
 
 
-    public List<FinancialDetailsDTO> getDailyFinancialReport(LocalDate date, Long batchId) throws Exception {
+    public FinancialDetailsDTO getDailyFinancialReport(LocalDate date, Long batchId) throws Exception {
 
         List<AviaryDTO> aviaries = listAviariesByBatchUseCase.invoke(batchId);
 
-        if (aviaries.isEmpty()){
+        if (aviaries.isEmpty()) {
             throw new Exception("Nenhum aviário encontrado para o lote");
         }
 
         List<FinancialDetailsVO> financialDetails = new ArrayList<>();
+        BigDecimal farmHatchable = BigDecimal.ZERO;
+        BigDecimal farmMarket = BigDecimal.ZERO;
+        BigDecimal farmTotal = BigDecimal.ZERO;
 
         for (AviaryDTO aviary : aviaries) {
             List<CollectEggBO> eggsCollects = collectEggMapperBO.toBOList(listEggCollectsByDateAndAviaryUseCase.invoke(aviary.id(), date));
             EggValueBO eggValue = eggValueMapperBO.toBO(getLastInsertedEggValueUseCase.invoke(batchId));
-
-            financialDetails.add(FinancialDetailsFactory.createFinancialDetails(eggValue, eggsCollects));
+            FinancialDetailsVO financial = FinancialDetailsFactory.createFinancialDetails(aviary.name(), eggValue, eggsCollects);
+            farmHatchable = farmHatchable.add(financial.getHatchableTotal());
+            farmMarket = farmMarket.add(financial.getMarketTotal());
+            farmTotal = farmTotal.add(financial.getTotal());
+            financialDetails.add(financial);
         }
 
-        return financialDetailMapperBO.toDTOList(financialDetails);
+
+        return new FinancialDetailsDTO(financialDetails, farmHatchable, farmMarket, farmTotal);
 
     }
 

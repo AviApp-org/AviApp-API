@@ -109,7 +109,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/addresses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/addresses/**").hasRole("ADMIN")
 
-                        // Deny all other requests
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.aviapp.api.infra.mysql.models.MySqlAddressEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlAviaryEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlBatchEntity;
 import br.com.aviapp.api.infra.mysql.models.MySqlClientEntity;
@@ -14,8 +13,6 @@ import br.com.aviapp.api.infra.mysql.models.MySqlFarmEntity;
 @Repository
 public interface EntityLookupRepository {
     Optional<MySqlClientEntity> findClientById(Long id);
-
-    Optional<MySqlAddressEntity> findAddressById(Long id);
 
     Optional<MySqlEmployeeEntity> findEmployeeById(Long id);
 
