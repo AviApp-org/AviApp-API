@@ -2,6 +2,7 @@ package br.com.aviapp.api.controllers;
 
 import br.com.aviapp.api.application.dto.LoginDTO;
 import br.com.aviapp.api.application.dto.LoginResponseDTO;
+import br.com.aviapp.api.application.dto.TokenRefreshDTO;
 import br.com.aviapp.api.application.dto.UserCredentialsDTO;
 import br.com.aviapp.api.application.usecases.userCredentials.FindByLoginUseCase;
 import br.com.aviapp.api.application.usecases.userCredentials.RegisterUserUseCase;
@@ -39,10 +40,12 @@ public class AuthController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         MySqlUserCredentials userCredentials = (MySqlUserCredentials) auth.getPrincipal();
-        var token = tokenService.generateToken(userCredentials);
+        var accessToken = tokenService.generateToken(userCredentials);
+        var refreshToken = tokenService.generateRefreshToken(userCredentials);
 
         LoginResponseDTO response = new LoginResponseDTO(
-                token,
+                accessToken,
+                refreshToken,
                 userCredentials.getClient().getId(),
                 userCredentials.getClient().getName(),
                 userCredentials.getRole().name(),
@@ -58,4 +61,27 @@ public class AuthController {
         URI location = URI.create("/api/auth/register/" + newUser.id());
         return ResponseEntity.created(location).body(newUser);
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<LoginResponseDTO> refreshToken(@RequestBody @Valid TokenRefreshDTO dto) {
+        String login = tokenService.validateToken(dto.refreshToken());
+        if (login == null || login.isEmpty()) {
+            return ResponseEntity.status(401).build(); // Token inválido
+        }
+
+        MySqlUserCredentials user = (MySqlUserCredentials) findByLoginUseCase.invoke(login);
+
+        String newAccessToken = tokenService.generateToken(user);
+        String newRefreshToken = tokenService.generateRefreshToken(user); // opcional
+
+        return ResponseEntity.ok(new LoginResponseDTO(
+                newAccessToken,
+                newRefreshToken,
+                user.getClient().getId(),
+                user.getClient().getName(),
+                user.getRole().name(),
+                user.getLogin()
+        ));
+    }
+
 }

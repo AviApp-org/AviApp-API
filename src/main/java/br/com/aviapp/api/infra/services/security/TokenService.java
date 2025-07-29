@@ -46,4 +46,19 @@ public class TokenService {
     private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
+
+    public String generateRefreshToken(MySqlUserCredentials user) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            return JWT.create()
+                    .withIssuer("freyr-api")
+                    .withSubject(user.getLogin())
+                    .withExpiresAt(LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of("-03:00")))
+                    .sign(algorithm);
+        } catch (JWTCreationException e) {
+            throw new RuntimeException("Error generating refresh token", e);
+        }
+    }
+
 }
+
