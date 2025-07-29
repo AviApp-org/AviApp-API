@@ -2,18 +2,6 @@ package br.com.aviapp.api.domain.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-
-import br.com.aviapp.api.application.dto.ClientDTO;
-import br.com.aviapp.api.infra.mysql.repository.IClienteDatabaseRepositoryJPA;
 
 public class CadastrarClienteTest {
 /* 
