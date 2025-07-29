@@ -38,6 +38,7 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers("api/auth/refresh").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/addresses/cep/**").authenticated()
 
@@ -102,12 +103,6 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/clients/**").hasRole("ADMIN")
 
-
-                        // Address management
-                        .requestMatchers(HttpMethod.GET, "/api/addresses").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/addresses").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/addresses/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/addresses/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
