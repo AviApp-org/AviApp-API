@@ -24,18 +24,40 @@ public class SecurityFilter extends OncePerRequestFilter {
     UserCredentialsRepositoryJPA repositoryJPA;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         var token = this.recoverToken(request);
 
-        if (token != null) {
-            var login = tokenService.validateToken(token);
-            UserDetails user = repositoryJPA.findByLogin(login);
+        try {
+            if (token != null) {
+                var login = tokenService.validateToken(token); // Pode lançar exceção
+                UserDetails user = repositoryJPA.findByLogin(login);
 
-            var authentication = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+            filterChain.doFilter(request, response);
+
+        } catch (RuntimeException ex) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("""
+                            {
+                              "timestamp": "%s",
+                              "status": 401,
+                              "error": "Unauthorized",
+                              "message": "%s",
+                              "path": "%s"
+                            }
+                            """.formatted(
+                            java.time.LocalDateTime.now(),
+                            ex.getMessage(),
+                            request.getRequestURI()
+                    )
+            );
         }
-        filterChain.doFilter(request, response);
     }
+
 
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");

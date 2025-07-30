@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.services.security;
 
+import br.com.aviapp.api.infra.exceptions.JwtAuthenticationException;
 import br.com.aviapp.api.infra.mysql.models.MySqlUserCredentials;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -39,7 +40,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException e) {
-            return "";
+            throw  new JwtAuthenticationException("Token inválido ou expirado");
         }
     }
 
