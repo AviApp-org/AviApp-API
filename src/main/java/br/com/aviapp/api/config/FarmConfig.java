@@ -31,8 +31,8 @@ public class FarmConfig {
     }
 
     @Bean
-    public CreateFarmUseCase createFarmUseCase(IFarm repository, FarmMapperBO mapperBO) {
-        return new CreateFarmUseCase(repository, mapperBO);
+    public CreateFarmUseCase createFarmUseCase(IFarm repository, FarmMapperBO mapperBO, GetFarmByClientIdUseCase getFarmByClientIdUseCase) {
+        return new CreateFarmUseCase(repository, getFarmByClientIdUseCase, mapperBO);
     }
 
     @Bean
@@ -41,7 +41,7 @@ public class FarmConfig {
     }
 
     @Bean
-    public ListAllFarmsUseCase listAllFarmsUseCase(IFarm repository, FarmMapperBO mapperBO){
+    public ListAllFarmsUseCase listAllFarmsUseCase(IFarm repository, FarmMapperBO mapperBO) {
         return new ListAllFarmsUseCase(repository, mapperBO);
     }
 
@@ -51,7 +51,7 @@ public class FarmConfig {
     }
 
     @Bean
-    public DeleteFarmByIdUseCase deleteFarmByIdUseCase (IFarm repository, FarmMapperBO mapperBO) {
+    public DeleteFarmByIdUseCase deleteFarmByIdUseCase(IFarm repository, FarmMapperBO mapperBO) {
         return new DeleteFarmByIdUseCase(repository, mapperBO);
     }
 }

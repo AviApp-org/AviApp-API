@@ -52,6 +52,8 @@ public class FarmBO implements CreationValidator, DeletableEntity {
         if (client.getStatus() == EnumStatusCliente.INACTIVE) {
             throw new BusinessRuleException("O cliente deve estar ativo para criar uma granja.");
         }
+
+
     }
 
     @Override
