@@ -38,7 +38,7 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
-                        .requestMatchers("api/auth/refresh").permitAll()
+                        .requestMatchers("/api/auth/refresh").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/addresses/cep/**").authenticated()
 
