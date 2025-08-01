@@ -30,7 +30,12 @@ public class CollectEggMapperEntity {
                 entity.getId(),
                 entity.getAviary().getId(),
                 eggDetailDTOs,
-                entity.getCollectionDate()
+                entity.getCollectionDate(),
+                0,
+                0,
+                0,
+                0
+
         );
     }
 

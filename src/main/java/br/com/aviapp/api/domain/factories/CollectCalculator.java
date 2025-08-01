@@ -14,16 +14,11 @@ import java.util.stream.Collectors;
 
 public abstract class CollectCalculator {
 
-    static int calculateTotalEggs(List<CollectEggBO> collectEggs) {
-        if (collectEggs == null) return 0;
-
+    protected static int calculateTotalEggs(List<EggDetailBO> eggDetailBOS) {
         int totalEggs = 0;
 
-        for (CollectEggBO egg : collectEggs) {
-            List<EggDetailBO> eggDetails = egg.getEggDetails();
-            if (eggDetails != null) {
-                totalEggs += eggDetails.stream().mapToInt(EggDetailBO::getQuantity).sum();
-            }
+        if (eggDetailBOS != null) {
+            totalEggs += eggDetailBOS.stream().mapToInt(EggDetailBO::getQuantity).sum();
         }
 
         return totalEggs;
@@ -86,7 +81,7 @@ public abstract class CollectCalculator {
 
         return eggDetails.stream()
                 .filter(eggDetail -> eggDetail.getType() == EnumEggType.BROKEN ||
-                        eggDetail.getType() == EnumEggType.CRACKED )
+                        eggDetail.getType() == EnumEggType.CRACKED)
                 .mapToInt(EggDetailBO::getQuantity)
                 .sum();
     }

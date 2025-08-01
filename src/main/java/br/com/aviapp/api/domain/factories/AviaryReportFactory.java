@@ -8,7 +8,11 @@ public class AviaryReportFactory extends CollectCalculator {
 
     public static AviaryReportVO createFromAviary(AviaryBO aviary, List<CollectEggBO> collectEggs, List<CollectChickenBO> collectChickens) {
 
-        int totalEggsCollected = calculateTotalEggs(collectEggs);
+
+
+        int totalEggsCollected = collectEggs.stream()
+                .mapToInt(collectEgg -> calculateTotalEggs(collectEgg.getEggDetails()))
+                .sum();
         int totalDeadChickens = calculateDeadChickens(collectChickens);
         int totalDeadRoosters = calculateDeadRoosters(collectChickens);
         int totalDeadBirds = totalDeadChickens + totalDeadRoosters;

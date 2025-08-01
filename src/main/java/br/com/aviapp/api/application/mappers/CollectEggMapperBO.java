@@ -46,7 +46,11 @@ public class CollectEggMapperBO {
                 bo.getId(),
                 bo.getAviary().getId(),
                 eggDetailDTOs,
-                bo.getCollectionDate()
+                bo.getCollectionDate(),
+                bo.getMarketEggs(),
+                bo.getDumpEggs(),
+                bo.getHatchableEggs(),
+                bo.getTotalEggs()
         );
     }
 
