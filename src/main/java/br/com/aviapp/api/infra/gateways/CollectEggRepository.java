@@ -29,21 +29,26 @@ public class CollectEggRepository implements ICollectEgg {
 
     @Override
     public CollectEggDataDTO createCollectEgg(CollectEggDataDTO collectEggDataDTO) {
+        // Converte DTO para Entity
         MySqlCollectEggDataEntity entity = collectEggMapper.toEntity(collectEggDataDTO);
-        MySqlCollectEggDataEntity savedEntity = repositoryJPA.save(entity);
 
+        // Processa os detalhes dos ovos
         List<EggDetailDTO> eggDetails = collectEggDataDTO.eggDetails();
+        if (eggDetails != null && !eggDetails.isEmpty()) {
+            List<MySqlEggDetailEntity> eggDetailEntities = eggDetailMapper.toEntityList(eggDetails);
 
-        List<MySqlEggDetailEntity> eggDetailEntity = eggDetailMapper.toEntityList(eggDetails);
-
-        for (MySqlEggDetailEntity eggDetail : eggDetailEntity) {
-            eggDetail.setEggCollection(savedEntity);
-            eggDetailRepositoryJPA.save(eggDetail);
+            // Associa os detalhes à entidade principal
+            for (MySqlEggDetailEntity eggDetail : eggDetailEntities) {
+                eggDetail.setEggCollection(entity);
+                entity.getEggDetails().add(eggDetail);  // Adiciona à coleção gerenciada
+            }
         }
+
+        // Salva a entidade principal (os detalhes serão salvos por cascade)
+        MySqlCollectEggDataEntity savedEntity = repositoryJPA.save(entity);
 
         return collectEggMapper.toDTO(savedEntity);
     }
-
     @Override
     public List<CollectEggDataDTO> listEggCollectByAviary(Long aviaryId) {
         List<MySqlCollectEggDataEntity> entities = repositoryJPA.findByAviary(aviaryId);

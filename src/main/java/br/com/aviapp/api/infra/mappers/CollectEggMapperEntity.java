@@ -1,5 +1,6 @@
 package br.com.aviapp.api.infra.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,9 @@ public class CollectEggMapperEntity {
         entity.setId(dto.id());
         entity.setAviary(aviary);
         entity.setCollectionDate(dto.collectionDate());
+
+        // Inicializa a lista vazia para evitar NPE
+        entity.setEggDetails(new ArrayList<>());
 
         return entity;
     }

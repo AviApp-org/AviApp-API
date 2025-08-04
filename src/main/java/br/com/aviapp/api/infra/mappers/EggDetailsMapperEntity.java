@@ -11,16 +11,32 @@ import java.util.stream.Collectors;
 public class EggDetailsMapperEntity {
 
     public EggDetailDTO toDTO(MySqlEggDetailEntity entity) {
-        return new EggDetailDTO(
-                EnumEggType.valueOf(entity.getType().name()),
-                entity.getQuantity()
-        );
+        if (entity == null) {
+            return null;
+        }
+
+        try {
+            return new EggDetailDTO(
+                    EnumEggType.valueOf(entity.getType().name()),
+                    entity.getQuantity()
+            );
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("Tipo de ovo inválido: " + entity.getType().name());
+        }
     }
 
     public MySqlEggDetailEntity toEntity(EggDetailDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         MySqlEggDetailEntity entity = new MySqlEggDetailEntity();
-        entity.setType(EggType.valueOf(dto.type().name()));
-        entity.setQuantity(dto.quantity());
+        try {
+            entity.setType(EggType.valueOf(dto.type().name()));
+            entity.setQuantity(dto.quantity());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("Tipo de ovo inválido: " + dto.type().name());
+        }
         return entity;
     }
 

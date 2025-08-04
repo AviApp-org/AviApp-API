@@ -30,4 +30,15 @@ public class MySqlCollectEggDataEntity {
 
   @OneToMany(mappedBy = "eggCollection", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<MySqlEggDetailEntity> eggDetails = new ArrayList<>();
+
+  // Métodos auxiliares para gerenciar o relacionamento bidirecional
+  public void addEggDetail(MySqlEggDetailEntity detail) {
+    eggDetails.add(detail);
+    detail.setEggCollection(this);
+  }
+
+  public void removeEggDetail(MySqlEggDetailEntity detail) {
+    eggDetails.remove(detail);
+    detail.setEggCollection(null);
+  }
 }
