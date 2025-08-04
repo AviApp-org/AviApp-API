@@ -28,10 +28,11 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String path = request.getServletPath();
-        if (path.startsWith("/ws-collect")) {
+        if (path.startsWith("/ws-collect") || path.contains("sockjs")) {
             filterChain.doFilter(request, response);
             return;
         }
+
 
         var token = this.recoverToken(request);
 
