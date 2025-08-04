@@ -35,10 +35,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
+
                         // Public endpoints
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/refresh").permitAll()
+                        .requestMatchers("/ws-collect/**").permitAll()
+
 
                         .requestMatchers(HttpMethod.GET, "/api/addresses/cep/**").authenticated()
 
