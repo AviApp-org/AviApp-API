@@ -7,7 +7,7 @@ import br.com.aviapp.api.domain.entities.CollectEggBO;
 import br.com.aviapp.api.domain.errors.BusinessRuleException;
 
 public class CreateEggCollectUseCase {
-    
+
     private final ICollectEgg collectEggRepository;
     private final CollectEggMapperBO collectEggMapperBO;
 
@@ -21,6 +21,8 @@ public class CreateEggCollectUseCase {
 
         collectEggData.validateForCreation();
 
-        return collectEggRepository.createCollectEgg(collectEggMapperBO.toDTO(collectEggData));
+        CollectEggBO savedCollect = collectEggMapperBO.toBO(collectEggRepository.createCollectEgg(collectEggMapperBO.toDTO(collectEggData)));
+
+        return collectEggMapperBO.toDTO(savedCollect);
     }
 }
