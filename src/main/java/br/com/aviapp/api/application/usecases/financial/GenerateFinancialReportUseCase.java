@@ -57,10 +57,11 @@ public class GenerateFinancialReportUseCase {
     }
 
     private FinancialDetailsDTO getFinancialReportByDates(List<LocalDate> dates, Long batchId) throws Exception {
-        List<AviaryDTO> aviaries = listAviariesByBatchUseCase.invoke(batchId);
 
-        if (aviaries.isEmpty()) {
-            throw new Exception("Nenhum aviário encontrado para o lote");
+        List<AviaryDTO> aviaryDTOs = listAviariesByBatchUseCase.invoke(batchId);
+
+        if (aviaryDTOs.isEmpty()) {
+            throw new RuntimeException("Não existem aviários cadastrados para esse lote");
         }
 
         List<FinancialDetailsVO> financialDetails = new ArrayList<>();
@@ -68,7 +69,7 @@ public class GenerateFinancialReportUseCase {
         BigDecimal farmMarket = BigDecimal.ZERO;
         BigDecimal farmTotal = BigDecimal.ZERO;
 
-        for (AviaryDTO aviary : aviaries) {
+        for (AviaryDTO aviary : aviaryDTOs) {
             List<CollectEggBO> allCollects = new ArrayList<>();
 
             for (LocalDate date : dates) {

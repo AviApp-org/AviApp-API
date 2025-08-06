@@ -43,7 +43,9 @@ public class GenerateDailyReportUseCase {
     }
 
     public DailyReportDTO invoke(Long batchId, LocalDate date) {
+
         List<AviaryDTO> aviaryDTOs = listAviariesByBatchUseCase.invoke(batchId);
+
         if (aviaryDTOs.isEmpty()) {
             throw new RuntimeException("Não existem aviários cadastrados para esse lote");
         }
