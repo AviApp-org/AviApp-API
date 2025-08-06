@@ -12,6 +12,7 @@ import br.com.aviapp.api.domain.entities.DailyReportVO;
 import br.com.aviapp.api.domain.factories.DailyReportFactory;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,14 @@ public class GenerateDailyReportUseCase {
     private final AviaryReportMapperBO aviaryReportMapperBO;
     private final FindBatchByIdUseCase findBatchByIdUseCase;
 
-    public GenerateDailyReportUseCase(GenerateAviaryReportUseCase generateAviaryReportUseCase, ListAviariesByBatchUseCase listAviariesByBatchUseCase, AviaryMapperBO aviaryMapperBO, DailyReportMapperBO dailyReportMapperBO, AviaryReportMapperBO aviaryReportMapperBO, FindBatchByIdUseCase findBatchByIdUseCase) {
+    public GenerateDailyReportUseCase(
+            GenerateAviaryReportUseCase generateAviaryReportUseCase,
+            ListAviariesByBatchUseCase listAviariesByBatchUseCase,
+            AviaryMapperBO aviaryMapperBO,
+            DailyReportMapperBO dailyReportMapperBO,
+            AviaryReportMapperBO aviaryReportMapperBO,
+            FindBatchByIdUseCase findBatchByIdUseCase
+    ) {
         this.generateAviaryReportUseCase = generateAviaryReportUseCase;
         this.listAviariesByBatchUseCase = listAviariesByBatchUseCase;
         this.aviaryMapperBO = aviaryMapperBO;
@@ -35,76 +43,53 @@ public class GenerateDailyReportUseCase {
     }
 
     public DailyReportDTO invoke(Long batchId, LocalDate date) {
-
-        List<AviaryDTO> aviaryDTO = listAviariesByBatchUseCase.invoke(batchId);
-
-        if (aviaryDTO.isEmpty()) {
+        List<AviaryDTO> aviaryDTOs = listAviariesByBatchUseCase.invoke(batchId);
+        if (aviaryDTOs.isEmpty()) {
             throw new RuntimeException("Não existem aviários cadastrados para esse lote");
         }
 
-        List<AviaryBO> aviaryBO = aviaryMapperBO.toBOList(aviaryDTO);
+        List<AviaryBO> aviaryBOs = aviaryMapperBO.toBOList(aviaryDTOs);
 
-        List<AviaryReportDTO> aviaryReports = new ArrayList<>();
+        List<AviaryReportDTO> aviaryReports = aviaryBOs.stream()
+                .map(aviary -> generateAviaryReportUseCase.invoke(aviary.getId(), date))
+                .toList();
 
-        for (AviaryBO aviary : aviaryBO) {
-            aviaryReports.add(generateAviaryReportUseCase.invoke(aviary.getId(), date));
-        }
-
-        List<AviaryReportVO> aviaryReportVO = aviaryReportMapperBO.toBOList(aviaryReports);
-
-        DailyReportVO dailyReportVO = DailyReportFactory.createDailyReport(aviaryReportVO, date);
+        List<AviaryReportVO> aviaryReportVOs = aviaryReportMapperBO.toBOList(aviaryReports);
+        DailyReportVO dailyReportVO = DailyReportFactory.createDailyReport(aviaryReportVOs, date);
 
         return dailyReportMapperBO.toDTO(dailyReportVO);
     }
 
     public WeeklyReportDTO generateWeeklyReport(Long batchId, LocalDate startDate) {
-
-        List<DailyReportDTO> dailyReports = new ArrayList<>();
-
-        Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
-
-        if (batchDTO.isEmpty()) {
-            throw new RuntimeException("Batch not found");
-        }
-
         LocalDate endDate = startDate.plusDays(6);
-
-        for (int i = 0; i < 7; i++) {
-
-            DailyReportDTO dailyReport = invoke(batchId, startDate);
-
-            dailyReports.add(dailyReport);
-
-            startDate = startDate.plusDays(1);
-        }
-
-
-        return new WeeklyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
+        List<LocalDate> dates = generateDateRange(startDate, endDate);
+        return new WeeklyReportDTO(getBatchNameOrThrow(batchId), startDate, endDate, generateDailyReports(batchId, dates));
     }
 
-    public MonthlyReportDTO generateMonthlyReport(Long batchId, LocalDate startDate) {
+    public MonthlyReportDTO generateMonthlyReport(Long batchId, YearMonth yearMonth) {
+        LocalDate startDate = yearMonth.atDay(1);
+        LocalDate endDate = yearMonth.atEndOfMonth();
 
-        List<DailyReportDTO> dailyReports = new ArrayList<>();
+        List<LocalDate> dates = generateDateRange(startDate, endDate);
+        List<DailyReportDTO> dailyReports = generateDailyReports(batchId, dates);
 
-        Optional<BatchDTO> batchDTO = findBatchByIdUseCase.invoke(batchId);
+        return new MonthlyReportDTO(getBatchNameOrThrow(batchId), startDate, endDate, dailyReports);
+    }
 
-        if (batchDTO.isEmpty()) {
-            throw new RuntimeException("Batch not found");
-        }
+    private List<DailyReportDTO> generateDailyReports(Long batchId, List<LocalDate> dates) {
+        return dates.stream()
+                .map(date -> invoke(batchId, date))
+                .toList();
+    }
 
-        LocalDate endDate = startDate.plusMonths(1);
+    private List<LocalDate> generateDateRange(LocalDate start, LocalDate endInclusive) {
+        return start.datesUntil(endInclusive.plusDays(1)).toList(); // inclusive
+    }
 
-        while (!startDate.isEqual(endDate)) {
-
-            DailyReportDTO dailyReport = invoke(batchId, startDate);
-
-            dailyReports.add(dailyReport);
-
-            startDate = startDate.plusDays(1);
-
-        }
-
-        return new MonthlyReportDTO(batchDTO.get().name(), startDate, endDate, dailyReports);
+    private String getBatchNameOrThrow(Long batchId) {
+        return findBatchByIdUseCase.invoke(batchId)
+                .map(BatchDTO::name)
+                .orElseThrow(() -> new RuntimeException("Batch not found"));
     }
 
 }

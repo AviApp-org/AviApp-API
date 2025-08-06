@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 import static java.sql.DriverManager.println;
@@ -26,9 +27,19 @@ public class FinancialDetailController {
 
     @GetMapping("/{batchId}/{localDate}")
     public ResponseEntity<FinancialDetailsDTO> generateFinancialDetail(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate localDate) throws Exception {
-        println("localDate: " + localDate);
-
         FinancialDetailsDTO financialDetails = generateFinancialReportUseCase.getDailyFinancialReport(localDate, batchId);
+        return ResponseEntity.ok(financialDetails);
+    }
+
+    @GetMapping("/{batchId}/weekly/{startDate}")
+    public ResponseEntity<FinancialDetailsDTO> generateWeeklyFinancialDetail(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate) throws Exception {
+        FinancialDetailsDTO financialDetails = generateFinancialReportUseCase.getWeeklyFinancialReport(startDate, batchId);
+        return ResponseEntity.ok(financialDetails);
+    }
+
+    @GetMapping("/{batchId}/monthly/{yearMonth}")
+    public ResponseEntity<FinancialDetailsDTO> generateMonthlyFinancialDetail(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "MM-yyyy") YearMonth yearMonth) throws Exception {
+        FinancialDetailsDTO financialDetails = generateFinancialReportUseCase.getMonthlyFinancialReport(yearMonth, batchId);
         return ResponseEntity.ok(financialDetails);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 
 @RestController
@@ -34,9 +35,9 @@ public class DailyReportController {
         return ResponseEntity.ok(weeklyReport);
     }
 
-    @GetMapping("/month/{batchId}/{localDate}")
-    public ResponseEntity<MonthlyReportDTO> generateMonthlyReport(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate localDate) {
-        MonthlyReportDTO monthlyReport = generateDailyReportUseCase.generateMonthlyReport(batchId, localDate);
-        return ResponseEntity.ok(monthlyReport);
+    @GetMapping("/month/{batchId}/{yearMonth}")
+    public ResponseEntity<MonthlyReportDTO> generateMonthlyReport(@PathVariable Long batchId, @PathVariable @DateTimeFormat(pattern = "MM-yyyy") YearMonth yearMonth) {
+        return ResponseEntity.ok(generateDailyReportUseCase.generateMonthlyReport(batchId, yearMonth));
     }
+
 }
