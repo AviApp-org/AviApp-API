@@ -86,8 +86,8 @@ public class SecurityConfig {
 
                         // Egg value
                         .requestMatchers(HttpMethod.GET, "/api/egg-value/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/egg-value").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/egg-value/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/egg-value").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/egg-value/**").hasRole("MANAGER")
 
                         // Anomalies
                         .requestMatchers(HttpMethod.GET, "/api/anomalies/**").authenticated()

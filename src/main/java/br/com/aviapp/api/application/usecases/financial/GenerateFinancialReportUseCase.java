@@ -60,6 +60,8 @@ public class GenerateFinancialReportUseCase {
 
         List<AviaryDTO> aviaryDTOs = listAviariesByBatchUseCase.invoke(batchId);
 
+        System.out.println(aviaryDTOs);
+
         if (aviaryDTOs.isEmpty()) {
             throw new RuntimeException("Não existem aviários cadastrados para esse lote");
         }
