@@ -29,7 +29,7 @@ public class MySqlEggValueEntity {
     @Column(name = "timestamp", updatable = false)
     private LocalDateTime timestamp;
 
-    private BigDecimal value;
+    private float value;
 
     @ManyToOne
     @JoinColumn(name = "batch_id")

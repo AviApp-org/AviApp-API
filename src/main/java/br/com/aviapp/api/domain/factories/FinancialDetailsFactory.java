@@ -17,8 +17,8 @@ public class FinancialDetailsFactory extends CollectCalculator {
         int hatchableEggs = calculateHatchableEggs(eggDetails);
         int marketEggs = calculateMarketEggs(eggDetails);
 
-        BigDecimal marketEggsValue = BigDecimal.valueOf(marketEggs).multiply(eggValueBO.getValue());
-        BigDecimal hatchableEggsValue = BigDecimal.valueOf(hatchableEggs).multiply(eggValueBO.getValue());
+        BigDecimal marketEggsValue = BigDecimal.valueOf(marketEggs).multiply(BigDecimal.valueOf(eggValueBO.getValue()));
+        BigDecimal hatchableEggsValue = BigDecimal.valueOf(hatchableEggs).multiply(BigDecimal.valueOf(eggValueBO.getValue()));
         BigDecimal totalValue = marketEggsValue.add(hatchableEggsValue);
 
         return new FinancialDetailsVO(

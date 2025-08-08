@@ -17,14 +17,14 @@ public class EggValueBO {
 
     private final LocalDateTime timestamp;
 
-    private final BigDecimal value;
+    private final float value;
 
     private BatchBO batch;
 
-    public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, BigDecimal value, BatchBO batch) throws InvalidParamError {
+    public EggValueBO(Long id, EnumEggType eggType, LocalDateTime timestamp, float value, BatchBO batch) throws InvalidParamError {
         ParamValidator.validate(eggType,value);
 
-        if (value.compareTo(BigDecimal.ZERO) < 0) {
+        if (value < 0) {
             throw new InvalidParamError("Não é permitido valores negativos para valor do ovo.");
 
         }

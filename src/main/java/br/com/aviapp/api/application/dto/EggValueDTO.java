@@ -5,6 +5,6 @@ import java.time.LocalDateTime;
 
 import br.com.aviapp.api.domain.enums.EnumEggType;
 
-public record EggValueDTO(Long id, EnumEggType egg, LocalDateTime timeStamp, BigDecimal value, Long batchId) {
+public record EggValueDTO(Long id, EnumEggType egg, LocalDateTime timeStamp, float value, Long batchId) {
 
 }
