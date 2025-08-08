@@ -41,13 +41,14 @@ public class GenerateFinancialReportUseCase {
         return getFinancialReportByDates(List.of(date), batchId);
     }
 
-    public FinancialDetailsDTO getWeeklyFinancialReport(LocalDate anyDayOfWeek, Long batchId) throws Exception {
-        LocalDate startOfWeek = anyDayOfWeek.with(DayOfWeek.MONDAY);
+    public FinancialDetailsDTO getWeeklyFinancialReport(LocalDate date, Long batchId) throws Exception {
         List<LocalDate> weekDates = IntStream.range(0, 7)
-                .mapToObj(startOfWeek::plusDays)
+                .mapToObj(date::plusDays)
                 .toList();
+
         return getFinancialReportByDates(weekDates, batchId);
     }
+
 
     public FinancialDetailsDTO getMonthlyFinancialReport(YearMonth month, Long batchId) throws Exception {
         List<LocalDate> monthDates = IntStream.rangeClosed(1, month.lengthOfMonth())
